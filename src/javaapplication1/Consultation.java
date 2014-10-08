@@ -529,6 +529,7 @@ public class Consultation extends javax.swing.JFrame {
         
         setPanel();
         
+        CheckNewPatient.active = true;
         CheckNewPatient cnp = new CheckNewPatient(this);
         Thread tr = new Thread(cnp);
         tr.start();
@@ -11446,6 +11447,7 @@ public class Consultation extends javax.swing.JFrame {
 //        int reply = JOptionPane.showConfirmDialog(null, message, title,
 //            JOptionPane.YES_NO_OPTION);
 //        if (reply == JOptionPane.YES_OPTION) {
+            CheckNewPatient.active = false;
             System.out.println("\nSign Out from Consultation ");
             MainPage mainPage = new MainPage(id);
             mainPage.setVisible(true);

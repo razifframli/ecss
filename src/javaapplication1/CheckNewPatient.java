@@ -30,6 +30,12 @@ public class CheckNewPatient implements Runnable {
 
         while (active) {
             
+            if (i == 2) {
+                cons.setAlwaysOnTop(true);
+            } else {
+                cons.setAlwaysOnTop(false);
+            }
+            
             // thread activity.
             if (isNewPatient()) {
                 i++;
@@ -38,11 +44,11 @@ public class CheckNewPatient implements Runnable {
                 } else {
                     cons.lbl_new_patient.setVisible(true);
                 }
-                cons.setAlwaysOnTop(true);
+                //cons.setAlwaysOnTop(true);
             } else {
                 i = 0;
                 cons.lbl_new_patient.setVisible(false);
-                cons.setAlwaysOnTop(false);
+                //cons.setAlwaysOnTop(false);
             }
             
             try {
