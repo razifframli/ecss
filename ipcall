@@ -1,0 +1,11 @@
+ip:10.73.34.117
+port:1098
+ipserver:ecss.utem.edu.my
+------------------
+10.73.33.72
+210.48.157.104 <-- public ip server staging
+10.73.32.200 <-- server development
+10.73.38.205 <-- umar local lab
+ecss.utem.edu.my <-- domain name server VM
+biocore-stag.utem.edu.my <-- domain stagging
+------------------

@@ -1,0 +1,948 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package GUI;
+
+import api.ReferenceController;
+import java.awt.Dimension;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.Data;
+
+/**
+ *
+ * @author WC
+ */
+public class LookupMaintainance extends javax.swing.JFrame {
+
+    private DefaultTableModel modelMaster;
+    private DefaultTableModel modelDetails;
+    private Vector rowData;
+    private boolean newStat= true;
+    private boolean validDetTab = false;
+    private boolean validMasterTab = false;
+    /**
+     * Creates new form LookupMaintainance
+     */
+    public LookupMaintainance() {
+//        try {
+//              // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//               UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+//        }
+//        catch (ClassNotFoundException e) {System.out.println("11");}
+//
+//        catch (InstantiationException e) {System.out.println("121");}
+//
+//        catch (IllegalAccessException e) {System.out.println("311");}
+//
+//        catch (UnsupportedLookAndFeelException e) {System.out.println("114");}
+        initComponents();
+  
+         setMasterRowItem();
+        
+        
+    }
+    
+    //set master table shape
+    public void setMasterTableCollumn(){
+
+    tblMaster.setModel(modelMaster);
+    tblMaster.getColumnModel().getColumn(0).setMinWidth(150);
+    tblMaster.getColumnModel().getColumn(0).setMaxWidth(150);
+    tblMaster.getColumnModel().getColumn(0).setWidth(150);
+    tblMaster.getTableHeader().setPreferredSize(new Dimension(tblMaster.getColumnModel().getTotalColumnWidth(),32));
+
+    }
+
+    //set table master item
+    public void setMasterRowItem(){
+        try {
+             Vector<String> headers = new Vector<String>();
+             headers.add(" Master Reference Code ");
+             headers.add(" Description ");
+            rowData = new Vector();
+            ReferenceController rowLK = new ReferenceController();
+            rowData = rowLK.getMasterlookup();
+            modelMaster = new DefaultTableModel(rowData, headers){
+            @Override
+            public boolean isCellEditable(int rowIndex, int mColIndex){return false;}};
+             setMasterTableCollumn();
+        } catch (SQLException ex) {
+            Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    //set detail table size
+    public void setDetailTableCollumn(){
+    
+     
+        tblDetails.setModel(modelDetails);    
+        tblDetails.getColumnModel().getColumn(0).setMinWidth(145);
+        tblDetails.getColumnModel().getColumn(0).setMaxWidth(145);
+        tblDetails.getColumnModel().getColumn(0).setWidth(145);
+        tblDetails.getColumnModel().getColumn(1).setMinWidth(145);
+        tblDetails.getColumnModel().getColumn(1).setMaxWidth(145);
+        tblDetails.getColumnModel().getColumn(1).setWidth(145);
+        tblDetails.getTableHeader().setPreferredSize(new Dimension(tblMaster.getColumnModel().getTotalColumnWidth(),32));
+    
+    }
+    
+    //SET DETAILS TO TABLE DETAIL
+    public void setDetailRow(String MasCode) throws ClassNotFoundException, SQLException{
+
+        Vector<String> header2 = new Vector<String>();
+        header2.add("Master Reference Code");
+        header2.add("Detail Reference Code");
+        header2.add("Description");
+        
+        rowData = new Vector();
+        ReferenceController DetailrowLK = new ReferenceController();
+        rowData = DetailrowLK.getDetailLookup(MasCode);
+        
+        modelDetails= new DefaultTableModel(rowData, header2){
+        @Override
+        public boolean isCellEditable(int rowIndex, int mColIndex){return false;}};
+    
+        setDetailTableCollumn();
+    }
+    
+    //validate method detailtab
+    public void validateDetailTab(){
+        if(tbMasterDetCode.getText().trim().equals("") || tbDetRefCode.getText().trim().equals("")
+                || txtAreaDetDesc.getText().trim().equals("") ){
+            validDetTab=false;
+        }else{
+            validDetTab=true;
+        }
+    }
+    
+    //validate method MAster tab
+    public void vallidateMaster(){
+    
+    if(tboxMasterCode.getText().trim().equals("") || TxtAreaMasterDescription.getText().trim().equals("") ){
+            validMasterTab=false;
+     }else{
+            validMasterTab=true;
+        }
+    
+    
+    }
+    
+    
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tboxMasterCode = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TxtAreaMasterDescription = new javax.swing.JTextArea();
+        btnSaveMaster = new javax.swing.JButton();
+        btnDelMaster = new javax.swing.JButton();
+        btnNewMaster = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblMaster = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        tbMastDetCode = new javax.swing.JTextField();
+        btnSearchMasterIndex = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        tbDetRefCode = new javax.swing.JTextField();
+        tbMasterDetCode = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtAreaDetDesc = new javax.swing.JTextArea();
+        btnSaveLookupDetail = new javax.swing.JButton();
+        btnDelLookupDetail = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblDetails = new javax.swing.JTable();
+        lbldesc = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Lookup Maintainance");
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Master References", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Master Reference Code :");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Description :");
+
+        tboxMasterCode.setEditable(false);
+        tboxMasterCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        TxtAreaMasterDescription.setColumns(20);
+        TxtAreaMasterDescription.setRows(5);
+        jScrollPane1.setViewportView(TxtAreaMasterDescription);
+
+        btnSaveMaster.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSaveMaster.setText("Save");
+        btnSaveMaster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveMasterActionPerformed(evt);
+            }
+        });
+
+        btnDelMaster.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnDelMaster.setText("Delete");
+        btnDelMaster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelMasterActionPerformed(evt);
+            }
+        });
+
+        btnNewMaster.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnNewMaster.setText("New");
+        btnNewMaster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewMasterActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tboxMasterCode, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnNewMaster, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSaveMaster, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)
+                        .addComponent(btnDelMaster, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)))
+                .addGap(31, 31, 31))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tboxMasterCode, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNewMaster, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSaveMaster, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelMaster, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
+        );
+
+        tblMaster.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tblMaster.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        tblMaster.setRowHeight(25);
+        tblMaster.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMasterMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblMaster);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Master Index Lookup table", jPanel1);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search Lookup Detail", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Master Reference Code :");
+
+        tbMastDetCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        btnSearchMasterIndex.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnSearchMasterIndex.setText("Search");
+        btnSearchMasterIndex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchMasterIndexActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(tbMastDetCode, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(btnSearchMasterIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(btnSearchMasterIndex, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(tbMastDetCode)
+                    .addComponent(jLabel4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Master Reference Code :");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Detail Reference Code :");
+
+        tbDetRefCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        tbMasterDetCode.setEditable(false);
+        tbMasterDetCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Detail description :");
+
+        txtAreaDetDesc.setColumns(20);
+        txtAreaDetDesc.setRows(5);
+        jScrollPane3.setViewportView(txtAreaDetDesc);
+
+        btnSaveLookupDetail.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnSaveLookupDetail.setText("Save");
+        btnSaveLookupDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveLookupDetailActionPerformed(evt);
+            }
+        });
+
+        btnDelLookupDetail.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnDelLookupDetail.setText("Delete");
+        btnDelLookupDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelLookupDetailActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tbMasterDetCode, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(tbDetRefCode))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(btnSaveLookupDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDelLookupDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tbMasterDetCode, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tbDetRefCode, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSaveLookupDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(btnDelLookupDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(9, 9, 9))
+        );
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel8.setText("* This Master Code For");
+
+        tblDetails.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tblDetails.setRowHeight(25);
+        tblDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDetailsMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tblDetails);
+
+        lbldesc.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbldesc.setText("*");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbldesc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbldesc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Detail Lookup Table", jPanel4);
+
+        jLabel1.setFont(new java.awt.Font("Trajan Pro", 0, 24)); // NOI18N
+        jLabel1.setText("Lookup Table Maintenance");
+
+        btnBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(360, 360, 360)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(5, 5, 5))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane1))
+        );
+
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-1154)/2, (screenSize.height-632)/2, 1154, 632);
+    }// </editor-fold>//GEN-END:initComponents
+
+    //save or update Master code
+    private void btnSaveMasterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveMasterActionPerformed
+            vallidateMaster();
+        if(validMasterTab == true){
+        
+            try {
+                boolean saveStat=false;
+                ReferenceController LKcontrol = new ReferenceController();
+                if(newStat==true){
+
+                saveStat=LKcontrol.insertMasterLookup(tboxMasterCode.getText(),TxtAreaMasterDescription.getText());
+
+                }else{
+
+                saveStat= LKcontrol.updateMaaster(tboxMasterCode.getText(),TxtAreaMasterDescription.getText());
+
+                }
+
+                if( saveStat == true){
+
+                    JOptionPane.showMessageDialog(null,
+                                        "Data have been successfully saved.",
+                                        "PMAS Notification",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                    setMasterRowItem();
+                    tboxMasterCode.setText(null);
+                    TxtAreaMasterDescription.setText(null);
+
+                }
+            else{
+                    JOptionPane.showMessageDialog(null,
+                                        "Failed save Data.",
+                                        "PMAS Notification",
+                                        JOptionPane.INFORMATION_MESSAGE);
+            }
+
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+           JOptionPane.showMessageDialog(null,
+                           "Please fill in all the Details.",
+                             "PMAS Notification",
+                           JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+        
+    }//GEN-LAST:event_btnSaveMasterActionPerformed
+
+    private void tblMasterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMasterMouseClicked
+        // TODO add your handling code here:
+          if (evt.getClickCount() == 2) {
+               newStat=false;
+               int rowIndex = tblMaster.getSelectedRow();
+               String colValue1 = (String) tblMaster.getValueAt(rowIndex,0);
+               String colValue2 = (String) tblMaster.getValueAt(rowIndex,1);
+          
+               tboxMasterCode.setText(colValue1);
+               TxtAreaMasterDescription.setText(colValue2);
+          
+          }
+        
+        
+        
+    }//GEN-LAST:event_tblMasterMouseClicked
+
+    private void btnSearchMasterIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchMasterIndexActionPerformed
+        try {
+            // TODO add your handling code here:
+            Vector<String> mastDesc = new Vector<String>();
+            ReferenceController searchLK= new ReferenceController();
+            mastDesc= searchLK.searchMasterRef(tbMastDetCode.getText());
+            setDetailRow(tbMastDetCode.getText());
+            if(!mastDesc.isEmpty()){
+                tbMasterDetCode.setText(mastDesc.elementAt(0));
+                lbldesc.setText(mastDesc.elementAt(1));
+            }else{
+                  JOptionPane.showMessageDialog(null,
+                                    "No record found.",
+                                    "PMAS Notification",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                  tbMasterDetCode.setText(null);
+                  lbldesc.setText("Not Available");
+            }
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnSearchMasterIndexActionPerformed
+
+    private void btnSaveLookupDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveLookupDetailActionPerformed
+       validateDetailTab();
+        if(validDetTab==true){
+                boolean inDet=false;
+                boolean keyExist= false;
+                Vector<String> detailLK = new Vector<String>();
+                detailLK.add(tbMasterDetCode.getText());
+                detailLK.add(tbDetRefCode.getText());
+                detailLK.add(txtAreaDetDesc.getText());
+
+                ReferenceController Detcontrol= new ReferenceController();
+                try {
+                keyExist = Detcontrol.CheckDetID(detailLK.elementAt(0), detailLK.elementAt(1));
+
+                if(keyExist == true){
+                    int n = JOptionPane.showConfirmDialog( null,
+                            "Are you sure you want to save changes made?",
+                            "Confirm Dialog Options",
+                            JOptionPane.YES_NO_OPTION //Button appearing on JOptionpane
+                        );
+
+                    if(n == 0){
+                    inDet= Detcontrol.updateDetails(detailLK);
+
+                    }
+
+                }else{
+                        inDet=  Detcontrol.InsertDetailLookup(detailLK);
+
+                }   
+                    if( inDet == true){
+
+                                JOptionPane.showMessageDialog(null,
+                                                    "Data have been successfully saved.",
+                                                    "PMAS Notification",
+                                                    JOptionPane.INFORMATION_MESSAGE);
+                                setDetailRow(detailLK.elementAt(0));
+                                tbDetRefCode.setText(null);
+                                txtAreaDetDesc.setText(null);
+
+                            }
+                        else{
+                                JOptionPane.showMessageDialog(null,
+                                                    "Failed save Data.",
+                                                    "PMAS Notification",
+                                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                        JOptionPane.showMessageDialog(null,
+                                            ex.getMessage(),
+                                            "PMAS Notification",
+                                            JOptionPane.INFORMATION_MESSAGE);
+
+                }
+        }else
+        {
+          JOptionPane.showMessageDialog(null,
+                           "Please fill in all the Details.",
+                             "PMAS Notification",
+                           JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+    }//GEN-LAST:event_btnSaveLookupDetailActionPerformed
+
+    private void btnDelLookupDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelLookupDetailActionPerformed
+        validateDetailTab();
+        if(validDetTab==true){
+            int n = JOptionPane.showConfirmDialog( null,
+                "Are you sure you want to delete the Detail Master References?",
+                "Confirm Dialog Options",
+                JOptionPane.YES_NO_OPTION //Button appearing on JOptionpane
+            );
+
+                if(n == 0){
+                    boolean DelDetStat=false;
+                ReferenceController Deldet= new ReferenceController();
+                    try {
+                        DelDetStat = Deldet.DeleteDetailLK(tbMastDetCode.getText() , tbDetRefCode.getText());
+                                if( DelDetStat  == true){
+
+                            JOptionPane.showMessageDialog(null,
+                                                "Data have been successfully Deleted.",
+                                                "PMAS Notification",
+                                                JOptionPane.INFORMATION_MESSAGE);
+                    setDetailRow(tbMastDetCode.getText());
+                    tbDetRefCode.setText(null);
+                        txtAreaDetDesc.setText(null);
+                        }
+                    else{
+                            JOptionPane.showMessageDialog(null,
+                                                "Failed Delete Data.",
+                                                "PMAS Notification",
+                                                JOptionPane.INFORMATION_MESSAGE);
+                    }
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+        }else{
+                       JOptionPane.showMessageDialog(null,
+                           "Please fill in all the Details.",
+                             "PMAS Notification",
+                           JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+    }//GEN-LAST:event_btnDelLookupDetailActionPerformed
+
+    private void btnDelMasterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelMasterActionPerformed
+        vallidateMaster();
+        if(validMasterTab == true){
+            int n = JOptionPane.showConfirmDialog( null,
+                "Are you sure you want to delete the Master References?",
+                "Confirm Dialog Options",
+                JOptionPane.YES_NO_OPTION //Button appearing on JOptionpane
+            );
+
+                if(n == 0){
+                boolean DelStat=false;
+                ReferenceController Delmast= new ReferenceController();
+                    try {
+                        DelStat = Delmast.deleteMaster(tboxMasterCode.getText());
+                                if( DelStat == true){
+
+                            JOptionPane.showMessageDialog(null,
+                                                "Data have been successfully Deleted.",
+                                                "PMAS Notification",
+                                                JOptionPane.INFORMATION_MESSAGE);
+                            setMasterRowItem();
+                            tboxMasterCode.setText(null);
+                            TxtAreaMasterDescription.setText(null);
+                        }
+                    else{
+                            JOptionPane.showMessageDialog(null,
+                                                "Failed Delete Data.",
+                                                "PMAS Notification",
+                                                JOptionPane.INFORMATION_MESSAGE);
+                    }
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+        }else{
+            JOptionPane.showMessageDialog(null,
+                  "Please fill in all the Details.",
+                  "PMAS Notification",
+                  JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+    }//GEN-LAST:event_btnDelMasterActionPerformed
+
+    private void btnNewMasterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewMasterActionPerformed
+        // TODO add your handling code here:
+        newStat=true;
+        String MRefcode = null;
+        ReferenceController Master = new ReferenceController();
+        try {
+            MRefcode = Master.getAutoMasterID();
+            tboxMasterCode.setText(MRefcode);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LookupMaintainance.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnNewMasterActionPerformed
+
+    private void tblDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetailsMouseClicked
+       
+         
+        if (evt.getClickCount() == 2) {
+               
+               int rowIndex = tblDetails.getSelectedRow();
+               String colValue1 = (String) tblDetails.getValueAt(rowIndex,0);
+               String colValue2 = (String) tblDetails.getValueAt(rowIndex,1);
+               String colValue3 = (String) tblDetails.getValueAt(rowIndex,2);
+               
+               tbMasterDetCode.setText(colValue1);
+               tbDetRefCode.setText(colValue2);
+               txtAreaDetDesc.setText(colValue3);
+          
+          }
+        
+    }//GEN-LAST:event_tblDetailsMouseClicked
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CodeMaintainance cm = new CodeMaintainance();
+        cm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /*
+         * Set the Nimbus look and feel
+         */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(LookupMaintainance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(LookupMaintainance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(LookupMaintainance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(LookupMaintainance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /*
+         * Create and display the form
+         */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                new LookupMaintainance().setVisible(true);
+            }
+        });
+    }
+    
+    
+    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea TxtAreaMasterDescription;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDelLookupDetail;
+    private javax.swing.JButton btnDelMaster;
+    private javax.swing.JButton btnNewMaster;
+    private javax.swing.JButton btnSaveLookupDetail;
+    private javax.swing.JButton btnSaveMaster;
+    private javax.swing.JButton btnSearchMasterIndex;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lbldesc;
+    private javax.swing.JTextField tbDetRefCode;
+    private javax.swing.JTextField tbMastDetCode;
+    private javax.swing.JTextField tbMasterDetCode;
+    private javax.swing.JTable tblDetails;
+    private javax.swing.JTable tblMaster;
+    private javax.swing.JTextField tboxMasterCode;
+    private javax.swing.JTextArea txtAreaDetDesc;
+    // End of variables declaration//GEN-END:variables
+}
