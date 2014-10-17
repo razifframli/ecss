@@ -550,6 +550,7 @@ public class Consultation_subcode {
                         String Instruction = note_array[zz++].split(": ")[1];
                         String UD_MDC_Code = "";
                         String Cautionary = note_array[zz++].split(": ")[1];
+                        String packType = note_array[zz++].split(": ")[1];
                         try {
                             //                            tempQuery = "SELECT UD_MDC_CODE "
                             //                                    + "FROM PIS_MDC "
@@ -557,8 +558,8 @@ public class Consultation_subcode {
                             //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
                             cons.tempQuery = "SELECT UD_MDC_CODE "
                                     + "FROM PIS_MDC2 "
-                                    + "WHERE UCASE(D_GNR_NAME) = UCASE(?) "
-                                    + "AND UCASE(D_TRADE_NAME) = UCASE(?) ";
+                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
+                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
                             ps = Session.getCon_x(1000).prepareStatement(cons.tempQuery);
                             ps.setString(1, "%" + ActiveIngredient + "%");
                             ps.setString(2, "%" + ProductName + "%");
@@ -569,6 +570,12 @@ public class Consultation_subcode {
                         } catch (Exception ex) {
                             System.out.println(ex.toString());
                         }
+                        
+                        String qty_drug = Quantity;
+                        if (packType.equals("CAP") || packType.equals("TAB")) {
+                            qty_drug = cons.getDrugQuantity(cons.getFrequencyCode(Frequency), Quantity, cons.getDayDrugCode(Duration));
+                        }
+                        
                         String data[] = {
                             ProblemCode + "^" + ProblemDesc + "^" + ProblemCode,
                             UD_MDC_Code + "^" + ActiveIngredient + "^" + UD_MDC_Code,
@@ -580,7 +587,7 @@ public class Consultation_subcode {
                             Dose,
                             "" + "^" + "" + "^" + Dose,
                             cons.getDayDrugCode(Duration),
-                            cons.getDrugQuantity(cons.getFrequencyCode(Frequency), Quantity, cons.getDayDrugCode(Duration)),
+                            qty_drug,
                             "" + "^" + "" + "^" + "",
                             Instruction,
                             "" + "^" + Session.getHfc_code() + "^"
@@ -913,6 +920,7 @@ public class Consultation_subcode {
         //            Session.setPrev_stat(false);
             //            Session.setCurr_stat(false);
             //Session.setCon_x();
+            CheckNewPatient.active = false;
             new Consultation().setVisible(true);
             cons.dispose();
 

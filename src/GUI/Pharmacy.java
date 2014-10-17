@@ -7375,11 +7375,18 @@ jScrollPane17.setViewportView(tbl_drugOList);
 
                 row1 = 0;
                 row2 = 0;
+                
+                for (int i = 0; i < od.size(); i++) {
+                    for (int j = 0; j < od.get(i).size(); j++) {
+                        System.out.print(od.get(i).get(j)+"|");
+                    }
+                    System.out.println();
+                }
 
                 //put od data into drug order
                 for (int i = 0; i < od.size(); i++) {
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(0), row1, 0); //0
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(1), row1, 1); //1
+                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(1) + "(" + od.get(i).get(15) + ")", row1, 1);
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(7), row1, 2); //7
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(10), row1, 3); //9
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(13), row1, 4); //13
@@ -7430,7 +7437,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 //put od data into drug order
                 for (int i = 0; i < od.size(); i++) {
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(0), row1, 0);
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(1), row1, 1);
+                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(1) + "(" + od.get(i).get(15) + ")", row1, 1);
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(7), row1, 2);
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(10), row1, 3);//9
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(13), row1, 4);

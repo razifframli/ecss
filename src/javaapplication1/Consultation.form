@@ -808,7 +808,7 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jTabbedPane4" min="-2" pref="400" max="-2" attributes="0"/>
+                              <Component id="jTabbedPane4" min="-2" pref="336" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -844,7 +844,7 @@
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane3" alignment="0" pref="372" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane3" alignment="0" pref="308" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -2620,7 +2620,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                       <Component id="jPanel56" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="134" max="32767" attributes="0"/>
+                                      <EmptySpace pref="70" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -2904,7 +2904,7 @@
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane37" alignment="0" pref="372" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane37" alignment="0" pref="308" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -3303,7 +3303,7 @@
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane8" alignment="0" pref="372" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane8" alignment="0" pref="308" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -3703,7 +3703,7 @@
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane36" alignment="0" pref="372" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane36" alignment="0" pref="308" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -6962,34 +6962,34 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="jPanel74" max="32767" attributes="0"/>
+                                                      <Group type="102" attributes="0">
+                                                          <Group type="103" groupAlignment="1" attributes="0">
+                                                              <Component id="lbl_drugNameOListSearch" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="jLabel24" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="lbl_productNameOList1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                              <Component id="txt_productNameOList" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="jScrollPane17" alignment="1" pref="0" max="32767" attributes="0"/>
+                                                              <Component id="txt_drugNameOListSearch" alignment="1" min="-2" pref="353" max="-2" attributes="1"/>
+                                                          </Group>
+                                                      </Group>
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                                                           <Component id="stock_qty" min="-2" pref="53" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                              <Component id="jPanel74" max="32767" attributes="0"/>
-                                                              <Group type="102" attributes="0">
-                                                                  <Group type="103" groupAlignment="1" attributes="0">
-                                                                      <Component id="lbl_drugNameOListSearch" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                                      <Component id="jLabel24" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                                      <Component id="lbl_productNameOList1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                                  </Group>
-                                                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                                      <Component id="txt_productNameOList" alignment="0" max="32767" attributes="0"/>
-                                                                      <Component id="jScrollPane17" alignment="1" pref="0" max="32767" attributes="0"/>
-                                                                      <Component id="txt_drugNameOListSearch" alignment="1" min="-2" pref="353" max="-2" attributes="1"/>
-                                                                  </Group>
-                                                              </Group>
-                                                          </Group>
+                                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                                          <Component id="jLabel61" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Component id="btn_drugAccept" min="-2" max="-2" attributes="0"/>
-                                                              <Component id="btn_drugClear" min="-2" pref="67" max="-2" attributes="0"/>
-                                                          </Group>
+                                                          <Component id="txt_packagetype" min="-2" pref="77" max="-2" attributes="0"/>
                                                       </Group>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="btn_drugAccept" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btn_drugClear" min="-2" pref="67" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace pref="93" max="32767" attributes="0"/>
                                               </Group>
@@ -7011,6 +7011,8 @@
                                                           <Group type="103" groupAlignment="3" attributes="0">
                                                               <Component id="stock_qty" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                                                               <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="jLabel61" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="txt_packagetype" alignment="3" min="-2" max="-2" attributes="0"/>
                                                           </Group>
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="3" attributes="0">
@@ -7352,6 +7354,22 @@
                                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_drugClearActionPerformed"/>
                                           </Events>
                                         </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel61">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Tahoma" size="11" style="1"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Packaging Type :"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JTextField" name="txt_packagetype">
+                                          <Properties>
+                                            <Property name="editable" type="boolean" value="false"/>
+                                          </Properties>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                                          </AuxValues>
+                                        </Component>
                                       </SubComponents>
                                     </Container>
                                     <Container class="javax.swing.JPanel" name="jPanel9">
@@ -7519,8 +7537,8 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                              <JTabbedPaneConstraints tabName="Referral">
-                                <Property name="tabTitle" type="java.lang.String" value="Referral"/>
+                              <JTabbedPaneConstraints tabName="Second Opinion">
+                                <Property name="tabTitle" type="java.lang.String" value="Second Opinion"/>
                               </JTabbedPaneConstraints>
                             </Constraint>
                           </Constraints>
@@ -7587,7 +7605,7 @@
                                         </Property>
                                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                            <TitledBorder title="Referral">
+                                            <TitledBorder title="Second Opinion">
                                               <Font PropertyName="font" name="Times New Roman" size="12" style="1"/>
                                             </TitledBorder>
                                           </Border>
@@ -7712,7 +7730,7 @@
                                         </Property>
                                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                            <TitledBorder title="List of Referral">
+                                            <TitledBorder title="List of Second Opinion">
                                               <Font PropertyName="font" name="Times New Roman" size="12" style="1"/>
                                             </TitledBorder>
                                           </Border>

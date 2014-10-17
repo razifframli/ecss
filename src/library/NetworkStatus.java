@@ -70,7 +70,7 @@ public class NetworkStatus {
     public static void main(String[] args) {
         int nice = 0;
         int bad = 0;
-        int total = 1;
+        int total = 10;
         int rmi_port = 1099;
 //        String ip = "10.73.32.200";
 //        String ip = "210.48.157.104";

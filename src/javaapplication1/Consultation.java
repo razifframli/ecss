@@ -983,6 +983,8 @@ public class Consultation extends javax.swing.JFrame {
         txt_caution = new javax.swing.JTextArea();
         btn_drugAccept = new javax.swing.JButton();
         btn_drugClear = new javax.swing.JButton();
+        jLabel61 = new javax.swing.JLabel();
+        txt_packagetype = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane29 = new javax.swing.JScrollPane();
         tbl_drug = new javax.swing.JTable();
@@ -1668,7 +1670,7 @@ public class Consultation extends javax.swing.JFrame {
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
         );
 
         jTabbedPane4.addTab("C.Complaints", jPanel18);
@@ -2570,7 +2572,7 @@ public class Consultation extends javax.swing.JFrame {
             .addGroup(jPanel23Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jPanel56, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Blood Group/G6PD", jPanel23);
@@ -2791,7 +2793,7 @@ public class Consultation extends javax.swing.JFrame {
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane37, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+            .addComponent(jScrollPane37, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
         );
 
         jTabbedPane4.addTab("Allergy", jPanel24);
@@ -3013,7 +3015,7 @@ public class Consultation extends javax.swing.JFrame {
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
         );
 
         jTabbedPane4.addTab("Immunization", jPanel25);
@@ -3218,7 +3220,7 @@ public class Consultation extends javax.swing.JFrame {
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane36, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+            .addComponent(jScrollPane36, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
         );
 
         jTabbedPane4.addTab("Disability", jPanel26);
@@ -3232,7 +3234,7 @@ public class Consultation extends javax.swing.JFrame {
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -5213,33 +5215,40 @@ public class Consultation extends javax.swing.JFrame {
             }
         });
 
+        jLabel61.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel61.setText("Packaging Type :");
+
+        txt_packagetype.setEditable(false);
+
         javax.swing.GroupLayout jPanel45Layout = new javax.swing.GroupLayout(jPanel45);
         jPanel45.setLayout(jPanel45Layout);
         jPanel45Layout.setHorizontalGroup(
             jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel45Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel74, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel45Layout.createSequentialGroup()
+                        .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_drugNameOListSearch)
+                            .addComponent(jLabel24)
+                            .addComponent(lbl_productNameOList1))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txt_productNameOList, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(txt_drugNameOListSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel45Layout.createSequentialGroup()
                         .addGap(118, 118, 118)
-                        .addComponent(stock_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel45Layout.createSequentialGroup()
-                        .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel74, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel45Layout.createSequentialGroup()
-                                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbl_drugNameOListSearch)
-                                    .addComponent(jLabel24)
-                                    .addComponent(lbl_productNameOList1))
-                                .addGap(28, 28, 28)
-                                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txt_productNameOList, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(txt_drugNameOListSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(stock_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel61)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_drugAccept)
-                            .addComponent(btn_drugClear, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(txt_packagetype, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_drugAccept)
+                    .addComponent(btn_drugClear, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel45Layout.setVerticalGroup(
@@ -5256,7 +5265,9 @@ public class Consultation extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(stock_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel24))
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel61)
+                            .addComponent(txt_packagetype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_productNameOList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -5408,7 +5419,7 @@ public class Consultation extends javax.swing.JFrame {
         jPanel43.setBackground(new java.awt.Color(173, 182, 200));
 
         jPanel8.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Referral", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Second Opinion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
 
         cbx_referral_doctor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- Please Select a Doctor --" }));
 
@@ -5476,7 +5487,7 @@ public class Consultation extends javax.swing.JFrame {
         );
 
         jPanel75.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel75.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "List of Referral", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        jPanel75.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "List of Second Opinion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
 
         tbl_referral_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -5621,7 +5632,7 @@ public class Consultation extends javax.swing.JFrame {
             .addComponent(jScrollPane60, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
         );
 
-        jTabbedPane7.addTab("Referral", jPanel40);
+        jTabbedPane7.addTab("Second Opinion", jPanel40);
 
         jPanel41.setBackground(new java.awt.Color(173, 182, 200));
 
@@ -9614,15 +9625,16 @@ public class Consultation extends javax.swing.JFrame {
                         String Instruction = note_array[zz++].split(": ")[1];
                         String UD_MDC_Code = "";
                         String Cautionary = note_array[zz++].split(": ")[1];
+                        String packType = note_array[zz++].split(": ")[1];
                         try {
                             //                            tempQuery = "SELECT UD_MDC_CODE "
                             //                                    + "FROM PIS_MDC "
                             //                                    + "WHERE ACTIVE_INGREDIENT_CODE LIKE ? "
                             //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
                             tempQuery = "SELECT UD_MDC_CODE "
-                            + "FROM PIS_MDC2 "
-                            + "WHERE UCASE(D_GNR_NAME) = UCASE(?) "
-                            + "AND UCASE(D_TRADE_NAME) = UCASE(?) ";
+                                    + "FROM PIS_MDC2 "
+                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
+                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
                             ps = Session.getCon_x(1000).prepareStatement(tempQuery);
                             ps.setString(1, "%" + ActiveIngredient + "%");
                             ps.setString(2, "%" + ProductName + "%");
@@ -9633,23 +9645,29 @@ public class Consultation extends javax.swing.JFrame {
                         } catch (Exception ex) {
                             System.out.println(ex.toString());
                         }
+                        
+                        String qty_drug = Quantity;
+                        if (packType.equals("CAP") || packType.equals("TAB")) {
+                            qty_drug = getDrugQuantity(getFrequencyCode(Frequency), Quantity, getDayDrugCode(Duration));
+                        }
+                        
                         String data[] = {
-                            ProblemCode+"^"+ProblemDesc+"^"+ProblemCode,
-                            UD_MDC_Code+"^"+ActiveIngredient+"^"+UD_MDC_Code,
-                            ""+"^"+DrugForm+"^"+"",
-                            ""+"^"+""+"^"+"",
-                            ""+"^"+Frequency+"^"+"",
+                            ProblemCode + "^" + ProblemDesc + "^" + ProblemCode,
+                            UD_MDC_Code + "^" + ActiveIngredient + "^" + UD_MDC_Code,
+                            "" + "^" + DrugForm + "^" + "",
+                            "" + "^" + "" + "^" + "",
+                            "" + "^" + Frequency + "^" + "",
                             getFrequencyCode(Frequency),
                             Quantity,
                             Dose,
-                            ""+"^"+""+"^"+Dose,
+                            "" + "^" + "" + "^" + Dose,
                             getDayDrugCode(Duration),
-                            getDrugQuantity(getFrequencyCode(Frequency), Quantity, getDayDrugCode(Duration)),
-                            ""+"^"+""+"^"+"",
+                            qty_drug,
+                            "" + "^" + "" + "^" + "",
                             Instruction,
-                            ""+"^"+Session.getHfc_code()+"^"
-                            +""+"^"+Session.getDiscipline()+"^"
-                            +""+"^"+Session.getDiscipline(),
+                            "" + "^" + Session.getHfc_code() + "^"
+                            + "" + "^" + Session.getDiscipline() + "^"
+                            + "" + "^" + Session.getDiscipline(),
                             Cautionary
                         };
                         msgs[ii] = "DTO|" + date + "|";
@@ -9676,7 +9694,7 @@ public class Consultation extends javax.swing.JFrame {
             }
 
             if(stat_dto) {
-                PDFiText.createPrescription("assets/Presription_.pdf", data_temp);
+                PDFiText.createPrescription("assets/Presription_.pdf", data_temp, this);
             } else {
                 J.o("No Drug Order", "No drug had been ordered!\nPlease order drug first.", 1);
             }
@@ -10016,6 +10034,7 @@ public class Consultation extends javax.swing.JFrame {
                     }
                     break;
                     case 13: {
+                        txt_packagetype.setText(tbl_note_1.getValueAt(index_temp--, 1).toString());
                         txt_caution.setText(tbl_note_1.getValueAt(index_temp--, 1).toString());
                         cb_instructionOList.setSelectedItem(tbl_note_1.getValueAt(index_temp--, 1).toString());
                         cb_frequencyOList.setSelectedItem(tbl_note_1.getValueAt(index_temp--, 1).toString());
@@ -10742,32 +10761,32 @@ public class Consultation extends javax.swing.JFrame {
 
     private void txt_diastolic2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_diastolic2KeyReleased
         if(checkPatient()) return;
-        checkNumber(txt_diastolic2, 0, 200);
+        checkNumber(2, txt_diastolic2, 0, 200);
     }//GEN-LAST:event_txt_diastolic2KeyReleased
 
     private void txt_systolic2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_systolic2KeyReleased
         if(checkPatient()) return;
-        checkNumber(txt_systolic2, 0, 300);
+        checkNumber(2, txt_systolic2, 0, 300);
     }//GEN-LAST:event_txt_systolic2KeyReleased
 
     private void txt_diastolic1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_diastolic1KeyReleased
         if(checkPatient()) return;
-        checkNumber(txt_diastolic1, 0, 200);
+        checkNumber(2, txt_diastolic1, 0, 200);
     }//GEN-LAST:event_txt_diastolic1KeyReleased
 
     private void txt_systolic1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_systolic1KeyReleased
         if(checkPatient()) return;
-        checkNumber(txt_systolic1, 0, 300);
+        checkNumber(2, txt_systolic1, 0, 300);
     }//GEN-LAST:event_txt_systolic1KeyReleased
 
     private void txt_diastolicKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_diastolicKeyReleased
         if(checkPatient()) return;
-        checkNumber(txt_diastolic, 0, 200);
+        checkNumber(2, txt_diastolic, 0, 200);
     }//GEN-LAST:event_txt_diastolicKeyReleased
 
     private void txt_systolicKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_systolicKeyReleased
         if(checkPatient()) return;
-        checkNumber(txt_systolic, 0, 300);
+        checkNumber(2, txt_systolic, 0, 300);
     }//GEN-LAST:event_txt_systolicKeyReleased
 
     private void btn_calculateBmiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calculateBmiActionPerformed
@@ -10858,12 +10877,12 @@ public class Consultation extends javax.swing.JFrame {
 
     private void txt_weightKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_weightKeyReleased
         if(checkPatient()) return;
-        checkNumber(txt_weight, 0, 1000);
+        checkNumber(2, txt_weight, 0, 1000);
     }//GEN-LAST:event_txt_weightKeyReleased
 
     private void txt_heightKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_heightKeyReleased
         if(checkPatient()) return;
-        checkNumber(txt_height, 0, 400);
+        checkNumber(2, txt_height, 0, 400);
     }//GEN-LAST:event_txt_heightKeyReleased
 
     private void txt_heightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_heightActionPerformed
@@ -11573,7 +11592,7 @@ public class Consultation extends javax.swing.JFrame {
 
     private void txt_temperatureKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_temperatureKeyReleased
         if(checkPatient()) return;
-        checkNumber(txt_temperature, 0, 100);
+        checkNumber(2, txt_temperature, 0, 100);
     }//GEN-LAST:event_txt_temperatureKeyReleased
 
     private void jSlider4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider4StateChanged
@@ -11588,7 +11607,7 @@ public class Consultation extends javax.swing.JFrame {
 
     private void txt_headCircumferenceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_headCircumferenceKeyReleased
         if(checkPatient()) return;
-        checkNumber(txt_headCircumference, 0, 200);
+        checkNumber(2, txt_headCircumference, 0, 200);
     }//GEN-LAST:event_txt_headCircumferenceKeyReleased
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -12486,6 +12505,7 @@ public class Consultation extends javax.swing.JFrame {
                         String Instruction = note_array[zz++].split(": ")[1];
                         String UD_MDC_Code = "";
                         String Cautionary = note_array[zz++].split(": ")[1];
+                        String packType = note_array[zz++].split(": ")[1];
                         try {
                             //                            tempQuery = "SELECT UD_MDC_CODE "
                             //                                    + "FROM PIS_MDC "
@@ -12493,8 +12513,8 @@ public class Consultation extends javax.swing.JFrame {
                             //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
                             tempQuery = "SELECT UD_MDC_CODE "
                                     + "FROM PIS_MDC2 "
-                                    + "WHERE UCASE(D_GNR_NAME) = UCASE(?) "
-                                    + "AND UCASE(D_TRADE_NAME) = UCASE(?) ";
+                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
+                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
                             ps = Session.getCon_x(1000).prepareStatement(tempQuery);
                             ps.setString(1, "%" + ActiveIngredient + "%");
                             ps.setString(2, "%" + ProductName + "%");
@@ -12505,6 +12525,12 @@ public class Consultation extends javax.swing.JFrame {
                         } catch (Exception ex) {
                             System.out.println(ex.toString());
                         }
+                        
+                        String qty_drug = Quantity;
+                        if (packType.equals("CAP") || packType.equals("TAB")) {
+                            qty_drug = getDrugQuantity(getFrequencyCode(Frequency), Quantity, getDayDrugCode(Duration));
+                        }
+                        
                         String data[] = {
                             ProblemCode + "^" + ProblemDesc + "^" + ProblemCode,
                             UD_MDC_Code + "^" + ActiveIngredient + "^" + UD_MDC_Code,
@@ -12516,7 +12542,7 @@ public class Consultation extends javax.swing.JFrame {
                             Dose,
                             "" + "^" + "" + "^" + Dose,
                             getDayDrugCode(Duration),
-                            getDrugQuantity(getFrequencyCode(Frequency), Quantity, getDayDrugCode(Duration)),
+                            qty_drug,
                             "" + "^" + "" + "^" + "",
                             Instruction,
                             "" + "^" + Session.getHfc_code() + "^"
@@ -12931,6 +12957,8 @@ public class Consultation extends javax.swing.JFrame {
         String p_name = txt_productNameOList.getText();
         String drug_form = (String) txt_dosageFormOList.getText();
         String duration = (String) cb_durationTypeOList.getSelectedItem();
+        
+        String pack_type = txt_packagetype.getText();
 
         //String data[] = p_name.split(";");
 
@@ -12969,7 +12997,8 @@ public class Consultation extends javax.swing.JFrame {
                     "Duration: " + Func.trim(doseT) + " " + Func.trim(duration),
                     "Frequency: " + Func.trim(freq),
                     "Instruction: " + Func.trim(inst),
-                    "Cautionary: " + Func.trim(cautionary)
+                    "Cautionary: " + Func.trim(cautionary),
+                    "Pack Type: " + Func.trim(pack_type)
                 };
                 setData(data, 13); //1 for c.complaint
 
@@ -13081,12 +13110,25 @@ public class Consultation extends javax.swing.JFrame {
         //lst_productNameOList.setModel(listModel);
         //tfield_productname.setText("");
     }
-    private void checkNumber(JTextField jtf, int start, int end) {
+    private void checkNumber(int type, JTextField jtf, int start, int end) {
         String a = jtf.getText();
         try {
-            int b = Integer.parseInt(a);
-            if (!(b >= start && b <= end)) {
-                jtf.setText("");
+            switch (type) {
+                case 1: // check integer
+                    int b = Integer.parseInt(a);
+                    if (!(b >= start && b <= end)) {
+                        jtf.setText("");
+                    }
+                    break;
+                case 2: // check double
+                    double b2 = Double.parseDouble(a);
+                    if (!(b2 >= start && b2 <= end)) {
+                        jtf.setText("");
+                    }
+                    break;
+                default:
+                    jtf.setText("");
+                    break;
             }
         } catch (Exception e) {
             jtf.setText("");
@@ -13105,6 +13147,8 @@ public class Consultation extends javax.swing.JFrame {
         cb_durationOList.setSelectedItem("-");
         cb_durationTypeOList.setSelectedItem("-");
         cb_instructionOList.setSelectedItem("-");
+        
+        txt_packagetype.setText("");
 
         stock_qty.setText("");
 
@@ -13137,6 +13181,8 @@ public class Consultation extends javax.swing.JFrame {
                 String dLexpdate = results.getString("D_EXP_DATE");
                 String dLclassification = results.getString("D_CLASSIFICATION");
                 
+                String dPackageType = results.getString("D_PACKAGINGT");
+                
                 txt_productNameOList.setText(dtraden);
                 stock_qty.setText(dstockqty);
                 txt_drugstrength.setText(dstrength);
@@ -13146,6 +13192,8 @@ public class Consultation extends javax.swing.JFrame {
                 cb_durationOList.setSelectedItem(dLduration);
                 cb_durationTypeOList.setSelectedItem(dLdurationType);
                 cb_instructionOList.setSelectedItem(dLadvisory);
+                
+                txt_packagetype.setText(dPackageType);
                 
                 txt_caution.setText(dLcaution);
 
@@ -13162,6 +13210,8 @@ public class Consultation extends javax.swing.JFrame {
                     cb_durationOList.setSelectedItem("");
                     cb_durationTypeOList.setSelectedItem("");
                     cb_instructionOList.setSelectedItem("");
+                    
+                    txt_packagetype.setText("");
 
                     txt_caution.setText("");
                 }
@@ -14420,6 +14470,7 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
@@ -14767,6 +14818,7 @@ public class Consultation extends javax.swing.JFrame {
     public javax.swing.JTextField txt_pRace;
     public javax.swing.JLabel txt_pSex;
     public javax.swing.JTextField txt_pStatus;
+    public static javax.swing.JTextField txt_packagetype;
     private javax.swing.JTextField txt_pain_result;
     public static javax.swing.JTextField txt_peparu_kanan;
     private javax.swing.JTextField txt_perut;

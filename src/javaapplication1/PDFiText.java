@@ -541,7 +541,7 @@ public class PDFiText {
         document.add(new Paragraph(line, subtitleFont));
     }
 
-    private static void addTableDrugs(Document document, String data) throws DocumentException {
+    private static void addTableDrugs(Document document, String data, Consultation cons) throws DocumentException {
         int num_col = 9;
         int num_row = 0;
         
@@ -565,17 +565,45 @@ public class PDFiText {
             table.addCell(getCell(table, header[i], 1, 1));
         }
         
+        for (int i = 0; i < num_row; i++) {
+            for (int j = 0; j < dto[i].length; j++) {
+                System.out.print(dto[i][j]+"^");
+            }
+            System.out.println();
+        }
+        
         //add data row by row
         for(int i = 0; i < num_row; i++) {
+            String mdcCode = dto[i][4];
+            String dTradeName = "";
+            String qtyDrug = dto[i][17];
+            String packType = "-";
+            try {
+                cons.tempQuery = "SELECT * "
+                        + "FROM PIS_MDC2 "
+                        + "WHERE UCASE(UD_MDC_CODE) LIKE UCASE(?) ";
+                cons.ps = Session.getCon_x(1000).prepareStatement(cons.tempQuery);
+                cons.ps.setString(1, "%" + mdcCode + "%");
+                cons.rs = cons.ps.executeQuery();
+                if (cons.rs.next()) {
+                    dTradeName = cons.rs.getString("D_TRADE_NAME");
+                    packType = cons.rs.getString("D_PACKAGINGT");
+                    if (packType.equals("CAP") || packType.equals("TAB")) {
+                        qtyDrug = dto[i][23];
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             table.addCell(getCell(table, (i+1)+".", 1, 1));
-            table.addCell(getCell(table, dto[i][5], 1, 1));
+            table.addCell(getCell(table, dTradeName + "(" + dto[i][5] + ")", 1, 1));
             table.addCell(getCell(table, dto[i][12], 1, 1));
             table.addCell(getCell(table, dto[i][17], 1, 1));
             table.addCell(getCell(table, dto[i][14], 1, 1));
             table.addCell(getCell(table, getDate(dto[i][0], 0), 1, 1));
             table.addCell(getCell(table, getDate(dto[i][0], getDay(dto[i][22])), 1, 1));
             table.addCell(getCell(table, dto[i][22] + " day" + getS(dto[i][22]), 1, 1));
-            table.addCell(getCell(table, dto[i][23], 1, 1));
+            table.addCell(getCell(table, qtyDrug, 1, 1));
         }
 
         document.add(table);
@@ -758,7 +786,7 @@ public class PDFiText {
         }
     }
 
-    public static void createPrescription(String title, String data_temp) {
+    public static void createPrescription(String title, String data_temp, Consultation cons) {
         try {
             Document document = new Document(PageSize.A4.rotate());
             PdfWriter.getInstance(document, new FileOutputStream(title));
@@ -766,7 +794,7 @@ public class PDFiText {
             addMetaData(document);
             addTitlePage(document, data_temp);
             addTablePatient(document, data_temp);
-            addTableDrugs(document, data_temp);
+            addTableDrugs(document, data_temp, cons);
             addFooter(document, data_temp);
             document.close();
             

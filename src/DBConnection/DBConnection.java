@@ -363,8 +363,8 @@ public class DBConnection {
     public static String getProductNameDrug(String ud_mdc_code) {
         String productName = "";
         try {
-            String sql = "SELECT DRUG_PRODUCT_NAME "
-                    + "FROM PIS_MDC "
+            String sql = "SELECT * "
+                    + "FROM PIS_MDC2 "
                     + "WHERE UD_MDC_CODE = ? ";
             //prepare the sql query and execute it
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
@@ -375,7 +375,8 @@ public class DBConnection {
             if (result.next()) {
                 //read data get from database to all fields
 
-                productName = result.getString("DRUG_PRODUCT_NAME");
+//                productName = result.getString("DRUG_PRODUCT_NAME");
+                productName = result.getString("D_TRADE_NAME");
 
             }
             //clean the results and data
@@ -500,22 +501,22 @@ public class DBConnection {
             //* * * * * * * * * * * * * * * * * * * * * * * * * * * 
                 try {
 
-                    String sql2 = "SELECT STOCK_QTY "
-                            + "FROM PIS_MDC "
+                    String sql2 = "SELECT * "
+                            + "FROM PIS_MDC2 "
                             + "where UD_MDC_Code = ?";
                     PreparedStatement ps3 = Session.getCon_x(1000).prepareStatement(sql2);
                     ps3.setString(1, drugCode);
                     ResultSet rs2 = ps3.executeQuery();
                     while (rs2.next()) {
-                        drugQty = rs2.getInt("STOCK_QTY");
+                        drugQty = rs2.getInt("D_STOCK_QTY");
                         drugQty -= (old_qty_dispensed);
                         S.oln("show data"+drugQty);   
                     }
                         
 
                         try {
-                            String sql3 = "UPDATE PIS_MDC "
-                                    + "SET STOCK_QTY = ? "
+                            String sql3 = "UPDATE PIS_MDC2 "
+                                    + "SET D_STOCK_QTY = ? "
                                     + "where UD_MDC_CODE = ?";
                             PreparedStatement ps4 = Session.getCon_x(1000).prepareStatement(sql3);
                             ps4.setInt(1, drugQty);
@@ -558,22 +559,22 @@ public class DBConnection {
         //* * * * * * * * * * * * * * * * * * * * * * * * * * * 
               try {
 
-                  String sql2 = "SELECT STOCK_QTY "
-                          + "FROM PIS_MDC "
+                  String sql2 = "SELECT * "
+                          + "FROM PIS_MDC2 "
                           + "where UD_MDC_Code = ?";
                   PreparedStatement ps3 = Session.getCon_x(1000).prepareStatement(sql2);
                   ps3.setString(1, drugCode);
                   ResultSet rs2 = ps3.executeQuery();
                   while (rs2.next()) {
-                      drugQty = rs2.getInt("STOCK_QTY");
+                      drugQty = rs2.getInt("D_STOCK_QTY");
                       drugQty -= (old_qty_dispensed);
                       S.oln("show data" + drugQty);
                   }
 
 
                   try {
-                      String sql3 = "UPDATE PIS_MDC "
-                              + "SET STOCK_QTY = ? "
+                      String sql3 = "UPDATE PIS_MDC2 "
+                              + "SET D_STOCK_QTY = ? "
                               + "where UD_MDC_CODE = ?";
                       PreparedStatement ps4 = Session.getCon_x(1000).prepareStatement(sql3);
                       ps4.setInt(1, drugQty);
@@ -1053,8 +1054,8 @@ public class DBConnection {
                //get data from table PIS_MDC
                try
                {
-                    String sql1="SELECT Drug_Product_Name, Def_Route_Code "
-                            + "FROM PIS_MDC "
+                    String sql1="SELECT * "
+                            + "FROM PIS_MDC2 "
                             + "WHERE UD_MDC_Code = ?";
 
                     //prepare the sql query and execute it
@@ -1065,8 +1066,10 @@ public class DBConnection {
                     while(result1.next())
                     {
                        //read data get from database to all fields
-                       productName = result1.getString("Drug_Product_Name");
-                       route = result1.getString("Def_Route_Code");
+//                       productName = result1.getString("Drug_Product_Name");
+//                       route = result1.getString("Def_Route_Code");
+                       productName = result1.getString("D_TRADE_NAME");
+                       route = result1.getString("D_ROUTE_CODE");
                     }
                 }catch(Exception ex){
                     System.out.println("dbc 1 "+ex.getMessage());
@@ -1076,7 +1079,7 @@ public class DBConnection {
                try
                {
                     //String sql1="SELECT MDC_Stock_Qty FROM PIS_MDC_PHARMACY WHERE UD_MDC_Code = ?";
-                    String sql1="SELECT STOCK_QTY FROM PIS_MDC WHERE UD_MDC_Code = ?";//11012013
+                    String sql1="SELECT * FROM PIS_MDC2 WHERE UD_MDC_Code = ?";//11012013
 
                     //prepare the sql query and execute it
                     PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
@@ -1086,7 +1089,7 @@ public class DBConnection {
                     while(result1.next())
                     {
                        //read data get from database to all fields
-                       stockQty1 = result1.getInt("STOCK_QTY");
+                       stockQty1 = result1.getInt("D_STOCK_QTY");
 
                        if(stockQty1 != 0)
                        {
@@ -1186,11 +1189,13 @@ public class DBConnection {
 //                    totalQty = frequency1 * qtyPerTime1 * duration1;
                     totalQty1 = Double.toString(totalQty);
                     
+                    String generic_name = "";
+                    
                     try {
 //                        String sql1 = "SELECT Drug_Product_Name, Def_Route_Code "
 //                                + "FROM PIS_MDC "
 //                                + "WHERE UD_MDC_Code = ?";
-                        String sql1 = "SELECT D_TRADE_NAME, D_ROUTE_CODE "
+                        String sql1 = "SELECT * "
                                 + "FROM PIS_MDC2 "
                                 + "WHERE UD_MDC_CODE = ? ";
 
@@ -1199,11 +1204,15 @@ public class DBConnection {
                         ps1.setString(1, mdcCode);
                         ResultSet result1 = ps1.executeQuery();
 
-                        while (result1.next()) {
+                        if (result1.next()) {
                             //read data get from database to all fields
-                            productName = result1.getString("Drug_Product_Name");
-                            route = result1.getString("Def_Route_Code");
-                            stockQty1 = result1.getInt("STOCK_QTY");
+//                            productName = result1.getString("Drug_Product_Name");
+//                            route = result1.getString("Def_Route_Code");
+//                            stockQty1 = result1.getInt("STOCK_QTY");
+                            productName = result1.getString("D_TRADE_NAME");
+                            route = result1.getString("D_ROUTE_CODE");
+                            stockQty1 = result1.getInt("D_STOCK_QTY");
+                            generic_name = result1.getString("D_GNR_NAME");
 
                             if (stockQty1 != 0) {
                                 stockQty = "Available";
@@ -1231,6 +1240,8 @@ public class DBConnection {
                     d.add(orderStatus); //12
                     d.add(stockQty1+""); //13
                     d.add(stockQty+""); //14
+                    
+                    d.add(generic_name); //15
                     
                     data.add(d);
                 }
@@ -1322,8 +1333,8 @@ public class DBConnection {
 
                 //get data from table PIS_MDC
                 try {
-                    String sql1 = "SELECT Drug_Product_Name, Def_Route_Code "
-                            + "FROM PIS_MDC "
+                    String sql1 = "SELECT * "
+                            + "FROM PIS_MDC2 "
                             + "WHERE UD_MDC_Code = ?";
 
                     //prepare the sql query and execute it
@@ -1333,8 +1344,10 @@ public class DBConnection {
 
                     while (result1.next()) {
                         //read data get from database to all fields
-                        productName = result1.getString("Drug_Product_Name");
-                        route = result1.getString("Def_Route_Code");
+//                        productName = result1.getString("Drug_Product_Name");
+//                        route = result1.getString("Def_Route_Code");
+                        productName = result1.getString("D_TRADE_NAME");
+                        route = result1.getString("D_ROUTE_CODE");
                     }
                 } catch (Exception ex) {
                     System.out.println("dbc 1 " + ex.getMessage());
@@ -1343,7 +1356,7 @@ public class DBConnection {
                 //get data from table PMS_MDC_PHARMACY
                 try {
                     //String sql1="SELECT MDC_Stock_Qty FROM PIS_MDC_PHARMACY WHERE UD_MDC_Code = ?";
-                    String sql1 = "SELECT STOCK_QTY FROM PIS_MDC WHERE UD_MDC_Code = ?";//11012013
+                    String sql1 = "SELECT * FROM PIS_MDC2 WHERE UD_MDC_Code = ?";//11012013
 
                     //prepare the sql query and execute it
                     PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
@@ -1352,7 +1365,7 @@ public class DBConnection {
 
                     while (result1.next()) {
                         //read data get from database to all fields
-                        stockQty1 = result1.getInt("STOCK_QTY");
+                        stockQty1 = result1.getInt("D_STOCK_QTY");
 
                         if (stockQty1 != 0) {
                             stockQty = "Available";
