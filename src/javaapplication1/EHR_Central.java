@@ -115,11 +115,15 @@ public class EHR_Central {
         Date date = new Date(new java.util.Date().getTime());
         String data = header + patientInfo;
         String dataDTO = data;
+        String dataPOS = data;
         for(int i = 0; i < msgs.length; i++) {
             if(msgs[i].length() > 0) {
                 data += msgs[i];
                 if(msgs[i].split("\\|")[0].contains("DTO")) {
                     dataDTO += msgs[i];
+                }
+                if(msgs[i].split("\\|")[0].contains("POS")) {
+                    dataPOS += msgs[i];
                 }
             }
         }
@@ -152,9 +156,10 @@ public class EHR_Central {
             //impl.sayHello("..Friza ");
 
             //String IC = "891031075331"; //for testing purpose
-            String s = DBConnection.getImpl().insertEHRCentral(status, PMI, data); //Insert CIS
-            String s2 = DBConnection.getImpl().insertDTO(PMI, dataDTO);
-            System.out.println(s);
+            String ehr_central = DBConnection.getImpl().insertEHRCentral(status, PMI, data); //Insert CIS
+            String dto = DBConnection.getImpl().insertDTO(PMI, dataDTO);
+            String pos = DBConnection.getImpl().insertPOS(PMI, dataPOS);
+            System.out.println(ehr_central);
 
             System.out.println(".....Message Sent....");
         } catch (Exception e) {

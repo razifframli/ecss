@@ -1437,9 +1437,9 @@ public class Registration extends javax.swing.JFrame {
         jLabel46.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel46.setText("Date of Birth");
 
-        tfieldDOBPatient.setDateFormatString("dd/MM/yyyy");
+        tfieldDOBPatient.setDateFormatString("yyyy-MM-dd");
 
-        jLabel50.setText("Example: 01/10/1989");
+        jLabel50.setText("Example: 1989-10-31");
 
         cboxMaritalStatusPatient.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cboxMaritalStatusPatient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Marital Status", "Single", "Married" }));
@@ -5854,18 +5854,16 @@ public class Registration extends javax.swing.JFrame {
                     }
                     
                     // date of birth
-                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-                    Date date1 = new SimpleDateFormat("yyyy-MM-dd", 
-                            Locale.ENGLISH).parse(RegisterInfo1[18]);
-                    String dateDOB1 = sdf1.format(date1);
-                    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                    Date date2 = new SimpleDateFormat("dd/MM/yyyy", 
-                            Locale.ENGLISH).parse(dateDOB1);
-                    tfieldDOBPatient.setDate(date2);
-                    Calendar calendar1 = new GregorianCalendar(2014,11,24);
-                    tfieldDOBPatient.setCalendar(calendar1);
+                    try {
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(RegisterInfo1[18]);
+                        tfieldDOBPatient.setDate(date1);
+                    } catch (Exception e) {
+                        System.out.println("Date Parse Error: "+e.getMessage());
+                    }
+                    
                     // name
                     tfieldPatientName.setText(RegisterInfo1[17]);
+                    
                     // id type
                     if (RegisterInfo1[12].equals("0")) {
                         Func.cmbSelectInput(cboxIdTypePatient, "Staff No.");

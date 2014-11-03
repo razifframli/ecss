@@ -1760,12 +1760,12 @@
                             </Component>
                             <Component class="com.toedter.calendar.JDateChooser" name="tfieldDOBPatient">
                               <Properties>
-                                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+                                <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel50">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Example: 01/10/1989"/>
+                                <Property name="text" type="java.lang.String" value="Example: 1989-10-31"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="cboxMaritalStatusPatient">

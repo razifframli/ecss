@@ -190,49 +190,49 @@ public class Consultation extends javax.swing.JFrame {
         for (int i = 0; i < pe0.size(); i++) {
             String code_0 = pe0.get(i).getPe_cd();
             String name_0 = pe0.get(i).getPe_name();
-            level0[i] = new DefaultMutableTreeNode(name_0+" "+code_0);
+            level0[i] = new DefaultMutableTreeNode(name_0);
             for (int j = 0; j < pe1.size(); j++) {
                 String code_1 = pe1.get(j).getPe_cd();
                 String code_1_parent = pe1.get(j).getPe_parent();
                 String name_1 = pe1.get(j).getPe_name();
                 if (code_0.equals(code_1_parent)) {
-                    DefaultMutableTreeNode level1 = new DefaultMutableTreeNode(name_1+" "+code_1);
+                    DefaultMutableTreeNode level1 = new DefaultMutableTreeNode(name_1);
                     for (int k = 0; k < pe2.size(); k++) {
                         String code_2 = pe2.get(k).getPe_cd();
                         String code_2_parent = pe2.get(k).getPe_parent();
                         String name_2 = pe2.get(k).getPe_name();
                         if (code_1.equals(code_2_parent)) {
-                            DefaultMutableTreeNode level2 = new DefaultMutableTreeNode(name_2+" "+code_2);
+                            DefaultMutableTreeNode level2 = new DefaultMutableTreeNode(name_2);
                             for (int k3 = 0; k3 < pe3.size(); k3++) {
                                 String code_3 = pe3.get(k3).getPe_cd();
                                 String code_3_parent = pe3.get(k3).getPe_parent();
                                 String name_3 = pe3.get(k3).getPe_name();
                                 if (code_2.equals(code_3_parent)) {
-                                    DefaultMutableTreeNode level3 = new DefaultMutableTreeNode(name_3+" "+code_3);
+                                    DefaultMutableTreeNode level3 = new DefaultMutableTreeNode(name_3);
                                     for (int k4 = 0; k4 < pe4.size(); k4++) {
                                         String code_4 = pe4.get(k4).getPe_cd();
                                         String code_4_parent = pe4.get(k4).getPe_parent();
                                         String name_4 = pe4.get(k4).getPe_name();
                                         if (code_3.equals(code_4_parent)) {
-                                            DefaultMutableTreeNode level4 = new DefaultMutableTreeNode(name_4+" "+code_4);
+                                            DefaultMutableTreeNode level4 = new DefaultMutableTreeNode(name_4);
                                             for (int k5 = 0; k5 < pe5.size(); k5++) {
                                                 String code_5 = pe5.get(k5).getPe_cd();
                                                 String code_5_parent = pe5.get(k5).getPe_parent();
                                                 String name_5 = pe5.get(k5).getPe_name();
                                                 if (code_4.equals(code_5_parent)) {
-                                                    DefaultMutableTreeNode level5 = new DefaultMutableTreeNode(name_5+" "+code_5);
+                                                    DefaultMutableTreeNode level5 = new DefaultMutableTreeNode(name_5);
                                                     for (int k6 = 0; k6 < pe6.size(); k6++) {
                                                         String code_6 = pe6.get(k6).getPe_cd();
                                                         String code_6_parent = pe6.get(k6).getPe_parent();
                                                         String name_6 = pe6.get(k6).getPe_name();
                                                         if (code_5.equals(code_6_parent)) {
-                                                            DefaultMutableTreeNode level6 = new DefaultMutableTreeNode(name_6+" "+code_6);
+                                                            DefaultMutableTreeNode level6 = new DefaultMutableTreeNode(name_6);
                                                             for (int k7 = 0; k7 < pe7.size(); k7++) {
                                                                 String code_7 = pe7.get(k7).getPe_cd();
                                                                 String code_7_parent = pe7.get(k7).getPe_parent();
                                                                 String name_7 = pe7.get(k7).getPe_name();
                                                                 if (code_6.equals(code_7_parent)) {
-                                                                    DefaultMutableTreeNode level7 = new DefaultMutableTreeNode(name_7+" "+code_7);
+                                                                    DefaultMutableTreeNode level7 = new DefaultMutableTreeNode(name_7);
                                                                     level6.add(level7);
                                                                 }
                                                             }
@@ -269,19 +269,19 @@ public class Consultation extends javax.swing.JFrame {
         for (int i = 0; i < data1.size(); i++) {
             String code = data1.get(i).get(0);
             String name = data1.get(i).get(1);
-            level1[i] = new DefaultMutableTreeNode(code+" "+name);
+            level1[i] = new DefaultMutableTreeNode(name);
             for (int j = 0; j < data2.size(); j++) {
                 String code_1 = data2.get(j).get(0);
                 String code_1_parent = data2.get(j).get(2);
                 String name_1 = data2.get(j).get(1);
                 if (code.equals(code_1_parent)) {
-                    DefaultMutableTreeNode level2 = new DefaultMutableTreeNode(code_1+" "+name_1);
+                    DefaultMutableTreeNode level2 = new DefaultMutableTreeNode(name_1);
                     for (int k = 0; k < data3.size(); k++) {
                         String code_2 = data3.get(k).get(0);
                         String code_2_parent = data3.get(k).get(2);
                         String name_2 = data3.get(k).get(1);
                         if (code_1.equals(code_2_parent)) {
-                            DefaultMutableTreeNode level3 = new DefaultMutableTreeNode(code_2+" "+name_2);
+                            DefaultMutableTreeNode level3 = new DefaultMutableTreeNode(name_2);
                             level2.add(level3);
                         }
                     }
@@ -866,11 +866,13 @@ public class Consultation extends javax.swing.JFrame {
         btn_calculateBmi = new javax.swing.JButton();
         jLabel55 = new javax.swing.JLabel();
         txt_weightStatus = new javax.swing.JTextField();
-        lbl_vsdate = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         txt_headCircumference = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
         jSlider3 = new javax.swing.JSlider();
+        jLabel63 = new javax.swing.JLabel();
+        txt_blood_glucose = new javax.swing.JTextField();
+        lbl_vsdate = new javax.swing.JLabel();
         jPanel28 = new javax.swing.JPanel();
         jScrollPane82 = new javax.swing.JScrollPane();
         jPanel69 = new javax.swing.JPanel();
@@ -4097,6 +4099,8 @@ public class Consultation extends javax.swing.JFrame {
             }
         });
 
+        jLabel63.setText("Blood Glucose :");
+
         javax.swing.GroupLayout jPanel84Layout = new javax.swing.GroupLayout(jPanel84);
         jPanel84.setLayout(jPanel84Layout);
         jPanel84Layout.setHorizontalGroup(
@@ -4112,7 +4116,6 @@ public class Consultation extends javax.swing.JFrame {
                         .addComponent(jLabel37)
                         .addGap(18, 18, 18)
                         .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lbl_vsdate, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel84Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addComponent(jLabel33)
@@ -4133,14 +4136,18 @@ public class Consultation extends javax.swing.JFrame {
                     .addGroup(jPanel84Layout.createSequentialGroup()
                         .addGroup(jPanel84Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel34)
-                            .addComponent(jLabel55))
+                            .addComponent(jLabel55)
+                            .addComponent(jLabel63))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel84Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_weightStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel84Layout.createSequentialGroup()
-                                .addComponent(txt_headCircumference, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel40)
+                                .addGroup(jPanel84Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txt_blood_glucose, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel84Layout.createSequentialGroup()
+                                        .addComponent(txt_headCircumference, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel40)))
                                 .addGap(18, 18, 18)
                                 .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -4181,9 +4188,11 @@ public class Consultation extends javax.swing.JFrame {
                         .addComponent(txt_headCircumference, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel40))
                     .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbl_vsdate, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(jPanel84Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel63)
+                    .addComponent(txt_blood_glucose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -4211,13 +4220,16 @@ public class Consultation extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
+                        .addContainerGap()
+                        .addComponent(jScrollPane80, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(239, 239, 239)
                         .addComponent(btn_vitalSignAccept)
                         .addGap(31, 31, 31)
                         .addComponent(btn_vitalSignClear))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane80, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbl_vsdate, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -4240,15 +4252,17 @@ public class Consultation extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel83, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel84, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel84, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_vitalSignAccept)
                     .addComponent(btn_vitalSignClear))
-                .addGap(20, 20, 20)
+                .addGap(19, 19, 19)
+                .addComponent(lbl_vsdate, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_previous_visit_date)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane80, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane80, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(302, 302, 302))
         );
 
@@ -5663,8 +5677,8 @@ public class Consultation extends javax.swing.JFrame {
         pnl_procedure_1Layout.setVerticalGroup(
             pnl_procedure_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_procedure_1Layout.createSequentialGroup()
-                .addComponent(jScrollPane54, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addComponent(jScrollPane54, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel44Layout = new javax.swing.GroupLayout(jPanel44);
@@ -5683,10 +5697,10 @@ public class Consultation extends javax.swing.JFrame {
             .addGroup(jPanel44Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(btn_ProcAcc)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(540, Short.MAX_VALUE))
             .addGroup(jPanel44Layout.createSequentialGroup()
                 .addComponent(pnl_procedure_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 226, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jScrollPane62.setViewportView(jPanel44);
@@ -8118,17 +8132,12 @@ public class Consultation extends javax.swing.JFrame {
         if (node == null) {
             J.o("Not Selected", "Please select the physical examination!", 0);
         } else {
-            String nodeInfo = (String) node.getUserObject();
-            String pe_exam[] = nodeInfo.split(" ");
-            String pe_code = pe_exam[pe_exam.length-1];
-            String pe_name = "";
-            for (int i = 0; i < pe_exam.length-1; i++) {
-                pe_name += pe_exam[i] + " ";
-            }
-            pe_name = DBConnection.getPE_treelink(pe_code);
+            String pe_name = (String) node.getUserObject();
+            
+            String pe = Func.getPhysicalExaminationLink(pe_name);
+            
             String data[] = {"Physical Examination",
-                "Physical Exam Code: " + Func.trim(pe_code),
-                "Physical Exam Name: " + Func.trim(pe_name)
+                "Physical Exam Name: " + Func.trim(pe)
             };
             setData(data, 14); //14 for PEM
         }
@@ -8184,6 +8193,8 @@ public class Consultation extends javax.swing.JFrame {
         String respiratory_rate = txt_respiratory_rate.getText();
         String oxygen_saturation = txt_oxygen_saturation.getText();
         String pain_scale = (String) cbx_pain_scale.getSelectedItem();
+        
+        String blood_glucose = txt_blood_glucose.getText();
 
         //**************************Print Existing Value*****************************
         if (tab1 > 0) {
@@ -8236,7 +8247,8 @@ public class Consultation extends javax.swing.JFrame {
                     "Pulse: " + Func.trim(pul1) + " /min",
                     "Systolic Lying: " + Func.trim(sys2) + " mmHg",
                     "Diastolic Lying: " + Func.trim(dis2) + " mmHg",
-                    "Pulse: " + Func.trim(pul2) + " /min"
+                    "Pulse: " + Func.trim(pul2) + " /min",
+                    "Blood Glucose: " + Func.trim(blood_glucose)
                 };
                 setData(data, 10); //10 for Vital Sign
 
@@ -8349,6 +8361,13 @@ public class Consultation extends javax.swing.JFrame {
         }
         String immID;
         String immSnomedID = "";
+        
+        String data[] = {"Immunisation",
+            "Type: " + Func.trim(immunType),
+            "Comment: " + Func.trim(cmmt),
+            "Date: " + Func.trim(immDate)
+        };
+        setData(data, 8); //8 for Immunisation
 
         try {
             tempQuery = "SELECT SNOMEDID FROM SNOMEDIMMUNISATION where SNOMEDDESC like '%" + immunType + "%' ";
@@ -8383,13 +8402,6 @@ public class Consultation extends javax.swing.JFrame {
                 tab3s = "\n" + (q1 + 1) + ") " + "Type: " + immunType + ",\nComment: " + cmmt + ", Date : " + immDate + "\n";
                 tsttab3[q1] = tab3s;
                 jTextArea7.append("\nImmunization\n" + jTextArea10.getText());
-
-                String data[] = {"Immunisation",
-                    "Type: " + Func.trim(immunType),
-                    "Comment: " + Func.trim(cmmt),
-                    "Date: " + Func.trim(immDate)
-                };
-                setData(data, 8); //8 for Immunisation
 
                 //to retrieve update value
                 immsub[q1][0] = immSnomedID;
@@ -9050,6 +9062,14 @@ public class Consultation extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }
+        
+        String data[] = {"Allergy",
+            "Type: " + Func.trim(allergy_name),
+            "Comment: " + Func.trim(allergy_comments),
+            "Date: " + Func.trim(allergy_date)
+        };
+        setData(data, 7); //7 for Allergy
+        
         //**************************Print Existing Value*****************************
         if (tab1 > 0) {
             tab1s = "\nC.Complaint\n" + jTextArea12.getText();
@@ -9084,13 +9104,6 @@ public class Consultation extends javax.swing.JFrame {
                 tab7s = "\n" + (q5 + 1) + ") " + "Type: " + allergy_name + ", Comment: " + allergy_comments + ",\nDate : " + allergy_date + "\n";
                 tsttab7[q5] = tab7s;
                 jTextArea7.append("\nAllergy\n" + jTextArea14.getText());
-
-                String data[] = {"Allergy",
-                    "Type: " + Func.trim(allergy_name),
-                    "Comment: " + Func.trim(allergy_comments),
-                    "Date: " + Func.trim(allergy_date)
-                };
-                setData(data, 7); //7 for Allergy
 
                 //to retrieve update value
                 allergysub[q5][0] = algSnomedId;
@@ -9987,6 +10000,7 @@ public class Consultation extends javax.swing.JFrame {
                     }
                     break;
                     case 10: {
+                        txt_blood_glucose.setText(tbl_note_1.getValueAt(index_temp--, 1).toString().split(" ")[0]);
                         txt_pulse2.setText(tbl_note_1.getValueAt(index_temp--, 1).toString().split(" ")[0]);
                         txt_diastolic2.setText(tbl_note_1.getValueAt(index_temp--, 1).toString().split(" ")[0]);
                         txt_systolic2.setText(tbl_note_1.getValueAt(index_temp--, 1).toString().split(" ")[0]);
@@ -10138,6 +10152,9 @@ public class Consultation extends javax.swing.JFrame {
     private void btn_ProcAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProcAccActionPerformed
         // TODO add your handling code here:
         if(checkPatient()) return;
+        if (checkProblem().equals("|")) {
+            return;
+        }
         accept_btn_pos();
     }//GEN-LAST:event_btn_ProcAccActionPerformed
 
@@ -11708,15 +11725,16 @@ public class Consultation extends javax.swing.JFrame {
             if(note_array[i].contains("C.Complaint")) {
                 problemDesc = note_array[i+1].split(": ")[1];
                 try {
-//                    tempQuery = "SELECT RCC_CODE FROM READCODE_CHIEF_COMPLAINT "
-//                                    + "where UCASE(RCC_DESC) like UCASE(?) ";
-                    tempQuery = "SELECT * FROM icd10_codes "
-                            + "where UCASE(icd10_desc) like UCASE(?) ";
+                    tempQuery = "SELECT RCC_CODE FROM READCODE_CHIEF_COMPLAINT "
+                                    + "where UCASE(RCC_DESC) like UCASE(?) ";
+//                    tempQuery = "SELECT * FROM icd10_codes "
+//                            + "where UCASE(icd10_desc) like UCASE(?) ";
                     ps = Session.getCon_x(1000).prepareStatement(tempQuery);
                     ps.setString(1, "%"+problemDesc+"%");
                     rs = ps.executeQuery();
                     while (rs.next()) {
-                        problemCode = rs.getString("icd10_code");
+                        problemCode = rs.getString("RCC_CODE");
+//                        problemCode = rs.getString("icd10_code");
                     }
                 } catch (Exception ex) {
                     System.out.println(ex.toString());
@@ -11869,112 +11887,113 @@ public class Consultation extends javax.swing.JFrame {
         String FHRelationship = FH_Relationship.getSelectedItem().toString();
         //[0347 01042013] String Diagnosis = txt_FHDiagnosis.getText();
         String FHCmmnt = (String) FH_Comments.getText();
+        
+        String data[] = {"Family History",
+            "Problems: " + Func.trim(SearchFH),
+            "Relationship: " + Func.trim(FHRelationship),
+            //[0347 01042013] "Diagnosis: " + Func.trim(Diagnosis),
+            "Comments: " + Func.trim(FHCmmnt)
+        };
+        setData(data, 4); //4 for FH
 
-        if (tab1 > 0) {
-            jTextArea7.append(tab1s);
-        }
-        if (tab2 > 0) {
-            jTextArea7.append(tab2s);
-        }
-        if (tab3 > 0) {
-            jTextArea7.append(tab3s);
-        }
-        if (tab4 > 0) {
-            jTextArea7.append(tab4s);
-        }
-        if (tab5 > 0) {
-            jTextArea7.append(tab5s);
-        }
-        if (tab6 > 0) {
-            jTextArea7.append(tab6s);
-        }
-        if (tab7 > 0) {
-            jTextArea7.append(tab7s);
-        }
-        if (tab8 > 0) {
-            jTextArea7.append(tab8s);
-        }
-        if (tab9 > 0) {
-            jTextArea7.append(tab9s);
-        }
-        if (tab10 > 0) {
-            jTextArea7.append(tab10s);
-        }
-
-        if (v == 0) {
-            if (tab11 > 0 || tab11 == 0) {
-                jTextArea7.append("\nFamily History\n");
-                //jTextArea20.append("\n" + (q9 + 1) + ") "
-                        //+ "Problems: " + SearchFH
-                        //+ ", \n" + "Relationship: " + FHRelationship
-                        //+ //[0347 01042013] ", Diagnosis: " + Diagnosis + 
-                        //",\nComments: " + FHCmmnt + ";\n");
-                tab11s = "\n" + (q9 + 1) + ") " + "Problems: " + SearchFH + ", \n" + "Relationship: " + FHRelationship + ", "
-                        //[0347 01042013] + "Diagnosis: " + Diagnosis + ","
-                        + "\nComments: " + FHCmmnt + ";\n";
-                tsttab11[q9] = tab11s;
-                //jTextArea7.append(jTextArea20.getText());
-
-                String data[] = {"Family History",
-                    "Problems: " + Func.trim(SearchFH),
-                    "Relationship: " + Func.trim(FHRelationship),
-                    //[0347 01042013] "Diagnosis: " + Func.trim(Diagnosis),
-                    "Comments: " + Func.trim(FHCmmnt)
-                };
-                setData(data, 4); //4 for FH
-
-                //to retrieve update value
-                FHsub[q9][0] = SearchFH;
-                FHsub[q9][1] = FHRelationship;
-                FHsub[q9][2] = "-"; //[0347 01042013] Diagnosis;
-                FHsub[q9][3] = FHCmmnt;
-
-                //to retrieve update value
-                q7++;
-
-            }
-            tab11 = tab11 + 1;
-            //tab11s = "\nFamily History\n" + jTextArea20.getText();
-        } else {
-            String update = "Problems: " + SearchFH + ", \n" + "Relationship: " + FHRelationship
-                    //[0347 01042013] + ", Diagnosis: " + Diagnosis 
-                    + ",\nComments: " + FHCmmnt + ";\n";
-
-            int group1 = (Integer) jComboBox11.getSelectedItem();
-            //for delete in tab2
-            for (int m = 0; m < q9; m++) {
-                if (m == group1) {
-                    //to retrieve update value
-                    FHsub[group1][0] = SearchFH;
-                    FHsub[group1][1] = FHRelationship;
-                    FHsub[group1][2] = "-"; //[0347 01042013] Diagnosis;
-                    FHsub[group1][3] = FHCmmnt;
-
-                    //to retrieve update value
-                    tsttab11[group1] = "\n" + m + ") " + update;
-                }
-            }
-            //jTextArea20.setText("");
-            for (int p1 = 0; p1 < q9; p1++) {
-                if ("".equals(tsttab11[p1])) {
-                    p1 = p1 + 1;
-                }
-
-                //jTextArea20.append(tsttab11[p1]);
-
-            }
-
-            //jTextArea7.append("\nFamily History\n" + jTextArea20.getText());
-            //tab11s = "\nFamily History\n" + jTextArea20.getText();
-            v = v - 1;
-        }
-
-        if (tab12 > 0) {
-            jTextArea7.append(tab12s);
-        }
-        if (tab13 > 0) {
-            jTextArea7.append(tab13s);
-        }
+//        if (tab1 > 0) {
+//            jTextArea7.append(tab1s);
+//        }
+//        if (tab2 > 0) {
+//            jTextArea7.append(tab2s);
+//        }
+//        if (tab3 > 0) {
+//            jTextArea7.append(tab3s);
+//        }
+//        if (tab4 > 0) {
+//            jTextArea7.append(tab4s);
+//        }
+//        if (tab5 > 0) {
+//            jTextArea7.append(tab5s);
+//        }
+//        if (tab6 > 0) {
+//            jTextArea7.append(tab6s);
+//        }
+//        if (tab7 > 0) {
+//            jTextArea7.append(tab7s);
+//        }
+//        if (tab8 > 0) {
+//            jTextArea7.append(tab8s);
+//        }
+//        if (tab9 > 0) {
+//            jTextArea7.append(tab9s);
+//        }
+//        if (tab10 > 0) {
+//            jTextArea7.append(tab10s);
+//        }
+//
+//        if (v == 0) {
+//            if (tab11 > 0 || tab11 == 0) {
+//                jTextArea7.append("\nFamily History\n");
+//                //jTextArea20.append("\n" + (q9 + 1) + ") "
+//                        //+ "Problems: " + SearchFH
+//                        //+ ", \n" + "Relationship: " + FHRelationship
+//                        //+ //[0347 01042013] ", Diagnosis: " + Diagnosis + 
+//                        //",\nComments: " + FHCmmnt + ";\n");
+//                tab11s = "\n" + (q9 + 1) + ") " + "Problems: " + SearchFH + ", \n" + "Relationship: " + FHRelationship + ", "
+//                        //[0347 01042013] + "Diagnosis: " + Diagnosis + ","
+//                        + "\nComments: " + FHCmmnt + ";\n";
+//                tsttab11[q9] = tab11s;
+//                //jTextArea7.append(jTextArea20.getText());
+//
+//
+//                //to retrieve update value
+//                FHsub[q9][0] = SearchFH;
+//                FHsub[q9][1] = FHRelationship;
+//                FHsub[q9][2] = "-"; //[0347 01042013] Diagnosis;
+//                FHsub[q9][3] = FHCmmnt;
+//
+//                //to retrieve update value
+//                q7++;
+//
+//            }
+//            tab11 = tab11 + 1;
+//            //tab11s = "\nFamily History\n" + jTextArea20.getText();
+//        } else {
+//            String update = "Problems: " + SearchFH + ", \n" + "Relationship: " + FHRelationship
+//                    //[0347 01042013] + ", Diagnosis: " + Diagnosis 
+//                    + ",\nComments: " + FHCmmnt + ";\n";
+//
+//            int group1 = (Integer) jComboBox11.getSelectedItem();
+//            //for delete in tab2
+//            for (int m = 0; m < q9; m++) {
+//                if (m == group1) {
+//                    //to retrieve update value
+//                    FHsub[group1][0] = SearchFH;
+//                    FHsub[group1][1] = FHRelationship;
+//                    FHsub[group1][2] = "-"; //[0347 01042013] Diagnosis;
+//                    FHsub[group1][3] = FHCmmnt;
+//
+//                    //to retrieve update value
+//                    tsttab11[group1] = "\n" + m + ") " + update;
+//                }
+//            }
+//            //jTextArea20.setText("");
+//            for (int p1 = 0; p1 < q9; p1++) {
+//                if ("".equals(tsttab11[p1])) {
+//                    p1 = p1 + 1;
+//                }
+//
+//                //jTextArea20.append(tsttab11[p1]);
+//
+//            }
+//
+//            //jTextArea7.append("\nFamily History\n" + jTextArea20.getText());
+//            //tab11s = "\nFamily History\n" + jTextArea20.getText();
+//            v = v - 1;
+//        }
+//
+//        if (tab12 > 0) {
+//            jTextArea7.append(tab12s);
+//        }
+//        if (tab13 > 0) {
+//            jTextArea7.append(tab13s);
+//        }
         txt_FHSearch.setText("");
         //[0347 01042013] txt_FHDiagnosis.setText("");
         FH_Comments.setText("");
@@ -12249,6 +12268,9 @@ public class Consultation extends javax.swing.JFrame {
                         String sys2 = note_array[zz++].split(": ")[1].split(" ")[0];
                         String dis2 = note_array[zz++].split(": ")[1].split(" ")[0];
                         String pul2 = note_array[zz++].split(": ")[1].split(" ")[0];
+                        
+                        String blood_glucose = note_array[zz++].split(": ")[1].split(" ")[0];
+                        
                         String data[] = {
                             tem,
                             sys,
@@ -12282,7 +12304,9 @@ public class Consultation extends javax.swing.JFrame {
                             pgcs_result,
                             respiratory_rate,
                             oxygen_saturation,
-                            pain_scale
+                            pain_scale,
+                            
+                            blood_glucose
                         };
                         msgs[ii] = "VTS|" + date + "|";
                         for (int jj = 0; jj < data.length; jj++) {
@@ -12560,8 +12584,18 @@ public class Consultation extends javax.swing.JFrame {
 
                     } else if (note_array[zz].equals("Physical Examination")) {
                         zz++;
-                        String pe_code = note_array[zz++].split(": ")[1];
-                        String pe_exam = note_array[zz++].split(": ")[1];
+                        String pe_exam_line = note_array[zz++].split(": ")[1];
+                        String pe_exam = pe_exam_line.split(Func.SEPARATOR_LINK)[pe_exam_line.split(Func.SEPARATOR_LINK).length-1];
+                        String pe_cd = "";
+                        for (int level = 1; level <= Func.NUM_LEVEL_PHYSICAL_EXAMINATION; level++) {
+                            PhysicalExamBean pe = new PhysicalExamBean();
+                            pe.setPe_name(pe_exam);
+                            PhysicalExamBean getPhysicalExam2 = DBConnection.getPhysicalExam2(level, pe);
+//                            ArrayList<String> procedure_detail = DBConnection.getProcedureDetail2(level, procedure_desc);
+                            if (getPhysicalExam2.getPe_cd() != null && getPhysicalExam2.getPe_cd().length() > 0) {
+                                pe_cd = getPhysicalExam2.getPe_cd();
+                            }
+                        }
 //                        String tekak = note_array[zz++].split(": ")[1];
 //                        String jantung = note_array[zz++].split(": ")[1];
 //                        String peparuKanan = note_array[zz++].split(": ")[1];
@@ -12580,7 +12614,7 @@ public class Consultation extends javax.swing.JFrame {
 //                            tekak + "^" + jantung + "^" + peparuKanan + "^" + bahuKanan + "^"
 //                            + bahuKiri + "^" + perut + "^" + kepala + "^"
 //                            + hidung + "^" + mulut + "^" + telingaKanan,
-                            pe_code + "^" + pe_exam,
+                            pe_cd + "^" + pe_exam,
                             "",
                             "",
                             "",
@@ -12663,11 +12697,14 @@ public class Consultation extends javax.swing.JFrame {
                         zz++;
                         String diagnosisCode = note_array[zz++].split(": ")[1];
                         String diagnosisDesc = note_array[zz++].split(": ")[1];
-                        String procedure[] = note_array[zz++].split(": ")[1].split(" ");
-                        String procedure_cd = procedure[0];
-                        String procedure_desc = "";
-                        for (int i = 1; i < procedure.length; i++) {
-                            procedure_desc += procedure[i];
+                        String procedure_desc_line = note_array[zz++].split(": ")[1];
+                        String procedure_desc = procedure_desc_line.split(Func.SEPARATOR_LINK)[procedure_desc_line.split(Func.SEPARATOR_LINK).length-1];
+                        String procedure_cd = "";
+                        for (int level = 1; level <= Func.NUM_LEVEL_PROCEDURE; level++) {
+                            ArrayList<String> procedure_detail = DBConnection.getProcedureDetail2(level, procedure_desc);
+                            if (procedure_detail.size() > 0) {
+                                procedure_cd = procedure_detail.get(0);
+                            }
                         }
                         String data[] = {
                             diagnosisCode+"^"+diagnosisDesc+"^"+diagnosisCode,
@@ -13555,11 +13592,14 @@ public class Consultation extends javax.swing.JFrame {
         if (node == null) {
             J.o("Not Selected", "Please select the procedure!", 0);
         } else {
-            String nodeInfo = (String) node.getUserObject();
+            String procedure_name = (String) node.getUserObject();
+            
+            String procedure = Func.getProcedureLink(procedure_name);
+            
             String data[] = {"Procedure Order",
                 "Problem Code: " + Func.trim(problemCode),
                 "Problem Desc: " + Func.trim(problemDesc),
-                "Procedure: " + Func.trim(nodeInfo)
+                "Procedure: " + Func.trim(procedure)
             };
             setData(data, 18); //18 for POS
         }
@@ -13735,7 +13775,6 @@ public class Consultation extends javax.swing.JFrame {
         System.out.println("wat to print 2: : " + AppointmentInfo[2]);
 
         String str_pdi = AppointmentInfo[0] + "|" + AppointmentInfo[2] + "|" + Session.getUser_name();
-        callPatient(str_pdi);
         setBtnOff();
 
         txt_pPmiNo.setText(AppointmentInfo[0]);
@@ -13827,16 +13866,20 @@ public class Consultation extends javax.swing.JFrame {
                     // call server's method			
                     //impl.sayHello("..Friza ");
                     
-                    DBConnection.getImpl().sayHello("UMAR");
+//                    DBConnection.getImpl().sayHello("UMAR");
 
-                    ArrayList<String> arData = DBConnection.getImpl().getEHRRecords(pmiNo); // get PMS by IC
+                    ArrayList<String> arData = DBConnection.getImpl().getEHRRecords(pmiNo, 1); // get PMS by IC
                     cpyFile = arData.get(0);
                     status = arData.get(1);
                     cpyFile_history = arData.get(2);
+                    
+                    System.out.println("UMAQ cpyFile:"+cpyFile);
+                    System.out.println("UMAQ status:"+status);
 
                     System.out.println(".....Message Sent....");
                 } catch (Exception e) {
-                    S.oln(e.getMessage());
+                    S.oln("UMAQ ERROR:"+e.getMessage());
+                    e.printStackTrace();
                     //If RMI Error, get data from Local Database.
                     //Read BLOB from Journal_File
                     sql = "SELECT TXNDATA, STATUS2 "
@@ -13930,10 +13973,12 @@ public class Consultation extends javax.swing.JFrame {
             
             int data_limit = 100;
             
-            /** latest 7 history **/
+            /**
+             * latest 7 history *
+             */
             int rows_tbl = 7;
             MainRetrieval mr[] = new MainRetrieval[data_limit];
-            for(int i = 0; i < data_limit; i++) {
+            for (int i = 0; i < data_limit; i++) {
                 mr[i] = new MainRetrieval();
                 mr[i].startProcess(cpyFile_history);
             }
@@ -13961,114 +14006,118 @@ public class Consultation extends javax.swing.JFrame {
             row[9] = mr[9].getRowNums();
             msg[10] = mr[10].getData("DTO");
             row[10] = mr[10].getRowNums();
-            if(row[0] > 0) {
-                for (int i = 0; i < row[0] && i < rows_tbl; i++) {
-                    tbl_cc.getModel().setValueAt(msg[0][i][2], i, 0);
-                    tbl_cc.getModel().setValueAt(msg[0][i][4], i, 1);
-                    tbl_cc.getModel().setValueAt(msg[0][i][9], i, 2);
-                    tbl_cc.getModel().setValueAt(msg[0][i][5], i, 3);
-                    tbl_cc.getModel().setValueAt(msg[0][i][11], i, 4);
-                    tbl_cc.getModel().setValueAt(msg[0][i][12], i, 5);
+            try {
+                if (row[0] > 0) {
+                    for (int i = 0; i < row[0] && i < rows_tbl; i++) {
+                        tbl_cc.getModel().setValueAt(msg[0][i][2], i, 0);
+                        tbl_cc.getModel().setValueAt(msg[0][i][4], i, 1);
+                        tbl_cc.getModel().setValueAt(msg[0][i][9], i, 2);
+                        tbl_cc.getModel().setValueAt(msg[0][i][5], i, 3);
+                        tbl_cc.getModel().setValueAt(msg[0][i][11], i, 4);
+                        tbl_cc.getModel().setValueAt(msg[0][i][12], i, 5);
+                    }
                 }
-            }
-            if(row[1] > 0) {
-                for (int i = 0; i < row[1] && i < rows_tbl; i++) {
-                    tbl_HPI1.getModel().setValueAt((i + 1), i, 0);
-                    tbl_HPI1.getModel().setValueAt(msg[1][i][1], i, 1);
+                if (row[1] > 0) {
+                    for (int i = 0; i < row[1] && i < rows_tbl; i++) {
+                        tbl_HPI1.getModel().setValueAt((i + 1), i, 0);
+                        tbl_HPI1.getModel().setValueAt(msg[1][i][1], i, 1);
+                    }
                 }
-            }
-            if(row[2] > 0) {
-                for (int i = 0; i < row[2] && i < rows_tbl; i++) {
-                    tbl_pmh.getModel().setValueAt(msg[2][i][2], i, 0);
-                    tbl_pmh.getModel().setValueAt(msg[2][i][3], i, 1);
-                    tbl_pmh.getModel().setValueAt(msg[2][i][6], i, 2);
+                if (row[2] > 0) {
+                    for (int i = 0; i < row[2] && i < rows_tbl; i++) {
+                        tbl_pmh.getModel().setValueAt(msg[2][i][2], i, 0);
+                        tbl_pmh.getModel().setValueAt(msg[2][i][3], i, 1);
+                        tbl_pmh.getModel().setValueAt(msg[2][i][6], i, 2);
+                    }
                 }
-            }
-            if(row[3] > 0) {
-                for (int i = 0; i < row[3] && i < rows_tbl; i++) {
-                    tbl_fmh.getModel().setValueAt(msg[3][i][5], i, 0);
-                    tbl_fmh.getModel().setValueAt(msg[3][i][1], i, 1);
-                    tbl_fmh.getModel().setValueAt(msg[3][i][7], i, 2);
+                if (row[3] > 0) {
+                    for (int i = 0; i < row[3] && i < rows_tbl; i++) {
+                        tbl_fmh.getModel().setValueAt(msg[3][i][5], i, 0);
+                        tbl_fmh.getModel().setValueAt(msg[3][i][1], i, 1);
+                        tbl_fmh.getModel().setValueAt(msg[3][i][7], i, 2);
+                    }
                 }
-            }
-            if(row[4] > 0) {
-                for (int i = 0; i < row[4] && i < rows_tbl; i++) {
-                    tbl_sh.getModel().setValueAt(msg[4][i][2], i, 0);
-                    tbl_sh.getModel().setValueAt(msg[4][i][8], i, 1);
-                    tbl_sh.getModel().setValueAt(msg[4][i][12], i, 2);
+                if (row[4] > 0) {
+                    for (int i = 0; i < row[4] && i < rows_tbl; i++) {
+                        tbl_sh.getModel().setValueAt(msg[4][i][2], i, 0);
+                        tbl_sh.getModel().setValueAt(msg[4][i][8], i, 1);
+                        tbl_sh.getModel().setValueAt(msg[4][i][12], i, 2);
+                    }
                 }
-            }
-            if(row[5] > 0) {
-                String alg_str = "";
-                for (int i = 0; i < row[5] && i < rows_tbl; i++) {
-                    tbl_alg.getModel().setValueAt(msg[5][i][2], i, 0);
-                    tbl_alg.getModel().setValueAt(msg[5][i][3], i, 1);
-                    tbl_alg.getModel().setValueAt(msg[5][i][4], i, 2);
-                    alg_str += msg[5][i][2] + "|";
+                if (row[5] > 0) {
+                    String alg_str = "";
+                    for (int i = 0; i < row[5] && i < rows_tbl; i++) {
+                        tbl_alg.getModel().setValueAt(msg[5][i][2], i, 0);
+                        tbl_alg.getModel().setValueAt(msg[5][i][3], i, 1);
+                        tbl_alg.getModel().setValueAt(msg[5][i][4], i, 2);
+                        alg_str += msg[5][i][2] + "|";
+                    }
+                    LookupController CBoxloader = new LookupController();
+                    UniCBmodel = new DefaultComboBoxModel();
+                    UniCBmodel = CBoxloader.getAllergy(alg_str);
+                    cbx_allergy.setModel(UniCBmodel);
+                    Font font = new Font("Tahoma", Font.BOLD, 13);
+                    jLabel14.setFont(font);
+                    jLabel14.setForeground(Color.RED);
+                } else {
+                    Font font = new Font("Tahoma", Font.PLAIN, 11);
+                    jLabel14.setFont(font);
+                    jLabel14.setForeground(Color.BLACK);
                 }
-                LookupController CBoxloader = new LookupController();
-                UniCBmodel = new DefaultComboBoxModel();
-                UniCBmodel = CBoxloader.getAllergy(alg_str);
-                cbx_allergy.setModel(UniCBmodel);
-                Font font = new Font("Tahoma", Font.BOLD, 13);
-                jLabel14.setFont(font);
-                jLabel14.setForeground(Color.RED);
-            } else {
-                Font font = new Font("Tahoma", Font.PLAIN, 11);
-                jLabel14.setFont(font);
-                jLabel14.setForeground(Color.BLACK);
-            }
-            if(row[6] > 0) {
-                for (int i = 0; i < row[6] && i < rows_tbl; i++) {
-                    tbl_imu.getModel().setValueAt(msg[6][i][2], i, 0);
-                    tbl_imu.getModel().setValueAt(msg[6][i][4], i, 1);
-                    tbl_imu.getModel().setValueAt(msg[6][i][3], i, 2);
+                if (row[6] > 0) {
+                    for (int i = 0; i < row[6] && i < rows_tbl; i++) {
+                        tbl_imu.getModel().setValueAt(msg[6][i][2], i, 0);
+                        tbl_imu.getModel().setValueAt(msg[6][i][4], i, 1);
+                        tbl_imu.getModel().setValueAt(msg[6][i][3], i, 2);
+                    }
                 }
-            }
-            if(row[7] > 0) {
-                for (int i = 0; i < row[7] && i < rows_tbl; i++) {
-                    tbl_dab.getModel().setValueAt(msg[7][i][2], i, 0);
-                    tbl_dab.getModel().setValueAt(msg[7][i][3], i, 1);
-                    tbl_dab.getModel().setValueAt("", i, 2);
+                if (row[7] > 0) {
+                    for (int i = 0; i < row[7] && i < rows_tbl; i++) {
+                        tbl_dab.getModel().setValueAt(msg[7][i][2], i, 0);
+                        tbl_dab.getModel().setValueAt(msg[7][i][3], i, 1);
+                        tbl_dab.getModel().setValueAt("", i, 2);
+                    }
                 }
-            }
-            if(row[8] > 0) {
-                for (int i = 0; i < row[8] && i < rows_tbl; i++) {
-                    double height = Double.parseDouble(msg[8][i][9].trim());
-                    double weight = Double.parseDouble(msg[8][i][8].trim());
-                    double bmi = Math.round((weight / (height * height)) * 10000);
-                    tbl_vts.getModel().setValueAt(""+msg[8][i][9], i, 0);
-                    tbl_vts.getModel().setValueAt(""+msg[8][i][8], i, 1);
-                    tbl_vts.getModel().setValueAt(""+msg[8][i][13], i, 2);
-                    tbl_vts.getModel().setValueAt(""+bmi, i, 3);
-                    tbl_vts.getModel().setValueAt(""+msg[8][i][10], i, 4);
-                    tbl_vts.getModel().setValueAt(""+msg[8][i][1], i, 5);
-                    tbl_vts.getModel().setValueAt(""+msg[8][i][2]+","+msg[8][i][6]+","+msg[8][i][4], i, 6);
-                    tbl_vts.getModel().setValueAt(""+msg[8][i][3]+","+msg[8][i][7]+","+msg[8][i][5], i, 7);
+                if (row[8] > 0) {
+                    for (int i = 0; i < row[8] && i < rows_tbl; i++) {
+                        double height = Double.parseDouble(msg[8][i][9].trim());
+                        double weight = Double.parseDouble(msg[8][i][8].trim());
+                        double bmi = Math.round((weight / (height * height)) * 10000);
+                        tbl_vts.getModel().setValueAt("" + msg[8][i][9], i, 0);
+                        tbl_vts.getModel().setValueAt("" + msg[8][i][8], i, 1);
+                        tbl_vts.getModel().setValueAt("" + msg[8][i][13], i, 2);
+                        tbl_vts.getModel().setValueAt("" + bmi, i, 3);
+                        tbl_vts.getModel().setValueAt("" + msg[8][i][10], i, 4);
+                        tbl_vts.getModel().setValueAt("" + msg[8][i][1], i, 5);
+                        tbl_vts.getModel().setValueAt("" + msg[8][i][2] + "," + msg[8][i][6] + "," + msg[8][i][4], i, 6);
+                        tbl_vts.getModel().setValueAt("" + msg[8][i][3] + "," + msg[8][i][7] + "," + msg[8][i][5], i, 7);
+                    }
                 }
-            }
-            if(row[9] > 0) {
-                for (int i = 0; i < row[9] && i < rows_tbl; i++) {
-                    tbl_dgs.getModel().setValueAt(msg[9][i][2], i, 0);
-                    tbl_dgs.getModel().setValueAt(msg[9][i][4], i, 1);
-                    tbl_dgs.getModel().setValueAt(msg[9][i][8], i, 2);
-                    tbl_dgs.getModel().setValueAt(msg[9][i][10], i, 3);
-                    tbl_dgs.getModel().setValueAt(msg[9][i][12], i, 4);
-                    tbl_dgs.getModel().setValueAt(msg[9][i][16], i, 5);
-                    tbl_dgs.getModel().setValueAt(msg[9][i][19], i, 6);
+                if (row[9] > 0) {
+                    for (int i = 0; i < row[9] && i < rows_tbl; i++) {
+                        tbl_dgs.getModel().setValueAt(msg[9][i][2], i, 0);
+                        tbl_dgs.getModel().setValueAt(msg[9][i][4], i, 1);
+                        tbl_dgs.getModel().setValueAt(msg[9][i][8], i, 2);
+                        tbl_dgs.getModel().setValueAt(msg[9][i][10], i, 3);
+                        tbl_dgs.getModel().setValueAt(msg[9][i][12], i, 4);
+                        tbl_dgs.getModel().setValueAt(msg[9][i][16], i, 5);
+                        tbl_dgs.getModel().setValueAt(msg[9][i][19], i, 6);
+                    }
                 }
-            }
-            if(row[10] > 0) {
-                for (int i = 0; i < row[10] && i < rows_tbl; i++) {
-                    String ud_mdc_code = msg[10][i][4];
-                    String product_name = DBConnection.getProductNameDrug(ud_mdc_code);
-                    tbl_drug.getModel().setValueAt(msg[10][i][5], i, 0);
-                    tbl_drug.getModel().setValueAt(product_name, i, 1);
-                    tbl_drug.getModel().setValueAt(msg[10][i][23], i, 2);
-                    tbl_drug.getModel().setValueAt(msg[10][i][14], i, 3);
-                    tbl_drug.getModel().setValueAt(msg[10][i][22], i, 4);
-                    tbl_drug.getModel().setValueAt(msg[10][i][27], i, 5);
+                if (row[10] > 0) {
+                    for (int i = 0; i < row[10] && i < rows_tbl; i++) {
+                        String ud_mdc_code = msg[10][i][4];
+                        String product_name = DBConnection.getProductNameDrug(ud_mdc_code);
+                        tbl_drug.getModel().setValueAt(msg[10][i][5], i, 0);
+                        tbl_drug.getModel().setValueAt(product_name, i, 1);
+                        tbl_drug.getModel().setValueAt(msg[10][i][23], i, 2);
+                        tbl_drug.getModel().setValueAt(msg[10][i][14], i, 3);
+                        tbl_drug.getModel().setValueAt(msg[10][i][22], i, 4);
+                        tbl_drug.getModel().setValueAt(msg[10][i][27], i, 5);
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             
             System.out.println("STATUS SELECT EHR: "+status);
@@ -14139,29 +14188,61 @@ public class Consultation extends javax.swing.JFrame {
                 }
                 for (int i = 0; i < row2[4]; i++) {
                     txt_socialProblem.setText(msg2[4][i][2]);
-                    txt_socialDate1.setDate((Date) new SimpleDateFormat(
-                            "dd/MM/yyyy").parse(msg2[4][i][8]));
+                    try {
+                        txt_socialDate1.setDate((Date) new SimpleDateFormat(
+                            Func.DATE_FORMAT_1).parse(msg2[4][i][8]));
+                    } catch (Exception e) {
+                        try {
+                            txt_socialDate1.setDate((Date) new SimpleDateFormat(
+                            Func.DATE_FORMAT_2).parse(msg2[4][i][8]));
+                        } catch (Exception ee) {
+                        }
+                    }
                     txt_socialComment.setText(msg2[4][i][12]);
                     accept_btn_soh();
                 }
                 for (int i = 0; i < row2[5]; i++) {
                     txt_allergySearch.setText(msg2[5][i][2]);
-                    txt_allergyDate2.setDate((Date) new SimpleDateFormat(
-                            "dd/MM/yyyy").parse(msg2[5][i][7]));
+                    try {
+                        txt_allergyDate2.setDate((Date) new SimpleDateFormat(
+                            Func.DATE_FORMAT_1).parse(msg2[5][i][7]));
+                    } catch (Exception e) {
+                        try {
+                            txt_allergyDate2.setDate((Date) new SimpleDateFormat(
+                                Func.DATE_FORMAT_2).parse(msg2[5][i][7]));
+                        } catch (Exception ee) {
+                        }
+                    }
                     txt_allergyComments.setText(msg2[5][i][4]);
                     accept_btn_alg();
                 }
                 for (int i = 0; i < row2[6]; i++) {
                     txt_immSearch.setText(msg2[6][i][2]);
                     txt_immComment.setText(msg2[6][i][4]);
-                    txt_immDate1.setDate((Date) new SimpleDateFormat(
-                            "dd/MM/yyyy").parse(msg2[6][i][7]));
+                    try {
+                        txt_immDate1.setDate((Date) new SimpleDateFormat(
+                            Func.DATE_FORMAT_1).parse(msg2[6][i][7]));
+                    } catch (Exception e) {
+                        try {
+                            txt_immDate1.setDate((Date) new SimpleDateFormat(
+                                Func.DATE_FORMAT_2).parse(msg2[6][i][7]));
+                        } catch (Exception ee) {
+                        }
+                    }
                     accept_btn_imu();
                 }
                 for (int i = 0; i < row2[7]; i++) {
                     txt_disabilityType.setText(msg2[7][i][2]);
-                    txt_dDate1.setDate((Date) new SimpleDateFormat(
-                            "dd/MM/yyyy").parse(msg2[7][i][3]));
+                    try {
+                        txt_dDate1.setDate((Date) new SimpleDateFormat(
+                            Func.DATE_FORMAT_1).parse(msg2[7][i][3]));
+                    } catch (Exception e) {
+                        try {
+                            txt_dDate1.setDate((Date) new SimpleDateFormat(
+                                Func.DATE_FORMAT_2).parse(msg2[7][i][3]));
+                        } catch (Exception ee) {
+                        }
+                    }
                     txt_dComments.setText("");
                     accept_btn_dab();
                 }
@@ -14190,8 +14271,16 @@ public class Consultation extends javax.swing.JFrame {
                         jRadioButton1.setSelected(false);
                         jRadioButton2.setSelected(true);
                     }
-                    txt_date1.setDate((Date) new SimpleDateFormat(
-                            "dd/MM/yyyy").parse(msg2[9][i][4]));
+                    try {
+                        txt_date1.setDate((Date) new SimpleDateFormat(
+                            Func.DATE_FORMAT_1).parse(msg2[9][i][4]));
+                    } catch (Exception e) {
+                        try {
+                            txt_date1.setDate((Date) new SimpleDateFormat(
+                                Func.DATE_FORMAT_2).parse(msg2[9][i][4]));
+                        } catch (Exception ee) {
+                        }
+                    }
                     txt_diagnosisSearch.setText(msg2[9][i][8]);
                     cbx_dSeverity.setSelectedItem(msg2[9][i][10]);
                     dbx_site.setSelectedItem(msg2[9][i][12]);
@@ -14222,6 +14311,7 @@ public class Consultation extends javax.swing.JFrame {
         
         //3. Display at screen/all tab
 
+        callPatient(str_pdi);
     }
 
     //Online Indicator
@@ -14472,6 +14562,7 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel7;
@@ -14779,6 +14870,7 @@ public class Consultation extends javax.swing.JFrame {
     public javax.swing.JTextField txt_allergySearch;
     public static javax.swing.JTextField txt_bahu_kanan;
     private javax.swing.JTextField txt_bahu_kiri;
+    public static javax.swing.JTextField txt_blood_glucose;
     public static javax.swing.JTextField txt_bmi;
     private javax.swing.JTextArea txt_caution;
     public static javax.swing.JTextArea txt_complaintComment;

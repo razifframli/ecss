@@ -3901,6 +3901,7 @@ public class Pharmacy extends javax.swing.JFrame{
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -5735,7 +5736,7 @@ public void setSelectedAppointment(String selectedAppointment, String selectedTi
                     
                     DBConnection.getImpl().sayHello("UMAR");
 
-                    ArrayList<String> arData = DBConnection.getImpl().getEHRRecords(pmiNo); // get PMS by IC
+                    ArrayList<String> arData = DBConnection.getImpl().getEHRRecords(pmiNo, 1); // get PMS by IC
                     cpyFile = arData.get(0);
                     status = arData.get(1);
                     cpyFile_history = arData.get(2);

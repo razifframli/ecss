@@ -1,6 +1,8 @@
 package library;
 
 import Bean.ConnectCSS;
+import Bean.PhysicalExamBean;
+import DBConnection.DBConnection;
 import Helper.J;
 import java.io.File;
 import java.sql.Timestamp;
@@ -20,6 +22,86 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Func {
+    
+    public final static int NUM_LEVEL_PROCEDURE = 3;
+    public final static int NUM_LEVEL_PHYSICAL_EXAMINATION = 7;
+    public final static String SEPARATOR_LINK = ", ";
+    public final static String DATE_FORMAT_1 = "dd/MM/yyyy";
+    public final static String DATE_FORMAT_2 = "yyyy-MM-dd HH:mm:ss";
+    
+    public static String getPhysicalExaminationLink(String peName) {
+        String physicalExam = ""; //procedure
+        try {
+            ArrayList<String> listParent = new ArrayList<String>();
+            for (int j = 0; j < NUM_LEVEL_PHYSICAL_EXAMINATION; j++) {
+                PhysicalExamBean pe = new PhysicalExamBean();
+                pe.setPe_name(peName);
+                PhysicalExamBean getPhysicalExam2 = DBConnection.getPhysicalExam2(j + 1, pe);
+                if (getPhysicalExam2.getPe_cd() != null && getPhysicalExam2.getPe_cd().length() > 0) {
+                    int level = j + 1;
+
+                    String parent = getPhysicalExam2.getPe_parent();
+                    String self = getPhysicalExam2.getPe_name();
+
+                    for (int k = level; k >= 1; k--) {
+                        listParent.add(self);
+                        PhysicalExamBean pe2 = new PhysicalExamBean();
+                        pe2.setPe_cd(parent);
+                        PhysicalExamBean getPhysicalExam22 = DBConnection.getPhysicalExam(k - 1, pe2);
+                        parent = (getPhysicalExam22.getPe_cd() != null && getPhysicalExam22.getPe_cd().length() > 0) ? (getPhysicalExam22.getPe_parent()) : ("0");
+                        self = (getPhysicalExam22.getPe_cd() != null && getPhysicalExam22.getPe_cd().length() > 0) ? (getPhysicalExam22.getPe_name()) : ("0");
+                    }
+                }
+            }
+            
+            for (int j = listParent.size() - 1; j >= 1; j--) {
+                physicalExam += listParent.get(j) + SEPARATOR_LINK;
+            }
+            if (listParent.size() > 0) {
+                physicalExam += listParent.get(0);
+            }
+        } catch (Exception e) {
+        }
+        return physicalExam;
+    }
+    
+    /**
+     * Get procedure tree parent.
+     * 
+     * @param procedureName
+     * @return 
+     */
+    public static String getProcedureLink(String procedureName) {
+        String procedure = "";
+        try {
+            ArrayList<String> listParent = new ArrayList<String>();
+            for (int j = 0; j < NUM_LEVEL_PROCEDURE; j++) {
+                ArrayList<String> getProcedureDetail = DBConnection.getProcedureDetail2(j + 1, procedureName);
+                if (getProcedureDetail.size() > 0) {
+                    int level = j + 1;
+
+                    String parent = getProcedureDetail.get(2);
+                    String self = getProcedureDetail.get(1);
+
+                    for (int k = level; k >= 1; k--) {
+                        listParent.add(self);
+                        ArrayList<String> getParent = DBConnection.getProcedureDetail(k - 1, parent);
+                        parent = (getParent.size() > 0) ? (getParent.get(2)) : ("0");
+                        self = (getParent.size() > 0) ? (getParent.get(1)) : ("0");
+                    }
+                }
+            }
+            
+            for (int j = listParent.size() - 1; j >= 1; j--) {
+                procedure += listParent.get(j) + SEPARATOR_LINK;
+            }
+            if (listParent.size() > 0) {
+                procedure += listParent.get(0);
+            }
+        } catch (Exception e) {
+        }
+        return procedure;
+    }
     
     /**
      * Hide password

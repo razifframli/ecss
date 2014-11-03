@@ -531,7 +531,7 @@ public class MCReport extends javax.swing.JFrame {
                 DBConnection.getImpl().sayHello("UMAR");
 
                 pmiNo = DBConnection.getImpl().getPMINo(search, idtype, type);
-                ArrayList<String> arData = DBConnection.getImpl().getEHRRecords(pmiNo);
+                ArrayList<String> arData = DBConnection.getImpl().getEHRRecords(pmiNo, 1);
                 cpyFile = arData.get(0);
                 status = arData.get(1);
                 cpyFile_history = arData.get(2);

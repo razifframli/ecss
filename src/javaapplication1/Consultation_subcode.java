@@ -6,17 +6,21 @@
 
 package javaapplication1;
 
+import Bean.PhysicalExamBean;
+import DBConnection.DBConnection;
 import Helper.J;
 import Helper.S;
 import Helper.Session;
 import api.Queue;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import static javaapplication1.Consultation.max_row;
 import static javaapplication1.Consultation.note_array;
 import static javaapplication1.Consultation.ps;
 import static javaapplication1.Consultation.row_count;
 import javax.swing.JOptionPane;
+import library.Func;
 
 /**
  *
@@ -294,6 +298,9 @@ public class Consultation_subcode {
                         String sys2 = note_array[zz++].split(": ")[1].split(" ")[0];
                         String dis2 = note_array[zz++].split(": ")[1].split(" ")[0];
                         String pul2 = note_array[zz++].split(": ")[1].split(" ")[0];
+                        
+                        String blood_glucose = note_array[zz++].split(": ")[1].split(" ")[0];
+                        
                         String data[] = {
                             tem,
                             sys,
@@ -327,7 +334,9 @@ public class Consultation_subcode {
                             pgcs_result,
                             respiratory_rate,
                             oxygen_saturation,
-                            pain_scale
+                            pain_scale,
+                            
+                            blood_glucose
                         };
                         msgs[ii] = "VTS|" + date + "|";
                         for (int jj = 0; jj < data.length; jj++) {
@@ -605,8 +614,18 @@ public class Consultation_subcode {
 
                     } else if (note_array[zz].equals("Physical Examination")) {
                         zz++;
-                        String pe_code = note_array[zz++].split(": ")[1];
-                        String pe_exam = note_array[zz++].split(": ")[1];
+                        String pe_exam_line = note_array[zz++].split(": ")[1];
+                        String pe_exam = pe_exam_line.split(Func.SEPARATOR_LINK)[pe_exam_line.split(Func.SEPARATOR_LINK).length-1];
+                        String pe_cd = "";
+                        for (int level = 1; level <= Func.NUM_LEVEL_PHYSICAL_EXAMINATION; level++) {
+                            PhysicalExamBean pe = new PhysicalExamBean();
+                            pe.setPe_name(pe_exam);
+                            PhysicalExamBean getPhysicalExam2 = DBConnection.getPhysicalExam2(level, pe);
+//                            ArrayList<String> procedure_detail = DBConnection.getProcedureDetail2(level, procedure_desc);
+                            if (getPhysicalExam2.getPe_cd() != null && getPhysicalExam2.getPe_cd().length() > 0) {
+                                pe_cd = getPhysicalExam2.getPe_cd();
+                            }
+                        }
 //                        String tekak = note_array[zz++].split(": ")[1];
 //                        String jantung = note_array[zz++].split(": ")[1];
 //                        String peparuKanan = note_array[zz++].split(": ")[1];
@@ -625,7 +644,7 @@ public class Consultation_subcode {
 //                            tekak + "^" + jantung + "^" + peparuKanan + "^" + bahuKanan + "^"
 //                            + bahuKiri + "^" + perut + "^" + kepala + "^"
 //                            + hidung + "^" + mulut + "^" + telingaKanan,
-                            pe_code + "^" + pe_exam,
+                            pe_cd + "^" + pe_exam,
                             "",
                             "",
                             "",
@@ -708,11 +727,14 @@ public class Consultation_subcode {
                         zz++;
                         String diagnosisCode = note_array[zz++].split(": ")[1];
                         String diagnosisDesc = note_array[zz++].split(": ")[1];
-                        String procedure[] = note_array[zz++].split(": ")[1].split(" ");
-                        String procedure_cd = procedure[0];
-                        String procedure_desc = "";
-                        for (int i = 1; i < procedure.length; i++) {
-                            procedure_desc += procedure[i];
+                        String procedure_desc_line = note_array[zz++].split(": ")[1];
+                        String procedure_desc = procedure_desc_line.split(Func.SEPARATOR_LINK)[procedure_desc_line.split(Func.SEPARATOR_LINK).length-1];
+                        String procedure_cd = "";
+                        for (int level = 1; level <= Func.NUM_LEVEL_PROCEDURE; level++) {
+                            ArrayList<String> procedure_detail = DBConnection.getProcedureDetail2(level, procedure_desc);
+                            if (procedure_detail.size() > 0) {
+                                procedure_cd = procedure_detail.get(0);
+                            }
                         }
                         String data[] = {
                             diagnosisCode+"^"+diagnosisDesc+"^"+diagnosisCode,

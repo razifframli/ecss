@@ -15,6 +15,10 @@ import java.util.Vector;
 
 public interface Message extends Remote {
     
+    // procedure
+    String insertPOS(String PMI, String dataPOS) throws RemoteException;
+    ArrayList<ArrayList<String>> getProcedures() throws RemoteException;
+    
     // update pms
     boolean isUpdatePatientBiodata(String[] Biodata) throws RemoteException;
             
@@ -102,7 +106,7 @@ public interface Message extends Remote {
     
     String [] getBio(int stat, String ic, String type, int num_col) throws RemoteException;
     
-    ArrayList<String> getEHRRecords(String pmiNo) throws RemoteException;
+    ArrayList<String> getEHRRecords(String pmiNo, int type) throws RemoteException;
 
     void sayHello(String name) throws RemoteException;
     

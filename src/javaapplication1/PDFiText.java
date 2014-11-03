@@ -189,13 +189,39 @@ public class PDFiText {
             //CCN, DGS
             String data = ReportDB.getDataICD10(date);
             
-            String str[] = data.split("___");
-            for (int i = 0; i < str.length; i++) {
-                String str2[] = str[i].split("______");
-                for (int j = 0; j < str2.length; j++) {
-                    preface.add(getPara(str2[j], Element.ALIGN_LEFT));
+            String chapters[] = data.split("\\|");
+            for (int i = 0; i < chapters.length; i+=3) {
+                System.out.println("Chapter "+chapters[i]+": "+chapters[i+1]);
+                String blocks[] = chapters[i+2].split("\\^");
+                for (int j = 0; j < blocks.length; j+=3) {
+                    System.out.println("=Block "+blocks[j]+": "+blocks[j+1]);
+                    String codes[] = blocks[i+2].split(";");
+                    for (int k = 0; k < codes.length; k+=3) {
+                        System.out.println("==Codes ("+codes[k]+") "+codes[k+1]+": "+codes[k+2]);
+                    }
                 }
             }
+            
+            int columns = 3;
+            PdfPTable table = new PdfPTable(columns);
+            
+            ArrayList<ArrayList<PdfPCell>> cell = new ArrayList<ArrayList<PdfPCell>>();
+            
+            PdfPCell cell1 = new PdfPCell(new Paragraph("Cell 1"));
+            PdfPCell cell2 = new PdfPCell(new Paragraph("Cell 2"));
+            PdfPCell cell3 = new PdfPCell(new Paragraph("Cell 3"));
+            PdfPCell cell4 = new PdfPCell(new Paragraph("Cell 4"));
+            PdfPCell cell5 = new PdfPCell(new Paragraph("Cell 5"));
+            PdfPCell cell6 = new PdfPCell(new Paragraph("Cell 6"));
+            
+            table.addCell(cell1);
+            table.addCell(cell2);
+            table.addCell(cell3);
+            table.addCell(cell4);
+            table.addCell(cell5);
+            table.addCell(cell6);
+            
+            preface.add(data);
             
         } catch (Exception e) {
             //e.printStackTrace();
@@ -1060,7 +1086,7 @@ public class PDFiText {
         masa.add("03/03/2014");
         masa.add("05/03/2014");
         Session.setUser_name("Umar Mukhtar");
-//        PDFiText.createReportICD10("TimeSlip_.pdf", "2014-04-24 16:33:15");
-        PDFiText.createTimeSlip("timeslip_.pdf", data_temp, masa);
+        PDFiText.createReportICD10("TimeSlip_.pdf", "2014-00-00 16:33:15");
+//        PDFiText.createTimeSlip("timeslip_.pdf", data_temp, masa);
     }
 }

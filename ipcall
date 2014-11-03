@@ -1,7 +1,9 @@
-ip:10.73.34.117
+ip:10.73.34.113
 port:1098
-ipserver:ecss.utem.edu.my
+ipserver:biocore-stag.utem.edu.my
 ------------------
+calling 10.73.34.117
+
 10.73.33.72
 210.48.157.104 <-- public ip server staging
 10.73.32.200 <-- server development

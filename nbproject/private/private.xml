@@ -3,6 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/oms/rmi/server/Message.java</file>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/GUI/ReportICD10.java</file>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/javaapplication1/PDFiText.java</file>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/GUI/ReportMenu.java</file>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/javaapplication1/Consultation.java</file>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/javaapplication1/EHR_Central.java</file>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/api/Queue.java</file>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/GUI/QueueList.java</file>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/api/Patient.java</file>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/GUI/Login.java</file>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/GUI/MainPage.java</file>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/DBConnection/ReportDB.java</file>
+            <file>file:/D:/DriveE/JAVA_Netbean/CSS/src/GUI/ProcedurePage.java</file>
+        </group>
     </open-files>
 </project-private>

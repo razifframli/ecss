@@ -318,13 +318,14 @@ public class Searching {
         } else {
             S.oln("SEARCH IMMUNIZATION");
             try {
-//                cons.tempQuery = "SELECT RI_DESC FROM READCODE_IMMUNIZATION "
-//                        + "where UCASE(RI_DESC) like UCASE('%" + cons.ch + "%')";
-                cons.tempQuery = "SELECT * FROM icd10_codes "
-                                    + "where UCASE(icd10_desc) like UCASE('%" + cons.ch + "%') ";
+                cons.tempQuery = "SELECT RI_DESC FROM READCODE_IMMUNIZATION "
+                        + "where UCASE(RI_DESC) like UCASE('%" + cons.ch + "%')";
+//                cons.tempQuery = "SELECT * FROM icd10_codes "
+//                                    + "where UCASE(icd10_desc) like UCASE('%" + cons.ch + "%') ";
                 cons.rs = cons.st.executeQuery(cons.tempQuery);
                 while (cons.rs.next()) {
-                    cons.name = cons.rs.getString("icd10_desc");
+//                    cons.name = cons.rs.getString("icd10_desc");
+                    cons.name = cons.rs.getString("RI_DESC");
                     cons.listModel.addElement(cons.name);
                 }
                 cons.lbx_immSearch.setModel(cons.listModel);
@@ -437,15 +438,16 @@ public class Searching {
             cons.lbx_disabilityType.setModel(cons.listModel);
         } else {
             try {
-                //                tempQuery = "SELECT RD_DESC FROM READCODE_DISABILITY "
-                //                        + "WHERE UCASE(RD_DESC) LIKE UCASE(?) ";
-                cons.tempQuery = "SELECT * FROM icd10_codes "
-                + "where UCASE(icd10_desc) like UCASE(?) ";
+                cons.tempQuery = "SELECT RD_DESC FROM READCODE_DISABILITY "
+                                        + "WHERE UCASE(RD_DESC) LIKE UCASE(?) ";
+//                cons.tempQuery = "SELECT * FROM icd10_codes "
+//                + "where UCASE(icd10_desc) like UCASE(?) ";
                 ps = Session.getCon_x(1000).prepareStatement(cons.tempQuery);
                 ps.setString(1, "%" + cons.ch + "%");
                 cons.rs = ps.executeQuery();
                 while (cons.rs.next()) {
-                    cons.name = cons.rs.getString("icd10_desc");
+//                    cons.name = cons.rs.getString("icd10_desc");
+                    cons.name = cons.rs.getString("RD_DESC");
                     cons.listModel.addElement(cons.name);
                 }
                 cons.lbx_disabilityType.setModel(cons.listModel);

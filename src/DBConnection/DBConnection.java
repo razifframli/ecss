@@ -1801,6 +1801,44 @@ public class DBConnection {
         return data;
     }
     
+    public static ArrayList<String> getProcedureDetail2(int level, String procedure_name) {
+        ArrayList<String> data = new ArrayList<String>();
+        String table = "CIS_PROCEDURE";
+        String pcd = "PROCEDURE_NAME";
+        try {
+            switch (level) {
+                case 1:
+                    table = "CIS_PROCEDURE";
+                    pcd = "PROCEDURE_NAME";
+                    break;
+                case 2:
+                    table = "CIS_PROCEDURE_1";
+                    pcd = "PROCEDURE_1_NAME";
+                    break;
+                case 3:
+                    table = "CIS_PROCEDURE_2";
+                    pcd = "PROCEDURE_2_NAME";
+                    break;
+            }
+            String sql = "SELECT * FROM "+table+" WHERE UCASE("+pcd+") LIKE UCASE(?) ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, "%"+procedure_name+"%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int sizeCol = 3;
+                if (level != 1) {
+                    sizeCol = 4;
+                }
+                for (int i = 0; i < sizeCol; i++) {
+                    data.add(rs.getString(i+1));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
     public static ArrayList<ArrayList<String>> getProcedure(int level) {
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         String table = "CIS_PROCEDURE";
@@ -2328,6 +2366,80 @@ public class DBConnection {
             String sql = "SELECT "+column+" FROM "+table+" WHERE "+where+" ";
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
             ps.setString(1, pe.getPe_cd());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                switch (level) {
+                    case 0:
+                    default:
+                        pe.setPe_cd(rs.getString(1));
+                        pe.setPe_name(rs.getString(2));
+                        pe.setPe_status(rs.getString(3));
+                        break;
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        pe.setPe_cd(rs.getString(1));
+                        pe.setPe_name(rs.getString(2));
+                        pe.setPe_parent(rs.getString(3));
+                        pe.setPe_status(rs.getString(4));
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pe;
+    }
+    
+    public static PhysicalExamBean getPhysicalExam2(int level, PhysicalExamBean pe) {
+        try {
+            String column = "physical_exam_cd, physical_exam_name, status";
+            String table = "cis_physical_exam_system";
+            String where = "UCASE(physical_exam_name) LIKE UCASE(?)";
+            switch (level) {
+                case 1:
+                    column = "pe_1_cd, pe_1_name, physical_exam_cd, status";
+                    table = "cis_pe_1";
+                    where = "UCASE(pe_1_name) LIKE UCASE(?)";
+                    break;
+                case 2:
+                    column = "pe_2_cd, pe_2_name, pe_1_cd, status";
+                    table = "cis_pe_2";
+                    where = "UCASE(pe_2_name) LIKE UCASE(?)";
+                    break;
+                case 3:
+                    column = "pe_3_cd, pe_3_name, pe_2_cd, status";
+                    table = "cis_pe_3";
+                    where = "UCASE(pe_3_name) LIKE UCASE(?)";
+                    break;
+                case 4:
+                    column = "pe_4_cd, pe_4_name, pe_3_cd, status";
+                    table = "cis_pe_4";
+                    where = "UCASE(pe_4_name) LIKE UCASE(?)";
+                    break;
+                case 5:
+                    column = "pe_5_cd, pe_5_name, pe_4_cd, status";
+                    table = "cis_pe_5";
+                    where = "UCASE(pe_5_name) LIKE UCASE(?)";
+                    break;
+                case 6:
+                    column = "pe_6_cd, pe_6_name, pe_5_cd, status";
+                    table = "cis_pe_6";
+                    where = "UCASE(pe_6_name) LIKE UCASE(?)";
+                    break;
+                case 7:
+                    column = "pe_7_cd, pe_7_name, pe_6_cd, status";
+                    table = "cis_pe_7";
+                    where = "UCASE(pe_7_name) LIKE UCASE(?)";
+                    break;
+            }
+            String sql = "SELECT "+column+" FROM "+table+" WHERE "+where+" ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, "%"+pe.getPe_name()+"%");
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 switch (level) {
