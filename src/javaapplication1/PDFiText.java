@@ -18,6 +18,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,7 +45,10 @@ public class PDFiText {
             Font.NORMAL);
     private static Font footerFont = new Font(Font.FontFamily.TIMES_ROMAN, 11,
             Font.BOLD);
-
+    
+    private static Font labelFont = new Font(Font.FontFamily.TIMES_ROMAN,7);
+    private static Font labelTitle = new Font(Font.FontFamily.TIMES_ROMAN,2);
+    
     // iText allows to add metadata to the PDF which can be viewed in your Adobe
     // Reader
     // under File -> Properties
@@ -795,6 +800,101 @@ public class PDFiText {
         }
     }
     
+    //    Fn to print out medicine label --Hariz 20141014
+    public static void createPrescriptionLabel(String headerTitle, String pName, String orderDate,String orderNo)
+    {
+        try{
+            float x= (float)8.4, y= (float)4.9;
+            String sqlGetDrugPresc = "Select * from PIS_ORDER_detail where order_no = ?";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sqlGetDrugPresc);
+            ps.setString(1, orderNo);
+            ResultSet rs = ps.executeQuery();
+            
+//            for (int i = 0; rs.next(); i++) 
+//            {
+//                System.out.println("Ubat "+(i+1)+": "+rs.getString("DRUG_ITEM_CODE"));
+//            }
+            
+            Rectangle customRec = new Rectangle(238f, 138f);
+            Document document = new Document(customRec);
+            PdfWriter.getInstance(document,new FileOutputStream(headerTitle));
+            document.open();
+            
+            
+            Paragraph mainContent = new Paragraph();
+//            mainContent.add("Klinik Utem Induk");
+//            mainContent.setAlignment(Element.ALIGN_CENTER);
+            
+//            Image image1 = null;
+//            try {
+//                image1 = Image.getInstance("assets/logoUTeMPNG.png");
+//                image1.scaleAbsolute(image1.getWidth()*0.005f, image1.getHeight()*0.005f);
+//            } catch (BadElementException ex) {
+//                Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (MalformedURLException ex) {
+//                Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (IOException ex) {
+//                Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            image1.setAlignment(Element.ALIGN_CENTER);
+//            mainContent.add(image1);
+//            Phrase nestedClinicName = new Paragraph("Klinik Utem Induk");
+            
+            ArrayList<String> dataFromRMI = new ArrayList<String>();
+            dataFromRMI.add("Apply to the affected area At night only");
+            dataFromRMI.add("Name:................");
+            dataFromRMI.add("Date:................");
+            dataFromRMI.add("For External Use Only");
+            dataFromRMI.add("Elomet Cream");
+            dataFromRMI.add("Exp Date:06/2016");
+       
+            for(int i=0;rs.next();i++)
+            {   
+                Paragraph clinicName = new Paragraph("Klinik Utem Induk",labelTitle);
+                //clinicName.setFont(labelTitle);
+                clinicName.setAlignment(Element.ALIGN_CENTER);
+
+                mainContent.add(clinicName);
+                //addEmptyLine(mainContent,1);
+                Paragraph ptnName = new Paragraph("Name :"+pName,labelFont);
+                ptnName.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(ptnName);
+                
+                Paragraph oDate = new Paragraph("Date :"+orderDate.substring(0,10),labelFont);
+                oDate.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(oDate);
+                
+                Paragraph descrp1 = new Paragraph(rs.getString("DRUG_ITEM_DESC"),labelFont);
+                descrp1.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descrp1);
+                
+                Paragraph descrp2 = new Paragraph(rs.getString("DRUG_FREQUENCY"),labelFont);
+                descrp2.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descrp2);
+                
+                Paragraph descOrderOUM = new Paragraph(rs.getString("ORDER_OUM"),labelFont);
+                descOrderOUM.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descOrderOUM);
+                
+                Paragraph descDrugStrength = new Paragraph(rs.getString("DRUG_STRENGTH"),labelFont);
+                descDrugStrength.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descDrugStrength);
+                
+                //addEmptyLine(mainContent,1);
+                
+            }
+            document.add(mainContent);
+            document.close();
+            
+            PrintTest2.print3(headerTitle);
+            
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    //    Fn to print out medicine label --Hariz 20141014 END
+    
     public static void createReportICD10(String title, String date) {
         try {
             Document document = new Document(PageSize.A4.rotate());
@@ -1033,6 +1133,7 @@ public class PDFiText {
         masa.add("05/03/2014");
         Session.setUser_name("Umar Mukhtar");
 //        PDFiText.createReportICD10("TimeSlip_.pdf", "2014-04-24 16:33:15");
-        PDFiText.createTimeSlip("timeslip_.pdf", data_temp, masa);
+        //PDFiText.createTimeSlip("timeslip_.pdf", data_temp, masa);
+        createPrescriptionLabel("assets/prescLabel_.pdf", "Harizzzz", null,"13");
     }
 }

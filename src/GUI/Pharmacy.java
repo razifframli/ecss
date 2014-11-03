@@ -66,6 +66,7 @@ import javaapplication1.DriversLocation;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import javaapplication1.PDFiText;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import jxl.CellType;
@@ -234,6 +235,14 @@ public class Pharmacy extends javax.swing.JFrame{
     
     /** Creates new form Pharmacy */
     public Pharmacy() {
+        if(null == btn_PrintLabel.getText())
+        {
+            btn_PrintLabel.setEnabled(false);
+        }
+        else
+        {
+            btn_PrintLabel.setEnabled(true);
+        }
         initComponents();
         S.oln("Hello CIS 1 cannot use");
         
@@ -498,6 +507,7 @@ public class Pharmacy extends javax.swing.JFrame{
         tbl_drugList = new javax.swing.JTable();
         btn_dispense = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        btn_PrintLabel = new javax.swing.JButton();
         jPanel36 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbl_drugOrder = new javax.swing.JTable();
@@ -1445,6 +1455,7 @@ public class Pharmacy extends javax.swing.JFrame{
         jScrollPane20.setViewportView(tbl_drugList);
 
         btn_dispense.setText("Dispense");
+        btn_dispense.setEnabled(false);
         btn_dispense.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_dispenseActionPerformed(evt);
@@ -1455,6 +1466,13 @@ public class Pharmacy extends javax.swing.JFrame{
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
+            }
+        });
+
+        btn_PrintLabel.setText("Print Label");
+        btn_PrintLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PrintLabelActionPerformed(evt);
             }
         });
 
@@ -1472,7 +1490,9 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addComponent(jButton5)
                         .addGap(18, 18, 18)
                         .addComponent(btn_dispense)
-                        .addGap(510, 510, 510))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_PrintLabel)
+                        .addGap(413, 413, 413))))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1482,7 +1502,8 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_dispense)
-                    .addComponent(jButton5))
+                    .addComponent(jButton5)
+                    .addComponent(btn_PrintLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -4847,6 +4868,14 @@ public class Pharmacy extends javax.swing.JFrame{
 //            }
 //            Session.setPrev_stat(false);
 //            Session.setCurr_stat(false);
+                
+//    //end of online
+//            } else {
+//// offline
+//                
+//            }
+//            Session.setPrev_stat(false);
+//            Session.setCurr_stat(false);
         }
     }//GEN-LAST:event_btn_submitOListActionPerformed
 
@@ -7293,6 +7322,19 @@ jScrollPane17.setViewportView(tbl_drugOList);
 //        System.out.println(url);
 //        urlAdd = String.valueOf(url);
 //        jTextField1.setText(urlAdd);
+        
+//       //TEST 2
+//        
+//        javax.swing.JFileChooser FC = new JFileChooser(".");
+//        FC.showOpenDialog(this);
+//        FC.setCurrentDirectory(new File("."));
+//
+//
+//        //get selected file address
+//        File url = FC.getSelectedFile();
+//        System.out.println(url);
+//        urlAdd = String.valueOf(url);
+//        jTextField1.setText(urlAdd);
     }//GEN-LAST:event_jButton2ActionPerformed
     
     private void tbl_patientInQueueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_patientInQueueMouseClicked
@@ -8156,6 +8198,15 @@ public void toExcel(JTable tbl_mdc, File file){
         rb_newOList2.setSelected(false);
         rb_oldOList2.setSelected(true);
     }//GEN-LAST:event_rb_oldOList2MouseClicked
+
+    private void btn_PrintLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PrintLabelActionPerformed
+        // TODO add your handling code here:
+        String orderNo = order_no2.getText();
+        String patientName = txt_patientName.getText();
+        String orderDate = order_date2.getText();
+        PDFiText.createPrescriptionLabel("assets/prescLabel_.pdf", patientName, orderDate,orderNo);
+        btn_dispense.setEnabled(true);
+    }//GEN-LAST:event_btn_PrintLabelActionPerformed
    
     
   
@@ -8174,6 +8225,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JDialog Spatient;
     private javax.swing.JPanel Spatient_panel;
     private javax.swing.JTextField arrival_date;
+    private javax.swing.JButton btn_PrintLabel;
     private javax.swing.JButton btn_addmdc;
     private javax.swing.JButton btn_browse;
     private javax.swing.JButton btn_cancelATC;

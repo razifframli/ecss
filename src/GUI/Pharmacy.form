@@ -1066,7 +1066,9 @@
                                               <Component id="jButton5" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="btn_dispense" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="510" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="btn_PrintLabel" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="413" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -1081,6 +1083,7 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="btn_dispense" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btn_PrintLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
@@ -1180,6 +1183,7 @@
                             <Component class="javax.swing.JButton" name="btn_dispense">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Dispense"/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dispenseActionPerformed"/>
@@ -1191,6 +1195,14 @@
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btn_PrintLabel">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Print Label"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_PrintLabelActionPerformed"/>
                               </Events>
                             </Component>
                           </SubComponents>
