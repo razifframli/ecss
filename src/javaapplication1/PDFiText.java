@@ -46,8 +46,8 @@ public class PDFiText {
     private static Font footerFont = new Font(Font.FontFamily.TIMES_ROMAN, 11,
             Font.BOLD);
     
-    private static Font labelFont = new Font(Font.FontFamily.TIMES_ROMAN,7);
-    private static Font labelTitle = new Font(Font.FontFamily.TIMES_ROMAN,2);
+    private static Font labelFont = new Font(Font.FontFamily.TIMES_ROMAN,9);
+    private static Font labelTitle = new Font(Font.FontFamily.TIMES_ROMAN,5);
     
     // iText allows to add metadata to the PDF which can be viewed in your Adobe
     // Reader
@@ -816,12 +816,12 @@ public class PDFiText {
 //            }
             
             Rectangle customRec = new Rectangle(238f, 138f);
-            Document document = new Document(customRec);
+            Document document = new Document(customRec,1,1,2,3);
             PdfWriter.getInstance(document,new FileOutputStream(headerTitle));
             document.open();
             
             
-            Paragraph mainContent = new Paragraph();
+            
 //            mainContent.add("Klinik Utem Induk");
 //            mainContent.setAlignment(Element.ALIGN_CENTER);
             
@@ -850,6 +850,8 @@ public class PDFiText {
        
             for(int i=0;rs.next();i++)
             {   
+                Paragraph mainContent = new Paragraph();
+                
                 Paragraph clinicName = new Paragraph("Klinik Utem Induk",labelTitle);
                 //clinicName.setFont(labelTitle);
                 clinicName.setAlignment(Element.ALIGN_CENTER);
@@ -880,10 +882,13 @@ public class PDFiText {
                 descDrugStrength.setAlignment(Element.ALIGN_LEFT);
                 mainContent.add(descDrugStrength);
                 
-                //addEmptyLine(mainContent,1);
-                
+//                addEmptyLine(mainContent,1);
+//              
+                document.add(mainContent);
+                if(!rs.isLast())
+                document.newPage();
             }
-            document.add(mainContent);
+            
             document.close();
             
             PrintTest2.print3(headerTitle);
