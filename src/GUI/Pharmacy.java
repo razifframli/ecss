@@ -60,6 +60,7 @@ import Helper.J;
 import Process.MainRetrieval;
 import api.Queue;
 import api.LookupController;
+import java.awt.Color;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import javaapplication1.DriversLocation;
@@ -278,7 +279,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 
                 om = DBConnection.getImpl().getOrderMasterAll(stat, pmi_no, order_no);
                 S.oln("Get Order Master");
-                
+                showOnline();
                 for (int i = 0; i < 30 && i < om.size(); i++) {
                     tbl_patientInQueue.getModel().setValueAt(om.get(i).get(1), i, 0);//pmino
                     tbl_patientInQueue.getModel().setValueAt(om.get(i).get(17), i, 1);//pname
@@ -295,7 +296,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 S.oln("-- Offline --");
                 //guna current date, why? bcoz nk retrieve curr date je unless..
                 om = DBConnection.getPatientInQueueOff(stat, pmi_no, order_no);//getPatientInQueue
-
+                showOffline();
                 for (int i = 0; i < 30 && i < om.size(); i++) {
                     tbl_patientInQueue.getModel().setValueAt(om.get(i).get(1), i, 0);//pmino
                     tbl_patientInQueue.getModel().setValueAt(om.get(i).get(17), i, 1);//pname
@@ -743,6 +744,8 @@ public class Pharmacy extends javax.swing.JFrame{
         txt_userIDOList = new javax.swing.JTextField();
         jToolBar2 = new javax.swing.JToolBar();
         btn_mainPageOList = new javax.swing.JButton();
+        lblStatus = new javax.swing.JLabel();
+        btnStatus = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1867,7 +1870,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
 
         tab_drugOrder.addTab("Patient Drug Dispense", pnl_patientDrugOrder);
@@ -3885,13 +3888,20 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 526, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 413, Short.MAX_VALUE)
+                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
                 .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -8204,11 +8214,29 @@ public void toExcel(JTable tbl_mdc, File file){
         String orderNo = order_no2.getText();
         String patientName = txt_patientName.getText();
         String orderDate = order_date2.getText();
+        try
+        {
         PDFiText.createPrescriptionLabel("assets/prescLabel_.pdf", patientName, orderDate,orderNo);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+                
         btn_dispense.setEnabled(true);
     }//GEN-LAST:event_btn_PrintLabelActionPerformed
    
-    
+    //Online Indicator
+    public static void showOnline() {
+        lblStatus.setText("Online");
+        btnStatus.setBackground(Color.green);
+    }
+    //Offline Indicator
+
+    public static void showOffline() {
+        lblStatus.setText("Offline");
+        btnStatus.setBackground(Color.red);
+    }
   
     /**
     * @param args the command line arguments
@@ -8225,6 +8253,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JDialog Spatient;
     private javax.swing.JPanel Spatient_panel;
     private javax.swing.JTextField arrival_date;
+    private static javax.swing.JButton btnStatus;
     private javax.swing.JButton btn_PrintLabel;
     private javax.swing.JButton btn_addmdc;
     private javax.swing.JButton btn_browse;
@@ -8389,6 +8418,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JTextField jtdrugS2;
     private javax.swing.JTextField jtfatc;
     private java.awt.Label label2;
+    protected static javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lbl_allergy;
     private javax.swing.JLabel lbl_atcCode;
     private javax.swing.JLabel lbl_atcCodeSearch;
