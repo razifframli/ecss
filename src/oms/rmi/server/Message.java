@@ -73,6 +73,8 @@ public interface Message extends Remote {
     boolean updateStaff(String user_id, String cols1[], String data1[], String cols2[], String data2[]) throws RemoteException;
     ArrayList<String> getStaffLogin(String user_id, String password) throws RemoteException;
     
+    ArrayList<ArrayList<String>> getQuery(String strSQL, int col) throws RemoteException;
+    
     //get new pmi no
     String getPMI(String ic) throws RemoteException;
     
