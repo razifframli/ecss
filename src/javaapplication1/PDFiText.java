@@ -4,6 +4,7 @@
  */
 package javaapplication1;
 
+import DBConnection.DBConnection;
 import DBConnection.ReportDB;
 import GUI.PrintTest2;
 import Helper.Session;
@@ -16,10 +17,13 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.rmi.RemoteException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -801,57 +805,25 @@ public class PDFiText {
     }
     
     //    Fn to print out medicine label --Hariz 20141014
-    public static void createPrescriptionLabel(String headerTitle, String pName, String orderDate,String orderNo)
+    public static void createPrescriptionLabel(String headerTitle, String pName, String orderDate,String orderNo) throws FileNotFoundException, DocumentException, SQLException
     {
-        try{
-            float x= (float)8.4, y= (float)4.9;
-            String sqlGetDrugPresc = "Select * from PIS_ORDER_detail where order_no = ?";
-            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sqlGetDrugPresc);
-            ps.setString(1, orderNo);
-            ResultSet rs = ps.executeQuery();
-            
-//            for (int i = 0; rs.next(); i++) 
-//            {
-//                System.out.println("Ubat "+(i+1)+": "+rs.getString("DRUG_ITEM_CODE"));
-//            }
-            
-            Rectangle customRec = new Rectangle(238f, 138f);
-            Document document = new Document(customRec,1,1,2,3);
-            PdfWriter.getInstance(document,new FileOutputStream(headerTitle));
-            document.open();
-            
-            
-            
-//            mainContent.add("Klinik Utem Induk");
-//            mainContent.setAlignment(Element.ALIGN_CENTER);
-            
-//            Image image1 = null;
-//            try {
-//                image1 = Image.getInstance("assets/logoUTeMPNG.png");
-//                image1.scaleAbsolute(image1.getWidth()*0.005f, image1.getHeight()*0.005f);
-//            } catch (BadElementException ex) {
-//                Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (MalformedURLException ex) {
-//                Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (IOException ex) {
-//                Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            image1.setAlignment(Element.ALIGN_CENTER);
-//            mainContent.add(image1);
-//            Phrase nestedClinicName = new Paragraph("Klinik Utem Induk");
-            
-            ArrayList<String> dataFromRMI = new ArrayList<String>();
-            dataFromRMI.add("Apply to the affected area At night only");
-            dataFromRMI.add("Name:................");
-            dataFromRMI.add("Date:................");
-            dataFromRMI.add("For External Use Only");
-            dataFromRMI.add("Elomet Cream");
-            dataFromRMI.add("Exp Date:06/2016");
+        String sqlGetDrugPresc = "Select * from pis_order_detail";
+        
+        Rectangle customRec = new Rectangle(238f, 138f);
+        Document document = new Document(customRec,1,1,2,3);
+        PdfWriter.getInstance(document,new FileOutputStream(headerTitle));
+        document.open();
+        
        
-            for(int i=0;rs.next();i++)
-            {   
+        
+        try{
+            sqlGetDrugPresc = sqlGetDrugPresc + " where order_no = '"+ orderNo +"'";  
+            
+            ArrayList<ArrayList<String>> fromRmi = DBConnection.getImpl().getQuery(sqlGetDrugPresc,17);           
+            for(int i = 0 ; i < fromRmi.size() ; i++)
+            {
                 Paragraph mainContent = new Paragraph();
-                
+
                 Paragraph clinicName = new Paragraph("Klinik Utem Induk",labelTitle);
                 //clinicName.setFont(labelTitle);
                 clinicName.setAlignment(Element.ALIGN_CENTER);
@@ -861,7 +833,57 @@ public class PDFiText {
                 Paragraph ptnName = new Paragraph("Name :"+pName,labelFont);
                 ptnName.setAlignment(Element.ALIGN_LEFT);
                 mainContent.add(ptnName);
+
+                Paragraph oDate = new Paragraph("Date :"+orderDate.substring(0,10),labelFont);
+                oDate.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(oDate);
                 
+                Paragraph descrp1 = new Paragraph(fromRmi.get(i).get(2),labelFont);
+                descrp1.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descrp1);
+
+                Paragraph descrp2 = new Paragraph(fromRmi.get(i).get(4),labelFont);
+                descrp2.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descrp2);
+
+                Paragraph descOrderOUM = new Paragraph(fromRmi.get(i).get(8),labelFont);
+                descOrderOUM.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descOrderOUM);
+
+                Paragraph descDrugStrength = new Paragraph(fromRmi.get(i).get(6),labelFont);
+                descDrugStrength.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descDrugStrength);
+
+                document.add(mainContent);
+                if(i != fromRmi.size()- 1)
+                    document.newPage();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+                     
+            try 
+            {
+            sqlGetDrugPresc = sqlGetDrugPresc + " where order_no = ?";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sqlGetDrugPresc);
+            ps.setString(1, orderNo);
+            ResultSet rs = ps.executeQuery();          
+
+            for(int i=0;rs.next();i++)
+            { 
+                Paragraph mainContent = new Paragraph();
+
+                Paragraph clinicName = new Paragraph("Klinik Utem Induk",labelTitle);
+                //clinicName.setFont(labelTitle);
+                clinicName.setAlignment(Element.ALIGN_CENTER);
+
+                mainContent.add(clinicName);
+                //addEmptyLine(mainContent,1);
+                Paragraph ptnName = new Paragraph("Name :"+pName,labelFont);
+                ptnName.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(ptnName);
+
                 Paragraph oDate = new Paragraph("Date :"+orderDate.substring(0,10),labelFont);
                 oDate.setAlignment(Element.ALIGN_LEFT);
                 mainContent.add(oDate);
@@ -882,22 +904,17 @@ public class PDFiText {
                 descDrugStrength.setAlignment(Element.ALIGN_LEFT);
                 mainContent.add(descDrugStrength);
                 
-//                addEmptyLine(mainContent,1);
-//              
                 document.add(mainContent);
                 if(!rs.isLast())
-                document.newPage();
+                    document.newPage();
+            }                          
+            } catch (DocumentException exx) {
+                exx.printStackTrace();
             }
-            
-            document.close();
-            
-            PrintTest2.print3(headerTitle);
-            
-        } catch (Exception ex)
-        {
-            ex.printStackTrace();
         }
+        document.close();
     }
+    
     //    Fn to print out medicine label --Hariz 20141014 END
     
     public static void createReportICD10(String title, String date) {
@@ -1139,6 +1156,5 @@ public class PDFiText {
         Session.setUser_name("Umar Mukhtar");
 //        PDFiText.createReportICD10("TimeSlip_.pdf", "2014-04-24 16:33:15");
         //PDFiText.createTimeSlip("timeslip_.pdf", data_temp, masa);
-        createPrescriptionLabel("assets/prescLabel_.pdf", "Harizzzz", null,"13");
     }
 }
