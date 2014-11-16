@@ -807,7 +807,7 @@ public class PDFiText {
     //    Fn to print out medicine label --Hariz 20141014
     public static void createPrescriptionLabel(String headerTitle, String pName, String orderDate,String orderNo) throws FileNotFoundException, DocumentException, SQLException
     {
-        String sqlGetDrugPresc = "Select * from pis_order_detail";
+        String sqlGetDrugPresc = "";
         
         Rectangle customRec = new Rectangle(238f, 138f);
         Document document = new Document(customRec,1,1,2,3);
@@ -817,7 +817,7 @@ public class PDFiText {
        
         
         try{
-            sqlGetDrugPresc = sqlGetDrugPresc + " where order_no = '"+ orderNo +"'";  
+            sqlGetDrugPresc = "Select * from pis_order_detail where order_no = '"+ orderNo +"'";  
             
             ArrayList<ArrayList<String>> fromRmi = DBConnection.getImpl().getQuery(sqlGetDrugPresc,17);           
             for(int i = 0 ; i < fromRmi.size() ; i++)
@@ -865,7 +865,7 @@ public class PDFiText {
                      
             try 
             {
-            sqlGetDrugPresc = sqlGetDrugPresc + " where order_no = ?";
+            sqlGetDrugPresc = "Select * from pis_order_detail where order_no = ?";
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sqlGetDrugPresc);
             ps.setString(1, orderNo);
             ResultSet rs = ps.executeQuery();          
