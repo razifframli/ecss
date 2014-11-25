@@ -512,12 +512,11 @@ public class Pharmacy extends javax.swing.JFrame{
         tbl_patientInQueue = new javax.swing.JTable();
         btn_refresh = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        txt_search_ic = new javax.swing.JTextField();
+        txt_search_OrderNo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btn_search = new javax.swing.JButton();
         jLblIC = new javax.swing.JLabel();
         txt_search_pol1 = new javax.swing.JTextField();
-        jLblIC1 = new javax.swing.JLabel();
         pnl_patientDrugOrder = new javax.swing.JPanel();
         lbl_patientInfo = new java.awt.Label();
         jPanel20 = new javax.swing.JPanel();
@@ -763,6 +762,7 @@ public class Pharmacy extends javax.swing.JFrame{
         btn_mainPageOList = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
         btnStatus = new javax.swing.JButton();
+        btnDisHistory = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1280,7 +1280,7 @@ public class Pharmacy extends javax.swing.JFrame{
             }
         });
 
-        jLblIC.setText("IC No :");
+        jLblIC.setText("Order No :");
 
         txt_search_pol1.setText("PMS");
         txt_search_pol1.addActionListener(new java.awt.event.ActionListener() {
@@ -1288,8 +1288,6 @@ public class Pharmacy extends javax.swing.JFrame{
                 txt_search_pol1ActionPerformed(evt);
             }
         });
-
-        jLblIC1.setText("Without (-)");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1305,11 +1303,9 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addGap(18, 18, 18)
                         .addComponent(btn_search))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLblIC, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_search_ic, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLblIC1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLblIC, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_search_OrderNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -1323,8 +1319,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLblIC)
-                    .addComponent(txt_search_ic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLblIC1))
+                    .addComponent(txt_search_OrderNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -3917,6 +3912,13 @@ public class Pharmacy extends javax.swing.JFrame{
         });
         jToolBar2.add(btn_mainPageOList);
 
+        btnDisHistory.setText("Drug Dispense History");
+        btnDisHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDisHistoryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
@@ -3927,7 +3929,9 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 413, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDisHistory)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3937,13 +3941,15 @@ public class Pharmacy extends javax.swing.JFrame{
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
                 .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDisHistory)
+                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -7576,13 +7582,13 @@ jScrollPane17.setViewportView(tbl_drugOList);
 //        if (Session.getPrev_stat()) {
             S.oln("-- Online Search--");
             //ambil current date
-            if(txt_search_ic.getText().equals(""))
+            if(txt_search_OrderNo.getText().equals(""))
             {
                 getOrderMaster(2, txt_search_pol1.getText(), "");
             }
             else
             {
-                filterOrderMaster(txt_search_ic.getText());
+                filterOrderMaster(txt_search_OrderNo.getText());
             }
 //        } else {
 //            
@@ -8275,6 +8281,11 @@ public void toExcel(JTable tbl_mdc, File file){
     private void txt_search_pol1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_search_pol1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_search_pol1ActionPerformed
+
+    private void btnDisHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisHistoryActionPerformed
+        // TODO add your handling code here:
+        // select * from pis_dispense_master where order_date < CURDATE()       
+    }//GEN-LAST:event_btnDisHistoryActionPerformed
    
     //Online Indicator
     public static void showOnline() {
@@ -8303,6 +8314,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JDialog Spatient;
     private javax.swing.JPanel Spatient_panel;
     private javax.swing.JTextField arrival_date;
+    private javax.swing.JButton btnDisHistory;
     private static javax.swing.JButton btnStatus;
     private javax.swing.JButton btn_PrintLabel;
     private javax.swing.JButton btn_addmdc;
@@ -8406,7 +8418,6 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLblIC;
-    private javax.swing.JLabel jLblIC1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -8611,7 +8622,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JTextField txt_quantityOList;
     private javax.swing.JTextField txt_race;
     private javax.swing.JTextField txt_raceOList;
-    private javax.swing.JTextField txt_search_ic;
+    private javax.swing.JTextField txt_search_OrderNo;
     private javax.swing.JTextField txt_search_pol1;
     private javax.swing.JTextField txt_sellprice;
     private javax.swing.JTextField txt_sex;

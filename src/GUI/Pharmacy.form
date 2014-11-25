@@ -927,19 +927,17 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
                                               <Component id="jLabel2" min="-2" pref="49" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="txt_search_pol1" min="-2" pref="133" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Component id="btn_search" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLblIC" min="-2" pref="49" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txt_search_ic" min="-2" pref="133" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLblIC1" min="-2" pref="69" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLblIC" min="-2" pref="57" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="txt_search_OrderNo" min="-2" pref="133" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace pref="106" max="32767" attributes="0"/>
@@ -958,8 +956,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLblIC" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_search_ic" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLblIC1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txt_search_OrderNo" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
@@ -967,7 +964,7 @@
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JTextField" name="txt_search_ic">
+                            <Component class="javax.swing.JTextField" name="txt_search_OrderNo">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel2">
                               <Properties>
@@ -984,7 +981,7 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLblIC">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="IC No :"/>
+                                <Property name="text" type="java.lang.String" value="Order No :"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="txt_search_pol1">
@@ -994,11 +991,6 @@
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_search_pol1ActionPerformed"/>
                               </Events>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="jLblIC1">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Without (-)"/>
-                              </Properties>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -5061,7 +5053,9 @@
                   <Component id="jToolBar3" min="-2" pref="176" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jToolBar2" min="-2" pref="108" max="-2" attributes="0"/>
-                  <EmptySpace pref="413" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnDisHistory" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="256" max="32767" attributes="0"/>
                   <Component id="lblStatus" min="-2" pref="53" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnStatus" min="-2" pref="31" max="-2" attributes="0"/>
@@ -5073,14 +5067,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="13" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnStatus" alignment="1" min="-2" pref="25" max="-2" attributes="1"/>
-                          <Component id="lblStatus" alignment="1" min="-2" pref="17" max="-2" attributes="1"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="btnDisHistory" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="btnStatus" alignment="1" min="-2" pref="25" max="-2" attributes="1"/>
+                              <Component id="lblStatus" alignment="1" min="-2" pref="17" max="-2" attributes="1"/>
+                          </Group>
+                          <Component id="jToolBar2" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="jToolBar3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="jToolBar1" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jToolBar2" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="jToolBar3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="jToolBar1" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -5155,6 +5152,14 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnDisHistory">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Drug Dispense History"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDisHistoryActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

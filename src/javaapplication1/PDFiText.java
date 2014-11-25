@@ -804,6 +804,20 @@ public class PDFiText {
         }
     }
     
+        //Fn to create rpt of dispensed drug -- Hariz 20141122
+    public static void createDispensedDrug()
+    {
+        try
+        {
+           String strSql = "select order_no, order_date, dispensed_by from pis_dispense_master, pis_dispense_detail"
+                   + " where order_date < CURDATE()";
+        }catch (Exception ex)
+        {
+            
+        }
+    }
+    //Fn to create rpt of dispensed drug -- Hariz 20141122 END
+    
     //    Fn to print out medicine label --Hariz 20141014
     public static void createPrescriptionLabel(String headerTitle, String pName, String orderDate,String orderNo) throws FileNotFoundException, DocumentException, SQLException
     {
