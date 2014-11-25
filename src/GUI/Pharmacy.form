@@ -766,7 +766,7 @@
               <Component id="jScrollPane12" min="-2" pref="606" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel19" min="-2" pref="71" max="-2" attributes="0"/>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -2285,7 +2285,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="138" pref="138" max="-2" attributes="0"/>
                                       <Component id="stock_qty" min="-2" pref="53" max="-2" attributes="0"/>
-                                      <EmptySpace pref="396" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -3425,7 +3425,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jScrollPane23" min="-2" pref="194" max="-2" attributes="0"/>
-                                      <EmptySpace pref="14" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -4105,7 +4105,7 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="dpack1" min="-2" pref="38" max="-2" attributes="0"/>
-                                                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
                                                   <Component id="cdpack2" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <Component id="txt_costPrice" alignment="0" max="32767" attributes="0"/>
@@ -4299,7 +4299,7 @@
                                                       <Group type="102" attributes="0">
                                                           <Component id="cLduration" min="-2" pref="42" max="-2" attributes="0"/>
                                                           <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                                                          <Component id="cLdurationType" pref="86" max="32767" attributes="0"/>
+                                                          <Component id="cLdurationType" max="32767" attributes="0"/>
                                                       </Group>
                                                       <Component id="cLfrequency" alignment="0" max="32767" attributes="1"/>
                                                       <Component id="cInstruction" alignment="0" max="32767" attributes="0"/>
@@ -4902,7 +4902,7 @@
                                           <Component id="btn_supCancel" alignment="0" max="32767" attributes="0"/>
                                           <Component id="btn_supdel" alignment="0" max="32767" attributes="0"/>
                                           <Component id="btn_supSave" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="btn_edit" alignment="0" pref="77" max="32767" attributes="0"/>
+                                          <Component id="btn_edit" alignment="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
@@ -5020,6 +5020,64 @@
                         </Container>
                       </SubComponents>
                     </Container>
+                    <Container class="javax.swing.JPanel" name="jPanel2">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="Dispensed Report">
+                            <Property name="tabTitle" type="java.lang.String" value="Dispensed Report"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="btnDaily" min="-2" pref="96" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="318" max="-2" attributes="0"/>
+                                  <Component id="btnMonthly" min="-2" pref="123" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="330" max="-2" attributes="0"/>
+                                  <Component id="btnYearly" min="-2" pref="139" max="-2" attributes="0"/>
+                                  <EmptySpace pref="1141" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btnDaily" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="btnMonthly" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                                      <Component id="btnYearly" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="921" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JButton" name="btnDaily">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Daily"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDailyActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnMonthly">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Monthly"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnYearly">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Yearly"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
                   </SubComponents>
                 </Container>
               </SubComponents>
@@ -5053,9 +5111,7 @@
                   <Component id="jToolBar3" min="-2" pref="176" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jToolBar2" min="-2" pref="108" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnDisHistory" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="256" max="32767" attributes="0"/>
+                  <EmptySpace pref="403" max="32767" attributes="0"/>
                   <Component id="lblStatus" min="-2" pref="53" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnStatus" min="-2" pref="31" max="-2" attributes="0"/>
@@ -5066,18 +5122,15 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="13" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="btnDisHistory" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="btnStatus" alignment="1" min="-2" pref="25" max="-2" attributes="1"/>
-                              <Component id="lblStatus" alignment="1" min="-2" pref="17" max="-2" attributes="1"/>
-                          </Group>
-                          <Component id="jToolBar2" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jToolBar3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jToolBar1" min="-2" pref="25" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btnStatus" alignment="1" min="-2" pref="25" max="-2" attributes="1"/>
+                          <Component id="lblStatus" alignment="1" min="-2" pref="17" max="-2" attributes="1"/>
                       </Group>
+                      <Component id="jToolBar2" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="jToolBar3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="jToolBar1" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -5152,14 +5205,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
           </AuxValues>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnDisHistory">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Drug Dispense History"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDisHistoryActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

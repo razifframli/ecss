@@ -751,6 +751,10 @@ public class Pharmacy extends javax.swing.JFrame{
         btn_supCancel = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
         btn_supSave = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnDaily = new javax.swing.JButton();
+        btnMonthly = new javax.swing.JButton();
+        btnYearly = new javax.swing.JButton();
         jPanel19 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         lbl_userNameOList = new javax.swing.JLabel();
@@ -762,7 +766,6 @@ public class Pharmacy extends javax.swing.JFrame{
         btn_mainPageOList = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
         btnStatus = new javax.swing.JButton();
-        btnDisHistory = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -783,7 +786,7 @@ public class Pharmacy extends javax.swing.JFrame{
         Spatient.add(Spatient_panel);
         Spatient.pack();
 
-        Spatient_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Search ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        Spatient_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Search ", 0, 0, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         Spatient_panel.setPreferredSize(new java.awt.Dimension(1066, 301));
 
         lbl_pmiNoSearchOList2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -1358,7 +1361,7 @@ public class Pharmacy extends javax.swing.JFrame{
         lbl_patientInfo.setForeground(new java.awt.Color(255, 255, 255));
         lbl_patientInfo.setText(" Patient Info");
 
-        jPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "List Drug To Dispense", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "List Drug To Dispense", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         //int rowIndex = tbl_drugList.getSelectedRow();
         tbl_drugList.setModel(new javax.swing.table.DefaultTableModel(
@@ -1544,7 +1547,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel36.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "List Drug Order", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel36.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "List Drug Order", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         int rowIndex = tbl_drugOrder.getSelectedRow();
         tbl_drugOrder.setModel(new javax.swing.table.DefaultTableModel(
@@ -1708,7 +1711,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel37.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patient Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel37.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patient Information", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         lbl_patientName.setText("Patient Name :");
 
@@ -1918,7 +1921,7 @@ public class Pharmacy extends javax.swing.JFrame{
         lbl_prepareDrugOrderOList.setForeground(new java.awt.Color(255, 255, 255));
         lbl_prepareDrugOrderOList.setText(" Prepare Drug Order");
 
-        jPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug Order Detail", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug Order Detail", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         jScrollPane17.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -2009,7 +2012,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel22.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patient Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel22.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patient Information", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         lbl_pmiNoOList.setText("PMI No :");
 
@@ -2136,7 +2139,7 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jPanel23.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Search Drug", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel23.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Search Drug", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         lbl_drugNameOListSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbl_drugNameOListSearch.setText("Search :");
@@ -2383,7 +2386,7 @@ public class Pharmacy extends javax.swing.JFrame{
             .addGroup(jPanel23Layout.createSequentialGroup()
                 .addGap(138, 138, 138)
                 .addComponent(stock_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(396, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2414,7 +2417,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel39.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug History", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel39.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug History", 0, 0, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         tbl_DrugHist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2470,7 +2473,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addContainerGap())
         );
 
-        jPanel41.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patient Allergy", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel41.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patient Allergy", 0, 0, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         tbl_aller.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -3048,7 +3051,7 @@ public class Pharmacy extends javax.swing.JFrame{
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Search Drug"));
@@ -3361,7 +3364,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(dpack1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cdpack2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txt_costPrice)
                     .addComponent(txt_sellprice)
@@ -3454,7 +3457,7 @@ public class Pharmacy extends javax.swing.JFrame{
                             .addGroup(jPanel16Layout.createSequentialGroup()
                                 .addComponent(cLduration, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(62, 62, 62)
-                                .addComponent(cLdurationType, 0, 86, Short.MAX_VALUE))
+                                .addComponent(cLdurationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(cLfrequency, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cInstruction, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_expdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -3747,7 +3750,7 @@ public class Pharmacy extends javax.swing.JFrame{
         lbl_userInfoUpdateStock2.setForeground(new java.awt.Color(255, 255, 255));
         lbl_userInfoUpdateStock2.setText("Supplier Detail");
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Add, Edit Supplier", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Add, Edit Supplier", 0, 0, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         jLabel19.setText("Supplier Id :");
 
@@ -3811,7 +3814,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(btn_supCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_supdel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_supSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_edit, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
+                    .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -3867,6 +3870,43 @@ public class Pharmacy extends javax.swing.JFrame{
 
         tpnl_manageDCode.addTab("Add Supplier", jPanel13);
 
+        btnDaily.setText("Daily");
+        btnDaily.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDailyActionPerformed(evt);
+            }
+        });
+
+        btnMonthly.setText("Monthly");
+
+        btnYearly.setText("Yearly");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(btnDaily, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(318, 318, 318)
+                .addComponent(btnMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(330, 330, 330)
+                .addComponent(btnYearly, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1141, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDaily, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnYearly, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(921, Short.MAX_VALUE))
+        );
+
+        tpnl_manageDCode.addTab("Dispensed Report", jPanel2);
+
         javax.swing.GroupLayout pnl_convertAndManageLayout = new javax.swing.GroupLayout(pnl_convertAndManage);
         pnl_convertAndManage.setLayout(pnl_convertAndManageLayout);
         pnl_convertAndManageLayout.setHorizontalGroup(
@@ -3875,7 +3915,7 @@ public class Pharmacy extends javax.swing.JFrame{
         );
         pnl_convertAndManageLayout.setVerticalGroup(
             pnl_convertAndManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tpnl_manageDCode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
+            .addComponent(tpnl_manageDCode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 950, Short.MAX_VALUE)
         );
 
         tpnl_pharmacy.addTab("INVENTORY", pnl_convertAndManage);
@@ -3912,13 +3952,6 @@ public class Pharmacy extends javax.swing.JFrame{
         });
         jToolBar2.add(btn_mainPageOList);
 
-        btnDisHistory.setText("Drug Dispense History");
-        btnDisHistory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDisHistoryActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
@@ -3929,9 +3962,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnDisHistory)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 403, Short.MAX_VALUE)
                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3940,16 +3971,14 @@ public class Pharmacy extends javax.swing.JFrame{
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnDisHistory)
-                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -3973,7 +4002,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -8282,10 +8311,10 @@ public void toExcel(JTable tbl_mdc, File file){
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_search_pol1ActionPerformed
 
-    private void btnDisHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisHistoryActionPerformed
+    private void btnDailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailyActionPerformed
         // TODO add your handling code here:
         // select * from pis_dispense_master where order_date < CURDATE()       
-    }//GEN-LAST:event_btnDisHistoryActionPerformed
+    }//GEN-LAST:event_btnDailyActionPerformed
    
     //Online Indicator
     public static void showOnline() {
@@ -8314,8 +8343,10 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JDialog Spatient;
     private javax.swing.JPanel Spatient_panel;
     private javax.swing.JTextField arrival_date;
-    private javax.swing.JButton btnDisHistory;
+    private javax.swing.JButton btnDaily;
+    private javax.swing.JButton btnMonthly;
     private static javax.swing.JButton btnStatus;
+    private javax.swing.JButton btnYearly;
     private javax.swing.JButton btn_PrintLabel;
     private javax.swing.JButton btn_addmdc;
     private javax.swing.JButton btn_browse;
@@ -8427,6 +8458,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
