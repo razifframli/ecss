@@ -13,6 +13,7 @@ import Helper.S;
 import Helper.Session;
 import api.Queue;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import static javaapplication1.Consultation.max_row;
@@ -36,10 +37,16 @@ public class Consultation_subcode {
         if (reply != JOptionPane.YES_OPTION) {
             return;
         }
+        cons.vph.setVisible(false);
+        cons.que.setVisible(false);
         try {
-            Timestamp timestamp = new Timestamp(new java.util.Date().getTime());
+//            Timestamp timestamp = new Timestamp(new java.util.Date().getTime());
             DriversLocation driverLocation = new DriversLocation();
-            Timestamp date = timestamp;
+//            Timestamp date = timestamp;
+            
+            Date date1 = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String date = sdf.format(date1) + " " + Consultation.EpisodeTime;
 
             String PMI = cons.txt_pPmiNo.getText();
             String name = cons.txt_pName.getText();
@@ -50,7 +57,28 @@ public class Consultation_subcode {
             String blood = cons.txt_pBloodSex.getText();
             String pstatus = cons.txt_pStatus.getText();
 
-            String header = "MSH|^~|CIS^T12109|" + "<cr>" + "\n";
+            String header = "MSH|^~|CIS|"
+                    +Session.getHfc_code()+"^"
+                    +Session.getDiscipline()+"^"
+                    +Session.getSubdiscipline()+"|"
+                    +"CIS|"
+                    +Session.getHfc_code()+"^"
+                    +Session.getDiscipline()+"^"
+                    +Session.getSubdiscipline()+"|"
+                    +date+"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    + "<cr>" + "\n";
             String patientInfo = "PDI|" + PMI + "|" + name + "^" + IC + "^" + race + "^" + sex + "^" + DOB + "^" + blood + "^" + pstatus + "^" + "|" + "<cr>" + "\n";
             String msgs[] = new String[200];
             for (int zz = 0; zz < 200; zz++) {
@@ -312,7 +340,7 @@ public class Consultation_subcode {
                             wei,
                             hei,
                             hea,
-                            "",
+                            respiratory_rate,
                             "",
                             pul,
                             "",
@@ -332,7 +360,6 @@ public class Consultation_subcode {
                             gcs_result,
                             pgcs_points,
                             pgcs_result,
-                            respiratory_rate,
                             oxygen_saturation,
                             pain_scale,
                             
@@ -615,6 +642,7 @@ public class Consultation_subcode {
                     } else if (note_array[zz].equals("Physical Examination")) {
                         zz++;
                         String pe_exam_line = note_array[zz++].split(": ")[1];
+                        String pe_comments = note_array[zz++].split(": ")[1];
                         String pe_exam = pe_exam_line.split(Func.SEPARATOR_LINK)[pe_exam_line.split(Func.SEPARATOR_LINK).length-1];
                         String pe_cd = "";
                         for (int level = 1; level <= Func.NUM_LEVEL_PHYSICAL_EXAMINATION; level++) {
@@ -639,13 +667,13 @@ public class Consultation_subcode {
                         String data[] = {
                             "",
                             "",
-                            "",
-                            "",
+                            Func.getCodePemToDB(pe_cd),
+                            pe_exam,
 //                            tekak + "^" + jantung + "^" + peparuKanan + "^" + bahuKanan + "^"
 //                            + bahuKiri + "^" + perut + "^" + kepala + "^"
 //                            + hidung + "^" + mulut + "^" + telingaKanan,
-                            pe_cd + "^" + pe_exam,
                             "",
+                            pe_comments,
                             "",
                             "",
                             date.toString(),
@@ -809,7 +837,7 @@ public class Consultation_subcode {
                         //saveEhr.insertJournal(header, patientInfo, (String) enumTab1.nextElement(), (String) enumTab2.nextElement(), (String) enumTab3.nextElement(), (String) enumTab4.nextElement(), (String) enumTab5.nextElement(), (String) enumTab6.nextElement(), (String) enumTab7.nextElement(), (String) enumTab8.nextElement(), PMI);
                         cons.ehr.insertJournal(1, header, patientInfo,
                                 msgs,
-                                PMI);
+                                PMI, date);
                         driverLocation.insertToDrive(1, header, patientInfo,
                                 msgs);
 
@@ -836,7 +864,7 @@ public class Consultation_subcode {
 
                 if (msgs.length > 0) {
                     cons.ehr.insertJournal(1, header, patientInfo,
-                            msgs, PMI);
+                            msgs, PMI, date);
                     //Friza
                     //saveEhr.insertJournal(header, patientInfo, (String) enumTab1.nextElement(), (String) enumTab2.nextElement(), (String) enumTab3.nextElement(), (String) enumTab4.nextElement(), (String) enumTab5.nextElement(), (String) enumTab6.nextElement(), (String) enumTab7.nextElement(), (String) enumTab8.nextElement(), PMI);
 
@@ -857,7 +885,7 @@ public class Consultation_subcode {
                 //Friza - insert CIS to server-MySql
                 //umar - cek setiap enumTab.nextElement tu tngok ada data atau x..
                 cons.ehr.insertCentral(1, header, patientInfo,
-                        msgs, PMI);
+                        msgs, PMI, date);
 
                 //ehr.formatMsg(header, patientInfo, (String) enumTab1.nextElement(), (String) enumTab2.nextElement(), (String) enumTab3.nextElement(), (String) enumTab4.nextElement(), (String) enumTab5.nextElement(), (String) enumTab6.nextElement(), (String) enumTab7.nextElement(), (String) enumTab8.nextElement(), (String) enumTab9.nextElement(), (String) enumTab12.nextElement());
             }

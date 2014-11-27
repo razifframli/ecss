@@ -28,6 +28,38 @@ public class Func {
     public final static String SEPARATOR_LINK = ", ";
     public final static String DATE_FORMAT_1 = "dd/MM/yyyy";
     public final static String DATE_FORMAT_2 = "yyyy-MM-dd HH:mm:ss";
+    public final static String PEM_SEPARATOR_TO_DB = ",";
+    public final static String PEM_SEPARATOR_FROM_DB = "^";
+    
+    public static String getCodePemToDB(String code) {
+        String str = "";
+        try {
+            String a[] = code.split("\\"+PEM_SEPARATOR_FROM_DB);
+            for (int i = 0; i < a.length-1; i++) {
+                str += a[i] + PEM_SEPARATOR_TO_DB;
+            }
+            if (a.length > 0) {
+                str += a[a.length-1];
+            }
+        } catch (Exception e) {
+        }
+        return str;
+    }
+    
+    public static String getCodePemFromDB(String code) {
+        String str = "";
+        try {
+            String a[] = code.split(PEM_SEPARATOR_TO_DB);
+            for (int i = 0; i < a.length-1; i++) {
+                str += a[i] + PEM_SEPARATOR_FROM_DB;
+            }
+            if (a.length > 0) {
+                str += a[a.length-1];
+            }
+        } catch (Exception e) {
+        }
+        return str;
+    }
     
     public static String getPhysicalExaminationLink(String peName) {
         String physicalExam = ""; //procedure

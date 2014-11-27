@@ -15,9 +15,17 @@ import java.util.Vector;
 
 public interface Message extends Remote {
     
+    // CIS order drug
+    ResultSet getDrugCIS(String search) throws RemoteException;
+    
     // procedure
     String insertPOS(String PMI, String dataPOS) throws RemoteException;
     ArrayList<ArrayList<String>> getProcedures() throws RemoteException;
+    ArrayList<ArrayList<String>> getProcedureDetail(String orderNo) throws RemoteException;
+    
+    // fast rmi query
+    ArrayList<ArrayList<String>> getQuery(String query, int col, String data[]) throws RemoteException;
+    boolean setQuery(String query, String data[]) throws RemoteException;
     
     // update pms
     boolean isUpdatePatientBiodata(String[] Biodata) throws RemoteException;
@@ -44,7 +52,7 @@ public interface Message extends Remote {
     
     //consultation queue
     boolean isConsult(String pmino) throws RemoteException;
-    String[] simplifyCheckBiodata(String pmiNo) throws RemoteException;
+    String[] simplifyCheckBiodata(String pmiNo, String time) throws RemoteException;
     
     //Pharmacy order drug
     void addAUTOGENERATE_ONO(String oNo) throws RemoteException;
@@ -106,11 +114,12 @@ public interface Message extends Remote {
     
     String [] getBio(int stat, String ic, String type, int num_col) throws RemoteException;
     
+    ArrayList<ArrayList<String>> getEHRLatestEpisode(String pmiNo, int limit) throws RemoteException;
     ArrayList<String> getEHRRecords(String pmiNo, int type) throws RemoteException;
 
     void sayHello(String name) throws RemoteException;
     
-    String insertEHRCentral(int status, String pmi, String data) throws RemoteException;
+    String insertEHRCentral(int status, String pmi, String data, String episodeDate) throws RemoteException;
     
     List getEHRLatest7(String pmi)  throws RemoteException;
     

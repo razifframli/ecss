@@ -3909,7 +3909,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
         String pe_status_1 = (String) cbx_pe_status_1.getSelectedItem();
         PhysicalExamBean pe = new PhysicalExamBean();
         
-        pe.setPe_cd(pe_cd_0+"^"+pe_cd_1);
+        pe.setPe_cd(pe_cd_0+","+pe_cd_1);
         pe.setPe_name(pe_name_1);
         pe.setPe_parent(pe_cd_0);
         pe.setPe_status(pe_status_1);
@@ -3995,7 +3995,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
         String pe_status_2 = (String) cbx_pe_status_2.getSelectedItem();
         PhysicalExamBean pe = new PhysicalExamBean();
         
-        pe.setPe_cd(pe_cd_1+"^"+pe_cd_2);
+        pe.setPe_cd(pe_cd_1+","+pe_cd_2);
         pe.setPe_name(pe_name_2);
         pe.setPe_parent(pe_cd_1);
         pe.setPe_status(pe_status_2);
@@ -4081,7 +4081,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
         String pe_status_3 = (String) cbx_pe_status_3.getSelectedItem();
         
         PhysicalExamBean pe = new PhysicalExamBean();
-        pe.setPe_cd(pe_cd_2+"^"+pe_cd_3);
+        pe.setPe_cd(pe_cd_2+","+pe_cd_3);
         pe.setPe_name(pe_name_3);
         pe.setPe_parent(pe_cd_2);
         pe.setPe_status(pe_status_3);
@@ -4167,7 +4167,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
         String pe_status_4 = (String) cbx_pe_status_4.getSelectedItem();
         
         PhysicalExamBean pe = new PhysicalExamBean();
-        pe.setPe_cd(pe_cd_3+"^"+pe_cd_4);
+        pe.setPe_cd(pe_cd_3+","+pe_cd_4);
         pe.setPe_name(pe_name_4);
         pe.setPe_parent(pe_cd_3);
         pe.setPe_status(pe_status_4);
@@ -4253,7 +4253,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
         String pe_status_5 = (String) cbx_pe_status_5.getSelectedItem();
         
         PhysicalExamBean pe = new PhysicalExamBean();
-        pe.setPe_cd(pe_cd_4+"^"+pe_cd_5);
+        pe.setPe_cd(pe_cd_4+","+pe_cd_5);
         pe.setPe_name(pe_name_5);
         pe.setPe_parent(pe_cd_4);
         pe.setPe_status(pe_status_5);
@@ -4339,7 +4339,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
         String pe_status_6 = (String) cbx_pe_status_6.getSelectedItem();
         
         PhysicalExamBean pe = new PhysicalExamBean();
-        pe.setPe_cd(pe_cd_5+"^"+pe_cd_6);
+        pe.setPe_cd(pe_cd_5+","+pe_cd_6);
         pe.setPe_name(pe_name_6);
         pe.setPe_parent(pe_cd_5);
         pe.setPe_status(pe_status_6);
@@ -4425,7 +4425,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
         String pe_status_7 = (String) cbx_pe_status_7.getSelectedItem();
         
         PhysicalExamBean pe = new PhysicalExamBean();
-        pe.setPe_cd(pe_cd_6+"^"+pe_cd_7);
+        pe.setPe_cd(pe_cd_6+","+pe_cd_7);
         pe.setPe_name(pe_name_7);
         pe.setPe_parent(pe_cd_6);
         pe.setPe_status(pe_status_7);

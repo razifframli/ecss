@@ -301,6 +301,25 @@ public class Searching {
         }
     }
     
+    public static boolean isSearchImmune(String code) {
+        boolean s = false;
+        try {
+            String sql = "SELECT RI_DESC FROM READCODE_IMMUNIZATION "
+                        + "where UCASE(RI_DESC) = UCASE(?)";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, code);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                s = true;
+            } else {
+                s = false;
+            }
+        } catch (Exception e) {
+            s = false;
+        }
+        return s;
+    }
+    
     public static void searchImmune(Consultation cons) {
         try {
             cons.st = Session.getCon_x(100).createStatement();
@@ -334,6 +353,25 @@ public class Searching {
                 ex.printStackTrace();
             }
         }
+    }
+    
+    public static boolean isSearchAllergy1(String code) {
+        boolean s = false;
+        try {
+            String sql = "SELECT RA_DESC FROM READCODE_ALLERGY "
+                        + "where UCASE(RA_DESC) = UCASE(?) ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, code);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                s = true;
+            } else {
+                s = false;
+            }
+        } catch (Exception e) {
+            s = false;
+        }
+        return s;
     }
     
     public static void searchAllergy1(Consultation cons) {
@@ -372,6 +410,25 @@ public class Searching {
         }
     }
     
+    public static boolean isSearchSH1(String code) {
+        boolean status = false;
+        try {
+            String sql = "SELECT RSH_DESC FROM READCODE_SOCIAL_HISTORY "
+                        + "WHERE UCASE(RSH_DESC) = UCASE(?) ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, code);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                status = true;
+            } else {
+                status = false;
+            }
+        } catch (Exception e) {
+            status = false;
+        }
+        return status;
+    }
+    
     public static void searchSH1(Consultation cons) {
         try {
             cons.st = Session.getCon_x(100).createStatement();
@@ -405,6 +462,25 @@ public class Searching {
         }
     }
     
+    public static boolean isSearchDiagnosis(String code) {
+        boolean s = false;
+        try {
+            String sql = "SELECT * FROM icd10_codes "
+                        + "where UCASE(icd10_desc) = UCASE(?) ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, code);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                s = true;
+            } else {
+                s = false;
+            }
+        } catch (Exception e) {
+            s = false;
+        }
+        return s;
+    }
+    
     public static void searchDiagnosis(Consultation cons) {
         String ch = cons.txt_diagnosisSearch.getText().toLowerCase();
 
@@ -428,6 +504,25 @@ public class Searching {
             } catch (Exception ex) {
             }
         }
+    }
+    
+    public static boolean isSearchDAB1(String code) {
+        boolean s = false;
+        try {
+            String sql = "SELECT RD_DESC FROM READCODE_DISABILITY "
+                                        + "WHERE UCASE(RD_DESC) = UCASE(?)";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, code);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                s = true;
+            } else {
+                s = false;
+            }
+        } catch (Exception e) {
+            s = false;
+        }
+        return s;
     }
     
     public static void searchDAB1(Consultation cons) {
@@ -454,6 +549,25 @@ public class Searching {
             } catch (Exception ex) {
             }
         }
+    }
+    
+    public static boolean isSearchCCN1(String desc) {
+        boolean status = false;
+        try {
+            String sql = "SELECT RCC_DESC FROM READCODE_CHIEF_COMPLAINT "
+                        + "where UCASE(RCC_DESC) = UCASE(?) order by RCC_DESC ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, desc);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                status = true;
+            } else {
+                status = false;
+            }
+        } catch (Exception e) {
+            status = false;
+        }
+        return status;
     }
     
     public static void searchCCN1(Consultation cons) {
@@ -493,6 +607,25 @@ public class Searching {
         }
     }
     
+    public static boolean isSearchPMH1(String code) {
+        boolean status = false;
+        try {
+            String sql = "SELECT * FROM icd10_codes "
+                    + "where UCASE(icd10_desc) = UCASE(?) ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, code);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                status = true;
+            } else {
+                status = false;
+            }
+        } catch (Exception e) {
+            status = false;
+        }
+        return status;
+    }
+    
     public static void searchPMH1(Consultation cons) {
         try {
             cons.st = Session.getCon_x(100).createStatement();
@@ -522,6 +655,25 @@ public class Searching {
             J.o("Error PMH Search", "Error: " + ex.getMessage(), 0);
             ex.printStackTrace();
         }
+    }
+    
+    public static boolean isSearchFH1(String code) {
+        boolean status = false;
+        try {
+            String sql = "SELECT * FROM icd10_codes "
+                        + "where UCASE(icd10_desc) = UCASE(?) ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, code);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                status = true;
+            } else {
+                status = false;
+            }
+        } catch (Exception e) {
+            status = false;
+        }
+        return status;
     }
     
     public static void searchFH1(Consultation cons) {

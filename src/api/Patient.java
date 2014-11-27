@@ -18,7 +18,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javaapplication1.DatabaseConnection;
@@ -453,19 +455,33 @@ public class Patient {
      {
         String[] familyinfo1 = new String[6];
         
-        String sql = "SELECT * FROM PMS_FAMILY WHERE PMI_NO = (SELECT PMI_NO FROM PMS_PATIENT_BIODATA WHERE NEW_IC_NO = ?)";
-     
-        PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
-        ps.setString(1, family1);
-        ResultSet rs = ps.executeQuery();
-
-        while(rs.next()){
-            for(int i=0;i<6;i++)
-             {
-                System.out.print(rs.getString(i+1));
-                familyinfo1[i]=rs.getString(i+1);
+         try {
+             
+             String sql = "SELECT * FROM PMS_FAMILY WHERE PMI_NO = ? ";
+             String data[] = {family1};
+             ArrayList<ArrayList<String>> rs = DBConnection.getImpl().getQuery(sql, 6, data);
+             for (int j = 0; j < rs.size(); j++) {
+                 for (int i = 0; i < rs.get(j).size(); i++) {
+                     System.out.print(rs.get(j).get(i));
+                     familyinfo1[i] = rs.get(j).get(i);
+                 }
              }
-        }
+             
+         } catch (Exception e) {
+             String sql = "SELECT * FROM PMS_FAMILY WHERE PMI_NO = ? ";
+
+             PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
+             ps.setString(1, family1);
+             ResultSet rs = ps.executeQuery();
+
+             while (rs.next()) {
+                 for (int i = 0; i < 6; i++) {
+                     System.out.print(rs.getString(i + 1));
+                     familyinfo1[i] = rs.getString(i + 1);
+                 }
+             }
+         }
+        
         return familyinfo1;
      }
 
@@ -538,17 +554,31 @@ public class Patient {
      public String[] getNokDetailUsingNewIC(String nok1) throws ClassNotFoundException, SQLException
     {
         String[] nokinfo1 = new String[19];
-        String sql = "SELECT * FROM PMS_NEXTOFKIN WHERE PMI_NO = (SELECT PMI_NO FROM PMS_PATIENT_BIODATA WHERE NEW_IC_NO=?)";
-        PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
-        ps.setString(1, nok1);
-        ResultSet rs = ps.executeQuery();
+        
+        try {
+            
+            String sql = "SELECT * FROM PMS_NEXTOFKIN WHERE PMI_NO = ? ";
+            String data[] = {nok1};
+            ArrayList<ArrayList<String>> rs = DBConnection.getImpl().getQuery(sql, 19, data);
+            for (int j = 0; j < rs.size(); j++) {
+                for (int i = 0; i < rs.get(j).size(); i++) {
+                    System.out.print(rs.get(j).get(i));
+                    nokinfo1[i] = rs.get(j).get(i);
+                }
+            }
+            
+        } catch (Exception e) {
+            String sql = "SELECT * FROM PMS_NEXTOFKIN WHERE PMI_NO = ? ";
+            PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
+            ps.setString(1, nok1);
+            ResultSet rs = ps.executeQuery();
 
-        while(rs.next()){
-            for(int i=0;i<19;i++)
-             {
-                System.out.print(rs.getString(i+1));
-                nokinfo1[i]=rs.getString(i+1);
-             }
+            while (rs.next()) {
+                for (int i = 0; i < 19; i++) {
+                    System.out.print(rs.getString(i + 1));
+                    nokinfo1[i] = rs.getString(i + 1);
+                }
+            }
         }
 
         return nokinfo1;
@@ -620,17 +650,31 @@ public class Patient {
       public String[] getInsuranceDetailUsingNewIC(String insurance1) throws ClassNotFoundException, SQLException
     {
         String[] insuranceinfo1 = new String[6];
-        String sql = "SELECT * FROM PMS_MEDICAL_INSURANCE WHERE PMI_NO = (SELECT PMI_NO FROM PMS_PATIENT_BIODATA WHERE NEW_IC_NO=?)";
-        PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
-        ps.setString(1, insurance1);
-        ResultSet rs = ps.executeQuery();
+        
+        try {
+            
+            String sql = "SELECT * FROM PMS_MEDICAL_INSURANCE WHERE PMI_NO = ? ";
+            String data[] = {insurance1};
+            ArrayList<ArrayList<String>> rs = DBConnection.getImpl().getQuery(sql, 6, data);
+            for (int j = 0; j < rs.size(); j++) {
+                for (int i = 0; i < rs.get(j).size(); i++) {
+                    System.out.print(rs.get(j).get(i));
+                    insuranceinfo1[i] = rs.get(j).get(i);
+                }
+            }
+            
+        } catch (Exception e) {
+            String sql = "SELECT * FROM PMS_MEDICAL_INSURANCE WHERE PMI_NO = ? ";
+            PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
+            ps.setString(1, insurance1);
+            ResultSet rs = ps.executeQuery();
 
-        while(rs.next()){
-            for(int i=0;i<6;i++)
-             {
-                System.out.print(rs.getString(i+1));
-                insuranceinfo1[i]=rs.getString(i+1);
-             }
+            while (rs.next()) {
+                for (int i = 0; i < 6; i++) {
+                    System.out.print(rs.getString(i + 1));
+                    insuranceinfo1[i] = rs.getString(i + 1);
+                }
+            }
         }
         
         return insuranceinfo1;
@@ -703,18 +747,31 @@ public class Patient {
     public String[] getEmploymentDetailUsingNewIC(String employment1) throws ClassNotFoundException, SQLException
     {
         String[] employmentinfo1 = new String[10];
-        String sql = "SELECT * FROM PMS_EMPLOYMENT WHERE PMI_NO = "
-                + "(SELECT PMI_NO FROM PMS_PATIENT_BIODATA WHERE NEW_IC_NO=?)";
-        PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
-        ps.setString(1, employment1);
-        ResultSet rs = ps.executeQuery();
+        
+        try {
+            
+            String sql = "SELECT * FROM PMS_EMPLOYMENT WHERE PMI_NO = ? ";
+            String data[] = {employment1};
+            ArrayList<ArrayList<String>> rs = DBConnection.getImpl().getQuery(sql, 10, data);
+            for (int j = 0; j < rs.size(); j++) {
+                for (int i = 0; i < rs.get(j).size(); i++) {
+                    System.out.print(rs.get(j).get(i));
+                    employmentinfo1[i] = rs.get(j).get(i);
+                }
+            }
+            
+        } catch (Exception e) {
+            String sql = "SELECT * FROM PMS_EMPLOYMENT WHERE PMI_NO = ? ";
+            PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
+            ps.setString(1, employment1);
+            ResultSet rs = ps.executeQuery();
 
-        while(rs.next()){
-            for(int i=0;i<10;i++)
-             {
-                System.out.print(rs.getString(i+1));
-                employmentinfo1[i]=rs.getString(i+1);
-             }
+            while (rs.next()) {
+                for (int i = 0; i < 10; i++) {
+                    System.out.print(rs.getString(i + 1));
+                    employmentinfo1[i] = rs.getString(i + 1);
+                }
+            }
         }
 
         return employmentinfo1;
@@ -827,17 +884,30 @@ public class Patient {
     public String[] getBiodataUsingNewIC(String biodatainfo1) throws ClassNotFoundException, SQLException
     {
         String[] biodatainformation1 = new String[35];
-        String sql = "SELECT * FROM PMS_PATIENT_BIODATA WHERE NEW_IC_NO=?";
-        PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
-        ps.setString(1, biodatainfo1);
-        ResultSet rs = ps.executeQuery();
+        try {
+            
+            String sql = "SELECT * FROM PMS_PATIENT_BIODATA WHERE PMI_NO = ? ";
+            String data[] = {biodatainfo1};
+            ArrayList<ArrayList<String>> rs = DBConnection.getImpl().getQuery(sql, 35, data);
+            for (int j = 0; j < rs.size(); j++) {
+                for (int i = 0; i < 35; i++) {
+                    System.out.print(rs.get(j).get(i));
+                    biodatainformation1[i] = rs.get(j).get(i);
+                }
+            }
+            
+        } catch (Exception e) {
+            String sql = "SELECT * FROM PMS_PATIENT_BIODATA WHERE PMI_NO = ? ";
+            PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
+            ps.setString(1, biodatainfo1);
+            ResultSet rs = ps.executeQuery();
 
-        while(rs.next()){
-            for(int i=0;i<35;i++)
-             {
-                System.out.print(rs.getString(i+1));
-                biodatainformation1[i]=rs.getString(i+1);
-             }
+            while (rs.next()) {
+                for (int i = 0; i < 35; i++) {
+                    System.out.print(rs.getString(i + 1));
+                    biodatainformation1[i] = rs.getString(i + 1);
+                }
+            }
         }
 
         return biodatainformation1;
@@ -907,7 +977,7 @@ public class Patient {
         return existBiodataInfo;
     }
 
-    public boolean ayatSMP(String[] existBiodataInfo1, int num1) {
+    public boolean ayatSMP(int flag, String[] existBiodataInfo1, int num1, String carian, String dropdownIDtype) {
         boolean stat = true;
         
         /**
@@ -918,6 +988,10 @@ public class Patient {
          */
         String kod = existBiodataInfo1[num1].substring(0, 1);
         
+        for (int i = num1; i < existBiodataInfo1.length; i++) {
+            System.out.println("kod:"+existBiodataInfo1[i]);
+        }
+        
         if (kod.equals("0")) {
             int ask = JOptionPane.showConfirmDialog(null, "This patient IS NOT RECOGNIZED as UTeM's student "
                     + "or staff.\nDo you want to continue?", "Registration", JOptionPane.YES_NO_OPTION);
@@ -926,10 +1000,25 @@ public class Patient {
             } else {
                 stat = true;
             }
+        } else {
+            String local_foreign = existBiodataInfo1[num1 + 3]; // L local, F foreign
+            String stud_staf = existBiodataInfo1[num1 + 4]; // 1 student, 0 staff
+            String active = existBiodataInfo1[num1 + 6];
+            System.out.println("active:"+active);
+            if (!active.equals("AKTIF")) {
+                int ask = JOptionPane.showConfirmDialog(null, "This patient IS NOT ACTIVE as UTeM's student "
+                        + "or staff.\nDo you want to continue?", "Registration", JOptionPane.YES_NO_OPTION);
+                if (ask == JOptionPane.NO_OPTION) {
+                    stat = false;
+                } else {
+                    stat = true;
+                }
+            }
         }
         
-        String stud_staf = existBiodataInfo1[num1 + 1];
-        String active = existBiodataInfo1[num1 + 3];
+        if (stat == false) {
+            Registration.numCheckDigit = carian;
+        }
         
         return stat;
     }
@@ -957,7 +1046,7 @@ public class Patient {
 
                 existBiodataInfo1 = DBConnection.getImpl().getBio(1, existbiodata1, "", num_ic); //1 for New IC
                 
-                Registration.isRecognizedPatient = ayatSMP(existBiodataInfo1, num_ic);
+                Registration.isRecognizedPatient = ayatSMP(1, existBiodataInfo1, num_ic, existbiodata1, "");
 
                 System.out.println(".....Message Sent....");
             } catch (Exception e) {
@@ -1020,6 +1109,8 @@ public class Patient {
                 // call server's method	
 
                 existBiodataInfo2 = DBConnection.getImpl().getBio(4, existbiodata2, "", 8); //1 for New IC
+                
+                Registration.isRecognizedPatient = ayatSMP(4, existBiodataInfo2, 8, existbiodata2, "");
 
                 System.out.println(".....Message Sent....");
             } catch (Exception e) {
@@ -1064,7 +1155,8 @@ public class Patient {
      //get existing patient biodata from database using id no and id type
     public String[] getRegisterBiodataUsingID(String existbiodata3,String existbiodata4) throws ClassNotFoundException, SQLException
     {
-        String[] existBiodataInfo3 = new String[8+Registration.num_sii];
+        int num_ic = 8;
+        String[] existBiodataInfo3 = new String[num_ic+Registration.num_sii];
         
 //        LongRunProcess.check_network2();
 //        if (Session.getPrev_stat()) {
@@ -1082,6 +1174,8 @@ public class Patient {
                 // call server's method	
 
                 existBiodataInfo3 = DBConnection.getImpl().getBio(3, existbiodata3, existbiodata4, 8); //3 for id type
+                
+                Registration.isRecognizedPatient = ayatSMP(3, existBiodataInfo3, num_ic, existbiodata3, existbiodata4);
 
                 System.out.println(".....Message Sent....");
             } catch (Exception e) {
@@ -1527,7 +1621,7 @@ public class Patient {
 
 
         //get patient biodata from database when actor click table row from appointment list
-    public String[] getAppointmentBiodata(String appointmentbiodatainfo) throws ClassNotFoundException, SQLException
+    public String[] getAppointmentBiodata(String appointmentbiodatainfo, String episodeTime) throws ClassNotFoundException, SQLException
     {
         String[] appointmentbiodatainformation = new String[35];
         
@@ -1549,16 +1643,34 @@ public class Patient {
 //                if (isConsult) {
 //                    appointmentbiodatainformation = impl.getBiodata(appointmentbiodatainfo);
 //                }
-                appointmentbiodatainformation = DBConnection.getImpl().simplifyCheckBiodata(appointmentbiodatainfo);
+                appointmentbiodatainformation = DBConnection.getImpl().simplifyCheckBiodata(appointmentbiodatainfo, episodeTime);
                 
             } catch(Exception ex) {
                 String sql1 = "SELECT * "
                         + "FROM PMS_EPISODE "
                         + "WHERE PMI_NO = ? "
                         + "AND STATUS NOT LIKE 'Consult' "
-                        + "ORDER BY EPISODE_TIME ASC";
+                        + "AND EPISODE_DATE = ? ";
+                try {
+                    if (!episodeTime.equals("")) {
+                        sql1 += "AND EPISODE_TIME = ? ";
+                    }
+                } catch (Exception e) {
+                }
+                sql1 += "ORDER BY EPISODE_TIME ASC";
                 PreparedStatement ps1 = Session.getCon_x(100).prepareStatement(sql1);
                 ps1.setString(1, appointmentbiodatainfo);
+                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                ps1.setString(2, sdf.format(date));
+                
+                try {
+                    if (!episodeTime.equals("")) {
+                        ps1.setString(3, episodeTime);
+                    }
+                } catch (Exception e) {
+                }
+                
                 ResultSet rs1 = ps1.executeQuery();
 
                 if (rs1.next()) {

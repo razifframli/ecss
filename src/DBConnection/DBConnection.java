@@ -6,10 +6,12 @@
 package DBConnection;
 
 import Bean.CIS_Procedure;
+import Bean.ConnectCSS;
 import Bean.DrugOrderBean;
 import Bean.GCS_Month;
 import Bean.GCS_Response;
 import Bean.GCS_Scale;
+import Bean.JournalFileBean;
 import Bean.PatientBean;
 import Bean.PhysicalExamBean;
 import Bean.StaffBean;
@@ -92,6 +94,7 @@ public class DBConnection {
 //    private static String oS;//full partial
     
     private static Message impl;
+    private static Message implCalling;
     
     public static void startRMI()
     {
@@ -106,6 +109,12 @@ public class DBConnection {
             //Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
             //Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            Registry myRegistry = LocateRegistry.getRegistry(ConnectCSS.getHostCallingSystem(), ConnectCSS.getPortCallingSystem());
+            implCalling = (Message) myRegistry.lookup("myCalling");
+        } catch (Exception e) {
         }
     }
     public static Message getImpl()
@@ -127,6 +136,23 @@ public class DBConnection {
             }
         }
         return impl;
+    }
+    public static Message getImplCalling()
+    {
+        try {
+            implCalling.sayHello("get rmi");
+        } catch (Exception e) {
+            try {
+                // fire to server port 1099
+                Registry myRegistry = LocateRegistry.getRegistry(ConnectCSS.getHostCallingSystem(), ConnectCSS.getPortCallingSystem());
+                implCalling = (Message) myRegistry.lookup("myCalling");
+            } catch (RemoteException ex) {
+                //Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NotBoundException ex) {
+                //Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return implCalling;
     }
 
     public static Connection getConnInstance()
@@ -1625,7 +1651,7 @@ public class DBConnection {
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                for (int i = 0; i < 22; i++) {
+                for (int i = 0; i < 23; i++) {
                     data.add(rs.getString(i + 1));
                 }
             }
@@ -1637,7 +1663,7 @@ public class DBConnection {
     
     public static boolean copyDataStaff(String user_id, ArrayList<String> data) {
         boolean stat = false;
-        int num_cols1 = 17;
+        int num_cols1 = 18;
         int num_cols2 = 5;
         try {
             String sql1 = "DELETE FROM ADM_USER "
@@ -2559,5 +2585,105 @@ public class DBConnection {
         PhysicalExamBean peb = DBConnection.getPhysicalExam(size-1, peb_temp);
         pe_name += peb.getPe_name();
         return pe_name;
+    }
+    
+    public static boolean truncateJournalFile(String pmiNo) {
+        boolean status = false;
+        try {
+            String sql = "DELETE FROM JOURNAL_FILE "
+                    + "WHERE (STATUS = 'T' "
+                    + "OR STATUS = 't') "
+                    + "AND STATUS2 = 1 "
+                    + "AND PMI_NO = ? ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, pmiNo);
+            ps.execute();
+            status = true;
+        } catch (Exception e) {
+            status = false;
+            e.printStackTrace();
+        }
+        return status;
+    }
+    
+    public static boolean insertJournalFile(String centralCode, String pmiNoTemp, String txnDate, String txnDataBlob, String statusDischarge) {
+        boolean status = false;
+        try {
+            String sql = "INSERT INTO JOURNAL_FILE VALUES(?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, centralCode);
+            ps.setString(2, pmiNoTemp);
+            ps.setString(3, txnDate);
+            ps.setString(4, txnDataBlob);
+            ps.setString(5, "T");
+            ps.setInt(6, Integer.parseInt(statusDischarge));
+            ps.execute();
+            status = true;
+        } catch (Exception e) {
+            status = false;
+            e.printStackTrace();
+        }
+        return status;
+    }
+    
+    public static ArrayList<JournalFileBean> getJournalFile(String pmiNo) {
+        ArrayList<JournalFileBean> data = new ArrayList<JournalFileBean>();
+        try {
+            String sql = "SELECT * "
+                    + "FROM JOURNAL_FILE "
+                    + "WHERE (STATUS = 'T' "
+                    + "OR STATUS = 't') "
+                    + "AND STATUS2 = 1 "
+                    + "AND PMI_NO = ? ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, pmiNo);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                JournalFileBean jfb = new JournalFileBean();
+//                String aa = "";
+//                for (int i = 1; i <= 6; i++) {
+//                    aa += rs.getString(i) + "\n";
+//                }
+//                J.o(pmiNo, aa, 2);
+                jfb.setCentralCode(rs.getString(1));
+                jfb.setPmiNo(rs.getString(2));
+                jfb.setTxnDate(rs.getString(3));
+                jfb.setTxnDataBlob(rs.getString(4));
+                jfb.setStatusSync(rs.getString(5));
+                jfb.setStatusDischarge(rs.getInt(6));
+                data.add(jfb);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
+    public static JournalFileBean getJournalFile_episode(String pmiNo, String episodeDate) {
+        JournalFileBean data = new JournalFileBean();
+        try {
+            String sql = "SELECT * "
+                    + "FROM JOURNAL_FILE "
+                    + "WHERE (STATUS = 'T' "
+                    + "OR STATUS = 't') "
+                    + "AND STATUS2 = 1 "
+                    + "AND PMI_NO = ? "
+                    + "AND TXNDATE = ? ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, pmiNo);
+            ps.setString(2, episodeDate);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                data.setCentralCode(rs.getString(1));
+                data.setPmiNo(rs.getString(2));
+                data.setTxnDate(rs.getString(3));
+                data.setTxnDataBlob(rs.getString(4));
+                data.setStatusSync(rs.getString(5));
+                data.setStatusDischarge(rs.getInt(6));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 }

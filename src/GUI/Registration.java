@@ -853,6 +853,7 @@ public class Registration extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel9.setText("Id Type");
 
+        tfieldPMINoRegistration.setEditable(false);
         tfieldPMINoRegistration.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tfieldPMINoRegistration.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -860,6 +861,7 @@ public class Registration extends javax.swing.JFrame {
             }
         });
 
+        tfieldNewICNoRegistration.setEditable(false);
         tfieldNewICNoRegistration.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tfieldNewICNoRegistration.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -876,6 +878,7 @@ public class Registration extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel8.setText("Old IC No.");
 
+        tfieldNameRegistration.setEditable(false);
         tfieldNameRegistration.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tfieldNameRegistration.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -883,6 +886,7 @@ public class Registration extends javax.swing.JFrame {
             }
         });
 
+        tfieldOldICNoRegistration.setEditable(false);
         tfieldOldICNoRegistration.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tfieldOldICNoRegistration.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -893,6 +897,7 @@ public class Registration extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel10.setText("Identification No.");
 
+        tfieldIdNoRegistration.setEditable(false);
         tfieldIdNoRegistration.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -3459,7 +3464,7 @@ public class Registration extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -4982,6 +4987,11 @@ public class Registration extends javax.swing.JFrame {
         String[] registerPatient = {"", "", "", "", "", "", "", "", "", "", "", 
             "", "", "", "", "", "", "", "", "", "", 
             "", "", "", "", "", "", "", "", ""};
+        String pmiNo = tfieldPMINoRegistration.getText();
+        if (pmiNo.equals("") || pmiNo.equals("-") || pmiNo.equals(" ")) {
+            J.o("Blank Information", "Please use a proper PMI No.!", 0);
+            return;
+        }
 
         registerPatient[0] = tfieldPMINoRegistration.getText();
         Calendar today = Calendar.getInstance();
@@ -5584,10 +5594,12 @@ public class Registration extends javax.swing.JFrame {
     public static int num_sii = 7;
     
     public static boolean isRecognizedPatient = false;
+    public static String numCheckDigit = "";
     
     private void searchRegister() {
         setDefault();
 
+        // search by PMI No.
         if (tfieldPMISearchRegister.getText() != null && (tfieldPMISearchRegister.getText().length() != 0)) {
             String[] RegisterInfo = {};
             String[] BiodataInfo = {};
@@ -5600,32 +5612,37 @@ public class Registration extends javax.swing.JFrame {
 
             try {
                 RegisterInfo = patientRegister.getBiodata(tfieldPMISearchRegister.getText());
-                BiodataInfo = trim(patientRegister.getBiodata(tfieldPMISearchRegister.getText()));
-                EmploymentInfo = trim(patientRegister.getEmploymentDetail(tfieldPMISearchRegister.getText()));
-                NOKInfo = trim(patientRegister.getNokDetail(tfieldPMISearchRegister.getText()));
-                FamilyInfo = trim(patientRegister.getFamilyDetail(tfieldPMISearchRegister.getText()));
-                InsuranceInfo = trim(patientRegister.getInsuranceDetail(tfieldPMISearchRegister.getText()));
+                if (RegisterInfo[0] != null) {
+                    BiodataInfo = trim(patientRegister.getBiodata(tfieldPMISearchRegister.getText()));
+                    EmploymentInfo = trim(patientRegister.getEmploymentDetailUsingNewIC(tfieldPMISearchRegister.getText()));
+                    NOKInfo = trim(patientRegister.getNokDetailUsingNewIC(tfieldPMISearchRegister.getText()));
+                    FamilyInfo = trim(patientRegister.getFamilyDetailUsingNewIC(tfieldPMISearchRegister.getText()));
+                    InsuranceInfo = trim(patientRegister.getInsuranceDetailUsingNewIC(tfieldPMISearchRegister.getText()));
+                }
 
                 if (RegisterInfo[0] == null) {
-                    JOptionPane.showMessageDialog(null, "Patient biodata is not existed in the database. Please proceed to Patient Master Index Form to fill in information !!!", "Error", JOptionPane.INFORMATION_MESSAGE);
+//                    JOptionPane.showMessageDialog(null, "Patient biodata is not existed in the database.", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    J.o("Patient not exist", "Patient is not existed!", 0);
+                    
                     //Set tab to Registration
 
-                    String ic = JOptionPane.showInputDialog("Please key in the patient's identification number:-");
-                    
-                    if(ic != null && ic.length() != 0 && ic != "") {
-                        String[] ri1 = {};
-                        Patient pr1 = new Patient(this);
-                        ri1 = pr1.getRegisterBiodataUsingNewIC(ic);
-                        
-                        if (ri1[4] == null) {
-                            clearForm();
-                            generateAllAutogenerateNo(ic);
-                            tabpanel.setSelectedIndex(1);
-                            button_new();
-                        } else {
-                            JOptionPane.showMessageDialog(null, "This identification number already been used!!", "ID Number Been Used", 0);
-                        }
-                    }
+//                    String ic = JOptionPane.showInputDialog("Please key in the patient's identification number:-");
+//                    
+//                    if(ic != null && ic.length() != 0 && ic != "") {
+//                        String[] ri1 = {};
+//                        Patient pr1 = new Patient(this);
+//                        ri1 = pr1.getRegisterBiodataUsingNewIC(ic);
+//                        
+//                        if (ri1[4] == null) {
+//                            clearForm();
+//                            generateAllAutogenerateNo(ic);
+//                            tabpanel.setSelectedIndex(1);
+//                            button_new();
+//                        } else {
+//                            JOptionPane.showMessageDialog(null, "This identification number already been used!!", "ID Number Been Used", 0);
+//                        }
+//                    }
                     
                 } else {
                     button_old();
@@ -5822,12 +5839,23 @@ public class Registration extends javax.swing.JFrame {
 
             try {
                 RegisterInfo1 = patientRegister1.getRegisterBiodataUsingNewIC(tfieldICSearchRegister.getText());
-                BiodataInfo1 = trim(patientRegister1.getBiodataUsingNewIC(tfieldICSearchRegister.getText()));
-                EmploymentInfo1 = trim(patientRegister1.getEmploymentDetailUsingNewIC(tfieldICSearchRegister.getText()));
-                NOKInfo1 = trim(patientRegister1.getNokDetailUsingNewIC(tfieldICSearchRegister.getText()));
-                FamilyInfo1 = trim(patientRegister1.getFamilyDetailUsingNewIC(tfieldICSearchRegister.getText()));
-                InsuranceInfo1 = trim(patientRegister1.getInsuranceDetailUsingNewIC(tfieldICSearchRegister.getText()));
+                if (RegisterInfo1[4] != null) {
+                    BiodataInfo1 = trim(patientRegister1.getBiodataUsingNewIC(RegisterInfo1[0]));
+                    EmploymentInfo1 = trim(patientRegister1.getEmploymentDetailUsingNewIC(RegisterInfo1[0]));
+                    NOKInfo1 = trim(patientRegister1.getNokDetailUsingNewIC(RegisterInfo1[0]));
+                    FamilyInfo1 = trim(patientRegister1.getFamilyDetailUsingNewIC(RegisterInfo1[0]));
+                    InsuranceInfo1 = trim(patientRegister1.getInsuranceDetailUsingNewIC(RegisterInfo1[0]));
+                }
 
+                try {
+                    // id no
+                    for (int i = 0; i <= 26; i++) {
+                        S.oln(i+" umaq:"+RegisterInfo1[i]);
+                    }
+                } catch (Exception e) {
+                    J.o("", "error dowh", 0);
+                }
+                
                 if (RegisterInfo1[4] == null) {
                     
                     if (isRecognizedPatient == false) {
@@ -5837,11 +5865,14 @@ public class Registration extends javax.swing.JFrame {
                     
                     JOptionPane.showMessageDialog(null, "Patient biodata is not existed in the database."
                             + "\nPlease proceed to Patient Master Index Form to fill in information !!!", "New Patient", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    
+                    
                     //Set tab to Registration
 
                     String ic = tfieldICSearchRegister.getText();
                     clearForm();
-                    generateAllAutogenerateNo(ic);
+                    generateAllAutogenerateNo(numCheckDigit);
 
                     tabpanel.setSelectedIndex(1);
                     tfieldNewICNoPatient.setText(tfieldICSearchRegister.getText());
@@ -5905,6 +5936,8 @@ public class Registration extends javax.swing.JFrame {
                     tfieldHandphoneNoPatient.setText(RegisterInfo1[26]);
                     
                 } else {
+                    
+                    
                     button_old();
                     setsaveStatus(false);
                     //show patient information on registration screen
@@ -6105,7 +6138,7 @@ public class Registration extends javax.swing.JFrame {
                 setDefault();
             } catch (Exception ex) {
                 setDefault();
-                
+                ex.printStackTrace();
             }
         }
 
@@ -6122,23 +6155,88 @@ public class Registration extends javax.swing.JFrame {
 
             try {
                 RegisterInfo2 = patientRegister2.getRegisterBiodataUsingOldIC(tfieldICSearchRegister.getText());
-                BiodataInfo2 = trim(patientRegister2.getBiodataUsingOldIC(tfieldICSearchRegister.getText()));
-                EmploymentInfo2 = trim(patientRegister2.getEmploymentDetailUsingOldIC(tfieldICSearchRegister.getText()));
-                NOKInfo2 = trim(patientRegister2.getNokDetailUsingOldIC(tfieldICSearchRegister.getText()));
-                FamilyInfo2 = trim(patientRegister2.getFamilyDetailUsingOldIC(tfieldICSearchRegister.getText()));
-                InsuranceInfo2 = trim(patientRegister2.getInsuranceDetailUsingOldIC(tfieldICSearchRegister.getText()));
+                if (RegisterInfo2[0] != null) {
+                    BiodataInfo2 = trim(patientRegister2.getBiodataUsingNewIC(RegisterInfo2[0]));
+                    EmploymentInfo2 = trim(patientRegister2.getEmploymentDetailUsingNewIC(RegisterInfo2[0]));
+                    NOKInfo2 = trim(patientRegister2.getNokDetailUsingNewIC(RegisterInfo2[0]));
+                    FamilyInfo2 = trim(patientRegister2.getFamilyDetailUsingNewIC(RegisterInfo2[0]));
+                    InsuranceInfo2 = trim(patientRegister2.getInsuranceDetailUsingNewIC(RegisterInfo2[0]));
+                }
 
                 if (RegisterInfo2[0] == null) {
-                    JOptionPane.showMessageDialog(null, "Patient biodata is not existed in the database. Please proceed to Patient Master Index Form to fill in information !!!", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    if (isRecognizedPatient == false) {
+                        tabpanel.setSelectedIndex(0);
+                        return;
+                    }
+                    
+                    JOptionPane.showMessageDialog(null, "Patient biodata is not existed in the database.\nPlease proceed to Patient Master Index Form to fill in information !!!", "Error", JOptionPane.INFORMATION_MESSAGE);
                     //Set tab to Registration
 
                     String ic = tfieldICSearchRegister.getText();
                     clearForm();
-                    generateAllAutogenerateNo(ic);
+                    generateAllAutogenerateNo(numCheckDigit);
 
                     tabpanel.setSelectedIndex(1);
                     tfieldOldICNoPatient.setText(tfieldICSearchRegister.getText());
                     button_new();
+                    
+                    // id no
+                    for (int i = 0; i <= 26; i++) {
+                        S.oln(i + " shikin:" + RegisterInfo2[i]);
+                    }
+
+                    // date of birth
+                    try {
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(RegisterInfo2[18]);
+                        tfieldDOBPatient.setDate(date1);
+                    } catch (Exception e) {
+                        System.out.println("Date Parse Error: " + e.getMessage());
+                    }
+
+                    // name
+                    tfieldPatientName.setText(RegisterInfo2[17]);
+
+                    // id type
+                    if (RegisterInfo2[12].equals("0")) {
+                        Func.cmbSelectInput(cboxIdTypePatient, "Staff No.");
+                    } else {
+                        Func.cmbSelectInput(cboxIdTypePatient, "Matric No.");
+                    }
+                    if (RegisterInfo2[11].equals("F")) {
+                        Func.cmbSelectInput(cboxIdTypePatient, "Foreigner");
+                    }
+                    if (RegisterInfo2[11].equals("F")) {
+                        tfieldIdNoPatient.setText(RegisterInfo2[9]);
+                    } else {
+                        tfieldIdNoPatient.setText(RegisterInfo2[10]);
+                    }
+                    // date of birth
+                    tfieldDOBPatient.setDate(null);
+                    // gender
+                    if (RegisterInfo2[19].equals("M") || RegisterInfo2[19].equals("L")) {
+                        Func.cmbSelectInput(cboxSexPatient, "Male");
+                    } else if (RegisterInfo2[19].equals("F") || RegisterInfo2[19].equals("P")) {
+                        Func.cmbSelectInput(cboxSexPatient, "Female");
+                    }
+                    // race
+                    Func.cmbSelectInput(cboxRacePatient, RegisterInfo2[20]);
+                    // nationality
+                    Func.cmbSelectInput(cboxNationalityPatient, RegisterInfo2[21]);
+                    // home address
+                    tfieldHomeAddress.setText(RegisterInfo2[22]);
+                    // home address 2
+                    tfieldPostalAddressPatient.setText(RegisterInfo2[23]);
+                    // postcode
+                    Func.cmbSelectInput(cboxPostcode, RegisterInfo2[24]);
+                    Func.cmbSelectInput(cboxPostalPostcode, RegisterInfo2[24]);
+                    // country
+                    Func.cmbSelectInput(cboxCountryPatient, RegisterInfo2[25]);
+                    Func.cmbSelectInput(cboxPostalCountryPatient, RegisterInfo2[25]);
+                    // phone no
+                    tfieldHomephonePatient.setText(RegisterInfo2[26]);
+                    tfieldHandphoneNoPatient.setText(RegisterInfo2[26]);
+                    
                 } else {
                     button_old();
                     setsaveStatus(false);
@@ -6328,13 +6426,21 @@ public class Registration extends javax.swing.JFrame {
             Patient patientRegister3 = new Patient(this);
             try {
                 RegisterInfo3 = patientRegister3.getRegisterBiodataUsingID(tfieldIDSearchRegister.getText(), cboxIdTypeRegister.getSelectedItem().toString());
-                BiodataInfo3 = trim(patientRegister3.getBiodataUsingID(tfieldIDSearchRegister.getText(), cboxIdTypeRegister.getSelectedItem().toString()));
-                EmploymentInfo3 = trim(patientRegister3.getEmploymentDetailUsingID(tfieldIDSearchRegister.getText(), cboxIdTypeRegister.getSelectedItem().toString()));
-                NOKInfo3 = trim(patientRegister3.getNokDetailUsingID(tfieldIDSearchRegister.getText(), cboxIdTypeRegister.getSelectedItem().toString()));
-                FamilyInfo3 = trim(patientRegister3.getFamilyDetailUsingID(tfieldIDSearchRegister.getText(), cboxIdTypeRegister.getSelectedItem().toString()));
-                InsuranceInfo3 = trim(patientRegister3.getInsuranceDetailUsingID(tfieldIDSearchRegister.getText(), cboxIdTypeRegister.getSelectedItem().toString()));
+                if (RegisterInfo3[0] != null) {
+                    BiodataInfo3 = trim(patientRegister3.getBiodataUsingNewIC(RegisterInfo3[0]));
+                    EmploymentInfo3 = trim(patientRegister3.getEmploymentDetailUsingNewIC(RegisterInfo3[0]));
+                    NOKInfo3 = trim(patientRegister3.getNokDetailUsingNewIC(RegisterInfo3[0]));
+                    FamilyInfo3 = trim(patientRegister3.getFamilyDetailUsingNewIC(RegisterInfo3[0]));
+                    InsuranceInfo3 = trim(patientRegister3.getInsuranceDetailUsingNewIC(RegisterInfo3[0]));
+                }
 
                 if (RegisterInfo3[0] == null) {
+                    
+                    if (isRecognizedPatient == false) {
+                        tabpanel.setSelectedIndex(0);
+                        return;
+                    }
+                    
                     String idx = tfieldIDSearchRegister.getText();
                     String typex = cboxIdTypeRegister.getSelectedItem().toString();
                     
@@ -6342,13 +6448,71 @@ public class Registration extends javax.swing.JFrame {
                     //Set tab to Registration
                     
                     clearForm();
-                    generateAllAutogenerateNo(idx);
+                    generateAllAutogenerateNo(numCheckDigit);
 
                     tabpanel.setSelectedIndex(1);
                     tfieldIdNoPatient.setText(idx);
                     Func.cmbSelectInput(cboxIdTypePatient, typex);
                     
                     button_new();
+                    
+                    // id no
+                    for (int i = 0; i <= 26; i++) {
+                        S.oln(i+" shikin:"+RegisterInfo3[i]);
+                    }
+                    
+                    // date of birth
+                    try {
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(RegisterInfo3[18]);
+                        tfieldDOBPatient.setDate(date1);
+                    } catch (Exception e) {
+                        System.out.println("Date Parse Error: "+e.getMessage());
+                    }
+                    
+                    // name
+                    tfieldPatientName.setText(RegisterInfo3[17]);
+                    
+                    // id type
+                    if (RegisterInfo3[12].equals("0")) {
+                        Func.cmbSelectInput(cboxIdTypePatient, "Staff No.");
+                    } else {
+                        Func.cmbSelectInput(cboxIdTypePatient, "Matric No.");
+                    }
+                    if (RegisterInfo3[11].equals("F")) {
+                        Func.cmbSelectInput(cboxIdTypePatient, "Foreigner");
+                    }
+                    if (RegisterInfo3[11].equals("F")) {
+                        tfieldIdNoPatient.setText(RegisterInfo3[9]);
+                    } else {
+                        tfieldIdNoPatient.setText(RegisterInfo3[10]);
+                        tfieldNewICNoPatient.setText(RegisterInfo3[9]);
+                    }
+                    // date of birth
+                    tfieldDOBPatient.setDate(null);
+                    // gender
+                    if (RegisterInfo3[19].equals("M") || RegisterInfo3[19].equals("L")) {
+                        Func.cmbSelectInput(cboxSexPatient, "Male");
+                    } else if (RegisterInfo3[19].equals("F") || RegisterInfo3[19].equals("P")) {
+                        Func.cmbSelectInput(cboxSexPatient, "Female");
+                    }
+                    // race
+                    Func.cmbSelectInput(cboxRacePatient, RegisterInfo3[20]);
+                    // nationality
+                    Func.cmbSelectInput(cboxNationalityPatient, RegisterInfo3[21]);
+                    // home address
+                    tfieldHomeAddress.setText(RegisterInfo3[22]+", "+RegisterInfo3[20]+", "+RegisterInfo3[21]);
+                    // home address 2
+                    tfieldPostalAddressPatient.setText(RegisterInfo3[23]);
+                    // postcode
+                    Func.cmbSelectInput(cboxPostcode, RegisterInfo3[24]);
+                    Func.cmbSelectInput(cboxPostalPostcode, RegisterInfo3[24]);
+                    // country
+                    Func.cmbSelectInput(cboxCountryPatient, RegisterInfo3[25]);
+                    Func.cmbSelectInput(cboxPostalCountryPatient, RegisterInfo3[25]);
+                    // phone no
+                    tfieldHomephonePatient.setText(RegisterInfo3[26]);
+                    tfieldHandphoneNoPatient.setText(RegisterInfo3[26]);
+                    
                 } else {
                     button_old();
                     setsaveStatus(false);
@@ -6895,7 +7059,7 @@ public class Registration extends javax.swing.JFrame {
         Patient appointment = new Patient(this);
 
         try {
-            AppointmentInfo = appointment.getAppointmentBiodata(selectedAppointment);
+            AppointmentInfo = appointment.getAppointmentBiodata(selectedAppointment, "");
 
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
@@ -6921,8 +7085,8 @@ public class Registration extends javax.swing.JFrame {
             tfieldPaymentAmount.setText("1.00");
         }
         if (tfieldIdNoRegistration.getText() != null && (tfieldIdNoRegistration.getText().length() != 1)) {
-            tfieldChargeRate.setText("5.00");
-            tfieldPaymentAmount.setText("5.00");
+            tfieldChargeRate.setText("1.00");
+            tfieldPaymentAmount.setText("1.00");
         }
 
         try {

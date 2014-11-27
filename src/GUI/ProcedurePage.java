@@ -7,6 +7,8 @@
 package GUI;
 
 import DBConnection.DBConnection;
+import Helper.J;
+import api.Patient;
 import java.util.ArrayList;
 
 /**
@@ -15,8 +17,11 @@ import java.util.ArrayList;
  */
 public class ProcedurePage extends javax.swing.JFrame {
 
-    private final static int NUM_COLS = 6;
-    private final static int NUM_ROWS = 50;
+    private final static int NUM_COLS_MASTER = 6;
+    private final static int NUM_ROWS_MASTER = 50;
+    
+    private final static int NUM_COLS_DETAIL = 4;
+    private final static int NUM_ROWS_DETAIL = 50;
     
     /**
      * Creates new form ProcedurePage
@@ -30,10 +35,29 @@ public class ProcedurePage extends javax.swing.JFrame {
     
     protected void clearProceduresTable() {
         try {
-            for (int i = 0; i < NUM_ROWS; i++) {
-                for (int j = 0; j < NUM_COLS; j++) {
+            for (int i = 0; i < NUM_ROWS_MASTER; i++) {
+                for (int j = 0; j < NUM_COLS_MASTER; j++) {
                     tbl_procedures.getModel().setValueAt("", i, j);
                 }
+            }
+            for (int i = 0; i < NUM_ROWS_DETAIL; i++) {
+                for (int j = 0; j < NUM_COLS_DETAIL-1; j++) {
+                    tbl_procedure_detail.getModel().setValueAt("", i, j);
+                }
+                tbl_procedure_detail.getModel().setValueAt(false, i, NUM_COLS_DETAIL-1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    protected void clearProcedureDetailTable() {
+        try {
+            for (int i = 0; i < NUM_ROWS_DETAIL; i++) {
+                for (int j = 0; j < NUM_COLS_DETAIL-1; j++) {
+                    tbl_procedure_detail.getModel().setValueAt("", i, j);
+                }
+                tbl_procedure_detail.getModel().setValueAt(false, i, NUM_COLS_DETAIL-1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +68,7 @@ public class ProcedurePage extends javax.swing.JFrame {
         clearProceduresTable();
         try {
             ArrayList<ArrayList<String>> procedures = DBConnection.getImpl().getProcedures();
-            for (int i = 0; i < procedures.size() && i < NUM_ROWS; i++) {
+            for (int i = 0; i < procedures.size() && i < NUM_ROWS_MASTER; i++) {
                 for (int j = 0; j < procedures.get(i).size(); j++) {
                     tbl_procedures.getModel().setValueAt(procedures.get(i).get(j), i, j);
                 }
@@ -63,13 +87,14 @@ public class ProcedurePage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txt_pStatus1 = new javax.swing.JTextField();
+        txt_pStatus3 = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        tabPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -77,22 +102,62 @@ public class ProcedurePage extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel6 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        lbl_pName = new javax.swing.JLabel();
+        txt_pName = new javax.swing.JTextField();
+        lbl_pPmiNo = new javax.swing.JLabel();
+        txt_pPmiNo = new javax.swing.JTextField();
+        lbl_pIcNo = new javax.swing.JLabel();
+        txt_pIcNo = new javax.swing.JTextField();
+        lbl_pRace = new javax.swing.JLabel();
+        txt_pRace = new javax.swing.JTextField();
+        lbl_pSex = new javax.swing.JLabel();
+        lbl_pBdate = new javax.swing.JLabel();
+        lbl_pStatus = new javax.swing.JLabel();
+        txt_pStatus = new javax.swing.JTextField();
+        lbl_pBloodSex = new javax.swing.JLabel();
+        txt_pBloodSex = new javax.swing.JTextField();
+        lbl_pBloodSex1 = new javax.swing.JLabel();
+        txt_g6pd = new javax.swing.JTextField();
+        txt_pBirthDate = new javax.swing.JTextField();
+        txt_pGender = new javax.swing.JTextField();
+        pnl_procedures = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lbl_order_date = new javax.swing.JLabel();
+        lbl_order_no = new javax.swing.JLabel();
+        lbl_location_code = new javax.swing.JLabel();
+        lbl_arrival_date = new javax.swing.JLabel();
+        lbl_doctor_name = new javax.swing.JLabel();
+        lbl_doctor_id = new javax.swing.JLabel();
+        pnl_procedures1 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbl_procedure_detail = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel7 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+
+        txt_pStatus1.setEditable(false);
+        txt_pStatus1.setBackground(new java.awt.Color(204, 204, 255));
+        txt_pStatus1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        txt_pStatus1.setBorder(null);
+
+        txt_pStatus3.setEditable(false);
+        txt_pStatus3.setBackground(new java.awt.Color(204, 204, 255));
+        txt_pStatus3.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        txt_pStatus3.setBorder(null);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Procedure Order System");
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Search Patient"));
-
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jButton2.setText("Refresh");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -107,18 +172,15 @@ public class ProcedurePage extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(0, 77, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)))
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Order List"));
@@ -177,7 +239,7 @@ public class ProcedurePage extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "PMI No.", "Name", "Order Date", "Location Code", "Arrival Date", "Doctor's Name"
+                "Order No.", "PMI No.", "Order Date", "Location Code", "Arrival Date", "Doctor ID"
             }
         ) {
             Class[] types = new Class [] {
@@ -193,6 +255,11 @@ public class ProcedurePage extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbl_procedures.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_proceduresMouseClicked(evt);
             }
         });
         jScrollPane4.setViewportView(tbl_procedures);
@@ -237,17 +304,367 @@ public class ProcedurePage extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jPanel3);
 
-        jTabbedPane2.addTab("Procedure Order List", jScrollPane1);
+        tabPane1.addTab("Procedure Order List", jScrollPane1);
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Patient Information"));
+
+        lbl_pName.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lbl_pName.setText("Name:");
+
+        txt_pName.setEditable(false);
+        txt_pName.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        txt_pName.setBorder(null);
+        txt_pName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_pNameActionPerformed(evt);
+            }
+        });
+
+        lbl_pPmiNo.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lbl_pPmiNo.setText("PMI No:");
+
+        txt_pPmiNo.setEditable(false);
+        txt_pPmiNo.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        txt_pPmiNo.setBorder(null);
+
+        lbl_pIcNo.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lbl_pIcNo.setText("New IC No:");
+
+        txt_pIcNo.setEditable(false);
+        txt_pIcNo.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        txt_pIcNo.setBorder(null);
+
+        lbl_pRace.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lbl_pRace.setText("Race:");
+
+        txt_pRace.setEditable(false);
+        txt_pRace.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        txt_pRace.setBorder(null);
+
+        lbl_pSex.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lbl_pSex.setText("Gender:");
+
+        lbl_pBdate.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lbl_pBdate.setText("Birth Date:");
+
+        lbl_pStatus.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lbl_pStatus.setText("Marital Status:");
+
+        txt_pStatus.setEditable(false);
+        txt_pStatus.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        txt_pStatus.setBorder(null);
+
+        lbl_pBloodSex.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lbl_pBloodSex.setText("Blood Type:");
+
+        txt_pBloodSex.setEditable(false);
+        txt_pBloodSex.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        txt_pBloodSex.setBorder(null);
+
+        lbl_pBloodSex1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lbl_pBloodSex1.setText("G6PD Status:");
+
+        txt_g6pd.setEditable(false);
+        txt_g6pd.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        txt_g6pd.setBorder(null);
+
+        txt_pBirthDate.setEditable(false);
+        txt_pBirthDate.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        txt_pBirthDate.setBorder(null);
+
+        txt_pGender.setEditable(false);
+        txt_pGender.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        txt_pGender.setBorder(null);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_pName)
+                            .addComponent(lbl_pPmiNo))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_pPmiNo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_pName, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_pRace)
+                            .addComponent(lbl_pIcNo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_pIcNo)
+                            .addComponent(txt_pRace, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_pSex)
+                            .addComponent(lbl_pBdate))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_pBirthDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_pGender, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(lbl_pStatus)
+                        .addGap(1, 1, 1)
+                        .addComponent(txt_pStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(lbl_pBloodSex)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_pBloodSex, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_pBloodSex1)
+                .addGap(26, 26, 26)
+                .addComponent(txt_g6pd, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(82, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_pName)
+                            .addComponent(txt_pName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_pPmiNo)
+                            .addComponent(txt_pPmiNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_pRace)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_pIcNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_pIcNo)
+                                    .addComponent(lbl_pStatus)
+                                    .addComponent(txt_pStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_pRace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_pBloodSex)
+                                    .addComponent(txt_pBloodSex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_pSex)
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lbl_pBloodSex1)
+                                .addComponent(txt_g6pd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_pGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_pBdate)
+                            .addComponent(txt_pBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnl_procedures.setBorder(javax.swing.BorderFactory.createTitledBorder("Procedures"));
+
+        jLabel1.setText("Order No.:");
+
+        jLabel2.setText("Order Date:");
+
+        jLabel3.setText("Location Code:");
+
+        jLabel4.setText("Arrival Date:");
+
+        jLabel5.setText("Doctor's ID:");
+
+        jLabel6.setText("Doctor's Name:");
+
+        lbl_order_date.setText("-");
+
+        lbl_order_no.setText("-");
+
+        lbl_location_code.setText("-");
+
+        lbl_arrival_date.setText("-");
+
+        lbl_doctor_name.setText("-");
+
+        lbl_doctor_id.setText("-");
+
+        tbl_procedure_detail.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Procedure Code", "Procedure Name", "Comments", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(tbl_procedure_detail);
+
+        javax.swing.GroupLayout pnl_procedures1Layout = new javax.swing.GroupLayout(pnl_procedures1);
+        pnl_procedures1.setLayout(pnl_procedures1Layout);
+        pnl_procedures1Layout.setHorizontalGroup(
+            pnl_procedures1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5)
+        );
+        pnl_procedures1Layout.setVerticalGroup(
+            pnl_procedures1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+        );
+
+        jButton3.setText("Submit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnl_proceduresLayout = new javax.swing.GroupLayout(pnl_procedures);
+        pnl_procedures.setLayout(pnl_proceduresLayout);
+        pnl_proceduresLayout.setHorizontalGroup(
+            pnl_proceduresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_proceduresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_proceduresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnl_procedures1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnl_proceduresLayout.createSequentialGroup()
+                        .addGroup(pnl_proceduresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_proceduresLayout.createSequentialGroup()
+                                .addGroup(pnl_proceduresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnl_proceduresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbl_order_date, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_order_no, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnl_proceduresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnl_proceduresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbl_location_code, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbl_arrival_date, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnl_proceduresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnl_proceduresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbl_doctor_name, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                                    .addComponent(lbl_doctor_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        pnl_proceduresLayout.setVerticalGroup(
+            pnl_proceduresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_proceduresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_proceduresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(lbl_order_no)
+                    .addComponent(lbl_location_code)
+                    .addComponent(lbl_doctor_id))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_proceduresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(lbl_order_date)
+                    .addComponent(lbl_arrival_date)
+                    .addComponent(lbl_doctor_name))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnl_procedures1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 938, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_procedures, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 549, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnl_procedures, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(jPanel6);
@@ -260,10 +677,10 @@ public class ProcedurePage extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Procedure Order Process", jPanel4);
+        tabPane1.addTab("Procedure Order Process", jPanel4);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -286,20 +703,20 @@ public class ProcedurePage extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Order Procedure", jPanel5);
+        tabPane1.addTab("Order Procedure", jPanel5);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 925, Short.MAX_VALUE)
+            .addComponent(tabPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 925, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+            .addComponent(tabPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Procedure", jPanel1);
@@ -312,10 +729,17 @@ public class ProcedurePage extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
+            .addGap(0, 528, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Inventory", jPanel2);
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -323,13 +747,19 @@ public class ProcedurePage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
@@ -348,6 +778,76 @@ public class ProcedurePage extends javax.swing.JFrame {
         // TODO add your handling code here:
         getData();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txt_pNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_pNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_pNameActionPerformed
+
+    private void tbl_proceduresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_proceduresMouseClicked
+        // TODO add your handling code here:
+        int index = tbl_procedures.getSelectedRow();
+        String orderNo = (String) tbl_procedures.getValueAt(index, 0);
+        String pmiNo = (String) tbl_procedures.getValueAt(index, 1);
+        String orderDate = (String) tbl_procedures.getValueAt(index, 2);
+        String locationCode = (String) tbl_procedures.getValueAt(index, 3);
+        String arrivalDate = (String) tbl_procedures.getValueAt(index, 4);
+        String doctorId = (String) tbl_procedures.getValueAt(index, 5);
+        
+        try {
+            Patient appointment = new Patient(null);
+            String[] appointmentInfo = appointment.getAppointmentBiodata(pmiNo, "");
+            
+            for (int i = 0; i < appointmentInfo.length; i++) {
+                System.out.println("i"+i+":"+appointmentInfo[i]);
+            }
+            
+            txt_pPmiNo.setText(appointmentInfo[0]);
+            txt_pName.setText(appointmentInfo[2]);
+            txt_pIcNo.setText(appointmentInfo[4]);
+            txt_pRace.setText(appointmentInfo[13]);
+            txt_pGender.setText(appointmentInfo[11]);
+            txt_pBirthDate.setText(appointmentInfo[10]);
+            txt_pBloodSex.setText(appointmentInfo[16]);
+            txt_pStatus.setText(appointmentInfo[12]);
+            
+            lbl_order_no.setText(orderNo);
+            lbl_order_date.setText(orderDate);
+            lbl_location_code.setText(locationCode);
+            lbl_arrival_date.setText(arrivalDate);
+            lbl_doctor_id.setText(doctorId);
+            
+            clearProcedureDetailTable();
+            ArrayList<ArrayList<String>> getProcedureDetail = DBConnection.getImpl().getProcedureDetail(orderNo);
+            for (int i = 0; i < getProcedureDetail.size() && i < NUM_ROWS_DETAIL; i++) {
+                tbl_procedure_detail.setValueAt(getProcedureDetail.get(i).get(1), i, 0);
+                tbl_procedure_detail.setValueAt(getProcedureDetail.get(i).get(2), i, 1);
+                tbl_procedure_detail.setValueAt(getProcedureDetail.get(i).get(3), i, 2);
+                boolean status = (getProcedureDetail.get(i).get(4).equals("1")) ? (false) : (true);
+                tbl_procedure_detail.setValueAt(status, i, 3);
+            }
+            
+            tabPane1.setSelectedIndex(1);
+        } catch (Exception ex) {
+            J.o("Error", "Error: "+ex.getMessage(), 0);
+            tabPane1.setSelectedIndex(0);
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_tbl_proceduresMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String orderNo = lbl_order_no.getText();
+        for (int i = 0; i < NUM_ROWS_DETAIL; i++) {
+            if (!tbl_procedure_detail.getModel().getValueAt(i, 0).equals("")
+                    && Boolean.parseBoolean(tbl_procedure_detail.getModel().getValueAt(i, 3).toString()) == true) {
+                String procedure_cd = (String) tbl_procedure_detail.getValueAt(i, 0);
+                String procedure_name = (String) tbl_procedure_detail.getValueAt(i, 1);
+                String comments = (String) tbl_procedure_detail.getValueAt(i, 2);
+                boolean status = (Boolean) tbl_procedure_detail.getValueAt(i, 3);
+                System.out.println(procedure_cd+"|"+procedure_name+"|"+comments+"|"+status);
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,7 +887,15 @@ public class ProcedurePage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -400,8 +908,38 @@ public class ProcedurePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    protected static javax.swing.JLabel lbl_arrival_date;
+    protected static javax.swing.JLabel lbl_doctor_id;
+    protected static javax.swing.JLabel lbl_doctor_name;
+    protected static javax.swing.JLabel lbl_location_code;
+    protected static javax.swing.JLabel lbl_order_date;
+    protected static javax.swing.JLabel lbl_order_no;
+    private javax.swing.JLabel lbl_pBdate;
+    private javax.swing.JLabel lbl_pBloodSex;
+    private javax.swing.JLabel lbl_pBloodSex1;
+    private javax.swing.JLabel lbl_pIcNo;
+    private javax.swing.JLabel lbl_pName;
+    private javax.swing.JLabel lbl_pPmiNo;
+    private javax.swing.JLabel lbl_pRace;
+    private javax.swing.JLabel lbl_pSex;
+    private javax.swing.JLabel lbl_pStatus;
+    protected static javax.swing.JPanel pnl_procedures;
+    protected static javax.swing.JPanel pnl_procedures1;
+    protected static javax.swing.JTabbedPane tabPane1;
+    protected static javax.swing.JTable tbl_procedure_detail;
     protected static javax.swing.JTable tbl_procedures;
+    public static javax.swing.JTextField txt_g6pd;
+    public static javax.swing.JTextField txt_pBirthDate;
+    public static javax.swing.JTextField txt_pBloodSex;
+    public static javax.swing.JTextField txt_pGender;
+    public static javax.swing.JTextField txt_pIcNo;
+    public static javax.swing.JTextField txt_pName;
+    public static javax.swing.JTextField txt_pPmiNo;
+    public static javax.swing.JTextField txt_pRace;
+    public static javax.swing.JTextField txt_pStatus;
+    public javax.swing.JTextField txt_pStatus1;
+    public javax.swing.JTextField txt_pStatus3;
     // End of variables declaration//GEN-END:variables
 }

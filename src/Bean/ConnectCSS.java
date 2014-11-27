@@ -26,6 +26,8 @@ public class ConnectCSS {
     
     private static int portRMI;
     
+    private static String statusCallingSystem;
+    
     public static void online() {
         try {
             ip = getIpCall()[2];
@@ -154,7 +156,7 @@ public class ConnectCSS {
     }
     
     public static String[] getIpCall() {
-        String data[] = new String[3];
+        String data[] = new String[4];
         try {
             // Open the file that is the first 
             // command line parameter
@@ -180,6 +182,10 @@ public class ConnectCSS {
                 if (pecah[0].equals("ipserver")) {
                     data[2] = pecah[1];
                 }
+                // Get Calling System Status
+                if (pecah[0].equals("callsys")) {
+                    data[3] = pecah[1];
+                }
             }
             //Close the input stream
             in.close();
@@ -192,5 +198,19 @@ public class ConnectCSS {
     public static int getPortRMI() {
         portRMI = 1099;
         return portRMI;
+    }
+
+    public static String getStatusCallingSystem() {
+        try {
+            statusCallingSystem = getIpCall()[3];
+        } catch (Exception e) {
+            statusCallingSystem = "off";
+            e.printStackTrace();
+        }
+        return statusCallingSystem;
+    }
+
+    public static void setStatusCallingSystem(String aStatusCallingSystem) {
+        statusCallingSystem = aStatusCallingSystem;
     }
 }

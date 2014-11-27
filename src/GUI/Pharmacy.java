@@ -5663,7 +5663,7 @@ public void setSelectedAppointment(String selectedAppointment, String selectedTi
 
         try {
             //
-            AppointmentInfo = appointment.getAppointmentBiodata(selectedAppointment);
+            AppointmentInfo = appointment.getAppointmentBiodata(selectedAppointment, selectedTime);
             //Friza getEHR
             
         } catch (Exception ex) {
@@ -6070,7 +6070,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
         }
         
         try {
-            AppointmentInfo = appointment.getAppointmentBiodata(pmiNo);
+            AppointmentInfo = appointment.getAppointmentBiodata(pmiNo, "");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
