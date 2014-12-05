@@ -3878,6 +3878,11 @@ public class Pharmacy extends javax.swing.JFrame{
         });
 
         btnMonthly.setText("Monthly");
+        btnMonthly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonthlyActionPerformed(evt);
+            }
+        });
 
         btnYearly.setText("Yearly");
         btnYearly.addActionListener(new java.awt.event.ActionListener() {
@@ -8315,18 +8320,55 @@ public void toExcel(JTable tbl_mdc, File file){
     private void txt_search_pol1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_search_pol1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_search_pol1ActionPerformed
-
+    
+    //get list of dispensed drug -- Hariz 20141203
     private void btnDailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailyActionPerformed
         // TODO add your handling code here:
-        // select * from pis_dispense_master where order_date < CURDATE()       
+        String strSql = "Select DISTINCT(DRUG_ITEM_CODE), SUM(DISPENSED_QTY) as QTY from servercis.pis_dispense_detail PDS, servercis.pis_dispense_master PDM " +
+                        "where PDM.order_no = PDS.order_no and DATE(PDM.DISPENSED_DATE) = DATE(NOW())" +
+                        "group by PDS.Drug_item_code";
+        
+        fnCreateXLS(strSql, "Daily_Dispensed_Drug.xls");
+             
     }//GEN-LAST:event_btnDailyActionPerformed
 
     private void btnYearlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYearlyActionPerformed
         // TODO add your handling code here:
-        String strSql = "Select DISTINCT(DRUG_ITEM_CODE), SUM(DISPENSED_QTY) from servercis.pis_dispense_detail PDS, servercis.pis_dispense_master PDM " +
+        String strSql = "Select DISTINCT(DRUG_ITEM_CODE), SUM(DISPENSED_QTY) as QTY from servercis.pis_dispense_detail PDS, servercis.pis_dispense_master PDM " +
                         "where PDM.order_no = PDS.order_no and PDM.dispensed_date = YEAR(CURDATE())" +
                         "group by PDS.Drug_item_code";
+       
+        fnCreateXLS(strSql,"Yearly_Dispensed_Drug.xls");
+        
+    }//GEN-LAST:event_btnYearlyActionPerformed
+
+    private void btnMonthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyActionPerformed
+        // TODO add your handling code here:
+        String strSql = "Select DISTINCT(DRUG_ITEM_CODE), SUM(DISPENSED_QTY) as QTY from servercis.pis_dispense_detail PDS, servercis.pis_dispense_master PDM " +
+                        "where PDM.order_no = PDS.order_no and MONTH(DISPENSED_DATE) = MONTH(CURDATE()) and YEAR(DISPENSED_DATE) = YEAR(CURDATE())" +
+                        "group by PDS.Drug_item_code";
+        
+        fnCreateXLS(strSql,"Monthly_Dispensed_Drug.xls");
+    }//GEN-LAST:event_btnMonthlyActionPerformed
+   
+    void fnCreateXLS(String strSQL , String fName)
+    {
+         JTable jtblYearly = new JTable();
+        TableModel tm = null;
+        String prepStmtn[] = { };
+        try
+        {
+            tm = DBConnection.getImpl().getDispensedDrug(strSQL, prepStmtn);  
+            jtblYearly.setModel(tm);
+            System.out.println("Yeay!");
+           
+        }catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }     
+        
         JFileChooser jfc = new JFileChooser();
+        jfc.setSelectedFile(new File(fName));
         int option = jfc.showSaveDialog(Pharmacy.this);
         if(option == JFileChooser.APPROVE_OPTION)
         {
@@ -8349,11 +8391,11 @@ public void toExcel(JTable tbl_mdc, File file){
             {
                 fileToSave  = filePath + "\\" + fileName + ".xls";
             }
+            toExcel(jtblYearly, new File(fileToSave));
         }
-        
-        
-    }//GEN-LAST:event_btnYearlyActionPerformed
-   
+    }
+    //get list of dispensed drug -- Hariz 20141203 END
+    
     //Online Indicator
     public static void showOnline() {
         lblStatus.setText("Online");
