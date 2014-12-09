@@ -89,7 +89,8 @@ public class MainPage extends javax.swing.JFrame {
     private void setRole() {
         hideAllBtn();
         try {
-            String role = Session.getData_user().get(19);
+            String role = Session.getData_user().get(20); // role code
+            System.out.println("role:|"+role+"|");
             if (role.equals("SYSTEM ADMINISTRATOR")) {
 //                btnPAS.setEnabled(true);
 //                btn_CodeMaintenance.setEnabled(true);
