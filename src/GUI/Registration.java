@@ -5912,10 +5912,13 @@ public class Registration extends javax.swing.JFrame {
                     // date of birth
                     tfieldDOBPatient.setDate(null);
                     // gender
-                    if (RegisterInfo1[19].equals("M") || RegisterInfo1[19].equals("L")) {
-                        Func.cmbSelectInput(cboxSexPatient, "Male");
-                    } else if (RegisterInfo1[19].equals("F") || RegisterInfo1[19].equals("P")) {
-                        Func.cmbSelectInput(cboxSexPatient, "Female");
+                    try {
+                        if (RegisterInfo1[19].equals("M") || RegisterInfo1[19].equals("L")) {
+                            Func.cmbSelectInput(cboxSexPatient, "Male");
+                        } else if (RegisterInfo1[19].equals("F") || RegisterInfo1[19].equals("P")) {
+                            Func.cmbSelectInput(cboxSexPatient, "Female");
+                        }
+                    } catch (Exception e) {
                     }
                     // race
                     Func.cmbSelectInput(cboxRacePatient, RegisterInfo1[20]);
