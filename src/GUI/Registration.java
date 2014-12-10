@@ -5611,8 +5611,8 @@ public class Registration extends javax.swing.JFrame {
             Patient patientRegister = new Patient(this);
 
             try {
-                RegisterInfo = patientRegister.getBiodata(tfieldPMISearchRegister.getText());
-                if (RegisterInfo[0] != null) {
+                RegisterInfo = trim(patientRegister.getBiodata(tfieldPMISearchRegister.getText()));
+                if (RegisterInfo[0] != "-") {
                     BiodataInfo = trim(patientRegister.getBiodata(tfieldPMISearchRegister.getText()));
                     EmploymentInfo = trim(patientRegister.getEmploymentDetailUsingNewIC(tfieldPMISearchRegister.getText()));
                     NOKInfo = trim(patientRegister.getNokDetailUsingNewIC(tfieldPMISearchRegister.getText()));
@@ -5620,7 +5620,7 @@ public class Registration extends javax.swing.JFrame {
                     InsuranceInfo = trim(patientRegister.getInsuranceDetailUsingNewIC(tfieldPMISearchRegister.getText()));
                 }
 
-                if (RegisterInfo[0] == null) {
+                if (RegisterInfo[0] == "-") {
 //                    JOptionPane.showMessageDialog(null, "Patient biodata is not existed in the database.", "Error", JOptionPane.INFORMATION_MESSAGE);
                     
                     J.o("Patient not exist", "Patient is not existed!", 0);
@@ -5838,8 +5838,8 @@ public class Registration extends javax.swing.JFrame {
             Patient patientRegister1 = new Patient(this);
 
             try {
-                RegisterInfo1 = patientRegister1.getRegisterBiodataUsingNewIC(tfieldICSearchRegister.getText());
-                if (RegisterInfo1[4] != null) {
+                RegisterInfo1 = trim(patientRegister1.getRegisterBiodataUsingNewIC(tfieldICSearchRegister.getText()));
+                if (RegisterInfo1[4] != "-") {
                     BiodataInfo1 = trim(patientRegister1.getBiodataUsingNewIC(RegisterInfo1[0]));
                     EmploymentInfo1 = trim(patientRegister1.getEmploymentDetailUsingNewIC(RegisterInfo1[0]));
                     NOKInfo1 = trim(patientRegister1.getNokDetailUsingNewIC(RegisterInfo1[0]));
@@ -5856,7 +5856,7 @@ public class Registration extends javax.swing.JFrame {
                     J.o("", "error dowh", 0);
                 }
                 
-                if (RegisterInfo1[4] == null) {
+                if (RegisterInfo1[4] == "-") {
                     
                     if (isRecognizedPatient == false) {
                         tabpanel.setSelectedIndex(0);
@@ -5912,13 +5912,10 @@ public class Registration extends javax.swing.JFrame {
                     // date of birth
                     tfieldDOBPatient.setDate(null);
                     // gender
-                    try {
-                        if (RegisterInfo1[19].equals("M") || RegisterInfo1[19].equals("L")) {
-                            Func.cmbSelectInput(cboxSexPatient, "Male");
-                        } else if (RegisterInfo1[19].equals("F") || RegisterInfo1[19].equals("P")) {
-                            Func.cmbSelectInput(cboxSexPatient, "Female");
-                        }
-                    } catch (Exception e) {
+                    if (RegisterInfo1[19].equals("M") || RegisterInfo1[19].equals("L")) {
+                        Func.cmbSelectInput(cboxSexPatient, "Male");
+                    } else if (RegisterInfo1[19].equals("F") || RegisterInfo1[19].equals("P")) {
+                        Func.cmbSelectInput(cboxSexPatient, "Female");
                     }
                     // race
                     Func.cmbSelectInput(cboxRacePatient, RegisterInfo1[20]);
@@ -6157,8 +6154,8 @@ public class Registration extends javax.swing.JFrame {
             Patient patientRegister2 = new Patient(this);
 
             try {
-                RegisterInfo2 = patientRegister2.getRegisterBiodataUsingOldIC(tfieldICSearchRegister.getText());
-                if (RegisterInfo2[0] != null) {
+                RegisterInfo2 = trim(patientRegister2.getRegisterBiodataUsingOldIC(tfieldICSearchRegister.getText()));
+                if (RegisterInfo2[0] != "-") {
                     BiodataInfo2 = trim(patientRegister2.getBiodataUsingNewIC(RegisterInfo2[0]));
                     EmploymentInfo2 = trim(patientRegister2.getEmploymentDetailUsingNewIC(RegisterInfo2[0]));
                     NOKInfo2 = trim(patientRegister2.getNokDetailUsingNewIC(RegisterInfo2[0]));
@@ -6166,7 +6163,7 @@ public class Registration extends javax.swing.JFrame {
                     InsuranceInfo2 = trim(patientRegister2.getInsuranceDetailUsingNewIC(RegisterInfo2[0]));
                 }
 
-                if (RegisterInfo2[0] == null) {
+                if (RegisterInfo2[0] == "-") {
                     
                     if (isRecognizedPatient == false) {
                         tabpanel.setSelectedIndex(0);
@@ -6428,8 +6425,8 @@ public class Registration extends javax.swing.JFrame {
 
             Patient patientRegister3 = new Patient(this);
             try {
-                RegisterInfo3 = patientRegister3.getRegisterBiodataUsingID(tfieldIDSearchRegister.getText(), cboxIdTypeRegister.getSelectedItem().toString());
-                if (RegisterInfo3[0] != null) {
+                RegisterInfo3 = trim(patientRegister3.getRegisterBiodataUsingID(tfieldIDSearchRegister.getText(), cboxIdTypeRegister.getSelectedItem().toString()));
+                if (RegisterInfo3[0] != "-") {
                     BiodataInfo3 = trim(patientRegister3.getBiodataUsingNewIC(RegisterInfo3[0]));
                     EmploymentInfo3 = trim(patientRegister3.getEmploymentDetailUsingNewIC(RegisterInfo3[0]));
                     NOKInfo3 = trim(patientRegister3.getNokDetailUsingNewIC(RegisterInfo3[0]));
@@ -6437,7 +6434,7 @@ public class Registration extends javax.swing.JFrame {
                     InsuranceInfo3 = trim(patientRegister3.getInsuranceDetailUsingNewIC(RegisterInfo3[0]));
                 }
 
-                if (RegisterInfo3[0] == null) {
+                if (RegisterInfo3[0] == "-") {
                     
                     if (isRecognizedPatient == false) {
                         tabpanel.setSelectedIndex(0);
@@ -6536,68 +6533,72 @@ public class Registration extends javax.swing.JFrame {
                     tfieldChargeRate.setText("5.00");
                     tfieldPaymentAmount.setText("5.00");
 
-                    //show patient biodata on patient master index screen
-                    tfieldPMINoPMI.setText(BiodataInfo3[0]);
-                    tfieldTempPMINo.setText(BiodataInfo3[1]);
-                    tfieldPatientName.setText(BiodataInfo3[2]);
-                    // cboxTitle.setSelectedItem(BiodataInfo3[3]);
-                    cboxTitle.getModel().setSelectedItem(BiodataInfo3[3]);
-                    tfieldNewICNoPatient.setText(BiodataInfo3[4]);
-                    tfieldOldICNoPatient.setText(BiodataInfo3[5]);
-                    //cboxIdTypePatient.setSelectedItem(BiodataInfo3[6]);
-                    cboxIdTypePatient.getModel().setSelectedItem(BiodataInfo3[6]);
-                    tfieldIdNoPatient.setText(BiodataInfo3[7]);
-                    //cboxEligibilityCategoryPatient.setSelectedItem(BiodataInfo3[8]);
-                    //cboxEligibilityTypePatient.setSelectedItem(BiodataInfo3[9]);
-                    cboxEligibilityCategoryPatient.getModel().setSelectedItem(BiodataInfo3[8]);
-                    cboxEligibilityTypePatient.getModel().setSelectedItem(BiodataInfo3[9]);
-
-                    DateFormat formatterBiodata = new SimpleDateFormat("dd/MM/yyyy");
-                    Date getDOB = null;
                     try {
-                        getDOB = formatterBiodata.parse(BiodataInfo3[10]);
-                    } catch (ParseException ex) {
-                        
-                    }
-                    tfieldDOBPatient.setDate(getDOB);
+                        //show patient biodata on patient master index screen
+                        tfieldPMINoPMI.setText(BiodataInfo3[0]);
+                        tfieldTempPMINo.setText(BiodataInfo3[1]);
+                        tfieldPatientName.setText(BiodataInfo3[2]);
+                        // cboxTitle.setSelectedItem(BiodataInfo3[3]);
+                        cboxTitle.getModel().setSelectedItem(BiodataInfo3[3]);
+                        tfieldNewICNoPatient.setText(BiodataInfo3[4]);
+                        tfieldOldICNoPatient.setText(BiodataInfo3[5]);
+                        //cboxIdTypePatient.setSelectedItem(BiodataInfo3[6]);
+                        cboxIdTypePatient.getModel().setSelectedItem(BiodataInfo3[6]);
+                        tfieldIdNoPatient.setText(BiodataInfo3[7]);
+                    //cboxEligibilityCategoryPatient.setSelectedItem(BiodataInfo3[8]);
+                        //cboxEligibilityTypePatient.setSelectedItem(BiodataInfo3[9]);
+                        cboxEligibilityCategoryPatient.getModel().setSelectedItem(BiodataInfo3[8]);
+                        cboxEligibilityTypePatient.getModel().setSelectedItem(BiodataInfo3[9]);
 
-                    /*
-                     * new model
-                     */
-                    cboxSexPatient.getModel().setSelectedItem(BiodataInfo3[11]);
-                    cboxMaritalStatusPatient.getModel().setSelectedItem(BiodataInfo3[12]);
-                    cboxRacePatient.getModel().setSelectedItem(BiodataInfo3[13]);
-                    cboxNationalityPatient.getModel().setSelectedItem(BiodataInfo3[14]);
-                    cboxReligionPatient.getModel().setSelectedItem(BiodataInfo3[15]);
-                    cboxStatePatient.getModel().setSelectedItem(BiodataInfo3[25]);
-                    cboxCountryPatient.getModel().setSelectedItem(BiodataInfo3[26]);
-                    cboxPostalStatePatient.getModel().setSelectedItem(BiodataInfo3[32]);
-                    cboxPostalCountryPatient.getModel().setSelectedItem(BiodataInfo3[33]);
+                        DateFormat formatterBiodata = new SimpleDateFormat("dd/MM/yyyy");
+                        Date getDOB = null;
+                        try {
+                            getDOB = formatterBiodata.parse(BiodataInfo3[10]);
+                        } catch (ParseException ex) {
+
+                        }
+                        tfieldDOBPatient.setDate(getDOB);
+
+                        /*
+                         * new model
+                         */
+                        cboxSexPatient.getModel().setSelectedItem(BiodataInfo3[11]);
+                        cboxMaritalStatusPatient.getModel().setSelectedItem(BiodataInfo3[12]);
+                        cboxRacePatient.getModel().setSelectedItem(BiodataInfo3[13]);
+                        cboxNationalityPatient.getModel().setSelectedItem(BiodataInfo3[14]);
+                        cboxReligionPatient.getModel().setSelectedItem(BiodataInfo3[15]);
+                        cboxStatePatient.getModel().setSelectedItem(BiodataInfo3[25]);
+                        cboxCountryPatient.getModel().setSelectedItem(BiodataInfo3[26]);
+                        cboxPostalStatePatient.getModel().setSelectedItem(BiodataInfo3[32]);
+                        cboxPostalCountryPatient.getModel().setSelectedItem(BiodataInfo3[33]);
 
 //                        cboxSexPatient.setSelectedItem(BiodataInfo3[11]);
 //                        cboxMaritalStatusPatient.setSelectedItem(BiodataInfo3[12]);
 //                        cboxRacePatient.setSelectedItem(BiodataInfo3[13]);
 //                        cboxNationalityPatient.setSelectedItem(BiodataInfo3[14]);
 //                        cboxReligionPatient.setSelectedItem(BiodataInfo3[15]);
-                    cboxBloodTypePatient.setSelectedItem(BiodataInfo3[16]);
-                    cboxBloodRhesusPatient.setSelectedItem(BiodataInfo3[17]);
-                    cboxAllergyPatient.setSelectedItem(BiodataInfo3[18]);
-                    cboxChronicDiseasePatient.setSelectedItem(BiodataInfo3[19]);
-                    cboxOrganDonorPatient.setSelectedItem(BiodataInfo3[20]);
-                    tfieldHomeAddress.setText(BiodataInfo3[21]);
-                    cboxDistrictCode.setSelectedItem(BiodataInfo3[22]);
-                    cboxTownCode.setSelectedItem(BiodataInfo3[23]);
-                    cboxPostcode.setSelectedItem(BiodataInfo3[24]);
+                        cboxBloodTypePatient.setSelectedItem(BiodataInfo3[16]);
+                        cboxBloodRhesusPatient.setSelectedItem(BiodataInfo3[17]);
+                        cboxAllergyPatient.setSelectedItem(BiodataInfo3[18]);
+                        cboxChronicDiseasePatient.setSelectedItem(BiodataInfo3[19]);
+                        cboxOrganDonorPatient.setSelectedItem(BiodataInfo3[20]);
+                        tfieldHomeAddress.setText(BiodataInfo3[21]);
+                        cboxDistrictCode.setSelectedItem(BiodataInfo3[22]);
+                        cboxTownCode.setSelectedItem(BiodataInfo3[23]);
+                        cboxPostcode.setSelectedItem(BiodataInfo3[24]);
                     //cboxStatePatient.setSelectedItem(BiodataInfo3[25]);
-                    //cboxCountryPatient.setSelectedItem(BiodataInfo3[26]);
-                    tfieldHomephonePatient.setText(BiodataInfo3[27]);
-                    tfieldPostalAddressPatient.setText(BiodataInfo3[28]);
-                    cboxPostalDistrict.setSelectedItem(BiodataInfo3[29]);
-                    cboxPostalTown.setSelectedItem(BiodataInfo3[30]);
-                    cboxPostalPostcode.setSelectedItem(BiodataInfo3[31]);
+                        //cboxCountryPatient.setSelectedItem(BiodataInfo3[26]);
+                        tfieldHomephonePatient.setText(BiodataInfo3[27]);
+                        tfieldPostalAddressPatient.setText(BiodataInfo3[28]);
+                        cboxPostalDistrict.setSelectedItem(BiodataInfo3[29]);
+                        cboxPostalTown.setSelectedItem(BiodataInfo3[30]);
+                        cboxPostalPostcode.setSelectedItem(BiodataInfo3[31]);
                     //cboxPostalStatePatient.setSelectedItem(BiodataInfo3[32]);
-                    //cboxPostalCountryPatient.setSelectedItem(BiodataInfo3[33]);
-                    tfieldHandphoneNoPatient.setText(BiodataInfo3[34]);
+                        //cboxPostalCountryPatient.setSelectedItem(BiodataInfo3[33]);
+                        tfieldHandphoneNoPatient.setText(BiodataInfo3[34]);
+                    } catch (Exception e) {
+                        
+                    }
 
                     //show patient's employment information on employment screen
                     tfieldPmiEmployment.setText(EmploymentInfo3[0]);
