@@ -5863,8 +5863,8 @@ public class Registration extends javax.swing.JFrame {
                         return;
                     }
                     
-                    JOptionPane.showMessageDialog(null, "Patient biodata is not existed in the database."
-                            + "\nPlease proceed to Patient Master Index Form to fill in information !!!", "New Patient", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Patient biodata is not existed!"
+                            + "\nData will be retrieved from the SMP/SMSM", "New Patient", JOptionPane.INFORMATION_MESSAGE);
                     
                     
                     
@@ -6170,12 +6170,13 @@ public class Registration extends javax.swing.JFrame {
                         return;
                     }
                     
-                    JOptionPane.showMessageDialog(null, "Patient biodata is not existed in the database.\nPlease proceed to Patient Master Index Form to fill in information !!!", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Patient biodata is not existed!"
+                            + "\nData will be retrieved from the SMP/SMSM", "New Patient", JOptionPane.INFORMATION_MESSAGE);
                     //Set tab to Registration
 
                     String ic = tfieldICSearchRegister.getText();
                     clearForm();
-                    generateAllAutogenerateNo(numCheckDigit);
+                    generateAllAutogenerateNo(ic);
 
                     tabpanel.setSelectedIndex(1);
                     tfieldOldICNoPatient.setText(tfieldICSearchRegister.getText());
@@ -6444,7 +6445,8 @@ public class Registration extends javax.swing.JFrame {
                     String idx = tfieldIDSearchRegister.getText();
                     String typex = cboxIdTypeRegister.getSelectedItem().toString();
                     
-                    JOptionPane.showMessageDialog(null, "Patient biodata is not existed in the database. Please proceed to Patient Master Index Form to fill in information !!!", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Patient biodata is not existed!"
+                            + "\nData will be retrieved from the SMP/SMSM", "New Patient", JOptionPane.INFORMATION_MESSAGE);
                     //Set tab to Registration
                     
                     clearForm();

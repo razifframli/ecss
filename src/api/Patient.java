@@ -1002,6 +1002,7 @@ public class Patient {
             }
         } else {
             String local_foreign = existBiodataInfo1[num1 + 3]; // L local, F foreign
+            Registration.numCheckDigit = existBiodataInfo1[num1 + 1];
             String stud_staf = existBiodataInfo1[num1 + 4]; // 1 student, 0 staff
             String active = existBiodataInfo1[num1 + 6];
             System.out.println("active:"+active);
@@ -1019,6 +1020,10 @@ public class Patient {
         if (stat == false) {
             Registration.numCheckDigit = carian;
         }
+        
+        System.out.println("stat:"+stat);
+        System.out.println("Registration.numCheckDigit:"+Registration.numCheckDigit);
+        System.out.println("carian:"+carian);
         
         return stat;
     }
