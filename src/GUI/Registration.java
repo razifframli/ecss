@@ -5839,7 +5839,7 @@ public class Registration extends javax.swing.JFrame {
 
             try {
                 RegisterInfo1 = trim(patientRegister1.getRegisterBiodataUsingNewIC(tfieldICSearchRegister.getText()));
-                if (RegisterInfo1[4] != "-") {
+                if (!RegisterInfo1[4].equals("-")) {
                     BiodataInfo1 = trim(patientRegister1.getBiodataUsingNewIC(RegisterInfo1[0]));
                     EmploymentInfo1 = trim(patientRegister1.getEmploymentDetailUsingNewIC(RegisterInfo1[0]));
                     NOKInfo1 = trim(patientRegister1.getNokDetailUsingNewIC(RegisterInfo1[0]));
@@ -5856,7 +5856,7 @@ public class Registration extends javax.swing.JFrame {
                     J.o("", "error dowh", 0);
                 }
                 
-                if (RegisterInfo1[4] == "-") {
+                if (RegisterInfo1[4].equals("-")) {
                     
                     if (isRecognizedPatient == false) {
                         tabpanel.setSelectedIndex(0);
@@ -5872,7 +5872,7 @@ public class Registration extends javax.swing.JFrame {
 
                     String ic = tfieldICSearchRegister.getText();
                     clearForm();
-                    generateAllAutogenerateNo(numCheckDigit);
+                    generateAllAutogenerateNo(ic);
 
                     tabpanel.setSelectedIndex(1);
                     tfieldNewICNoPatient.setText(tfieldICSearchRegister.getText());
