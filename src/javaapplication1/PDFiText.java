@@ -4,6 +4,7 @@
  */
 package javaapplication1;
 
+import DBConnection.DBConnection;
 import DBConnection.ReportDB;
 import GUI.PrintTest2;
 import Helper.Session;
@@ -16,8 +17,13 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.rmi.RemoteException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,7 +49,10 @@ public class PDFiText {
             Font.NORMAL);
     private static Font footerFont = new Font(Font.FontFamily.TIMES_ROMAN, 11,
             Font.BOLD);
-
+    
+    private static Font labelFont = new Font(Font.FontFamily.TIMES_ROMAN,9);
+    private static Font labelTitle = new Font(Font.FontFamily.TIMES_ROMAN,5);
+    
     // iText allows to add metadata to the PDF which can be viewed in your Adobe
     // Reader
     // under File -> Properties
@@ -189,39 +198,13 @@ public class PDFiText {
             //CCN, DGS
             String data = ReportDB.getDataICD10(date);
             
-            String chapters[] = data.split("\\|");
-            for (int i = 0; i < chapters.length; i+=3) {
-                System.out.println("Chapter "+chapters[i]+": "+chapters[i+1]);
-                String blocks[] = chapters[i+2].split("\\^");
-                for (int j = 0; j < blocks.length; j+=3) {
-                    System.out.println("=Block "+blocks[j]+": "+blocks[j+1]);
-                    String codes[] = blocks[i+2].split(";");
-                    for (int k = 0; k < codes.length; k+=3) {
-                        System.out.println("==Codes ("+codes[k]+") "+codes[k+1]+": "+codes[k+2]);
-                    }
+            String str[] = data.split("___");
+            for (int i = 0; i < str.length; i++) {
+                String str2[] = str[i].split("______");
+                for (int j = 0; j < str2.length; j++) {
+                    preface.add(getPara(str2[j], Element.ALIGN_LEFT));
                 }
             }
-            
-            int columns = 3;
-            PdfPTable table = new PdfPTable(columns);
-            
-            ArrayList<ArrayList<PdfPCell>> cell = new ArrayList<ArrayList<PdfPCell>>();
-            
-            PdfPCell cell1 = new PdfPCell(new Paragraph("Cell 1"));
-            PdfPCell cell2 = new PdfPCell(new Paragraph("Cell 2"));
-            PdfPCell cell3 = new PdfPCell(new Paragraph("Cell 3"));
-            PdfPCell cell4 = new PdfPCell(new Paragraph("Cell 4"));
-            PdfPCell cell5 = new PdfPCell(new Paragraph("Cell 5"));
-            PdfPCell cell6 = new PdfPCell(new Paragraph("Cell 6"));
-            
-            table.addCell(cell1);
-            table.addCell(cell2);
-            table.addCell(cell3);
-            table.addCell(cell4);
-            table.addCell(cell5);
-            table.addCell(cell6);
-            
-            preface.add(data);
             
         } catch (Exception e) {
             //e.printStackTrace();
@@ -567,7 +550,7 @@ public class PDFiText {
         document.add(new Paragraph(line, subtitleFont));
     }
 
-    private static void addTableDrugs(Document document, String data, Consultation cons) throws DocumentException {
+    private static void addTableDrugs(Document document, String data) throws DocumentException {
         int num_col = 9;
         int num_row = 0;
         
@@ -591,45 +574,17 @@ public class PDFiText {
             table.addCell(getCell(table, header[i], 1, 1));
         }
         
-        for (int i = 0; i < num_row; i++) {
-            for (int j = 0; j < dto[i].length; j++) {
-                System.out.print(dto[i][j]+"^");
-            }
-            System.out.println();
-        }
-        
         //add data row by row
         for(int i = 0; i < num_row; i++) {
-            String mdcCode = dto[i][4];
-            String dTradeName = "";
-            String qtyDrug = dto[i][17];
-            String packType = "-";
-            try {
-                cons.tempQuery = "SELECT * "
-                        + "FROM PIS_MDC2 "
-                        + "WHERE UCASE(UD_MDC_CODE) LIKE UCASE(?) ";
-                cons.ps = Session.getCon_x(1000).prepareStatement(cons.tempQuery);
-                cons.ps.setString(1, "%" + mdcCode + "%");
-                cons.rs = cons.ps.executeQuery();
-                if (cons.rs.next()) {
-                    dTradeName = cons.rs.getString("D_TRADE_NAME");
-                    packType = cons.rs.getString("D_PACKAGINGT");
-                    if (packType.equals("CAP") || packType.equals("TAB")) {
-                        qtyDrug = dto[i][23];
-                    }
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
             table.addCell(getCell(table, (i+1)+".", 1, 1));
-            table.addCell(getCell(table, dTradeName + "(" + dto[i][5] + ")", 1, 1));
+            table.addCell(getCell(table, dto[i][5], 1, 1));
             table.addCell(getCell(table, dto[i][12], 1, 1));
             table.addCell(getCell(table, dto[i][17], 1, 1));
             table.addCell(getCell(table, dto[i][14], 1, 1));
             table.addCell(getCell(table, getDate(dto[i][0], 0), 1, 1));
             table.addCell(getCell(table, getDate(dto[i][0], getDay(dto[i][22])), 1, 1));
             table.addCell(getCell(table, dto[i][22] + " day" + getS(dto[i][22]), 1, 1));
-            table.addCell(getCell(table, qtyDrug, 1, 1));
+            table.addCell(getCell(table, dto[i][23], 1, 1));
         }
 
         document.add(table);
@@ -812,7 +767,7 @@ public class PDFiText {
         }
     }
 
-    public static void createPrescription(String title, String data_temp, Consultation cons) {
+    public static void createPrescription(String title, String data_temp) {
         try {
             Document document = new Document(PageSize.A4.rotate());
             PdfWriter.getInstance(document, new FileOutputStream(title));
@@ -820,7 +775,7 @@ public class PDFiText {
             addMetaData(document);
             addTitlePage(document, data_temp);
             addTablePatient(document, data_temp);
-            addTableDrugs(document, data_temp, cons);
+            addTableDrugs(document, data_temp);
             addFooter(document, data_temp);
             document.close();
             
@@ -848,6 +803,134 @@ public class PDFiText {
             e.printStackTrace();
         }
     }
+    
+        //Fn to create rpt of dispensed drug -- Hariz 20141122
+    public static void createDispensedDrug()
+    {
+        try
+        {
+           String strSql = "select order_no, order_date, dispensed_by from pis_dispense_master, pis_dispense_detail"
+                   + " where order_date < CURDATE()";
+        }catch (Exception ex)
+        {
+            
+        }
+    }
+    //Fn to create rpt of dispensed drug -- Hariz 20141122 END
+    
+    //    Fn to print out medicine label --Hariz 20141014
+    public static void createPrescriptionLabel(String headerTitle, String pName, String orderDate,String orderNo) throws FileNotFoundException, DocumentException, SQLException
+    {
+        String sqlGetDrugPresc = "";
+        
+        Rectangle customRec = new Rectangle(238f, 138f);
+        Document document = new Document(customRec,1,1,2,3);
+        PdfWriter.getInstance(document,new FileOutputStream(headerTitle));
+        document.open();
+        
+       
+        
+        try{
+            sqlGetDrugPresc = "Select * from pis_order_detail where order_no = '"+ orderNo +"'";  
+            
+            String a[] = {};
+            ArrayList<ArrayList<String>> fromRmi = DBConnection.getImpl().getQuery(sqlGetDrugPresc, 17, a);           
+            for(int i = 0 ; i < fromRmi.size() ; i++)
+            {
+                Paragraph mainContent = new Paragraph();
+
+                Paragraph clinicName = new Paragraph("Klinik Utem Induk",labelTitle);
+                //clinicName.setFont(labelTitle);
+                clinicName.setAlignment(Element.ALIGN_CENTER);
+
+                mainContent.add(clinicName);
+                //addEmptyLine(mainContent,1);
+                Paragraph ptnName = new Paragraph("Name :"+pName,labelFont);
+                ptnName.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(ptnName);
+
+                Paragraph oDate = new Paragraph("Date :"+orderDate.substring(0,10),labelFont);
+                oDate.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(oDate);
+                
+                Paragraph descrp1 = new Paragraph(fromRmi.get(i).get(2),labelFont);
+                descrp1.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descrp1);
+
+                Paragraph descrp2 = new Paragraph(fromRmi.get(i).get(4),labelFont);
+                descrp2.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descrp2);
+
+                Paragraph descOrderOUM = new Paragraph(fromRmi.get(i).get(8),labelFont);
+                descOrderOUM.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descOrderOUM);
+
+                Paragraph descDrugStrength = new Paragraph(fromRmi.get(i).get(6),labelFont);
+                descDrugStrength.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descDrugStrength);
+
+                document.add(mainContent);
+                if(i != fromRmi.size()- 1)
+                    document.newPage();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+                     
+            try 
+            {
+            sqlGetDrugPresc = "Select * from pis_order_detail where order_no = ?";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sqlGetDrugPresc);
+            ps.setString(1, orderNo);
+            ResultSet rs = ps.executeQuery();          
+
+            for(int i=0;rs.next();i++)
+            { 
+                Paragraph mainContent = new Paragraph();
+
+                Paragraph clinicName = new Paragraph("Klinik Utem Induk",labelTitle);
+                //clinicName.setFont(labelTitle);
+                clinicName.setAlignment(Element.ALIGN_CENTER);
+
+                mainContent.add(clinicName);
+                //addEmptyLine(mainContent,1);
+                Paragraph ptnName = new Paragraph("Name :"+pName,labelFont);
+                ptnName.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(ptnName);
+
+                Paragraph oDate = new Paragraph("Date :"+orderDate.substring(0,10),labelFont);
+                oDate.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(oDate);
+                
+                Paragraph descrp1 = new Paragraph(rs.getString("DRUG_ITEM_DESC"),labelFont);
+                descrp1.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descrp1);
+                
+                Paragraph descrp2 = new Paragraph(rs.getString("DRUG_FREQUENCY"),labelFont);
+                descrp2.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descrp2);
+                
+                Paragraph descOrderOUM = new Paragraph(rs.getString("ORDER_OUM"),labelFont);
+                descOrderOUM.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descOrderOUM);
+                
+                Paragraph descDrugStrength = new Paragraph(rs.getString("DRUG_STRENGTH"),labelFont);
+                descDrugStrength.setAlignment(Element.ALIGN_LEFT);
+                mainContent.add(descDrugStrength);
+                
+                document.add(mainContent);
+                if(!rs.isLast())
+                    document.newPage();
+            }                          
+            } catch (DocumentException exx) {
+                exx.printStackTrace();
+            }
+        }
+        document.close();
+    }
+    
+    //    Fn to print out medicine label --Hariz 20141014 END
     
     public static void createReportICD10(String title, String date) {
         try {
@@ -1086,7 +1169,7 @@ public class PDFiText {
         masa.add("03/03/2014");
         masa.add("05/03/2014");
         Session.setUser_name("Umar Mukhtar");
-        PDFiText.createReportICD10("TimeSlip_.pdf", "2014-00-00 16:33:15");
-//        PDFiText.createTimeSlip("timeslip_.pdf", data_temp, masa);
+//        PDFiText.createReportICD10("TimeSlip_.pdf", "2014-04-24 16:33:15");
+        //PDFiText.createTimeSlip("timeslip_.pdf", data_temp, masa);
     }
 }

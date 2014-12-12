@@ -60,12 +60,14 @@ import Helper.J;
 import Process.MainRetrieval;
 import api.Queue;
 import api.LookupController;
+import java.awt.Color;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import javaapplication1.DriversLocation;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import javaapplication1.PDFiText;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import jxl.CellType;
@@ -234,6 +236,14 @@ public class Pharmacy extends javax.swing.JFrame{
     
     /** Creates new form Pharmacy */
     public Pharmacy() {
+        if(null == btn_PrintLabel.getText())
+        {
+            btn_PrintLabel.setEnabled(false);
+        }
+        else
+        {
+            btn_PrintLabel.setEnabled(true);
+        }
         initComponents();
         S.oln("Hello CIS 1 cannot use");
         
@@ -248,6 +258,20 @@ public class Pharmacy extends javax.swing.JFrame{
         rb_newOList2.setSelected(true);
         rb_oldOList2.setSelected(false);
         cpyFile_history = "-";
+    }
+    
+    private void filterOrderMaster(String txtIC)
+    {
+        int omIndex = om.indexOf(txtIC);
+        if(omIndex != -1)
+        {
+            tbl_patientInQueue.getModel().setValueAt(om.get(omIndex).get(1), 1, 0);//pmino
+            tbl_patientInQueue.getModel().setValueAt(om.get(omIndex).get(17), 1, 1);//pname
+            tbl_patientInQueue.getModel().setValueAt(om.get(omIndex).get(5), 1, 2);//odate
+            tbl_patientInQueue.getModel().setValueAt(om.get(omIndex).get(2), 1, 3);//loca code
+            tbl_patientInQueue.getModel().setValueAt(om.get(omIndex).get(3), 1, 4);//arrival date
+            tbl_patientInQueue.getModel().setValueAt(om.get(omIndex).get(6), 1, 5);//doc's name
+        }
     }
     
     private void getOrderMaster(int stat, String pmi_no, String order_no) {
@@ -269,7 +293,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 
                 om = DBConnection.getImpl().getOrderMasterAll(stat, pmi_no, order_no);
                 S.oln("Get Order Master");
-                
+                showOnline();
                 for (int i = 0; i < 30 && i < om.size(); i++) {
                     tbl_patientInQueue.getModel().setValueAt(om.get(i).get(1), i, 0);//pmino
                     tbl_patientInQueue.getModel().setValueAt(om.get(i).get(17), i, 1);//pname
@@ -286,7 +310,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 S.oln("-- Offline --");
                 //guna current date, why? bcoz nk retrieve curr date je unless..
                 om = DBConnection.getPatientInQueueOff(stat, pmi_no, order_no);//getPatientInQueue
-
+                showOffline();
                 for (int i = 0; i < 30 && i < om.size(); i++) {
                     tbl_patientInQueue.getModel().setValueAt(om.get(i).get(1), i, 0);//pmino
                     tbl_patientInQueue.getModel().setValueAt(om.get(i).get(17), i, 1);//pname
@@ -488,9 +512,11 @@ public class Pharmacy extends javax.swing.JFrame{
         tbl_patientInQueue = new javax.swing.JTable();
         btn_refresh = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        txt_search_pol = new javax.swing.JTextField();
+        txt_search_OrderNo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btn_search = new javax.swing.JButton();
+        jLblIC = new javax.swing.JLabel();
+        txt_search_pol1 = new javax.swing.JTextField();
         pnl_patientDrugOrder = new javax.swing.JPanel();
         lbl_patientInfo = new java.awt.Label();
         jPanel20 = new javax.swing.JPanel();
@@ -498,6 +524,7 @@ public class Pharmacy extends javax.swing.JFrame{
         tbl_drugList = new javax.swing.JTable();
         btn_dispense = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        btn_PrintLabel = new javax.swing.JButton();
         jPanel36 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbl_drugOrder = new javax.swing.JTable();
@@ -724,6 +751,10 @@ public class Pharmacy extends javax.swing.JFrame{
         btn_supCancel = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
         btn_supSave = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnDaily = new javax.swing.JButton();
+        btnMonthly = new javax.swing.JButton();
+        btnYearly = new javax.swing.JButton();
         jPanel19 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         lbl_userNameOList = new javax.swing.JLabel();
@@ -733,6 +764,8 @@ public class Pharmacy extends javax.swing.JFrame{
         txt_userIDOList = new javax.swing.JTextField();
         jToolBar2 = new javax.swing.JToolBar();
         btn_mainPageOList = new javax.swing.JButton();
+        lblStatus = new javax.swing.JLabel();
+        btnStatus = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1241,8 +1274,6 @@ public class Pharmacy extends javax.swing.JFrame{
             }
         });
 
-        txt_search_pol.setText("PMS");
-
         jLabel2.setText("PMI No :");
 
         btn_search.setText("Search");
@@ -1252,17 +1283,32 @@ public class Pharmacy extends javax.swing.JFrame{
             }
         });
 
+        jLblIC.setText("Order No :");
+
+        txt_search_pol1.setText("PMS");
+        txt_search_pol1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_search_pol1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txt_search_pol, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_search)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_search_pol1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_search))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLblIC, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_search_OrderNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -1270,10 +1316,14 @@ public class Pharmacy extends javax.swing.JFrame{
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_search_pol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(btn_search))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(btn_search)
+                    .addComponent(txt_search_pol1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLblIC)
+                    .addComponent(txt_search_OrderNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnl_patientListLayout = new javax.swing.GroupLayout(pnl_patientList);
@@ -1298,7 +1348,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(437, Short.MAX_VALUE))
@@ -1445,6 +1495,7 @@ public class Pharmacy extends javax.swing.JFrame{
         jScrollPane20.setViewportView(tbl_drugList);
 
         btn_dispense.setText("Dispense");
+        btn_dispense.setEnabled(false);
         btn_dispense.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_dispenseActionPerformed(evt);
@@ -1455,6 +1506,13 @@ public class Pharmacy extends javax.swing.JFrame{
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
+            }
+        });
+
+        btn_PrintLabel.setText("Print Label");
+        btn_PrintLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PrintLabelActionPerformed(evt);
             }
         });
 
@@ -1472,7 +1530,9 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addComponent(jButton5)
                         .addGap(18, 18, 18)
                         .addComponent(btn_dispense)
-                        .addGap(510, 510, 510))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_PrintLabel)
+                        .addGap(413, 413, 413))))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1482,7 +1542,8 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_dispense)
-                    .addComponent(jButton5))
+                    .addComponent(jButton5)
+                    .addComponent(btn_PrintLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1846,7 +1907,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
 
         tab_drugOrder.addTab("Patient Drug Dispense", pnl_patientDrugOrder);
@@ -2303,7 +2364,7 @@ public class Pharmacy extends javax.swing.JFrame{
             .addGroup(jPanel23Layout.createSequentialGroup()
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 33, Short.MAX_VALUE)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -2325,7 +2386,7 @@ public class Pharmacy extends javax.swing.JFrame{
             .addGroup(jPanel23Layout.createSequentialGroup()
                 .addGap(138, 138, 138)
                 .addComponent(stock_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(396, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2990,7 +3051,7 @@ public class Pharmacy extends javax.swing.JFrame{
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Search Drug"));
@@ -3303,7 +3364,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(dpack1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cdpack2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txt_costPrice)
                     .addComponent(txt_sellprice)
@@ -3396,7 +3457,7 @@ public class Pharmacy extends javax.swing.JFrame{
                             .addGroup(jPanel16Layout.createSequentialGroup()
                                 .addComponent(cLduration, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(62, 62, 62)
-                                .addComponent(cLdurationType, 0, 86, Short.MAX_VALUE))
+                                .addComponent(cLdurationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(cLfrequency, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cInstruction, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_expdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -3753,7 +3814,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(btn_supCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_supdel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_supSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_edit, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
+                    .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -3808,6 +3869,53 @@ public class Pharmacy extends javax.swing.JFrame{
         );
 
         tpnl_manageDCode.addTab("Add Supplier", jPanel13);
+
+        btnDaily.setText("Daily");
+        btnDaily.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDailyActionPerformed(evt);
+            }
+        });
+
+        btnMonthly.setText("Monthly");
+        btnMonthly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonthlyActionPerformed(evt);
+            }
+        });
+
+        btnYearly.setText("Yearly");
+        btnYearly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnYearlyActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(btnDaily, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(318, 318, 318)
+                .addComponent(btnMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(330, 330, 330)
+                .addComponent(btnYearly, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1141, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDaily, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnYearly, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(921, Short.MAX_VALUE))
+        );
+
+        tpnl_manageDCode.addTab("Dispensed Report", jPanel2);
 
         javax.swing.GroupLayout pnl_convertAndManageLayout = new javax.swing.GroupLayout(pnl_convertAndManage);
         pnl_convertAndManage.setLayout(pnl_convertAndManageLayout);
@@ -3864,13 +3972,20 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 526, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 413, Short.MAX_VALUE)
+                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
                 .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -3897,11 +4012,10 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -4848,6 +4962,14 @@ public class Pharmacy extends javax.swing.JFrame{
 //            }
 //            Session.setPrev_stat(false);
 //            Session.setCurr_stat(false);
+                
+//    //end of online
+//            } else {
+//// offline
+//                
+//            }
+//            Session.setPrev_stat(false);
+//            Session.setCurr_stat(false);
         }
     }//GEN-LAST:event_btn_submitOListActionPerformed
 
@@ -5663,7 +5785,7 @@ public void setSelectedAppointment(String selectedAppointment, String selectedTi
 
         try {
             //
-            AppointmentInfo = appointment.getAppointmentBiodata(selectedAppointment, selectedTime);
+            AppointmentInfo = appointment.getAppointmentBiodata(selectedAppointment);
             //Friza getEHR
             
         } catch (Exception ex) {
@@ -5736,7 +5858,7 @@ public void setSelectedAppointment(String selectedAppointment, String selectedTi
                     
                     DBConnection.getImpl().sayHello("UMAR");
 
-                    ArrayList<String> arData = DBConnection.getImpl().getEHRRecords(pmiNo, 1); // get PMS by IC
+                    ArrayList<String> arData = DBConnection.getImpl().getEHRRecords(pmiNo); // get PMS by IC
                     cpyFile = arData.get(0);
                     status = arData.get(1);
                     cpyFile_history = arData.get(2);
@@ -6070,7 +6192,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
         }
         
         try {
-            AppointmentInfo = appointment.getAppointmentBiodata(pmiNo, "");
+            AppointmentInfo = appointment.getAppointmentBiodata(pmiNo);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -7294,6 +7416,19 @@ jScrollPane17.setViewportView(tbl_drugOList);
 //        System.out.println(url);
 //        urlAdd = String.valueOf(url);
 //        jTextField1.setText(urlAdd);
+        
+//       //TEST 2
+//        
+//        javax.swing.JFileChooser FC = new JFileChooser(".");
+//        FC.showOpenDialog(this);
+//        FC.setCurrentDirectory(new File("."));
+//
+//
+//        //get selected file address
+//        File url = FC.getSelectedFile();
+//        System.out.println(url);
+//        urlAdd = String.valueOf(url);
+//        jTextField1.setText(urlAdd);
     }//GEN-LAST:event_jButton2ActionPerformed
     
     private void tbl_patientInQueueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_patientInQueueMouseClicked
@@ -7376,18 +7511,11 @@ jScrollPane17.setViewportView(tbl_drugOList);
 
                 row1 = 0;
                 row2 = 0;
-                
-                for (int i = 0; i < od.size(); i++) {
-                    for (int j = 0; j < od.get(i).size(); j++) {
-                        System.out.print(od.get(i).get(j)+"|");
-                    }
-                    System.out.println();
-                }
 
                 //put od data into drug order
                 for (int i = 0; i < od.size(); i++) {
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(0), row1, 0); //0
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(1) + "(" + od.get(i).get(15) + ")", row1, 1);
+                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(1), row1, 1); //1
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(7), row1, 2); //7
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(10), row1, 3); //9
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(13), row1, 4); //13
@@ -7438,7 +7566,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 //put od data into drug order
                 for (int i = 0; i < od.size(); i++) {
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(0), row1, 0);
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(1) + "(" + od.get(i).get(15) + ")", row1, 1);
+                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(1), row1, 1);
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(7), row1, 2);
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(10), row1, 3);//9
                     tbl_drugOrder.getModel().setValueAt(od.get(i).get(13), row1, 4);
@@ -7493,7 +7621,14 @@ jScrollPane17.setViewportView(tbl_drugOList);
 //        if (Session.getPrev_stat()) {
             S.oln("-- Online Search--");
             //ambil current date
-            getOrderMaster(2, txt_search_pol.getText(), "");
+            if(txt_search_OrderNo.getText().equals(""))
+            {
+                getOrderMaster(2, txt_search_pol1.getText(), "");
+            }
+            else
+            {
+                filterOrderMaster(txt_search_OrderNo.getText());
+            }
 //        } else {
 //            
 //            try{
@@ -8164,8 +8299,114 @@ public void toExcel(JTable tbl_mdc, File file){
         rb_newOList2.setSelected(false);
         rb_oldOList2.setSelected(true);
     }//GEN-LAST:event_rb_oldOList2MouseClicked
-   
+
+    private void btn_PrintLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PrintLabelActionPerformed
+        // TODO add your handling code here:
+        String orderNo = order_no2.getText();
+        String patientName = txt_patientName.getText();
+        String orderDate = order_date2.getText();
+        try
+        {
+        PDFiText.createPrescriptionLabel("assets/prescLabel_.pdf", patientName, orderDate,orderNo);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+                
+        btn_dispense.setEnabled(true);
+    }//GEN-LAST:event_btn_PrintLabelActionPerformed
+
+    private void txt_search_pol1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_search_pol1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_search_pol1ActionPerformed
     
+    //get list of dispensed drug -- Hariz 20141203
+    private void btnDailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailyActionPerformed
+        // TODO add your handling code here:
+        String strSql = "Select DISTINCT(DRUG_ITEM_CODE), SUM(DISPENSED_QTY) as QTY from servercis.pis_dispense_detail PDS, servercis.pis_dispense_master PDM " +
+                        "where PDM.order_no = PDS.order_no and DATE(PDM.DISPENSED_DATE) = DATE(NOW())" +
+                        "group by PDS.Drug_item_code";
+        
+        fnCreateXLS(strSql, "Daily_Dispensed_Drug.xls");
+             
+    }//GEN-LAST:event_btnDailyActionPerformed
+
+    private void btnYearlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYearlyActionPerformed
+        // TODO add your handling code here:
+        String strSql = "Select DISTINCT(DRUG_ITEM_CODE), SUM(DISPENSED_QTY) as QTY from servercis.pis_dispense_detail PDS, servercis.pis_dispense_master PDM " +
+                        "where PDM.order_no = PDS.order_no and PDM.dispensed_date = YEAR(CURDATE())" +
+                        "group by PDS.Drug_item_code";
+       
+        fnCreateXLS(strSql,"Yearly_Dispensed_Drug.xls");
+        
+    }//GEN-LAST:event_btnYearlyActionPerformed
+
+    private void btnMonthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyActionPerformed
+        // TODO add your handling code here:
+        String strSql = "Select DISTINCT(DRUG_ITEM_CODE), SUM(DISPENSED_QTY) as QTY from servercis.pis_dispense_detail PDS, servercis.pis_dispense_master PDM " +
+                        "where PDM.order_no = PDS.order_no and MONTH(DISPENSED_DATE) = MONTH(CURDATE()) and YEAR(DISPENSED_DATE) = YEAR(CURDATE())" +
+                        "group by PDS.Drug_item_code";
+        
+        fnCreateXLS(strSql,"Monthly_Dispensed_Drug.xls");
+    }//GEN-LAST:event_btnMonthlyActionPerformed
+   
+    void fnCreateXLS(String strSQL , String fName)
+    {
+         JTable jtblYearly = new JTable();
+        TableModel tm = null;
+        String prepStmtn[] = { };
+        try
+        {
+            tm = DBConnection.getImpl().getDispensedDrug(strSQL, prepStmtn);  
+            jtblYearly.setModel(tm);
+            System.out.println("Yeay!");
+           
+        }catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }     
+        
+        JFileChooser jfc = new JFileChooser();
+        jfc.setSelectedFile(new File(fName));
+        int option = jfc.showSaveDialog(Pharmacy.this);
+        if(option == JFileChooser.APPROVE_OPTION)
+        {
+            String fileName = jfc.getSelectedFile().getName();
+            String filePath = jfc.getSelectedFile().getParentFile().getPath();
+            String ext = "";
+            String fileToSave = "";
+            int nameLength = fileName.length();
+            
+            if(nameLength > 4)
+            {
+                ext = fileName.substring(nameLength - 4, nameLength);
+            }
+            
+            if(ext.equals(".xls"))
+            {
+                fileToSave = filePath + "\\" + fileName;
+            }
+            else
+            {
+                fileToSave  = filePath + "\\" + fileName + ".xls";
+            }
+            toExcel(jtblYearly, new File(fileToSave));
+        }
+    }
+    //get list of dispensed drug -- Hariz 20141203 END
+    
+    //Online Indicator
+    public static void showOnline() {
+        lblStatus.setText("Online");
+        btnStatus.setBackground(Color.green);
+    }
+    //Offline Indicator
+
+    public static void showOffline() {
+        lblStatus.setText("Offline");
+        btnStatus.setBackground(Color.red);
+    }
   
     /**
     * @param args the command line arguments
@@ -8182,6 +8423,11 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JDialog Spatient;
     private javax.swing.JPanel Spatient_panel;
     private javax.swing.JTextField arrival_date;
+    private javax.swing.JButton btnDaily;
+    private javax.swing.JButton btnMonthly;
+    private static javax.swing.JButton btnStatus;
+    private javax.swing.JButton btnYearly;
+    private javax.swing.JButton btn_PrintLabel;
     private javax.swing.JButton btn_addmdc;
     private javax.swing.JButton btn_browse;
     private javax.swing.JButton btn_cancelATC;
@@ -8282,6 +8528,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLblIC;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -8291,6 +8538,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
@@ -8345,6 +8593,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JTextField jtdrugS2;
     private javax.swing.JTextField jtfatc;
     private java.awt.Label label2;
+    protected static javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lbl_allergy;
     private javax.swing.JLabel lbl_atcCode;
     private javax.swing.JLabel lbl_atcCodeSearch;
@@ -8485,7 +8734,8 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JTextField txt_quantityOList;
     private javax.swing.JTextField txt_race;
     private javax.swing.JTextField txt_raceOList;
-    private javax.swing.JTextField txt_search_pol;
+    private javax.swing.JTextField txt_search_OrderNo;
+    private javax.swing.JTextField txt_search_pol1;
     private javax.swing.JTextField txt_sellprice;
     private javax.swing.JTextField txt_sex;
     private javax.swing.JTextField txt_stockQty;

@@ -9803,7 +9803,7 @@ public class Consultation extends javax.swing.JFrame {
             }
 
             if(stat_dto) {
-                PDFiText.createPrescription("assets/Presription_.pdf", data_temp, this);
+                PDFiText.createPrescription("assets/Presription_.pdf", data_temp);
             } else {
                 J.o("No Drug Order", "No drug had been ordered!\nPlease order drug first.", 1);
             }

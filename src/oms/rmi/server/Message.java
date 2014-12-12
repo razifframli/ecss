@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.table.TableModel;
 
 public interface Message extends Remote {
     
@@ -156,4 +157,6 @@ public interface Message extends Remote {
     boolean makeAppointment(Vector<String> patient) throws RemoteException;
     
     boolean updateAppointment(Vector<String> patient) throws RemoteException;
+    
+    TableModel getDispensedDrug(String strSql, String prepStatement[]) throws RemoteException; //get list of dispensed drug -- Hariz 20141203
 }
