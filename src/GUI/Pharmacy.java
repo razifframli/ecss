@@ -5785,7 +5785,7 @@ public void setSelectedAppointment(String selectedAppointment, String selectedTi
 
         try {
             //
-            AppointmentInfo = appointment.getAppointmentBiodata(selectedAppointment);
+            AppointmentInfo = appointment.getAppointmentBiodata(selectedAppointment, selectedTime);
             //Friza getEHR
             
         } catch (Exception ex) {
@@ -5858,7 +5858,7 @@ public void setSelectedAppointment(String selectedAppointment, String selectedTi
                     
                     DBConnection.getImpl().sayHello("UMAR");
 
-                    ArrayList<String> arData = DBConnection.getImpl().getEHRRecords(pmiNo); // get PMS by IC
+                    ArrayList<String> arData = DBConnection.getImpl().getEHRRecords(pmiNo, 1); // get PMS by IC
                     cpyFile = arData.get(0);
                     status = arData.get(1);
                     cpyFile_history = arData.get(2);
@@ -6192,7 +6192,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
         }
         
         try {
-            AppointmentInfo = appointment.getAppointmentBiodata(pmiNo);
+            AppointmentInfo = appointment.getAppointmentBiodata(pmiNo, "");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
