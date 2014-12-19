@@ -813,7 +813,7 @@ public class PDFiText {
                    + " where order_date < CURDATE()";
         }catch (Exception ex)
         {
-            
+             ex.printStackTrace();
         }
     }
     //Fn to create rpt of dispensed drug -- Hariz 20141122 END

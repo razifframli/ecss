@@ -12727,7 +12727,7 @@ public class Consultation extends javax.swing.JFrame {
                         
                         String data[] = {
                             ProblemCode + "^" + ProblemDesc + "^" + ProblemCode,
-                            UD_MDC_Code + "^" + ActiveIngredient + "^" + UD_MDC_Code,
+                            UD_MDC_Code + "^"+ ProductName + "-" + ActiveIngredient + "^" + UD_MDC_Code,
                             "" + "^" + DrugForm + "^" + "",
                             "" + "^" + "" + "^" + "",
                             "" + "^" + Frequency + "^" + "",
@@ -12740,6 +12740,7 @@ public class Consultation extends javax.swing.JFrame {
                             "" + "^" + "" + "^" + "",
                             Instruction,
                             "" + "^" + Session.getHfc_code() + "^"
+                            + "" + "^" + Session.getUser_id() + "^"   //20141218 Hariz --> if data inserted at wrong column, might need to put at last     
                             + "" + "^" + Session.getDiscipline() + "^"
                             + "" + "^" + Session.getDiscipline(),
                             Cautionary
