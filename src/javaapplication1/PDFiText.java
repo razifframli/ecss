@@ -928,6 +928,7 @@ public class PDFiText {
             }
         }
         document.close();
+        PrintTest2.print3(headerTitle);
     }
     
     //    Fn to print out medicine label --Hariz 20141014 END
