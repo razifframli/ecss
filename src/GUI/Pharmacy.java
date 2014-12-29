@@ -3406,7 +3406,7 @@ public class Pharmacy extends javax.swing.JFrame{
 
         lbl_durationOList1.setText("Duration :");
 
-        cLduration.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "1", "2", "3", "4", "5", "6" }));
+        cLduration.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6" }));
 
         cLdurationType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Day", "Week", "Month" }));
 
@@ -4093,8 +4093,15 @@ public class Pharmacy extends javax.swing.JFrame{
             dLdurationType = (String) cLdurationType.getSelectedItem();
             dLadvisory = (String) cInstruction.getSelectedItem();
             dLcaution = txt_cautionary.getText();
-            Format formatter2 = new SimpleDateFormat("dd/MM/yyyy");
-            dLexpdate = formatter2.format(txt_expdate.getDate());//date
+            if(txt_expdate.getDate() != null && !txt_expdate.getDate().equals(""))
+            {
+                Format formatter2 = new SimpleDateFormat("dd/MM/yyyy");
+                dLexpdate = formatter2.format(txt_expdate.getDate());//date
+            }
+            else
+            {
+                dLexpdate = "";
+            }
             dLclassification = (String) cClassification.getSelectedItem();
             supname = (String) cb_supplierUStock.getSelectedItem();
 
@@ -4118,10 +4125,10 @@ public class Pharmacy extends javax.swing.JFrame{
                 ps.setString(6, ddosage);
                 ps.setString(7, dstrength);
                 ps.setString(8, dLadvisory);
-                ps.setString(9, dstockqty);
-                ps.setString(10, dLqty);//d
+                ps.setDouble(9, Double.parseDouble(dstockqty));
+                ps.setDouble(10, Double.parseDouble(dLqty));//d
                 ps.setString(11, dLqtyt);
-                ps.setString(12, dLduration );//n
+                ps.setInt(12, Integer.parseInt(dLduration));//n
                 ps.setString(13, dLdurationType );
                 ps.setString(14, dLfreq );
                 ps.setString(15, dLcaution );
@@ -4129,14 +4136,18 @@ public class Pharmacy extends javax.swing.JFrame{
                 ps.setString(17, dLclassification );
                 ps.setString(18, dstatus);
                 ps.setString(19, dloccode);
-                ps.setString(20, dsellp);//d
-                ps.setString(21, dcostp);//d
-                ps.setString(22, dpackaging);
+                ps.setDouble(20, Double.parseDouble(dsellp));//d
+                ps.setDouble(21, Double.parseDouble(dcostp));//d
+                ps.setInt(22, Integer.parseInt(dpackaging));
                 ps.setString(23, dpackagingType);
-                ps.setString(24, dpriceppack);
+                ps.setDouble(24, Double.parseDouble(dpriceppack));
+                ps.setString(25, dmdc);
                 //update data
                 ps.executeUpdate();
-                              
+                
+                //popup windows update success
+                JOptionPane.showMessageDialog(btn_updateMDC, "Update success!");
+                
                 String sql1 = "INSERT INTO PIS_PRODUCT_SUPPLIER (Update_Stock_Date, Staff_ID, Supplier_ID, UD_MDC_Code) VALUES (?,?,?,?)";
 
                 //prepare sql query and execute it
@@ -4150,9 +4161,6 @@ public class Pharmacy extends javax.swing.JFrame{
                 
                 //update data
                 ps1.execute();
-
-                //popup windows update success
-                JOptionPane.showMessageDialog(btn_updateMDC, "Update success!");
 
                 //clear textfield
                 txt_mdcCode.setText("");
