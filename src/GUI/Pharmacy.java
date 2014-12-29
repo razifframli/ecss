@@ -61,16 +61,21 @@ import Process.MainRetrieval;
 import api.Queue;
 import api.LookupController;
 import java.awt.Color;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import javaapplication1.DriversLocation;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import javaapplication1.PDFiText;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import jxl.CellType;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
 
 /**
  *
@@ -7391,7 +7396,25 @@ jScrollPane17.setViewportView(tbl_drugOList);
             javax.swing.JFileChooser FC2=new JFileChooser("assets/");
             FC2.showOpenDialog(this);
             FC2.setCurrentDirectory(new File("db/"));
-             
+            
+            FileInputStream fis = new FileInputStream(FC2.getSelectedFile());
+            
+            HSSFWorkbook workbook = new HSSFWorkbook(fis);
+            HSSFSheet sheet = workbook.getSheetAt(0);
+            Iterator<Row> rowIterator = sheet.iterator();
+            rowIterator.next();
+            int i = 1;
+            while(rowIterator.hasNext())
+            {
+                i++;
+                Row row = rowIterator.next();
+       
+                Iterator<org.apache.poi.ss.usermodel.Cell> cellIterator = row.cellIterator();
+                          
+                String testData2 = row.getCell(8).toString();
+                String testData1 = row.getCell(7)==null ? "" :row.getCell(7).toString() ; 
+                String ggrr = "";
+            }
             //name of source file
             //File file = new File(source);
             //File sourceFile = new File(file.getAbsoluteFile()+source);
@@ -7438,6 +7461,33 @@ jScrollPane17.setViewportView(tbl_drugOList);
 //        urlAdd = String.valueOf(url);
 //        jTextField1.setText(urlAdd);
     }//GEN-LAST:event_jButton2ActionPerformed
+    
+    //fn to insert to tbl PIS_MDC2  -- Hariz 20141229
+    private void fnInsertPISMDC2 ( String [] arrData  ) throws SQLException
+    {
+  
+        String sql = "INSERT INTO PIS_MDC2 "
+                        + "(UD_MDC_CODE,UD_ATC_CODE, D_TRADE_NAME,D_GNR_NAME,D_ROUTE_CODE,"
+                        + "D_FORM_CODE,D_STRENGTH,D_ADVISORY_CODE,D_STOCK_QTY,D_QTY,D_QTYT,"
+                        + "D_DURATION,D_DURATIONT,D_FREQUENCY,D_CAUTION_CODE, D_EXP_DATE, D_CLASSIFICATION,"
+                        + "STATUS, D_LOCATION_CODE, D_SELL_PRICE, D_COST_PRICE,D_PACKAGING,D_PACKAGINGT,"
+                        + "D_PRICE_PPACK )"
+                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+
+        //prepare sql query and execute it
+        PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+        for(int i = 1 ; i <=  arrData.length ; i++)
+        {
+                ps.setString(i, arrData[i]);
+
+        }
+              
+
+        ps.execute();
+    }
+    
+     //fn to insert to tbl PIS_MDC2  -- Hariz 20141229 END
     
     private void tbl_patientInQueueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_patientInQueueMouseClicked
 
