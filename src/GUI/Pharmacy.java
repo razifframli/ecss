@@ -60,6 +60,7 @@ import Helper.J;
 import Process.MainRetrieval;
 import api.Queue;
 import api.LookupController;
+import com.itextpdf.text.log.SysoLogger;
 import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -68,6 +69,7 @@ import javaapplication1.DriversLocation;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Iterator;
 import javaapplication1.PDFiText;
 import javax.swing.JTable;
@@ -7403,36 +7405,58 @@ jScrollPane17.setViewportView(tbl_drugOList);
             HSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
             rowIterator.next();
+            ArrayList<String> strArr = new ArrayList<String>();
             int i = 1;
             while(rowIterator.hasNext())
             {
                 i++;
-                Row row = rowIterator.next();
-       
-                Iterator<org.apache.poi.ss.usermodel.Cell> cellIterator = row.cellIterator();
-                          
-                String testData2 = row.getCell(8).toString();
-                String testData1 = row.getCell(7)==null ? "" :row.getCell(7).toString() ; 
-                String ggrr = "";
+                Row row = rowIterator.next();     
+                if(!ispkPISMDC2exist(row.getCell(0).toString()))
+                {
+                    for (int n = row.getFirstCellNum() ;  n < row.getLastCellNum(); n++)
+                    {
+                        if( n == 15 && row.getCell(n)!=null ) // to convert date so that length will be fix to 10
+                        {
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTime(new SimpleDateFormat("dd-MMM-yyyy").parse(row.getCell(n).toString()));
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                            dLexpdate = sdf.format(cal.getTime());//date
+                            strArr.add(dLexpdate);
+                        }
+                        else
+                        {
+                            strArr.add(row.getCell(n)==null ? "" :row.getCell(n).toString());
+                        }
+                    }
+                    fnInsertPISMDC2(strArr);
+                    String ggrr = "";
+                }
             }
             //name of source file
             //File file = new File(source);
             //File sourceFile = new File(file.getAbsoluteFile()+source);
             //File sourceFile = new File(file.getAbsoluteFile()+filename);
-            File sourceFile = new File(source);
-            String name = sourceFile.getName();
-          
-            File targetFile = new File(target+name);
-            System.out.println("Copying file from " + sourceFile.getName() +" to "+source+ " from Java Program");
+//            File sourceFile = new File(source);
+//            String name = sourceFile.getName();
+//          
+//            File targetFile = new File(target+name);
+//            System.out.println("Copying file from " + sourceFile.getName() +" to "+source+ " from Java Program");
             //JOptionPane.showMessageDialog(btn_updateUStock, "Please select a drug to update its stock data!");
            
             //copy file from one location to other
-            FileUtils.copyFile(sourceFile, targetFile);
+//            FileUtils.copyFile(sourceFile, targetFile);
             
-            JOptionPane.showMessageDialog(null, "Copying of file from Java program is completed\n");
+            JOptionPane.showMessageDialog(null, "Import Data From XLS done");
             System.out.println("Copying of file from Java program is completed\n");
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Unable to Import. Please ensure file XLS Excel 2003 only");
             Logger.getLogger(Pharmacy.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException sqlEx)
+        {
+            System.out.println(sqlEx);
+        } catch(ParseException parEx)
+        {
+            System.out.println(parEx);
         }
         
 //       //TEST 2
@@ -7463,7 +7487,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
     }//GEN-LAST:event_jButton2ActionPerformed
     
     //fn to insert to tbl PIS_MDC2  -- Hariz 20141229
-    private void fnInsertPISMDC2 ( String [] arrData  ) throws SQLException
+    private void fnInsertPISMDC2 ( ArrayList<String> arrData  ) throws SQLException
     {
   
         String sql = "INSERT INTO PIS_MDC2 "
@@ -7477,16 +7501,28 @@ jScrollPane17.setViewportView(tbl_drugOList);
 
         //prepare sql query and execute it
         PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
-        for(int i = 1 ; i <=  arrData.length ; i++)
+        for(int i = 1 ; i <=  arrData.size() ; i++)
         {
-                ps.setString(i, arrData[i]);
-
+                ps.setString(i, arrData.get(i-1));
         }
               
 
         ps.execute();
     }
     
+   
+    private boolean ispkPISMDC2exist(String ud_mdc_code) throws SQLException
+    {
+        String sql = "Select UD_MDC_CODE from PIS_MDC2 where UD_MDC_CODE = ?";
+        
+        PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+        ps.setString(1,ud_mdc_code);
+        
+        ResultSet rs = ps.executeQuery();
+        boolean boo = rs.next();
+        return boo;
+        
+    }
      //fn to insert to tbl PIS_MDC2  -- Hariz 20141229 END
     
     private void tbl_patientInQueueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_patientInQueueMouseClicked
