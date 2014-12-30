@@ -464,6 +464,14 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="rbtn_grp_diagnosis">
     </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="txt_allergyDate3">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -3815,20 +3823,20 @@
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="txt_disabilityType" alignment="0" max="32767" attributes="1"/>
-                                                      <Component id="jScrollPane21" alignment="0" max="32767" attributes="1"/>
                                                       <Component id="jScrollPane22" alignment="0" max="32767" attributes="1"/>
+                                                      <Component id="jScrollPane21" max="32767" attributes="1"/>
                                                       <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="txt_dDate1" min="-2" pref="275" max="-2" attributes="0"/>
+                                                          <Component id="txt_dDate1" min="-2" pref="248" max="-2" attributes="0"/>
                                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                                       </Group>
                                                   </Group>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                       <Component id="btnSrcDisability" alignment="0" max="32767" attributes="0"/>
                                                       <Component id="btn_dAccept" alignment="0" max="32767" attributes="0"/>
                                                       <Component id="btn_dClear" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace max="32767" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -3853,16 +3861,16 @@
                                                       </Group>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="2" attributes="0">
-                                                      <Component id="lbl_disDate" alignment="2" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="txt_dDate1" alignment="2" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lbl_disDate" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="txt_dDate1" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="jScrollPane22" alignment="0" min="-2" pref="54" max="-2" attributes="1"/>
                                                       <Component id="lbl_dComments" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="21" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -3914,14 +3922,6 @@
                                             </Component>
                                           </SubComponents>
                                         </Container>
-                                        <Component class="com.toedter.calendar.JDateChooser" name="txt_dDate1">
-                                          <Properties>
-                                            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
-                                          </Properties>
-                                          <AuxValues>
-                                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-                                          </AuxValues>
-                                        </Component>
                                         <Component class="javax.swing.JLabel" name="lbl_disDate">
                                           <Properties>
                                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -3971,6 +3971,14 @@
                                           <Events>
                                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dClearActionPerformed"/>
                                           </Events>
+                                        </Component>
+                                        <Component class="com.toedter.calendar.JDateChooser" name="txt_dDate1">
+                                          <Properties>
+                                            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+                                          </Properties>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                                          </AuxValues>
                                         </Component>
                                       </SubComponents>
                                     </Container>
