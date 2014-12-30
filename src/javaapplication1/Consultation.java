@@ -578,6 +578,7 @@ public class Consultation extends javax.swing.JFrame {
         rbtn_grp_mcts = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
         rbtn_grp_diagnosis = new javax.swing.ButtonGroup();
+        txt_allergyDate3 = new com.toedter.calendar.JDateChooser();
         mainPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -763,13 +764,13 @@ public class Consultation extends javax.swing.JFrame {
         btnSrcDisability = new javax.swing.JButton();
         jScrollPane21 = new javax.swing.JScrollPane();
         lbx_disabilityType = new javax.swing.JList();
-        txt_dDate1 = new com.toedter.calendar.JDateChooser();
         lbl_disDate = new javax.swing.JLabel();
         lbl_dComments = new javax.swing.JLabel();
         jScrollPane22 = new javax.swing.JScrollPane();
         txt_dComments = new javax.swing.JTextArea();
         btn_dAccept = new javax.swing.JButton();
         btn_dClear = new javax.swing.JButton();
+        txt_dDate1 = new com.toedter.calendar.JDateChooser();
         jPanel62 = new javax.swing.JPanel();
         jScrollPane41 = new javax.swing.JScrollPane();
         tbl_dab = new javax.swing.JTable();
@@ -1359,6 +1360,8 @@ public class Consultation extends javax.swing.JFrame {
             }
         ));
         jScrollPane14.setViewportView(jTable3);
+
+        txt_allergyDate3.setDateFormatString("dd/MM/yyyy");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Clinical Information System");
@@ -3061,8 +3064,6 @@ public class Consultation extends javax.swing.JFrame {
         });
         jScrollPane21.setViewportView(lbx_disabilityType);
 
-        txt_dDate1.setDateFormatString("dd/MM/yyyy");
-
         lbl_disDate.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lbl_disDate.setText("Since When : ");
 
@@ -3087,6 +3088,8 @@ public class Consultation extends javax.swing.JFrame {
             }
         });
 
+        txt_dDate1.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout jPanel61Layout = new javax.swing.GroupLayout(jPanel61);
         jPanel61.setLayout(jPanel61Layout);
         jPanel61Layout.setHorizontalGroup(
@@ -3100,17 +3103,17 @@ public class Consultation extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_disabilityType)
-                    .addComponent(jScrollPane21)
                     .addComponent(jScrollPane22)
+                    .addComponent(jScrollPane21)
                     .addGroup(jPanel61Layout.createSequentialGroup()
-                        .addComponent(txt_dDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_dDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSrcDisability, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_dAccept, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_dClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(82, 82, 82))
         );
         jPanel61Layout.setVerticalGroup(
             jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3129,14 +3132,14 @@ public class Consultation extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_dClear)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_disDate)
                     .addComponent(txt_dDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_dComments))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jPanel62.setBackground(new java.awt.Color(173, 182, 200));
@@ -9451,12 +9454,12 @@ public class Consultation extends javax.swing.JFrame {
         //==--String d_date = txt_dDate.getText();//==--
 
         Format formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String d_date1;
+        String d_date1 = "00/00/0000";
         try {
             d_date1 = formatter.format(txt_dDate1.getDate());
         } catch (Exception e) {
-            J.o("Invalid Date", "Invalid Date Format!", 0);
-            return;
+//            J.o("Invalid Date", "Invalid Date Format!", 0);
+//            return;
         }
 
         String d_comments = txt_dComments.getText();
@@ -14354,9 +14357,9 @@ public class Consultation extends javax.swing.JFrame {
                 }
                 for (int i = 0; i < row2[3]; i++) {
                     try {
-                        txt_FHSearch.setText(msg2[3][i][2]);
-                        FH_Relationship.setSelectedItem(msg2[3][i][3]);
-                        FH_Comments.setText(msg2[3][i][6]);
+                        txt_FHSearch.setText(msg2[3][i][5]);
+                        Func.cmbSelectInput(FH_Relationship, msg2[3][i][1]);
+                        FH_Comments.setText(msg2[3][i][7]);
                         accept_btn_FH();
                     } catch (Exception e) {
                     }
@@ -14384,11 +14387,11 @@ public class Consultation extends javax.swing.JFrame {
                         txt_allergySearch.setText(msg2[5][i][2]);
                         try {
                             txt_allergyDate2.setDate((Date) new SimpleDateFormat(
-                                    Func.DATE_FORMAT_1).parse(msg2[5][i][7]));
+                                    Func.DATE_FORMAT_1).parse(msg2[5][i][3]));
                         } catch (Exception e) {
                             try {
                                 txt_allergyDate2.setDate((Date) new SimpleDateFormat(
-                                        Func.DATE_FORMAT_2).parse(msg2[5][i][7]));
+                                        Func.DATE_FORMAT_2).parse(msg2[5][i][3]));
                             } catch (Exception ee) {
                             }
                         }
@@ -14403,11 +14406,11 @@ public class Consultation extends javax.swing.JFrame {
                         txt_immComment.setText(msg2[6][i][4]);
                         try {
                             txt_immDate1.setDate((Date) new SimpleDateFormat(
-                                    Func.DATE_FORMAT_1).parse(msg2[6][i][7]));
+                                    Func.DATE_FORMAT_1).parse(msg2[6][i][3]));
                         } catch (Exception e) {
                             try {
                                 txt_immDate1.setDate((Date) new SimpleDateFormat(
-                                        Func.DATE_FORMAT_2).parse(msg2[6][i][7]));
+                                        Func.DATE_FORMAT_2).parse(msg2[6][i][3]));
                             } catch (Exception ee) {
                             }
                         }
@@ -15069,6 +15072,7 @@ public class Consultation extends javax.swing.JFrame {
     public static javax.swing.JTextField txt_PMHSearch;
     public static javax.swing.JTextArea txt_allergyComments;
     public static com.toedter.calendar.JDateChooser txt_allergyDate2;
+    public static com.toedter.calendar.JDateChooser txt_allergyDate3;
     public static javax.swing.JTextField txt_allergySearch;
     public static javax.swing.JTextField txt_bahu_kanan;
     private javax.swing.JTextField txt_bahu_kiri;
