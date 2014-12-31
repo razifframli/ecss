@@ -7405,7 +7405,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             HSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
             rowIterator.next();
-            ArrayList<String> strArr = new ArrayList<String>();
+            
             int i = 1;
             while(rowIterator.hasNext())
             {
@@ -7413,6 +7413,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 Row row = rowIterator.next();     
                 if(!ispkPISMDC2exist(row.getCell(0).toString()))
                 {
+                    ArrayList<String> strArr = new ArrayList<String>();
                     for (int n = row.getFirstCellNum() ;  n < row.getLastCellNum(); n++)
                     {
                         if( n == 15 && row.getCell(n)!=null ) // to convert date so that length will be fix to 10
