@@ -8171,25 +8171,27 @@ public class Consultation extends javax.swing.JFrame {
         return (String) str;
     }
 
-    private void calcBMI() {
-        double height = 0.0;
-        double weight = 0.0;
-        try {
-            height = Double.parseDouble(txt_height.getText().trim());
-            weight = Double.parseDouble(txt_weight.getText().trim());
-        } catch (Exception e) {
-        }
+    private void setCalcBMI(double height, double weight) {
         double total = Math.round((weight / (height * height)) * 10000);
         txt_bmi.setText(total + "");
+        txt_weightStatus.setText(calcBMI(height, weight));
+    }
+    
+    private String calcBMI(double height, double weight) {
+        double total = calcBMI_Math(height, weight);
         if (total < 18.5) {
-            txt_weightStatus.setText("Underweight");
+            return "Underweight";
         } else if (total <= 23.9) {
-            txt_weightStatus.setText("Healthy weight");
+            return "Healthy weight";
         } else if (total <= 26.9) {
-            txt_weightStatus.setText("Overweight");
+            return "Overweight";
         } else {
-            txt_weightStatus.setText("Obese");
+            return "Obese";
         }
+    }
+    
+    private double calcBMI_Math(double height, double weight) {
+        return Math.round((weight / (height * height)) * 10000);
     }
     
     private void accept_button_pem() {
@@ -10937,7 +10939,9 @@ public class Consultation extends javax.swing.JFrame {
 
     private void btn_calculateBmiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calculateBmiActionPerformed
         // TODO add your handling code here:
-        calcBMI();
+        double height = Double.parseDouble(txt_height.getText().trim());
+        double weight = Double.parseDouble(txt_weight.getText().trim());
+        setCalcBMI(height, weight);
     }//GEN-LAST:event_btn_calculateBmiActionPerformed
 
     private void btn_calculateBmiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_calculateBmiMouseClicked
@@ -12458,7 +12462,7 @@ public class Consultation extends javax.swing.JFrame {
                             hea,
                             respiratory_rate,
                             "",
-                            pul,
+                            pul+","+pul1+","+pul2,
                             "",
                             "",
                             "",
@@ -12496,7 +12500,8 @@ public class Consultation extends javax.swing.JFrame {
                         String data[] = {
                             Blood,
                             Rhesus,
-                            G6PD
+                            G6PD,
+                            Comment
                         };
                         msgs[ii] = "BLD|" + date + "|";
                         for (int jj = 0; jj < data.length; jj++) {
@@ -12760,11 +12765,12 @@ public class Consultation extends javax.swing.JFrame {
                         zz++;
                         String pe_exam_line = note_array[zz++].split(": ")[1];
                         String pe_comments = note_array[zz++].split(": ")[1];
-                        String pe_exam = pe_exam_line.split(Func.SEPARATOR_LINK)[pe_exam_line.split(Func.SEPARATOR_LINK).length-1];
+                        String pe_exam_2 = pe_exam_line.split(Func.SEPARATOR_LINK)[pe_exam_line.split(Func.SEPARATOR_LINK).length-1];
+                        String pe_exam = pe_exam_line;
                         String pe_cd = "";
                         for (int level = 1; level <= Func.NUM_LEVEL_PHYSICAL_EXAMINATION; level++) {
                             PhysicalExamBean pe = new PhysicalExamBean();
-                            pe.setPe_name(pe_exam);
+                            pe.setPe_name(pe_exam_2);
                             PhysicalExamBean getPhysicalExam2 = DBConnection.getPhysicalExam2(level, pe);
 //                            ArrayList<String> procedure_detail = DBConnection.getProcedureDetail2(level, procedure_desc);
                             if (getPhysicalExam2.getPe_cd() != null && getPhysicalExam2.getPe_cd().length() > 0) {
@@ -14246,9 +14252,9 @@ public class Consultation extends javax.swing.JFrame {
                 }
                 if (row[8] > 0) {
                     for (int i = 0; i < row[8] && i < rows_tbl; i++) {
-                        double height = Double.parseDouble(msg[8][i][9].trim());
-                        double weight = Double.parseDouble(msg[8][i][8].trim());
-                        double bmi = Math.round((weight / (height * height)) * 10000);
+                        double height = Double.parseDouble(msg[8][i][9]);
+                        double weight = Double.parseDouble(msg[8][i][8]);
+                        double bmi = calcBMI_Math(height, weight);
                         tbl_vts.getModel().setValueAt("" + msg[8][i][9], i, 0);
                         tbl_vts.getModel().setValueAt("" + msg[8][i][8], i, 1);
                         tbl_vts.getModel().setValueAt("" + msg[8][i][13], i, 2);
@@ -14321,13 +14327,7 @@ public class Consultation extends javax.swing.JFrame {
                 row2[9] = mr2[9].getRowNums();
                 msg2[10] = mr2[10].getData("DTO");
                 row2[10] = mr2[10].getRowNums();
-                for (int i = 0; i < row2[0]; i++) {
-                    try {
-                        HPI_DetailstxtArea.setText(msg2[0][i][1]);
-                        accept_button_HPI();
-                    } catch (Exception e) {
-                    }
-                }
+                
                 for (int i = 0; i < row2[1]; i++) {
                     try {
                         txt_complaintSearch.setText(msg2[1][i][2]);
@@ -14337,6 +14337,13 @@ public class Consultation extends javax.swing.JFrame {
                         cbx_site.setSelectedItem(msg2[1][i][9]);
                         cbx_laterality.setSelectedItem(msg2[1][i][11]);
                         accept_button_ccomplaint();
+                    } catch (Exception e) {
+                    }
+                }
+                for (int i = 0; i < row2[0]; i++) {
+                    try {
+                        HPI_DetailstxtArea.setText(msg2[0][i][1]);
+                        accept_button_HPI();
                     } catch (Exception e) {
                     }
                 }
@@ -14366,121 +14373,224 @@ public class Consultation extends javax.swing.JFrame {
                 }
                 for (int i = 0; i < row2[4]; i++) {
                     try {
-                        txt_socialProblem.setText(msg2[4][i][2]);
-                        try {
-                            txt_socialDate1.setDate((Date) new SimpleDateFormat(
-                                    Func.DATE_FORMAT_1).parse(msg2[4][i][8]));
-                        } catch (Exception e) {
-                            try {
-                                txt_socialDate1.setDate((Date) new SimpleDateFormat(
-                                        Func.DATE_FORMAT_2).parse(msg2[4][i][8]));
-                            } catch (Exception ee) {
-                            }
-                        }
-                        txt_socialComment.setText(msg2[4][i][12]);
-                        accept_btn_soh();
+//                        txt_socialProblem.setText(msg2[4][i][2]);
+//                        try {
+//                            txt_socialDate1.setDate((Date) new SimpleDateFormat(
+//                                    Func.DATE_FORMAT_1).parse(msg2[4][i][8]));
+//                        } catch (Exception e) {
+//                            try {
+//                                txt_socialDate1.setDate((Date) new SimpleDateFormat(
+//                                        Func.DATE_FORMAT_2).parse(msg2[4][i][8]));
+//                            } catch (Exception ee) {
+//                            }
+//                        }
+//                        txt_socialComment.setText(msg2[4][i][12]);
+//                        accept_btn_soh();
+                        String data[] = {"Social History",
+                            "Problem: " + Func.trim(msg2[4][i][2]),
+                            "Comment: " + Func.trim(msg2[4][i][12]),
+                            "Date: " + Func.trim(msg2[4][i][8])
+                        };
+                        setData(data, 5); //5 for SH
                     } catch (Exception e) {
                     }
                 }
                 for (int i = 0; i < row2[5]; i++) {
                     try {
-                        txt_allergySearch.setText(msg2[5][i][2]);
-                        try {
-                            txt_allergyDate2.setDate((Date) new SimpleDateFormat(
-                                    Func.DATE_FORMAT_1).parse(msg2[5][i][3]));
-                        } catch (Exception e) {
-                            try {
-                                txt_allergyDate2.setDate((Date) new SimpleDateFormat(
-                                        Func.DATE_FORMAT_2).parse(msg2[5][i][3]));
-                            } catch (Exception ee) {
-                            }
-                        }
-                        txt_allergyComments.setText(msg2[5][i][4]);
-                        accept_btn_alg();
+//                        txt_allergySearch.setText(msg2[5][i][2]);
+//                        try {
+//                            txt_allergyDate2.setDate((Date) new SimpleDateFormat(
+//                                    Func.DATE_FORMAT_1).parse(msg2[5][i][3]));
+//                        } catch (Exception e) {
+//                            try {
+//                                txt_allergyDate2.setDate((Date) new SimpleDateFormat(
+//                                        Func.DATE_FORMAT_2).parse(msg2[5][i][3]));
+//                            } catch (Exception ee) {
+//                            }
+//                        }
+//                        txt_allergyComments.setText(msg2[5][i][4]);
+//                        accept_btn_alg();
+                        String data[] = {"Allergy",
+                            "Type: " + Func.trim(msg2[5][i][2]),
+                            "Comment: " + Func.trim(msg2[5][i][4]),
+                            "Date: " + Func.trim(msg2[5][i][3])
+                        };
+                        setData(data, 7); //7 for Allergy
                     } catch (Exception e) {
                     }
                 }
                 for (int i = 0; i < row2[6]; i++) {
                     try {
-                        txt_immSearch.setText(msg2[6][i][2]);
-                        txt_immComment.setText(msg2[6][i][4]);
-                        try {
-                            txt_immDate1.setDate((Date) new SimpleDateFormat(
-                                    Func.DATE_FORMAT_1).parse(msg2[6][i][3]));
-                        } catch (Exception e) {
-                            try {
-                                txt_immDate1.setDate((Date) new SimpleDateFormat(
-                                        Func.DATE_FORMAT_2).parse(msg2[6][i][3]));
-                            } catch (Exception ee) {
-                            }
-                        }
-                        accept_btn_imu();
+//                        txt_immSearch.setText(msg2[6][i][2]);
+//                        txt_immComment.setText(msg2[6][i][4]);
+//                        try {
+//                            txt_immDate1.setDate((Date) new SimpleDateFormat(
+//                                    Func.DATE_FORMAT_1).parse(msg2[6][i][3]));
+//                        } catch (Exception e) {
+//                            try {
+//                                txt_immDate1.setDate((Date) new SimpleDateFormat(
+//                                        Func.DATE_FORMAT_2).parse(msg2[6][i][3]));
+//                            } catch (Exception ee) {
+//                            }
+//                        }
+//                        accept_btn_imu();
+                        String data[] = {"Immunisation",
+                            "Type: " + Func.trim(msg2[6][i][2]),
+                            "Comment: " + Func.trim(msg2[6][i][4]),
+                            "Date: " + Func.trim(msg2[6][i][3])
+                        };
+                        setData(data, 8); //8 for Immunisation
                     } catch (Exception e) {
                     }
                 }
                 for (int i = 0; i < row2[7]; i++) {
                     try {
-                        txt_disabilityType.setText(msg2[7][i][2]);
-                        try {
-                            txt_dDate1.setDate((Date) new SimpleDateFormat(
-                                    Func.DATE_FORMAT_1).parse(msg2[7][i][3]));
-                        } catch (Exception e) {
-                            try {
-                                txt_dDate1.setDate((Date) new SimpleDateFormat(
-                                        Func.DATE_FORMAT_2).parse(msg2[7][i][3]));
-                            } catch (Exception ee) {
-                            }
-                        }
-                        txt_dComments.setText("");
-                        accept_btn_dab();
+//                        txt_disabilityType.setText(msg2[7][i][2]);
+//                        try {
+//                            txt_dDate1.setDate((Date) new SimpleDateFormat(
+//                                    Func.DATE_FORMAT_1).parse(msg2[7][i][3]));
+//                        } catch (Exception e) {
+//                            try {
+//                                txt_dDate1.setDate((Date) new SimpleDateFormat(
+//                                        Func.DATE_FORMAT_2).parse(msg2[7][i][3]));
+//                            } catch (Exception ee) {
+//                            }
+//                        }
+//                        txt_dComments.setText("");
+//                        accept_btn_dab();
+                        String data[] = {"Disability",
+                            "Type: " + Func.trim(msg2[7][i][2]),
+                            "Comment: " + Func.trim(""),
+                            "Date: " + Func.trim(msg2[7][i][3])
+                        };
+                        setData(data, 9); //9 for Disability
                     } catch (Exception e) {
                     }
                 }
                 for (int i = 0; i < row2[8]; i++) {
                     try {
-                        txt_height.setText(msg2[8][i][9]);
-                        txt_weight.setText(msg2[8][i][8]);
-                        txt_systolic.setText(msg2[8][i][2]);
-                        txt_diastolic.setText(msg2[8][i][3]);
-                        txt_systolic1.setText(msg2[8][i][6]);
-                        txt_diastolic1.setText(msg2[8][i][7]);
-                        txt_systolic2.setText(msg2[8][i][4]);
-                        txt_diastolic2.setText(msg2[8][i][5]);
-                        txt_pulse.setText(msg2[8][i][13]);
-                        txt_pulse1.setText(msg2[8][i][13]);
-                        txt_pulse2.setText(msg2[8][i][13]);
-                        txt_headCircumference.setText(msg2[8][i][10]);
-                        txt_temperature.setText(msg2[8][i][1]);
-                        calcBMI();
-                        accept_button_vts();
+//                        txt_height.setText(msg2[8][i][9]);
+//                        txt_weight.setText(msg2[8][i][8]);
+//                        txt_systolic.setText(msg2[8][i][2]);
+//                        txt_diastolic.setText(msg2[8][i][3]);
+//                        txt_systolic1.setText(msg2[8][i][6]);
+//                        txt_diastolic1.setText(msg2[8][i][7]);
+//                        txt_systolic2.setText(msg2[8][i][4]);
+//                        txt_diastolic2.setText(msg2[8][i][5]);
+//                        txt_pulse.setText(msg2[8][i][13]);
+//                        txt_pulse1.setText(msg2[8][i][13]);
+//                        txt_pulse2.setText(msg2[8][i][13]);
+//                        txt_headCircumference.setText(msg2[8][i][10]);
+//                        txt_temperature.setText(msg2[8][i][1]);
+//                        calcBMI();
+//                        accept_button_vts();
+                        /*
+                        String data[] = {
+                            tem, //1
+                            sys, //2
+                            dis, //3
+                            sys2, //4
+                            dis2, //5
+                            sys1, //6
+                            dis1, //7
+                            wei, //8
+                            hei, //9
+                            hea, //10
+                            respiratory_rate, //11
+                            "", //12
+                            pul+","+pul1+","+pul2, //13
+                            "", //14
+                            "", //15
+                            "", //16
+                            "", //17
+                            "", //18
+                            "", //19
+                            "", //20
+                            "", //21
+                            date.toString(), //22
+                            Session.getHfc_code(), //23
+                            Session.getUser_id(), //24
+                            Session.getUser_name(), //25
+                            
+                            gcs_points, //26
+                            gcs_result, //27
+                            pgcs_points, //28
+                            pgcs_result, //29
+                            oxygen_saturation, //30
+                            pain_scale, //31
+                            
+                            blood_glucose //32
+                        };
+                        */
+                        String pulse[] = msg2[8][i][13].split(",");
+                        String pul = (pulse.length >= 1) ? (pulse[0]) : ("");
+                        String pul1 = (pulse.length >= 2) ? (pulse[1]) : ("");
+                        String pul2 = (pulse.length >= 3) ? (pulse[2]) : ("");
+                        String data[] = {"Vital Sign",
+                            "GCS Points: " + Func.trim(msg2[8][i][26]),
+                            "GCS Result: " + Func.trim(msg2[8][i][27]),
+                            "PGCS Points: " + Func.trim(msg2[8][i][28]),
+                            "PGCS Result: " + Func.trim(msg2[8][i][29]),
+                            "Respiratory Rate: " + Func.trim(msg2[8][i][11]),
+                            "Oxygen Saturation: " + Func.trim(msg2[8][i][30]),
+                            "Pain Scale: " + Func.trim(msg2[8][i][31]),
+                            "Height: " + Func.trim(msg2[8][i][9]) + " cm",
+                            "Weight: " + Func.trim(msg2[8][i][8]) + " kg",
+                            "BMI: " + Func.trim(""+calcBMI_Math(Double.parseDouble(msg2[8][i][9]), Double.parseDouble(msg2[8][i][8]))) + " kg/m2",
+                            "Status: " + Func.trim(calcBMI(Double.parseDouble(msg2[8][i][9]), Double.parseDouble(msg2[8][i][8]))),
+                            "Head circumference: " + Func.trim(msg2[8][i][10]) + " cm",
+                            "Temp: " + Func.trim(msg2[8][i][1]) + " celcius",
+                            "Systolic Sitting: " + Func.trim(msg2[8][i][2]) + " mmHg",
+                            "Diastolic Sitting: " + Func.trim(msg2[8][i][3]) + " mmHg",
+                            "Pulse: " + Func.trim(pul) + " /min",
+                            "Systolic Standing: " + Func.trim(msg2[8][i][6]) + " mmHg",
+                            "Diastolic Standing: " + Func.trim(msg2[8][i][7]) + " mmHg",
+                            "Pulse: " + Func.trim(pul1) + " /min",
+                            "Systolic Lying: " + Func.trim(msg2[8][i][4]) + " mmHg",
+                            "Diastolic Lying: " + Func.trim(msg2[8][i][5]) + " mmHg",
+                            "Pulse: " + Func.trim(pul2) + " /min",
+                            "Blood Glucose: " + Func.trim(msg2[8][i][32])
+                        };
+                        setData(data, 10); //10 for Vital Sign
                     } catch (Exception e) {
                     }
                 }
                 for (int i = 0; i < row2[9]; i++) {
                     try {
-                        if (msg2[9][i][2].equals("Final")) {
-                            jRadioButton1.setSelected(true);
-                            jRadioButton2.setSelected(false);
-                        } else {
-                            jRadioButton1.setSelected(false);
-                            jRadioButton2.setSelected(true);
-                        }
-                        try {
-                            txt_date1.setDate((Date) new SimpleDateFormat(
-                                    Func.DATE_FORMAT_1).parse(msg2[9][i][4]));
-                        } catch (Exception e) {
-                            try {
-                                txt_date1.setDate((Date) new SimpleDateFormat(
-                                        Func.DATE_FORMAT_2).parse(msg2[9][i][4]));
-                            } catch (Exception ee) {
-                            }
-                        }
-                        txt_diagnosisSearch.setText(msg2[9][i][8]);
-                        cbx_dSeverity.setSelectedItem(msg2[9][i][10]);
-                        dbx_site.setSelectedItem(msg2[9][i][12]);
-                        dbx_laterality.setSelectedItem(msg2[9][i][16]);
-                        txt_diagComment.setText(msg2[9][i][19]);
-                        accept_btn_dgs();
+//                        if (msg2[9][i][2].equals("Final")) {
+//                            jRadioButton1.setSelected(true);
+//                            jRadioButton2.setSelected(false);
+//                        } else {
+//                            jRadioButton1.setSelected(false);
+//                            jRadioButton2.setSelected(true);
+//                        }
+//                        try {
+//                            txt_date1.setDate((Date) new SimpleDateFormat(
+//                                    Func.DATE_FORMAT_1).parse(msg2[9][i][4]));
+//                        } catch (Exception e) {
+//                            try {
+//                                txt_date1.setDate((Date) new SimpleDateFormat(
+//                                        Func.DATE_FORMAT_2).parse(msg2[9][i][4]));
+//                            } catch (Exception ee) {
+//                            }
+//                        }
+//                        txt_diagnosisSearch.setText(msg2[9][i][8]);
+//                        cbx_dSeverity.setSelectedItem(msg2[9][i][10]);
+//                        dbx_site.setSelectedItem(msg2[9][i][12]);
+//                        dbx_laterality.setSelectedItem(msg2[9][i][16]);
+//                        txt_diagComment.setText(msg2[9][i][19]);
+//                        accept_btn_dgs();
+                        String data[] = {"Diagnosis",
+                            "Type: " + Func.trim(msg2[9][i][2]),
+                            "Type Code: " + Func.trim(msg2[9][i][1]),
+                            "Diagnosis: " + Func.trim(msg2[9][i][8]),
+                            "Severity: " + Func.trim(msg2[9][i][10]),
+                            "Site: " + Func.trim(msg2[9][i][12]),
+                            "Laterality: " + Func.trim(msg2[9][i][16]),
+                            "Comment: " + Func.trim(msg2[9][i][19]),
+                            "Date: " + Func.trim(msg2[9][i][4])
+                        };
+                        setData(data, 11); //11 for Diagnosis
                     } catch (Exception e) {
                     }
                 }
@@ -14493,6 +14603,46 @@ public class Consultation extends javax.swing.JFrame {
                         txt_quantityOList.setText(msg2[10][i][23]);
                         cb_instructionOList.setSelectedItem(msg2[10][i][34]);
                         accept_btn_dto();
+                    } catch (Exception e) {
+                    }
+                }
+                
+                msg2[11] = mr2[11].getData("BLD");
+                row2[11] = mr2[11].getRowNums();
+                for (int i = 0; i < row2[11]; i++) {
+                    try {
+                        String data[] = {"Blood Group / G6PD",
+                            "Blood Type: " + Func.trim(msg2[11][i][0]),
+                            "Rhesus: " + Func.trim(msg2[11][i][1]),
+                            "G6PD: " + Func.trim(msg2[11][i][2]),
+                            "Comment: " + Func.trim(msg2[11][i][3])
+                        };
+                        setData(data, 6); //6 for Blood Group
+                    } catch (Exception e) {
+                    }
+                }
+                
+                msg2[12] = mr2[12].getData("PEM");
+                row2[12] = mr2[12].getRowNums();
+                for (int i = 0; i < row2[12]; i++) {
+                    try {
+                        String data[] = {"Physical Examination",
+                            "Physical Exam Name: " + Func.trim(msg2[12][i][4]),
+                            "Comments: " + Func.trim(msg2[12][i][6])
+                        };
+                        setData(data, 14); //14 for PEM
+                    } catch (Exception e) {
+                    }
+                }
+                
+                msg2[13] = mr2[13].getData("PNT");
+                row2[13] = mr2[13].getRowNums();
+                for (int i = 0; i < row2[13]; i++) {
+                    try {
+                        String data[] = {"Progress Notes",
+                            "Notes: " + Func.trim(msg2[13][i][1])
+                        };
+                        setData(data, 12); //12 for Progress Notes
                     } catch (Exception e) {
                     }
                 }

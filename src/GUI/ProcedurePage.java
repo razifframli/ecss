@@ -837,6 +837,7 @@ public class ProcedurePage extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         String orderNo = lbl_order_no.getText();
+        ArrayList<ArrayList<String>> prod1 = new ArrayList<ArrayList<String>>();
         for (int i = 0; i < NUM_ROWS_DETAIL; i++) {
             if (!tbl_procedure_detail.getModel().getValueAt(i, 0).equals("")
                     && Boolean.parseBoolean(tbl_procedure_detail.getModel().getValueAt(i, 3).toString()) == true) {
@@ -845,7 +846,25 @@ public class ProcedurePage extends javax.swing.JFrame {
                 String comments = (String) tbl_procedure_detail.getValueAt(i, 2);
                 boolean status = (Boolean) tbl_procedure_detail.getValueAt(i, 3);
                 System.out.println(procedure_cd+"|"+procedure_name+"|"+comments+"|"+status);
+                ArrayList<String> data_prod = new ArrayList<String>();
+                data_prod.add(comments);
+                String status1 = (status == true) ? ("2") : ("1");
+                data_prod.add(status1);
+                data_prod.add(orderNo);
+                data_prod.add(procedure_cd);
+                prod1.add(data_prod);
             }
+        }
+        try {
+            boolean status_prod = DBConnection.getImpl().updateProcedures(prod1);
+            if (status_prod) {
+                J.o("Procedure", "Submit success..", 1);
+                getData();
+                tabPane1.setSelectedIndex(0);
+            } else {
+                J.o("Procedure", "Submit failed!", 0);
+            }
+        } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

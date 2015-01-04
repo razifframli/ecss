@@ -2109,7 +2109,8 @@ public class DBConnection {
                     + "WHERE g1.response_code = g2.response_code "
                     + "AND g1.month_code = g3.month_code "
                     + "AND g1.response_code = ? "
-                    + "AND g1.month_code = ? ";
+                    + "AND g1.month_code = ? "
+                    + "ORDER BY g1.scale_code ASC ";
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
             ps.setString(1, parent.getResponse_code());
             ps.setString(2, month.getMonth_code());

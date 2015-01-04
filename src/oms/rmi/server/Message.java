@@ -23,6 +23,7 @@ public interface Message extends Remote {
     String insertPOS(String PMI, String dataPOS) throws RemoteException;
     ArrayList<ArrayList<String>> getProcedures() throws RemoteException;
     ArrayList<ArrayList<String>> getProcedureDetail(String orderNo) throws RemoteException;
+    boolean updateProcedures(ArrayList<ArrayList<String>> prod) throws RemoteException;
     
     // fast rmi query
     ArrayList<ArrayList<String>> getQuery(String query, int col, String data[]) throws RemoteException;

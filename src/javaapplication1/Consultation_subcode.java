@@ -330,40 +330,40 @@ public class Consultation_subcode {
                         String blood_glucose = note_array[zz++].split(": ")[1].split(" ")[0];
                         
                         String data[] = {
-                            tem,
-                            sys,
-                            dis,
-                            sys2,
-                            dis2,
-                            sys1,
-                            dis1,
-                            wei,
-                            hei,
-                            hea,
-                            respiratory_rate,
-                            "",
-                            pul,
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            date.toString(),
-                            Session.getHfc_code(),
-                            Session.getUser_id(),
-                            Session.getUser_name(),
+                            tem, //1
+                            sys, //2
+                            dis, //3
+                            sys2, //4
+                            dis2, //5
+                            sys1, //6
+                            dis1, //7
+                            wei, //8
+                            hei, //9
+                            hea, //10
+                            respiratory_rate, //11
+                            "", //12
+                            pul+","+pul1+","+pul2, //13
+                            "", //14
+                            "", //15
+                            "", //16
+                            "", //17
+                            "", //18
+                            "", //19
+                            "", //20
+                            "", //21
+                            date.toString(), //22
+                            Session.getHfc_code(), //23
+                            Session.getUser_id(), //24
+                            Session.getUser_name(), //25
                             
-                            gcs_points,
-                            gcs_result,
-                            pgcs_points,
-                            pgcs_result,
-                            oxygen_saturation,
-                            pain_scale,
+                            gcs_points, //26
+                            gcs_result, //27
+                            pgcs_points, //28
+                            pgcs_result, //29
+                            oxygen_saturation, //30
+                            pain_scale, //31
                             
-                            blood_glucose
+                            blood_glucose //32
                         };
                         msgs[ii] = "VTS|" + date + "|";
                         for (int jj = 0; jj < data.length; jj++) {
@@ -380,7 +380,8 @@ public class Consultation_subcode {
                         String data[] = {
                             Blood,
                             Rhesus,
-                            G6PD
+                            G6PD,
+                            Comment
                         };
                         msgs[ii] = "BLD|" + date + "|";
                         for (int jj = 0; jj < data.length; jj++) {
