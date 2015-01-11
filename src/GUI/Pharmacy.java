@@ -7388,6 +7388,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int i = 1;
         try {
             //String source = "C:/PSMII_v7.3/data_mdc.csv";
             String source = "assets/pis_mdc2.csv";
@@ -7405,8 +7406,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             HSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
             rowIterator.next();
-            
-            int i = 1;
+                   
             while(rowIterator.hasNext())
             {
                 i++;
@@ -7414,11 +7414,26 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 if(!ispkPISMDC2exist(row.getCell(0).toString()))
                 {
                     ArrayList<String> strArr = new ArrayList<String>();
-                    for (int n = row.getFirstCellNum() ;  n < row.getLastCellNum(); n++)
+                    for (int n = row.getFirstCellNum() ;  n < row.getLastCellNum() && n < 24; n++)
                     {
-                        if( n == 15 && row.getCell(n)!=null ) // to convert date so that length will be fix to 10
+                        if(n == 8 || n == 9 || n == 11 || n == 19 || n == 20 || n == 21 || n == 23)
                         {
-                            Calendar cal = Calendar.getInstance();
+                            if(row.getCell(n) ==null )
+                            {
+                                strArr.add("1");
+                            }
+                            else if(row.getCell(n).toString().equals(""))
+                            {
+                                strArr.add("1");
+                            }
+                            else
+                            {
+                                strArr.add(row.getCell(n).toString());
+                            }
+                        }
+                        else if( n == 15 && row.getCell(n)!=null && !row.getCell(n).toString().equals("") ) // to convert date so that length will be fix to 10
+                        {
+                            Calendar cal = Calendar.getInstance();                           
                             cal.setTime(new SimpleDateFormat("dd-MMM-yyyy").parse(row.getCell(n).toString()));
                             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                             dLexpdate = sdf.format(cal.getTime());//date
@@ -7430,7 +7445,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                         }
                     }
                     fnInsertPISMDC2(strArr);
-                    String ggrr = "";
+                    //String ggrr = "";
                 }
             }
             //name of source file
@@ -7454,7 +7469,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             Logger.getLogger(Pharmacy.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException sqlEx)
         {
-            System.out.println(sqlEx);
+            System.out.println(sqlEx+".Stuck at line :"+i);
         } catch(ParseException parEx)
         {
             System.out.println(parEx);
@@ -7502,9 +7517,35 @@ jScrollPane17.setViewportView(tbl_drugOList);
 
         //prepare sql query and execute it
         PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+        
+        if(arrData.size() != 24) //IMPORTANT..If more table column added, need to change this also meh..
+        {
+            int arrSize = arrData.size();
+            for(; arrSize < 24 ; arrSize++)
+            {
+                if(arrSize == 8 || arrSize == 9 || arrSize == 11 || arrSize == 19 || arrSize == 20 || arrSize == 21 || arrSize == 23)
+                {
+                    arrData.add("1"); 
+                }
+                else
+                {
+                   arrData.add(""); 
+                }
+                
+            }
+            
+        }
         for(int i = 1 ; i <=  arrData.size() ; i++)
         {
-                ps.setString(i, arrData.get(i-1));
+//            if(i == 9 || i == 10 || i == 12 || i == 20 || i == 21 || i == 22 || i == 24)
+//            {
+//                ps.setDouble(i, Double.parseDouble(arrData.get(i-1)));
+//            }
+//            else
+            {
+              ps.setString(i, arrData.get(i-1));  
+            }
+            
         }
               
 
