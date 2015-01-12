@@ -14252,17 +14252,20 @@ public class Consultation extends javax.swing.JFrame {
                 }
                 if (row[8] > 0) {
                     for (int i = 0; i < row[8] && i < rows_tbl; i++) {
-                        double height = Double.parseDouble(msg[8][i][9]);
-                        double weight = Double.parseDouble(msg[8][i][8]);
-                        double bmi = calcBMI_Math(height, weight);
-                        tbl_vts.getModel().setValueAt("" + msg[8][i][9], i, 0);
-                        tbl_vts.getModel().setValueAt("" + msg[8][i][8], i, 1);
-                        tbl_vts.getModel().setValueAt("" + msg[8][i][13], i, 2);
-                        tbl_vts.getModel().setValueAt("" + bmi, i, 3);
-                        tbl_vts.getModel().setValueAt("" + msg[8][i][10], i, 4);
-                        tbl_vts.getModel().setValueAt("" + msg[8][i][1], i, 5);
-                        tbl_vts.getModel().setValueAt("" + msg[8][i][2] + "," + msg[8][i][6] + "," + msg[8][i][4], i, 6);
-                        tbl_vts.getModel().setValueAt("" + msg[8][i][3] + "," + msg[8][i][7] + "," + msg[8][i][5], i, 7);
+                        try {
+                            double height = Double.parseDouble(msg[8][i][9]);
+                            double weight = Double.parseDouble(msg[8][i][8]);
+                            double bmi = calcBMI_Math(height, weight);
+                            tbl_vts.getModel().setValueAt("" + msg[8][i][9], i, 0);
+                            tbl_vts.getModel().setValueAt("" + msg[8][i][8], i, 1);
+                            tbl_vts.getModel().setValueAt("" + msg[8][i][13], i, 2);
+                            tbl_vts.getModel().setValueAt("" + bmi, i, 3);
+                            tbl_vts.getModel().setValueAt("" + msg[8][i][10], i, 4);
+                            tbl_vts.getModel().setValueAt("" + msg[8][i][1], i, 5);
+                            tbl_vts.getModel().setValueAt("" + msg[8][i][2] + "," + msg[8][i][6] + "," + msg[8][i][4], i, 6);
+                            tbl_vts.getModel().setValueAt("" + msg[8][i][3] + "," + msg[8][i][7] + "," + msg[8][i][5], i, 7);
+                        } catch (Exception e) {
+                        }
                     }
                 }
                 if (row[9] > 0) {
