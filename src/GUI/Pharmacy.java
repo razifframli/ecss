@@ -4152,6 +4152,41 @@ public class Pharmacy extends javax.swing.JFrame{
                 //update data
                 ps.executeUpdate();
                 
+                try {
+                    String [] arrPS = new String[25];
+                    arrPS[0]=(dmdc);
+                    arrPS[1]=("Utem");
+                    arrPS[2]=(dtraden);
+                    arrPS[3]=(dgnrn);
+                    arrPS[4]=(droute);
+                    arrPS[5]=(ddosage);
+                    arrPS[6]=(dstrength);
+                    arrPS[7]=(dLadvisory);
+                    arrPS[8]=(dstockqty);
+                    arrPS[9]=(dLqty);
+                    arrPS[10]=(dLqtyt);
+                    arrPS[11]=(dLduration);
+                    arrPS[12]=(dLdurationType);
+                    arrPS[13]=(dLfreq);
+                    arrPS[14]=(dLcaution);
+                    arrPS[15]=(dLexpdate);
+                    arrPS[16]=(dLclassification);
+                    arrPS[17]=(dstatus);
+                    arrPS[18]=(dloccode);
+                    arrPS[19]=(dsellp);
+                    arrPS[20]=(dcostp);
+                    arrPS[21]=(dpackaging);
+                    arrPS[22]=(dpackagingType);
+                    arrPS[23]=(dpriceppack);
+                    arrPS[24]=(dmdc);
+                    
+                    Boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
+                    String ggr = "";
+                } catch (Exception e) {
+                    System.out.println("got error.."+e.getMessage());
+                    JOptionPane.showMessageDialog(null, "Unable to save at central Server. Please try again soon");
+                }
+                
                 //popup windows update success
                 JOptionPane.showMessageDialog(btn_updateMDC, "Update success!");
                 
@@ -7550,6 +7585,15 @@ jScrollPane17.setViewportView(tbl_drugOList);
               
 
         ps.execute();
+        
+        try {
+            String [] fixArrData = new String[arrData.size()];
+            fixArrData = arrData.toArray(fixArrData);
+            Boolean bool = DBConnection.getImpl().setQuery(sql, fixArrData);
+            String ej = "ehhhh";
+            
+        } catch (Exception e) {
+        }
     }
     
    
@@ -8237,6 +8281,41 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 ps.setString(23, dpackagingType);
                 ps.setString(24, dpriceppack);
                 
+                //update data
+                ps.execute();
+                
+                try {
+                    String [] arrPS = new String[24];
+                    arrPS[0]=(dmdc);
+                    arrPS[1]=("Utem");
+                    arrPS[2]=(dtraden);
+                    arrPS[3]=(dgnrn);
+                    arrPS[4]=(droute);
+                    arrPS[5]=(ddosage);
+                    arrPS[6]=(dstrength);
+                    arrPS[7]=(dLadvisory);
+                    arrPS[8]=(dstockqty);
+                    arrPS[9]=(dLqty);
+                    arrPS[10]=(dLqtyt);
+                    arrPS[11]=(dLduration);
+                    arrPS[12]=(dLdurationType);
+                    arrPS[13]=(dLfreq);
+                    arrPS[14]=(dLcaution);
+                    arrPS[15]=(dLexpdate);
+                    arrPS[16]=(dLclassification);
+                    arrPS[17]=(dstatus);
+                    arrPS[18]=(dloccode);
+                    arrPS[19]=(dsellp);
+                    arrPS[20]=(dcostp);
+                    arrPS[21]=(dpackaging);
+                    arrPS[22]=(dpackagingType);
+                    arrPS[23]=(dpriceppack);
+                    
+                    Boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Unable to save data to central server. Please save again when online");
+                }
+                
                 String sql1 = "INSERT INTO PIS_PRODUCT_SUPPLIER (Update_Stock_Date, Staff_ID, Supplier_ID, UD_MDC_Code) VALUES (?,?,?,?)";
 
                 //prepare sql query and execute it
@@ -8248,8 +8327,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 ps1.setString(4, dmdc);
 
                 
-                //update data
-                ps.execute();
+                
                 //update data
                 ps1.execute();
 
@@ -8322,6 +8400,14 @@ jScrollPane17.setViewportView(tbl_drugOList);
             
             ps.execute();
             ps.close();
+            
+            try {
+                String [] arr = new String [1];
+                arr[0] = txt_mdcCode.getText();
+                boolean bool = DBConnection.getImpl().setQuery(sql, arr);
+            } catch (Exception e) {
+                
+            }
             
             //clear textfield
             txt_mdcCode.setText("");
