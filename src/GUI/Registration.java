@@ -5847,14 +5847,14 @@ public class Registration extends javax.swing.JFrame {
                     InsuranceInfo1 = trim(patientRegister1.getInsuranceDetailUsingNewIC(RegisterInfo1[0]));
                 }
 
-                try {
-                    // id no
-                    for (int i = 0; i <= 26; i++) {
-                        S.oln(i+" umaq:"+RegisterInfo1[i]);
-                    }
-                } catch (Exception e) {
-                    J.o("", "error dowh", 0);
-                }
+//                try {
+//                    // id no
+//                    for (int i = 0; i <= 26; i++) {
+//                        S.oln(i+" umaq:"+RegisterInfo1[i]);
+//                    }
+//                } catch (Exception e) {
+//                    J.o("", "error dowh", 0);
+//                }
                 
                 if (RegisterInfo1[4].equals("-")) {
                     
