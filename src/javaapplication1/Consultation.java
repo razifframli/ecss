@@ -8927,10 +8927,10 @@ public class Consultation extends javax.swing.JFrame {
         jTextArea7.setText("");
         String cmmt = (String) txt_complaintComment.getText();
         String searchcbx = txt_complaintSearch.getText();
-        if (!Searching.isSearchCCN1(searchcbx)) {
-            J.o("Invalid", "Invalid Chief Complaint", 0);
-            return;
-        }
+//        if (!Searching.isSearchCCN1(searchcbx)) {
+//            J.o("Invalid", "Invalid Chief Complaint", 0);
+//            return;
+//        }
         String severity = (String) cbx_cSeverity.getSelectedItem();
         String site = (String) cbx_site.getSelectedItem();
         String durationtxt = (String) txt_duration.getText();
@@ -9947,6 +9947,13 @@ public class Consultation extends javax.swing.JFrame {
 
     private void btn_dischargeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dischargeActionPerformed
 
+        if (checkPatient()) {
+            return;
+        }
+        if (checkDiagnosis().equals("|")) {
+            return;
+        }
+        
         Consultation_subcode.btn_discharge(this);
     }//GEN-LAST:event_btn_dischargeActionPerformed
 
@@ -11846,19 +11853,28 @@ public class Consultation extends javax.swing.JFrame {
         }
     }
     
-    public String checkProblem() {
+    public boolean checkPatient2() {
+        String pmiNo = txt_pName.getText();
+        if (pmiNo.length() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public String checkDiagnosis() {
         problemCode = "";
         problemDesc = "";
-        for(int i = 0; i < max_row; i++) {
-            if(note_array[i].contains("Diagnosis")) {
-                problemDesc = note_array[i+3].split(": ")[1];
+        for (int i = 0; i < max_row; i++) {
+            if (note_array[i].contains("Diagnosis")) {
+                problemDesc = note_array[i + 3].split(": ")[1];
                 try {
 //                    tempQuery = "SELECT RCC_CODE FROM READCODE_CHIEF_COMPLAINT "
 //                                    + "where UCASE(RCC_DESC) like UCASE(?) ";
                     tempQuery = "SELECT * FROM icd10_codes "
                             + "where UCASE(icd10_desc) like UCASE(?) ";
                     ps = Session.getCon_x(1000).prepareStatement(tempQuery);
-                    ps.setString(1, "%"+problemDesc+"%");
+                    ps.setString(1, "%" + problemDesc + "%");
                     rs = ps.executeQuery();
                     while (rs.next()) {
                         problemCode = rs.getString("icd10_code");
@@ -11867,6 +11883,20 @@ public class Consultation extends javax.swing.JFrame {
                     System.out.println(ex.toString());
                 }
             }
+        }
+        String probs = "|";
+        if (problemCode.equals("") && problemDesc.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please insert patient's diagnosis!");
+        } else {
+            probs = problemCode + "|" + problemDesc;
+        }
+        return probs;
+    }
+    
+    public String checkProblem() {
+        problemCode = "";
+        problemDesc = "";
+        for(int i = 0; i < max_row; i++) {
             if(note_array[i].contains("C.Complaint")) {
                 problemDesc = note_array[i+1].split(": ")[1];
                 try {
@@ -11886,12 +11916,32 @@ public class Consultation extends javax.swing.JFrame {
                 }
                 break;
             }
+            if(note_array[i].contains("Diagnosis")) {
+                problemDesc = note_array[i+3].split(": ")[1];
+                try {
+//                    tempQuery = "SELECT RCC_CODE FROM READCODE_CHIEF_COMPLAINT "
+//                                    + "where UCASE(RCC_DESC) like UCASE(?) ";
+                    tempQuery = "SELECT * FROM icd10_codes "
+                            + "where UCASE(icd10_desc) like UCASE(?) ";
+                    ps = Session.getCon_x(1000).prepareStatement(tempQuery);
+                    ps.setString(1, "%"+problemDesc+"%");
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        problemCode = rs.getString("icd10_code");
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex.toString());
+                }
+            }
         }
+        String probs = "|";
         if (problemCode.equals("") && problemDesc.equals("")) {
             JOptionPane.showMessageDialog(null, "Please insert either patient's"
                     + " complains or patient's diagnosis!");
+        } else {
+            probs = problemCode + "|" + problemDesc;
         }
-        return problemCode+"|"+problemDesc;
+        return probs;
     }
             String hpisub[][] = new String[100][3];
     String tsttab9[] = new String[100];

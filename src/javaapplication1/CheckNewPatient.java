@@ -6,10 +6,12 @@
 
 package javaapplication1;
 
+import Helper.VoiceOutput;
 import api.Queue;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -30,11 +32,11 @@ public class CheckNewPatient implements Runnable {
 
         while (active) {
             
-            if (i == 2) {
-                cons.setAlwaysOnTop(true);
-            } else {
-                cons.setAlwaysOnTop(false);
-            }
+//            if (i == 2) {
+//                cons.setAlwaysOnTop(true);
+//            } else {
+//                cons.setAlwaysOnTop(false);
+//            }
             
             // thread activity.
             if (isNewPatient()) {
@@ -44,9 +46,17 @@ public class CheckNewPatient implements Runnable {
                 } else {
                     cons.lbl_new_patient.setVisible(true);
                 }
+                if (i % 5 == 0 && !cons.checkPatient2()) {
+                    cons.setAlwaysOnTop(true);
+                    cons.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    VoiceOutput.getSound("Doctor, you've got new patient");
+                } else {
+                    cons.setAlwaysOnTop(false);
+                }
                 //cons.setAlwaysOnTop(true);
             } else {
                 i = 0;
+                cons.setAlwaysOnTop(false);
                 cons.lbl_new_patient.setVisible(false);
                 //cons.setAlwaysOnTop(false);
             }

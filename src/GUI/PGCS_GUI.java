@@ -232,8 +232,10 @@ public class PGCS_GUI extends javax.swing.JFrame {
             result = "Severe Brain Injury";
         } else if (points > 8 && points <= 12) {
             result = "Moderate Brain Injury";
-        } else if (points > 12) {
+        } else if (points > 12 && points <= 14 ) {
             result = "Minor Brain Injury";
+        } else {
+            result = "Normal";
         }
         txt_result.setText(result);
     }
