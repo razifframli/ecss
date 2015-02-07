@@ -46,8 +46,12 @@ public class CheckNewPatient implements Runnable {
                 } else {
                     cons.lbl_new_patient.setVisible(true);
                 }
-                if (i % 5 == 0 && !cons.checkPatient2()) {
-                    cons.setAlwaysOnTop(true);
+                if (i % 20 == 0 && !cons.checkPatient2()) { // x panggil patient
+                    if (i % 200 == 0) {
+                        cons.setAlwaysOnTop(true);
+                    } else {
+                        cons.setAlwaysOnTop(false);
+                    }
                     cons.setExtendedState(JFrame.MAXIMIZED_BOTH);
                     VoiceOutput.getSound("Doctor, you've got new patient");
                 } else {
