@@ -2984,6 +2984,7 @@ public class Pharmacy extends javax.swing.JFrame{
         });
 
         jButton10.setText("truncate");
+        jButton10.setEnabled(false);
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -8408,7 +8409,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             } catch (Exception e) {
                 
             }
-            
+            String drugName = txt_drugNameMDC.getText();
             //clear textfield
             txt_mdcCode.setText("");
 //            catc.setSelectedItem("-");
@@ -8437,7 +8438,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             cClassification.setSelectedItem("");
             
             
-            JOptionPane.showMessageDialog(null,"Deleted "+ dmdc); 
+            JOptionPane.showMessageDialog(null,"Deleted "+ drugName); 
         }catch(Exception e){
             
            JOptionPane.showMessageDialog(null,"del from pis mdc2 "+ e); 
