@@ -472,6 +472,8 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup3">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -562,15 +564,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="mainPanel" pref="1190" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="mainPanel" alignment="0" pref="1200" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="mainPanel" alignment="0" pref="646" max="32767" attributes="0"/>
+          <Component id="mainPanel" alignment="0" pref="702" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -618,7 +617,7 @@
                       </Group>
                       <Component id="lbl_new_patient" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="72" max="32767" attributes="0"/>
+                  <EmptySpace pref="77" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -629,7 +628,7 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel76" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" pref="412" max="-2" attributes="0"/>
@@ -646,7 +645,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lbl_new_patient" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -884,12 +883,12 @@
                                     <DimensionLayout dim="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="jPanel47" max="32767" attributes="0"/>
                                                   <Component id="jPanel46" max="32767" attributes="0"/>
+                                                  <Component id="jPanel47" max="32767" attributes="0"/>
                                               </Group>
-                                              <EmptySpace pref="131" max="32767" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
@@ -898,9 +897,9 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" max="-2" attributes="0"/>
                                               <Component id="jPanel47" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="jPanel46" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="76" max="32767" attributes="0"/>
+                                              <EmptySpace pref="83" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
@@ -927,7 +926,7 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPane32" max="32767" attributes="0"/>
+                                                  <Component id="jScrollPane32" pref="710" max="32767" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
@@ -1051,18 +1050,30 @@
                                                           </Group>
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" attributes="0">
+                                                              <Group type="102" alignment="0" attributes="0">
+                                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                                      <Component id="btn_complaintClear" alignment="0" max="32767" attributes="0"/>
+                                                                      <Component id="btn_complaintAccept" alignment="0" pref="89" max="32767" attributes="0"/>
+                                                                  </Group>
+                                                                  <EmptySpace max="32767" attributes="0"/>
+                                                                  <Component id="jScrollPane20" min="-2" pref="0" max="-2" attributes="1"/>
+                                                              </Group>
                                                               <Group type="102" attributes="0">
                                                                   <Group type="103" groupAlignment="0" attributes="0">
-                                                                      <Component id="btnSrcComplaint" alignment="0" max="32767" attributes="0"/>
-                                                                      <Component id="btn_complaintAccept" alignment="0" pref="77" max="32767" attributes="0"/>
-                                                                      <Component id="btn_complaintClear" alignment="0" max="32767" attributes="0"/>
+                                                                      <Component id="btnSrcComplaint" min="-2" pref="88" max="-2" attributes="0"/>
+                                                                      <Group type="102" alignment="0" attributes="0">
+                                                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                                              <Component id="rbtn_per_search" pref="142" max="32767" attributes="0"/>
+                                                                              <Component id="rbtn_gen_search" max="32767" attributes="0"/>
+                                                                          </Group>
+                                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                                          <Group type="103" groupAlignment="0" attributes="0">
+                                                                              <Component id="btn_plus" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                                              <Component id="btn_substract" alignment="1" min="-2" pref="41" max="-2" attributes="0"/>
+                                                                          </Group>
+                                                                      </Group>
                                                                   </Group>
-                                                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                                              </Group>
-                                                              <Group type="102" alignment="1" attributes="0">
                                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                                  <Component id="jScrollPane20" min="-2" pref="0" max="-2" attributes="1"/>
-                                                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                                               </Group>
                                                           </Group>
                                                       </Group>
@@ -1076,7 +1087,7 @@
                                         </DimensionLayout>
                                         <DimensionLayout dim="1">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="2" attributes="0">
                                                       <Component id="lbl_complaintSearch" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -1084,13 +1095,28 @@
                                                       <Component id="btnSrcComplaint" alignment="2" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="2" attributes="0">
-                                                      <Component id="lbl_cSeverity" alignment="2" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="cbx_cSeverity" alignment="2" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="lbl_site" alignment="2" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="cbx_site" alignment="2" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" attributes="0">
+                                                          <Group type="103" groupAlignment="0" attributes="0">
+                                                              <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="rbtn_gen_search" min="-2" pref="15" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="2" attributes="0">
+                                                              <Component id="lbl_cSeverity" alignment="2" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="cbx_cSeverity" alignment="2" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="lbl_site" alignment="2" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="cbx_site" alignment="2" min="-2" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="btn_plus" min="-2" pref="15" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="3" attributes="0">
+                                                              <Component id="btn_substract" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                                                              <Component id="rbtn_per_search" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1334,6 +1360,57 @@
                                         <Component class="javax.swing.JLabel" name="lbl_ccdate">
                                           <AuxValues>
                                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                                          </AuxValues>
+                                        </Component>
+                                        <Component class="javax.swing.JRadioButton" name="rbtn_gen_search">
+                                          <Properties>
+                                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="c8" green="b6" red="ad" type="rgb"/>
+                                            </Property>
+                                            <Property name="selected" type="boolean" value="true"/>
+                                            <Property name="text" type="java.lang.String" value="Generic Search"/>
+                                          </Properties>
+                                          <Events>
+                                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rbtn_gen_searchMouseClicked"/>
+                                          </Events>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                                          </AuxValues>
+                                        </Component>
+                                        <Component class="javax.swing.JRadioButton" name="rbtn_per_search">
+                                          <Properties>
+                                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="c8" green="b6" red="ad" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Personalized Search"/>
+                                          </Properties>
+                                          <Events>
+                                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rbtn_per_searchMouseClicked"/>
+                                          </Events>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                                          </AuxValues>
+                                        </Component>
+                                        <Component class="javax.swing.JButton" name="btn_substract">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="-"/>
+                                          </Properties>
+                                          <Events>
+                                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_substractActionPerformed"/>
+                                          </Events>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                                          </AuxValues>
+                                        </Component>
+                                        <Component class="javax.swing.JButton" name="btn_plus">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="+"/>
+                                          </Properties>
+                                          <Events>
+                                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_plusActionPerformed"/>
+                                          </Events>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                                           </AuxValues>
                                         </Component>
                                       </SubComponents>
@@ -8566,19 +8643,19 @@
                               <Component id="txt_pBloodSex" max="32767" attributes="1"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_pBloodSex1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_pBloodSex1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace pref="45" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="cbx_allergy" min="-2" pref="208" max="-2" attributes="0"/>
                                   <Component id="lbl_g6pd" min="-2" pref="136" max="-2" attributes="1"/>
                               </Group>
-                              <EmptySpace pref="59" max="32767" attributes="0"/>
+                              <EmptySpace pref="45" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="lblStatus" min="-2" pref="53" max="-2" attributes="0"/>
@@ -8589,7 +8666,7 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="lbl_time" min="-2" pref="278" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -8662,7 +8739,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

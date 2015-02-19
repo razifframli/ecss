@@ -533,6 +533,12 @@ public class Consultation extends javax.swing.JFrame {
         CheckNewPatient cnp = new CheckNewPatient(this);
         Thread tr = new Thread(cnp);
         tr.start();
+        
+        buttonGroup3.add(rbtn_gen_search);
+        buttonGroup3.add(rbtn_per_search);
+        btn_plus.setEnabled(true);
+        btn_substract.setEnabled(false);
+        Searching.searchStatus = 1;
     }
 
     /** This method is called from within the constructor to
@@ -579,6 +585,7 @@ public class Consultation extends javax.swing.JFrame {
         buttonGroup4 = new javax.swing.ButtonGroup();
         rbtn_grp_diagnosis = new javax.swing.ButtonGroup();
         txt_allergyDate3 = new com.toedter.calendar.JDateChooser();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         mainPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -620,6 +627,10 @@ public class Consultation extends javax.swing.JFrame {
         jScrollPane20 = new javax.swing.JScrollPane();
         jTextArea12 = new javax.swing.JTextArea();
         lbl_ccdate = new javax.swing.JLabel();
+        rbtn_gen_search = new javax.swing.JRadioButton();
+        rbtn_per_search = new javax.swing.JRadioButton();
+        btn_substract = new javax.swing.JButton();
+        btn_plus = new javax.swing.JButton();
         jScrollPane76 = new javax.swing.JScrollPane();
         jPanel19 = new javax.swing.JPanel();
         jPanel48 = new javax.swing.JPanel();
@@ -1474,7 +1485,7 @@ public class Consultation extends javax.swing.JFrame {
             jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel46Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane32)
+                .addComponent(jScrollPane32, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel46Layout.setVerticalGroup(
@@ -1560,6 +1571,37 @@ public class Consultation extends javax.swing.JFrame {
         jTextArea12.setRows(5);
         jScrollPane20.setViewportView(jTextArea12);
 
+        rbtn_gen_search.setBackground(new java.awt.Color(173, 182, 200));
+        rbtn_gen_search.setSelected(true);
+        rbtn_gen_search.setText("Generic Search");
+        rbtn_gen_search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbtn_gen_searchMouseClicked(evt);
+            }
+        });
+
+        rbtn_per_search.setBackground(new java.awt.Color(173, 182, 200));
+        rbtn_per_search.setText("Personalized Search");
+        rbtn_per_search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbtn_per_searchMouseClicked(evt);
+            }
+        });
+
+        btn_substract.setText("-");
+        btn_substract.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_substractActionPerformed(evt);
+            }
+        });
+
+        btn_plus.setText("+");
+        btn_plus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_plusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel47Layout = new javax.swing.GroupLayout(jPanel47);
         jPanel47.setLayout(jPanel47Layout);
         jPanel47Layout.setHorizontalGroup(
@@ -1595,15 +1637,23 @@ public class Consultation extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel47Layout.createSequentialGroup()
+                                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btn_complaintClear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_complaintAccept, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel47Layout.createSequentialGroup()
                                 .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSrcComplaint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btn_complaintAccept, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                                    .addComponent(btn_complaintClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(28, 28, 28))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel47Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36))))
+                                    .addComponent(btnSrcComplaint, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel47Layout.createSequentialGroup()
+                                        .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                            .addComponent(rbtn_gen_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btn_plus, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(btn_substract, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel47Layout.createSequentialGroup()
                         .addComponent(lbl_ccdate, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -1617,13 +1667,23 @@ public class Consultation extends javax.swing.JFrame {
                     .addComponent(txt_complaintSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSrcComplaint))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lbl_cSeverity)
-                    .addComponent(cbx_cSeverity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_site)
-                    .addComponent(cbx_site, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel47Layout.createSequentialGroup()
+                        .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rbtn_gen_search, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(lbl_cSeverity)
+                            .addComponent(cbx_cSeverity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_site)
+                            .addComponent(cbx_site, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel47Layout.createSequentialGroup()
+                        .addComponent(btn_plus, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_substract, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel47Layout.createSequentialGroup()
@@ -1653,20 +1713,20 @@ public class Consultation extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(131, Short.MAX_VALUE))
+                    .addComponent(jPanel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel47, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         jScrollPane3.setViewportView(jPanel3);
@@ -7212,25 +7272,25 @@ public class Consultation extends javax.swing.JFrame {
                         .addComponent(lbl_pBloodSex)
                         .addGap(18, 18, 18)
                         .addComponent(txt_pBloodSex)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel76Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_pBloodSex1)
-                            .addComponent(jLabel14))
-                        .addGap(26, 26, 26)
+                            .addComponent(jLabel14)
+                            .addComponent(lbl_pBloodSex1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbx_allergy, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_g6pd, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel76Layout.createSequentialGroup()
                                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lbl_date, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel76Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel76Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbl_time, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -7285,7 +7345,7 @@ public class Consultation extends javax.swing.JFrame {
                                     .addComponent(lbl_pBdate)
                                     .addComponent(jLabel14)
                                     .addComponent(cbx_allergy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 16, Short.MAX_VALUE))))
+                        .addGap(0, 10, Short.MAX_VALUE))))
         );
 
         lbl_new_patient.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -7331,7 +7391,7 @@ public class Consultation extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lbl_new_patient, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -7340,7 +7400,7 @@ public class Consultation extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel76, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -7356,7 +7416,7 @@ public class Consultation extends javax.swing.JFrame {
                     .addComponent(btn_viewHistory))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_new_patient)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -7393,13 +7453,11 @@ public class Consultation extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1190, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
         );
 
         pack();
@@ -8927,10 +8985,10 @@ public class Consultation extends javax.swing.JFrame {
         jTextArea7.setText("");
         String cmmt = (String) txt_complaintComment.getText();
         String searchcbx = txt_complaintSearch.getText();
-//        if (!Searching.isSearchCCN1(searchcbx)) {
-//            J.o("Invalid", "Invalid Chief Complaint", 0);
-//            return;
-//        }
+        if (!Searching.isSearchCCN1(searchcbx)) {
+            J.o("Invalid", "Invalid Chief Complaint", 0);
+            return;
+        }
         String severity = (String) cbx_cSeverity.getSelectedItem();
         String site = (String) cbx_site.getSelectedItem();
         String durationtxt = (String) txt_duration.getText();
@@ -11843,6 +11901,79 @@ public class Consultation extends javax.swing.JFrame {
         vph.setVisible(true);
     }//GEN-LAST:event_btn_viewHistoryActionPerformed
 
+    private void rbtn_gen_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtn_gen_searchMouseClicked
+        // TODO add your handling code here:
+        btn_plus.setEnabled(true);
+        btn_substract.setEnabled(false);
+        Searching.searchStatus = 1;
+    }//GEN-LAST:event_rbtn_gen_searchMouseClicked
+
+    private void rbtn_per_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtn_per_searchMouseClicked
+        // TODO add your handling code here:
+        btn_plus.setEnabled(false);
+        btn_substract.setEnabled(true);
+        Searching.searchStatus = 2;
+    }//GEN-LAST:event_rbtn_per_searchMouseClicked
+
+    private void btn_plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_plusActionPerformed
+        // TODO add your handling code here:
+        try {
+            String searchcbx = txt_complaintSearch.getText();
+            if (!Searching.isSearchCCN1(searchcbx)) {
+                J.o("Invalid", "Invalid Chief Complaint", 0);
+                return;
+            } else {
+                String sql = "SELECT * FROM READCODE_CHIEF_COMPLAINT "
+                        + "where UCASE(RCC_DESC) = UCASE(?) order by RCC_DESC ";
+                PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+                ps.setString(1, searchcbx);
+                ResultSet rs = ps.executeQuery();
+                String code = "";
+                if (rs.next()) {
+                    code = rs.getString(1);
+                    sql = "INSERT INTO CIS_PERSONALIZED_CODE VALUES(?, ?) ";
+                    PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql);
+                    ps2.setString(1, code);
+                    ps2.setString(2, searchcbx);
+                    ps2.execute();
+                    J.o("Add Success", "Add Success ..", 1);
+                } else {
+                    J.o("Add Fail", "Add Fail !!", 0);
+                }
+            }
+        } catch (Exception e) {
+            J.o("Database Error", "Database error: "+e.getMessage(), 0);
+        }
+    }//GEN-LAST:event_btn_plusActionPerformed
+
+    private void btn_substractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_substractActionPerformed
+        // TODO add your handling code here:
+        try {
+            String searchcbx = txt_complaintSearch.getText();
+            if (!Searching.isSearchCCN1(searchcbx)) {
+                J.o("Invalid", "Invalid Chief Complaint", 0);
+                return;
+            } else {
+                String sql = "SELECT * FROM READCODE_CHIEF_COMPLAINT "
+                        + "where UCASE(RCC_DESC) = UCASE(?) order by RCC_DESC ";
+                PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+                ps.setString(1, searchcbx);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    sql = "DELETE FROM CIS_PERSONALIZED_CODE WHERE CPC_DESC = ? ";
+                    PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql);
+                    ps2.setString(1, searchcbx);
+                    ps2.execute();
+                    J.o("Remove Success", "Remove Success ..", 1);
+                } else {
+                    J.o("Remove Fail", "Remove Fail !!", 0);
+                }
+            }
+        } catch (Exception e) {
+            J.o("Database Error", "Database error: "+e.getMessage(), 0);
+        }
+    }//GEN-LAST:event_btn_substractActionPerformed
+
     public boolean checkPatient() {
         String pmiNo = txt_pName.getText();
         if (pmiNo.length() == 0) {
@@ -11866,7 +11997,8 @@ public class Consultation extends javax.swing.JFrame {
         problemCode = "";
         problemDesc = "";
         for (int i = 0; i < max_row; i++) {
-            if (note_array[i].contains("Diagnosis")) {
+            if (note_array[i].equals("Diagnosis")) {
+                //J.o("title", note_array[i + 3], 0);
                 problemDesc = note_array[i + 3].split(": ")[1];
                 try {
 //                    tempQuery = "SELECT RCC_CODE FROM READCODE_CHIEF_COMPLAINT "
@@ -11916,7 +12048,7 @@ public class Consultation extends javax.swing.JFrame {
                 }
                 break;
             }
-            if(note_array[i].contains("Diagnosis")) {
+            if(note_array[i].equals("Diagnosis")) {
                 problemDesc = note_array[i+3].split(": ")[1];
                 try {
 //                    tempQuery = "SELECT RCC_CODE FROM READCODE_CHIEF_COMPLAINT "
@@ -13984,7 +14116,11 @@ public class Consultation extends javax.swing.JFrame {
     
     public void setSelectedAppointment(String selectedAppointment, String selectedTime) {
         
-        time1 = Func.getTimeNow();
+//        time1 = Func.getTimeNow();
+        String timeStart = selectedTime;
+        timeStart.replaceAll("\\s+","");
+        time1 = timeStart;
+        //J.o("test time", "|"+selectedTime+"|"+time1+"|", 0);
         
         jTextArea7.setText("");
         
@@ -14862,14 +14998,17 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JButton btn_next;
     private javax.swing.JButton btn_pHistoryOk1;
     private javax.swing.JButton btn_pHistoryOk2;
+    public static javax.swing.JButton btn_plus;
     private javax.swing.JButton btn_sPatient;
     private javax.swing.JButton btn_sclAccept;
     private javax.swing.JButton btn_sclClear;
+    public static javax.swing.JButton btn_substract;
     protected static javax.swing.JButton btn_viewHistory;
     private javax.swing.JButton btn_vitalSignAccept;
     private javax.swing.JButton btn_vitalSignClear;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     protected static javax.swing.JComboBox cb_durationOList;
     protected static javax.swing.JComboBox cb_durationTypeOList;
@@ -15243,10 +15382,12 @@ public class Consultation extends javax.swing.JFrame {
     public static javax.swing.JRadioButton rbtn_Bpositive;
     public static javax.swing.JRadioButton rbtn_cActive1;
     public static javax.swing.JRadioButton rbtn_cInactive1;
+    public static javax.swing.JRadioButton rbtn_gen_search;
     private javax.swing.ButtonGroup rbtn_grp_diagnosis;
     private javax.swing.ButtonGroup rbtn_grp_mcts;
     private javax.swing.JRadioButton rbtn_mcts_mc;
     private javax.swing.JRadioButton rbtn_mcts_ts;
+    public static javax.swing.JRadioButton rbtn_per_search;
     protected static javax.swing.JTextField stock_qty;
     private javax.swing.JTable tblQueue;
     private javax.swing.JTable tblQueue1;

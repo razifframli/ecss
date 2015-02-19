@@ -139,7 +139,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
             }
         }
         ArrayList<PhysicalExamBean> pe_0 = DBConnection.getPhysicalExamAll(0);
-        for (int i = 0; i < pe_0.size(); i++) {
+        for (int i = 0; i < pe_0.size() && i < rowSize; i++) {
             tbl_pe_0.getModel().setValueAt(pe_0.get(i).getPe_cd(), i, 0);
             tbl_pe_0.getModel().setValueAt(pe_0.get(i).getPe_name(), i, 1);
             tbl_pe_0.getModel().setValueAt(pe_0.get(i).getPe_status(), i, 2);
@@ -152,7 +152,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
             }
         }
         ArrayList<PhysicalExamBean> pe_1 = DBConnection.getPhysicalExamAll(1);
-        for (int i = 0; i < pe_1.size(); i++) {
+        for (int i = 0; i < pe_1.size() && i < rowSize; i++) {
             tbl_pe_1.getModel().setValueAt(pe_1.get(i).getPe_cd(), i, 0);
             tbl_pe_1.getModel().setValueAt(pe_1.get(i).getPe_name(), i, 1);
             tbl_pe_1.getModel().setValueAt(pe_1.get(i).getPe_parent(), i, 2);
@@ -166,7 +166,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
             }
         }
         ArrayList<PhysicalExamBean> pe_2 = DBConnection.getPhysicalExamAll(2);
-        for (int i = 0; i < pe_2.size(); i++) {
+        for (int i = 0; i < pe_2.size() && i < rowSize; i++) {
             tbl_pe_2.getModel().setValueAt(pe_2.get(i).getPe_cd(), i, 0);
             tbl_pe_2.getModel().setValueAt(pe_2.get(i).getPe_name(), i, 1);
             tbl_pe_2.getModel().setValueAt(pe_2.get(i).getPe_parent(), i, 2);
@@ -180,7 +180,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
             }
         }
         ArrayList<PhysicalExamBean> pe_3 = DBConnection.getPhysicalExamAll(3);
-        for (int i = 0; i < pe_3.size(); i++) {
+        for (int i = 0; i < pe_3.size() && i < rowSize; i++) {
             tbl_pe_3.getModel().setValueAt(pe_3.get(i).getPe_cd(), i, 0);
             tbl_pe_3.getModel().setValueAt(pe_3.get(i).getPe_name(), i, 1);
             tbl_pe_3.getModel().setValueAt(pe_3.get(i).getPe_parent(), i, 2);
@@ -194,7 +194,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
             }
         }
         ArrayList<PhysicalExamBean> pe_4 = DBConnection.getPhysicalExamAll(4);
-        for (int i = 0; i < pe_4.size(); i++) {
+        for (int i = 0; i < pe_4.size() && i < rowSize; i++) {
             tbl_pe_4.getModel().setValueAt(pe_4.get(i).getPe_cd(), i, 0);
             tbl_pe_4.getModel().setValueAt(pe_4.get(i).getPe_name(), i, 1);
             tbl_pe_4.getModel().setValueAt(pe_4.get(i).getPe_parent(), i, 2);
@@ -208,7 +208,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
             }
         }
         ArrayList<PhysicalExamBean> pe_5 = DBConnection.getPhysicalExamAll(5);
-        for (int i = 0; i < pe_5.size(); i++) {
+        for (int i = 0; i < pe_5.size() && i < rowSize; i++) {
             tbl_pe_5.getModel().setValueAt(pe_5.get(i).getPe_cd(), i, 0);
             tbl_pe_5.getModel().setValueAt(pe_5.get(i).getPe_name(), i, 1);
             tbl_pe_5.getModel().setValueAt(pe_5.get(i).getPe_parent(), i, 2);
@@ -222,7 +222,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
             }
         }
         ArrayList<PhysicalExamBean> pe_6 = DBConnection.getPhysicalExamAll(6);
-        for (int i = 0; i < pe_6.size(); i++) {
+        for (int i = 0; i < pe_6.size() && i < rowSize; i++) {
             tbl_pe_6.getModel().setValueAt(pe_6.get(i).getPe_cd(), i, 0);
             tbl_pe_6.getModel().setValueAt(pe_6.get(i).getPe_name(), i, 1);
             tbl_pe_6.getModel().setValueAt(pe_6.get(i).getPe_parent(), i, 2);
@@ -236,7 +236,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
             }
         }
         ArrayList<PhysicalExamBean> pe_7 = DBConnection.getPhysicalExamAll(7);
-        for (int i = 0; i < pe_7.size(); i++) {
+        for (int i = 0; i < pe_7.size() && i < rowSize; i++) {
             tbl_pe_7.getModel().setValueAt(pe_7.get(i).getPe_cd(), i, 0);
             tbl_pe_7.getModel().setValueAt(pe_7.get(i).getPe_name(), i, 1);
             tbl_pe_7.getModel().setValueAt(pe_7.get(i).getPe_parent(), i, 2);

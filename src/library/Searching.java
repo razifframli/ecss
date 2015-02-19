@@ -7,6 +7,9 @@ import java.awt.datatransfer.StringSelection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javaapplication1.Consultation;
@@ -26,6 +29,12 @@ public class Searching {
     static String dosageForm = "";
     static String dosage = "";
     static String stockQty = "";
+    
+    /**
+     * 1 = generic search
+     * 2 = personalized search
+     */
+    public static int searchStatus = 1;
     
     public static void searchDrug(final Consultation cons) {
         //get pmiNo selected
@@ -554,7 +563,7 @@ public class Searching {
     public static boolean isSearchCCN1(String desc) {
         boolean status = false;
         try {
-            String sql = "SELECT RCC_DESC FROM READCODE_CHIEF_COMPLAINT "
+            String sql = "SELECT * FROM READCODE_CHIEF_COMPLAINT "
                         + "where UCASE(RCC_DESC) = UCASE(?) order by RCC_DESC ";
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
             ps.setString(1, desc);
@@ -587,18 +596,27 @@ public class Searching {
         } else {
             System.out.println(cons.ch);
             try {
-                cons.tempQuery = "SELECT RCC_DESC FROM READCODE_CHIEF_COMPLAINT "
-                        + "where UCASE(RCC_DESC) like UCASE(?) order by RCC_DESC ";
+                if (searchStatus == 1) {
+                    cons.tempQuery = "SELECT * FROM READCODE_CHIEF_COMPLAINT "
+                            + "where UCASE(RCC_DESC) like UCASE(?) ";
+                } else if (searchStatus == 2) {
+                    cons.tempQuery = "SELECT * FROM CIS_PERSONALIZED_CODE "
+                            + "where UCASE(CPC_DESC) like UCASE(?) ";
+                }
 //                tempQuery = "SELECT * FROM icd10_codes "
 //                        + "where UCASE(icd10_desc) like UCASE(?) ";
 //                        //+ "and SNOMEDDESC like '%(finding)%'";
                 ps = Session.getCon_x(1000).prepareStatement(cons.tempQuery);
-                ps.setString(1, cons.ch);
+                ps.setString(1, "%"+cons.ch+"%");
                 cons.rs = ps.executeQuery();
+                ArrayList<String> names = new ArrayList<String>();
                 while (cons.rs.next()) {
 //                    String name = rs.getString("icd10_desc");
-                    String name = cons.rs.getString("RCC_DESC");
-                    cons.listModel.addElement(name);
+                    names.add(cons.rs.getString(2));
+                }
+                Collections.sort(names);
+                for (int i = 0; i < names.size(); i++) {
+                    cons.listModel.addElement(names.get(i));
                 }
                 lbx_complaintSearch.setModel(cons.listModel);
             } catch (Exception ex) {

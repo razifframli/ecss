@@ -1443,7 +1443,7 @@ public class Registration extends javax.swing.JFrame {
         jLabel44.setText("Id Type");
 
         cboxIdTypePatient.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cboxIdTypePatient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Id Type", "-", "Police", "Army", "Foreigner" }));
+        cboxIdTypePatient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Id Type", "-", "Police", "Army", "Foreigner", "Matric No." }));
 
         cboxEligibilityCategoryPatient.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cboxEligibilityCategoryPatient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Eligibility Category", "Public", "Private", "Government", "Sosco" }));
@@ -5062,7 +5062,7 @@ public class Registration extends javax.swing.JFrame {
 //            }
 
         //registerPatient[27] = cboxHealthFacility.getSelectedItem().toString();
-        Calendar today1 = Calendar.getInstance();
+        //Calendar today1 = Calendar.getInstance();
         SimpleDateFormat dateFormat1 = new SimpleDateFormat(" HH:mm:ss");
 
         String now1 = "-";
@@ -5079,6 +5079,7 @@ public class Registration extends javax.swing.JFrame {
 
         for (int i = 0; i <= 28; i++) {
             registerPatient[i] = Func.trim(registerPatient[i]);
+            System.out.println("["+i+"]:"+registerPatient[i]+",");
         }
 
         boolean stat1 = false;
@@ -5913,14 +5914,14 @@ public class Registration extends javax.swing.JFrame {
                     } else {
                         Func.cmbSelectInput(cboxIdTypePatient, "Matric No.");
                     }
-                    if (RegisterInfo1[11].equals("F")) {
-                        Func.cmbSelectInput(cboxIdTypePatient, "Foreigner");
-                    }
-                    if (RegisterInfo1[11].equals("F")) {
-                        tfieldIdNoPatient.setText(RegisterInfo1[9]);
-                    } else {
+//                    if (RegisterInfo1[11].equals("F")) {
+//                        Func.cmbSelectInput(cboxIdTypePatient, "Foreigner");
+//                    }
+//                    if (RegisterInfo1[11].equals("F")) {
+//                        tfieldIdNoPatient.setText(RegisterInfo1[9]);
+//                    } else {
                         tfieldIdNoPatient.setText(RegisterInfo1[10]);
-                    }
+//                    }
                     // date of birth
                     tfieldDOBPatient.setDate(null);
                     // gender
@@ -6492,15 +6493,15 @@ public class Registration extends javax.swing.JFrame {
                     } else {
                         Func.cmbSelectInput(cboxIdTypePatient, "Matric No.");
                     }
-                    if (RegisterInfo3[11].equals("F")) {
-                        Func.cmbSelectInput(cboxIdTypePatient, "Foreigner");
-                    }
-                    if (RegisterInfo3[11].equals("F")) {
-                        tfieldIdNoPatient.setText(RegisterInfo3[9]);
-                    } else {
+//                    if (RegisterInfo3[11].equals("F")) {
+//                        Func.cmbSelectInput(cboxIdTypePatient, "Foreigner");
+//                    }
+//                    if (RegisterInfo3[11].equals("F")) {
+//                        tfieldIdNoPatient.setText(RegisterInfo3[9]);
+//                    } else {
                         tfieldIdNoPatient.setText(RegisterInfo3[10]);
                         tfieldNewICNoPatient.setText(RegisterInfo3[9]);
-                    }
+//                    }
                     // date of birth
                     tfieldDOBPatient.setDate(null);
                     // gender
