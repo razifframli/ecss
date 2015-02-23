@@ -8199,7 +8199,11 @@ jScrollPane17.setViewportView(tbl_drugOList);
         if (txt_mdcCode.getText().equals("")) {
             //popup windows search drug first
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter product to add!");
-        } else {
+        } else if(txt_expdate.getDate() == null) 
+        { 
+            JOptionPane.showMessageDialog(btn_addmdc, "Please select expired date!");
+        }
+        else {
 
             //get input from textfield
             dmdc = txt_mdcCode.getText();
@@ -8209,7 +8213,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             droute = txt_drugRoute.getText();
             ddosage = (String)cdosage_form.getSelectedItem();
             dstrength = txt_drugStrength.getText();
-            dstockqty = txt_stockQty.getText();//double
+            dstockqty = txt_stockQty.getText().equals("")? "0" : txt_stockQty.getText();//double
             dloccode = txt_locCode.getText();
             
             if (rbt_activeMDC.getSelectedObjects() != null) {
@@ -8217,12 +8221,12 @@ jScrollPane17.setViewportView(tbl_drugOList);
             } else {
                 dstatus = "FALSE";
             }
-            dpackaging = dpack1.getText();
+            dpackaging = dpack1.getText().equals("")? "0" :dpack1.getText();
             dpackagingType = (String)cdpack2.getSelectedItem();
-            dpriceppack = d_priceppack.getText();//double
-            dcostp = txt_costPrice.getText();//double
-            dsellp = txt_sellprice.getText();//double
-            dLqty = txt_Lqty.getText();//double
+            dpriceppack = d_priceppack.getText().equals("") ? "0" : d_priceppack.getText() ;//double
+            dcostp = txt_costPrice.getText().equals("")? "0" : txt_costPrice.getText() ;//double
+            dsellp = txt_sellprice.getText().equals("") ? "0" : txt_sellprice.getText();//double
+            dLqty = txt_Lqty.getText().equals("") ? "0" : txt_Lqty.getText();//double
             dLqtyt = (String)cLqtyT.getSelectedItem();
             dLfreq = (String)cLfrequency.getSelectedItem();
             dLduration = (String)cLduration.getSelectedItem();//numeric
