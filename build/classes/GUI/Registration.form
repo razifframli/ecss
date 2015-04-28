@@ -446,7 +446,9 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton8" min="-2" pref="119" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
                                           <Component id="jPanel23" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -476,8 +478,11 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton8" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                       <Component id="jPanel18" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                       <Component id="jPanel23" min="-2" max="-2" attributes="0"/>
@@ -1394,6 +1399,14 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
                               </Events>
                             </Component>
+                            <Component class="javax.swing.JButton" name="jButton8">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="List of Queue"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+                              </Events>
+                            </Component>
                           </SubComponents>
                         </Container>
                       </SubComponents>
@@ -1721,12 +1734,13 @@
                                   <Font name="Dialog" size="12" style="0"/>
                                 </Property>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="5">
+                                  <StringArray count="6">
                                     <StringItem index="0" value="Select Id Type"/>
                                     <StringItem index="1" value="-"/>
                                     <StringItem index="2" value="Police"/>
                                     <StringItem index="3" value="Army"/>
                                     <StringItem index="4" value="Foreigner"/>
+                                    <StringItem index="5" value="Matric No."/>
                                   </StringArray>
                                 </Property>
                               </Properties>

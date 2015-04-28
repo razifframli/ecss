@@ -1,10 +1,16 @@
 /*C4*/SET SCHEMA PUBLIC
-INSERT INTO PMS_EPISODE VALUES('8910310652137','19/01/2015','OMAR MUKHTAR BIN HAMBARAN','891031065213','-','Matric No.','M031210009','-','General Outpatient','Walk-in','-','Government','Student','Outpatient Discipline','-','-','Common Queue','-','Normal','-','-','-','-','-','-','-','-',' 13:17:58','Waiting','Klinik UTeM Induk')
+DELETE FROM ADM_USER WHERE USER_ID='DR001' AND HEALTH_FACILITY_CODE='Jabatan Pesakit Luar Am, Hosp Kuala Lumpur' AND PASSWORD='abc123' AND USER_NAME='DR. UMAR MUKHTAR' AND OCCUPATION_CODE='SYSTEM ADMINISTRATOR' AND BIRTH_DATE='1989-10-31' AND SEX_CODE='Male' AND NEW_ICNO='891031065213' AND HOME_PHONE='-' AND OFFICE_PHONE='-' AND MOBILE_PHONE='0199737579' AND LOGIN_STATUS='1' AND USER_STATUS='1' AND E_MAIL='kidzeclipes@yahoo.com' AND ID_CATEGORY_CODE='Fixed' AND START_DATE='2012-09-01' AND END_DATE='2014-09-01' AND ROOM_NO IS NULL
 COMMIT
-INSERT INTO PMS_PATIENT_BIODATA VALUES('8410260159616','-','WIRA HIDAYAT BIN MOHD SAAD','-','841026015961','-','Staff No.','02273','-','-','26/10/1984','-','-','-','-','-','-','-','-','-','-','-, -, -','-','-','-','-','-','-','-','-','-','-','-','-','-',NULL)
+DELETE FROM ADM_USER_ACCESS WHERE HEALTH_FACILITY_CODE='Jabatan Pesakit Luar Am, Hosp Kuala Lumpur' AND USER_ID='DR001' AND ROLE_CODE='SYSTEM ADMINISTRATOR' AND DISCIPLINE_CODE='Outpatient Discipline' AND SUBDISCIPLINE_CODE='Drug & Alcohol'
 COMMIT
-INSERT INTO AUTOGENERATE_PMI VALUES('8410260159616')
+INSERT INTO ADM_USER VALUES('DR001','Jabatan Pesakit Luar Am, Hosp Kuala Lumpur','abc123','DR. UMAR MUKHTAR','SYSTEM ADMINISTRATOR','1989-10-31','Male','891031065213','-','-','0199737579','1','1','kidzeclipes@yahoo.com','Fixed','2012-09-01','2014-09-01',NULL)
+COMMIT
+INSERT INTO ADM_USER_ACCESS VALUES('Jabatan Pesakit Luar Am, Hosp Kuala Lumpur','DR001','SYSTEM ADMINISTRATOR','Outpatient Discipline','Drug & Alcohol')
+COMMIT
+INSERT INTO PMS_PATIENT_BIODATA VALUES('9305180855147','-','NUR UMIRA BINTI MUSTAFA','-','930518085514','-','Matric No.','B031210001','-','-','18/05/1993','Female','-','-','-','-','-','-','-','-','-','15,PERSIARAN CEMPAKA SARI 40,, MELAYU, MALAYSIA','-','-','31400','-','MALAYSIA','0175034911','DESA CEMPAKA','-','-','31400','-','MALAYSIA','0175034911',NULL)
+COMMIT
+INSERT INTO AUTOGENERATE_PMI VALUES('9305180855147')
 COMMIT
 /*C5*/SET SCHEMA PUBLIC
-INSERT INTO PMS_EPISODE VALUES('8410260159616','19/01/2015','WIRA HIDAYAT BIN MOHD SAAD','841026015961','-','-','-','-','General Outpatient','Walk-in','-','Government','Student','Outpatient Discipline','-','-','Common Queue','-','Normal','-','-','-','-','-','-','-','-',' 13:18:44','Waiting','Klinik UTeM Induk')
+INSERT INTO PMS_EPISODE VALUES('9305180855147','27/04/2015','NUR UMIRA BINTI MUSTAFA','930518085514','-','-','-','-','General Outpatient','Walk-in','-','Government','Student','Outpatient Discipline','-','-','Common Queue','-','Normal','-','-','-','-','-','-','-','-',' 14:53:17','Waiting','Jabatan Pesakit Luar Am, Hosp Kuala Lumpur')
 COMMIT
