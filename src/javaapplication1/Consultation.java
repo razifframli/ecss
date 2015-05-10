@@ -425,13 +425,50 @@ public class Consultation extends javax.swing.JFrame {
         jScrollPane23.add(lab_req.pnl_lab_req_1);
         jScrollPane23.revalidate();
     }
+    
+    
+    public void loadDrug() {
+        try {
+            int num_rows = 24;
+            String sql = "SELECT * "
+                    + "FROM PIS_MDC2 ";
+            String params[] = {};
+            ArrayList<ArrayList<String>> data1 = DBConnection.getImpl().getQuery(sql, num_rows, params);
+            for (int j = 0; j < data1.size(); j++) {
+                //System.out.println("DRUG "+j+": "+data1.get(i)+"\n");
+                String UD_MDC_CODE = data1.get(i).get(0);
+                int num_rows1 = data1.get(i).size();
+                String sql1 = "SELECT * "
+                        + "FROM PIS_MDC2 "
+                        + "WHERE UD_MDC_CODE = ? ";
+                PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
+                ps1.setString(1, UD_MDC_CODE);
+                ResultSet rs1 = ps1.executeQuery();
+                if (!rs1.next()) {
+                    S.oln("Drug code "+UD_MDC_CODE+" not in the local list.. Adding it..");
+                    String params1 = "";
+                    for (int k = 0; k < num_rows1-1; k++) {
+                        params1 += "'"+data1.get(i).get(k)+"',";
+                    }
+                    params1 += "'"+data1.get(i).get(num_rows1-1)+"'";
+                    String sql2 = "INSERT INTO PIS_MDC2 VALUES("+params1+")";
+                    PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
+                    ps2.execute();
+                }
+            }
+            S.oln("Done sync drug.. Alhamdulillah..");
+        } catch (Exception e) {
+            S.oln("Cannot sync drug! Network down!!");
+            e.printStackTrace();
+        }
+    }
 
     /** Creates new form Consultation */
     public Consultation() {
         //LongRunProcess.check_network2();
         initComponents();
         
-        
+        loadDrug();
         
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
         
@@ -10586,21 +10623,21 @@ public class Consultation extends javax.swing.JFrame {
                     tbl_productname.getModel().setValueAt("", i, 0);
                 }
                 
-                String sql = "SELECT D_TRADE_NAME "
-                            + "FROM PIS_MDC2 "
-                            + "WHERE UCASE(D_TRADE_NAME) LIKE UCASE(?) "
-                            + "OR UCASE(D_GNR_NAME) LIKE UCASE(?)";
-                String params[] = {"%"+dtraden+"%", "%"+dtraden+"%"};
-                
-                ArrayList<ArrayList<String>> results = DBConnection.getImpl().getQuery(sql, 1, params);
-                for (int i = 0; i < results.size(); i++) {
-                    tbl_productname.getModel().setValueAt(results.get(i).get(0), i, 0);
-                }
-                
-//                ResultSet results = DBConnection.getImpl().getDrugCIS(dtraden);
-//                for (int i = 0; results.next() && i < 50; i++) {
-//                    tbl_productname.getModel().setValueAt(results.getString("D_TRADE_NAME"), i, 0);
+//                String sql = "SELECT D_TRADE_NAME "
+//                            + "FROM PIS_MDC2 "
+//                            + "WHERE UCASE(D_TRADE_NAME) LIKE UCASE(?) "
+//                            + "OR UCASE(D_GNR_NAME) LIKE UCASE(?)";
+//                String params[] = {"%"+dtraden+"%", "%"+dtraden+"%"};
+//                
+//                ArrayList<ArrayList<String>> results = DBConnection.getImpl().getQuery(sql, 1, params);
+//                for (int i = 0; i < results.size(); i++) {
+//                    tbl_productname.getModel().setValueAt(results.get(i).get(0), i, 0);
 //                }
+                
+                ResultSet results = DBConnection.getImpl().getDrugCIS(dtraden);
+                for (int i = 0; results.next() && i < 50; i++) {
+                    tbl_productname.getModel().setValueAt(results.getString("D_TRADE_NAME"), i, 0);
+                }
                 
             } catch (Exception e) {
                 e.printStackTrace();
