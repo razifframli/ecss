@@ -185,6 +185,7 @@ public class Consultation extends javax.swing.JFrame {
         ArrayList<PhysicalExamBean> pe5 = DBConnection.getPhysicalExamAll(5);
         ArrayList<PhysicalExamBean> pe6 = DBConnection.getPhysicalExamAll(6);
         ArrayList<PhysicalExamBean> pe7 = DBConnection.getPhysicalExamAll(7);
+        ArrayList<PhysicalExamBean> pe8 = DBConnection.getPhysicalExamAll(8);
         DefaultMutableTreeNode level0[] = new DefaultMutableTreeNode[pe0.size()];
         
         for (int i = 0; i < pe0.size(); i++) {
@@ -233,6 +234,15 @@ public class Consultation extends javax.swing.JFrame {
                                                                 String name_7 = pe7.get(k7).getPe_name();
                                                                 if (code_6.equals(code_7_parent)) {
                                                                     DefaultMutableTreeNode level7 = new DefaultMutableTreeNode(name_7);
+                                                                    for (int k8 = 0; k8 < pe8.size(); k8++) {
+                                                                        String code_8 = pe8.get(k8).getPe_cd();
+                                                                        String code_8_parent = pe8.get(k8).getPe_parent();
+                                                                        String name_8 = pe8.get(k8).getPe_name();
+                                                                        if (code_7.equals(code_8_parent)) {
+                                                                            DefaultMutableTreeNode level8 = new DefaultMutableTreeNode(name_8);
+                                                                            level7.add(level8);
+                                                                        }
+                                                                    }
                                                                     level6.add(level7);
                                                                 }
                                                             }
@@ -1420,7 +1430,7 @@ public class Consultation extends javax.swing.JFrame {
         });
 
         jPanel2.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(64, 64, 64), new java.awt.Color(0, 0, 0), new java.awt.Color(128, 128, 128), new java.awt.Color(192, 192, 192)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(0, new java.awt.Color(64, 64, 64), new java.awt.Color(0, 0, 0), new java.awt.Color(128, 128, 128), new java.awt.Color(192, 192, 192)));
         jPanel2.setPreferredSize(new java.awt.Dimension(1008, 502));
 
         jTextArea7.setColumns(20);
@@ -1647,7 +1657,7 @@ public class Consultation extends javax.swing.JFrame {
                                     .addComponent(btnSrcComplaint, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel47Layout.createSequentialGroup()
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.PREFERRED_SIZE, 142, Short.MAX_VALUE)
                                             .addComponent(rbtn_gen_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1847,7 +1857,7 @@ public class Consultation extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(HPI_ClrBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_HPIAccpt, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+                            .addComponent(btn_HPIAccpt, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addContainerGap(28, Short.MAX_VALUE))
                     .addGroup(jPanel49Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -3477,7 +3487,6 @@ public class Consultation extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbl_gcs.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane55.setViewportView(tbl_gcs);
 
         javax.swing.GroupLayout jPanel77Layout = new javax.swing.GroupLayout(jPanel77);
@@ -3621,7 +3630,6 @@ public class Consultation extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbl_pgcs.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane56.setViewportView(tbl_pgcs);
 
         javax.swing.GroupLayout jPanel78Layout = new javax.swing.GroupLayout(jPanel78);
@@ -5128,7 +5136,7 @@ public class Consultation extends javax.swing.JFrame {
         jPanel7.setPreferredSize(new java.awt.Dimension(623, 800));
 
         jPanel45.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel45.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel45.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         lbl_drugNameOListSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbl_drugNameOListSearch.setText("Search :");
@@ -5211,7 +5219,6 @@ public class Consultation extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbl_productname.setGridColor(new java.awt.Color(255, 255, 255));
         tbl_productname.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_productnameMouseClicked(evt);
@@ -5230,7 +5237,7 @@ public class Consultation extends javax.swing.JFrame {
         txt_productNameOList.setEditable(false);
 
         jPanel74.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel74.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel74.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug Details", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         lbl_dosageOList.setText("Drug Strength :");
 
@@ -5410,7 +5417,7 @@ public class Consultation extends javax.swing.JFrame {
         );
 
         jPanel9.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Previous History of Drug", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Previous History of Drug", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         tbl_drug.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -5546,7 +5553,7 @@ public class Consultation extends javax.swing.JFrame {
         jPanel43.setBackground(new java.awt.Color(173, 182, 200));
 
         jPanel8.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Second Opinion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Second Opinion", 0, 0, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
 
         cbx_referral_doctor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- Please Select a Doctor --" }));
 
@@ -5614,7 +5621,7 @@ public class Consultation extends javax.swing.JFrame {
         );
 
         jPanel75.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel75.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "List of Second Opinion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        jPanel75.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "List of Second Opinion", 0, 0, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
 
         tbl_referral_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -5854,7 +5861,7 @@ public class Consultation extends javax.swing.JFrame {
         jPanel70.setBackground(new java.awt.Color(173, 182, 200));
 
         jPanel72.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel72.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Medical Certification (MC) and Time Slip", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel72.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Medical Certification (MC) and Time Slip", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         date_from.setDateFormatString("dd/MM/yyyy");
 
@@ -7058,7 +7065,6 @@ public class Consultation extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbl_note_1.setGridColor(new java.awt.Color(255, 255, 255));
         tbl_note_1.setShowHorizontalLines(false);
         tbl_note_1.setShowVerticalLines(false);
         tbl_note_1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -7081,7 +7087,7 @@ public class Consultation extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -10579,12 +10585,25 @@ public class Consultation extends javax.swing.JFrame {
                 for (int i = 0; i < 50; i++) {
                     tbl_productname.getModel().setValueAt("", i, 0);
                 }
-                ResultSet results = DBConnection.getImpl().getDrugCIS(dtraden);
-                for (int i = 0; results.next() && i < 50; i++) {
-                    tbl_productname.getModel().setValueAt(results.getString("D_TRADE_NAME"), i, 0);
+                
+                String sql = "SELECT D_TRADE_NAME "
+                            + "FROM PIS_MDC2 "
+                            + "WHERE UCASE(D_TRADE_NAME) LIKE UCASE(?) "
+                            + "OR UCASE(D_GNR_NAME) LIKE UCASE(?)";
+                String params[] = {"%"+dtraden+"%", "%"+dtraden+"%"};
+                
+                ArrayList<ArrayList<String>> results = DBConnection.getImpl().getQuery(sql, 1, params);
+                for (int i = 0; i < results.size(); i++) {
+                    tbl_productname.getModel().setValueAt(results.get(i).get(0), i, 0);
                 }
                 
+//                ResultSet results = DBConnection.getImpl().getDrugCIS(dtraden);
+//                for (int i = 0; results.next() && i < 50; i++) {
+//                    tbl_productname.getModel().setValueAt(results.getString("D_TRADE_NAME"), i, 0);
+//                }
+                
             } catch (Exception e) {
+                e.printStackTrace();
                 try {
                     for (int i = 0; i < 50; i++) {
                         tbl_productname.getModel().setValueAt("", i, 0);

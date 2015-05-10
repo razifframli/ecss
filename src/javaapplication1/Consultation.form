@@ -727,7 +727,7 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jScrollPane13" pref="296" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane13" pref="304" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jTabbedPane2" min="-2" pref="782" max="-2" attributes="0"/>
                                   </Group>
@@ -1564,7 +1564,7 @@
                                                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                           <Component id="HPI_ClrBtn" max="32767" attributes="0"/>
-                                                          <Component id="btn_HPIAccpt" pref="68" max="32767" attributes="0"/>
+                                                          <Component id="btn_HPIAccpt" pref="0" max="32767" attributes="0"/>
                                                       </Group>
                                                       <EmptySpace pref="28" max="32767" attributes="0"/>
                                                   </Group>
@@ -4500,9 +4500,6 @@
                                                     <Column editable="false" title="Point" type="java.lang.String"/>
                                                   </Table>
                                                 </Property>
-                                                <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                                </Property>
                                               </Properties>
                                               <AuxValues>
                                                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -4638,9 +4635,6 @@
                                                     <Column editable="false" title="Response" type="java.lang.String"/>
                                                     <Column editable="false" title="Point" type="java.lang.String"/>
                                                   </Table>
-                                                </Property>
-                                                <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                                                 </Property>
                                               </Properties>
                                               <AuxValues>
@@ -7289,9 +7283,6 @@
                                                     <Column editable="false" title="" type="java.lang.String"/>
                                                   </Table>
                                                 </Property>
-                                                <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                                </Property>
                                                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                                                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                                                 </Property>
@@ -8522,9 +8513,6 @@
                         <Column editable="false" title="Note" type="java.lang.String"/>
                         <Column editable="false" title="" type="java.lang.String"/>
                       </Table>
-                    </Property>
-                    <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="showHorizontalLines" type="boolean" value="false"/>
                     <Property name="showVerticalLines" type="boolean" value="false"/>

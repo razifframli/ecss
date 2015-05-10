@@ -83,9 +83,9 @@ public class Queue {
 //        LongRunProcess.check_network2();
 //        if (Session.getPrev_stat()) {
             //Read BLOB from EHR_Central
-            System.err.println();
-            System.err.println("Server Online");
-            System.out.println("Start invoke remote server");
+            //System.err.println();
+            //System.err.println("Server Online");
+            //System.out.println("Start invoke remote server");
             try {
                 // fire to server port 1099
 //                ArrayList<String> listOnline = Func.readXML("online");
@@ -97,7 +97,7 @@ public class Queue {
 
                 QueueVector = DBConnection.getImpl().getQueueNameList(name, Session.getHfc_code());
 
-                System.out.println(".....Message Sent....");
+                //System.out.println(".....Message Sent....");
             } catch (Exception e) {
                 //offline
                 
