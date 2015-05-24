@@ -357,7 +357,7 @@
                                             <Component class="javax.swing.JTable" name="tbl_pe_0">
                                               <Properties>
                                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                                  <Table columnCount="3" rowCount="100">
+                                                  <Table columnCount="3" rowCount="10">
                                                     <Column editable="false" title="Code" type="java.lang.String"/>
                                                     <Column editable="false" title="Name" type="java.lang.String"/>
                                                     <Column editable="false" title="Status" type="java.lang.String"/>
@@ -459,7 +459,7 @@
                                                           </Group>
                                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                              <Component id="txt_pe_name_1" alignment="0" pref="232" max="32767" attributes="0"/>
+                                                              <Component id="txt_pe_name_1" alignment="0" max="32767" attributes="0"/>
                                                               <Component id="cbx_pe_status_1" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                                                               <Group type="102" alignment="0" attributes="0">
                                                                   <Component id="btn_pe_add_1" min="-2" pref="67" max="-2" attributes="0"/>
@@ -646,7 +646,7 @@
                                         <Component class="javax.swing.JTable" name="tbl_pe_1">
                                           <Properties>
                                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                              <Table columnCount="4" rowCount="100">
+                                              <Table columnCount="4" rowCount="150">
                                                 <Column editable="false" title="Code" type="java.lang.String"/>
                                                 <Column editable="false" title="Name" type="java.lang.String"/>
                                                 <Column editable="false" title="Parent" type="java.lang.String"/>
@@ -753,7 +753,7 @@
                                                           </Group>
                                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                              <Component id="txt_pe_name_2" alignment="0" pref="232" max="32767" attributes="0"/>
+                                                              <Component id="txt_pe_name_2" alignment="0" max="32767" attributes="0"/>
                                                               <Component id="cbx_pe_status_2" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                                                               <Group type="102" alignment="0" attributes="0">
                                                                   <Component id="btn_pe_add_2" min="-2" pref="67" max="-2" attributes="0"/>
@@ -940,7 +940,7 @@
                                         <Component class="javax.swing.JTable" name="tbl_pe_2">
                                           <Properties>
                                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                              <Table columnCount="4" rowCount="100">
+                                              <Table columnCount="4" rowCount="300">
                                                 <Column editable="false" title="Code" type="java.lang.String"/>
                                                 <Column editable="false" title="Name" type="java.lang.String"/>
                                                 <Column editable="false" title="Parent" type="java.lang.String"/>
@@ -1047,7 +1047,7 @@
                                                           </Group>
                                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                              <Component id="txt_pe_name_3" alignment="0" pref="232" max="32767" attributes="0"/>
+                                                              <Component id="txt_pe_name_3" alignment="0" max="32767" attributes="0"/>
                                                               <Component id="cbx_pe_status_3" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                                                               <Group type="102" alignment="0" attributes="0">
                                                                   <Component id="btn_pe_add_3" min="-2" pref="67" max="-2" attributes="0"/>
@@ -1234,7 +1234,7 @@
                                         <Component class="javax.swing.JTable" name="tbl_pe_3">
                                           <Properties>
                                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                              <Table columnCount="4" rowCount="100">
+                                              <Table columnCount="4" rowCount="400">
                                                 <Column editable="false" title="Code" type="java.lang.String"/>
                                                 <Column editable="false" title="Name" type="java.lang.String"/>
                                                 <Column editable="false" title="Parent" type="java.lang.String"/>
@@ -1341,7 +1341,7 @@
                                                           </Group>
                                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                              <Component id="txt_pe_name_4" alignment="0" pref="232" max="32767" attributes="0"/>
+                                                              <Component id="txt_pe_name_4" alignment="0" max="32767" attributes="0"/>
                                                               <Component id="cbx_pe_status_4" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                                                               <Group type="102" alignment="0" attributes="0">
                                                                   <Component id="btn_pe_add_4" min="-2" pref="67" max="-2" attributes="0"/>
@@ -1528,7 +1528,7 @@
                                         <Component class="javax.swing.JTable" name="tbl_pe_4">
                                           <Properties>
                                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                              <Table columnCount="4" rowCount="100">
+                                              <Table columnCount="4" rowCount="400">
                                                 <Column editable="false" title="Code" type="java.lang.String"/>
                                                 <Column editable="false" title="Name" type="java.lang.String"/>
                                                 <Column editable="false" title="Parent" type="java.lang.String"/>
@@ -1629,7 +1629,7 @@
                                                           </Group>
                                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                              <Component id="txt_pe_name_5" alignment="0" pref="232" max="32767" attributes="0"/>
+                                                              <Component id="txt_pe_name_5" alignment="0" max="32767" attributes="0"/>
                                                               <Component id="cbx_pe_status_5" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                                                               <Group type="102" alignment="0" attributes="0">
                                                                   <Component id="btn_pe_add_5" min="-2" pref="67" max="-2" attributes="0"/>
@@ -1816,7 +1816,7 @@
                                         <Component class="javax.swing.JTable" name="tbl_pe_5">
                                           <Properties>
                                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                              <Table columnCount="4" rowCount="100">
+                                              <Table columnCount="4" rowCount="200">
                                                 <Column editable="false" title="Code" type="java.lang.String"/>
                                                 <Column editable="false" title="Name" type="java.lang.String"/>
                                                 <Column editable="false" title="Parent" type="java.lang.String"/>
@@ -1917,7 +1917,7 @@
                                                           </Group>
                                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                              <Component id="txt_pe_name_6" alignment="0" pref="232" max="32767" attributes="0"/>
+                                                              <Component id="txt_pe_name_6" alignment="0" max="32767" attributes="0"/>
                                                               <Component id="cbx_pe_status_6" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                                                               <Group type="102" alignment="0" attributes="0">
                                                                   <Component id="btn_pe_add_6" min="-2" pref="67" max="-2" attributes="0"/>
@@ -2104,7 +2104,7 @@
                                         <Component class="javax.swing.JTable" name="tbl_pe_6">
                                           <Properties>
                                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                              <Table columnCount="4" rowCount="100">
+                                              <Table columnCount="4" rowCount="150">
                                                 <Column editable="false" title="Code" type="java.lang.String"/>
                                                 <Column editable="false" title="Name" type="java.lang.String"/>
                                                 <Column editable="false" title="Parent" type="java.lang.String"/>
@@ -2205,7 +2205,7 @@
                                                           </Group>
                                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                              <Component id="txt_pe_name_7" alignment="0" pref="232" max="32767" attributes="0"/>
+                                                              <Component id="txt_pe_name_7" alignment="0" max="32767" attributes="0"/>
                                                               <Component id="cbx_pe_status_7" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                                                               <Group type="102" alignment="0" attributes="0">
                                                                   <Component id="btn_pe_add_7" min="-2" pref="67" max="-2" attributes="0"/>
@@ -2392,7 +2392,7 @@
                                         <Component class="javax.swing.JTable" name="tbl_pe_7">
                                           <Properties>
                                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                              <Table columnCount="4" rowCount="100">
+                                              <Table columnCount="4" rowCount="20">
                                                 <Column editable="false" title="Code" type="java.lang.String"/>
                                                 <Column editable="false" title="Name" type="java.lang.String"/>
                                                 <Column editable="false" title="Parent" type="java.lang.String"/>
