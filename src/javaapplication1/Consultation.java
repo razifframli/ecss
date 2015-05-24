@@ -11976,8 +11976,30 @@ public class Consultation extends javax.swing.JFrame {
         try {
             String searchcbx = txt_complaintSearch.getText();
             if (!Searching.isSearchCCN1(searchcbx)) {
-                J.o("Invalid", "Invalid Chief Complaint", 0);
-                return;
+                //J.o("Invalid", "Invalid Chief Complaint", 0);
+                //return;
+                
+                // 1. get timestamp [year:month:day:hour:minute:seconds].
+                Calendar n = Calendar.getInstance();
+                String code = n.get(Calendar.YEAR)+""
+                        //+n.get(Calendar.MONTH)+""
+                        //+n.get(Calendar.DAY_OF_MONTH)+""
+                        +n.get(Calendar.HOUR_OF_DAY)+""
+                        +n.get(Calendar.MINUTE)+""
+                        +n.get(Calendar.SECOND)+""
+                        +n.get(Calendar.MILLISECOND)+"";
+                
+                // 2. append code 'S' with timestamp.
+                String last_seq_num = "CCN"+code;
+                
+                // 3. add into CIS_PERSONALIZED_CODE.
+                String sql = "INSERT INTO CIS_PERSONALIZED_CODE VALUES(?, ?) ";
+                PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql);
+                ps2.setString(1, last_seq_num);
+                ps2.setString(2, searchcbx);
+                ps2.execute();
+                J.o("Add Success", "Add Success ..", 1);
+                
             } else {
                 String sql = "SELECT * FROM READCODE_CHIEF_COMPLAINT "
                         + "where UCASE(RCC_DESC) = UCASE(?) order by RCC_DESC ";

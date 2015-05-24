@@ -562,6 +562,8 @@ public class Searching {
     
     public static boolean isSearchCCN1(String desc) {
         boolean status = false;
+        boolean status1 = false;
+        boolean status2 = false;
         try {
             String sql = "SELECT * FROM READCODE_CHIEF_COMPLAINT "
                         + "where UCASE(RCC_DESC) = UCASE(?) order by RCC_DESC ";
@@ -569,6 +571,21 @@ public class Searching {
             ps.setString(1, desc);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                status1 = true;
+            } else {
+                status1 = false;
+            }
+            String sql2 = "SELECT * FROM CIS_PERSONALIZED_CODE "
+                        + "where UCASE(CPC_DESC) = UCASE(?) order by CPC_DESC ";
+            PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
+            ps2.setString(1, desc);
+            ResultSet rs2 = ps2.executeQuery();
+            if (rs2.next()) {
+                status2 = true;
+            } else {
+                status2 = false;
+            }
+            if (status1 == true || status2 == true) {
                 status = true;
             } else {
                 status = false;
