@@ -967,7 +967,7 @@ public class Consultation_subcode {
             cons.setBtnOn();
 
             Queue updatequeue = new Queue();
-            updatequeue.updateStatusEpisode(cons.txt_pPmiNo.getText(), cons.EpisodeTime, "Discharge");
+            updatequeue.updateStatusEpisode(cons.txt_pPmiNo.getText(), cons.EpisodeTime, "Discharge", "");
 
         //            Session.setPrev_stat(false);
             //            Session.setCurr_stat(false);

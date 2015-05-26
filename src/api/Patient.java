@@ -1648,14 +1648,15 @@ public class Patient {
 //                if (isConsult) {
 //                    appointmentbiodatainformation = impl.getBiodata(appointmentbiodatainfo);
 //                }
-                appointmentbiodatainformation = DBConnection.getImpl().simplifyCheckBiodata(appointmentbiodatainfo, episodeTime);
+                appointmentbiodatainformation = DBConnection.getImpl().simplifyCheckBiodata(appointmentbiodatainfo, episodeTime, Session.getUser_name());
                 
             } catch(Exception ex) {
                 String sql1 = "SELECT * "
                         + "FROM PMS_EPISODE "
                         + "WHERE PMI_NO = ? "
                         + "AND STATUS NOT LIKE 'Consult' "
-                        + "AND EPISODE_DATE = ? ";
+                        + "AND EPISODE_DATE = ? "
+                        + "AND (DOCTOR = ? OR DOCTOR = '-') ";
                 try {
                     if (!episodeTime.equals("")) {
                         sql1 += "AND EPISODE_TIME = ? ";
@@ -1668,10 +1669,11 @@ public class Patient {
                 Date date = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 ps1.setString(2, sdf.format(date));
+                ps1.setString(3, Session.getUser_name());
                 
                 try {
                     if (!episodeTime.equals("")) {
-                        ps1.setString(3, episodeTime);
+                        ps1.setString(4, episodeTime);
                     }
                 } catch (Exception e) {
                 }

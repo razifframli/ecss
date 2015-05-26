@@ -105,7 +105,7 @@ public class Queue {
                         + "STATUS,EPISODE_DATE FROM PMS_EPISODE "
                         + "WHERE NAME LIKE upper(?) "
                         + "AND HEALTH_FACILITY_CODE = ? "
-                        + "AND STATUS NOT LIKE 'Consult' "
+                        //+ "AND STATUS NOT LIKE 'Consult' "
                         + "AND STATUS NOT LIKE 'Discharge' "
                         + "AND STATUS NOT LIKE 'Missing' "
                         + "ORDER BY EPISODE_TIME ASC";
@@ -285,7 +285,7 @@ public class Queue {
 
     }
     
-    public void updateStatusEpisode(String PMINumber, String TimeEpisode, String status) {
+    public void updateStatusEpisode(String PMINumber, String TimeEpisode, String status, String referer) {
         
 //        LongRunProcess.check_network2();
 //        if (Session.getPrev_stat()) {
@@ -302,7 +302,7 @@ public class Queue {
 //                Message impl = (Message) myRegistry.lookup("myMessage");
                 // call server's method	
                 
-                DBConnection.getImpl().updateStatEpisode(PMINumber, TimeEpisode, status, Session.getUser_name());
+                DBConnection.getImpl().updateStatEpisode(PMINumber, TimeEpisode, status, Session.getUser_name(), referer);
 
                 System.out.println(".....Message Sent....");
             } catch (Exception e) {
@@ -312,7 +312,7 @@ public class Queue {
                     //offline
                     S.oln("-- Offline --");
                     String plussql = "";
-                    if (status.equals("Consult")) {
+                    if (status.equals("Consult") || status.equals("Hold") || status.equals("Second Opinion")) {
                         plussql = ", DOCTOR=?";
                     }
                     PreparedStatement statement2 = Session.getCon_x(100).prepareStatement("UPDATE PMS_EPISODE "
@@ -321,8 +321,12 @@ public class Queue {
                             + "WHERE PMI_NO=? "
                             + "AND EPISODE_TIME=?");
                     statement2.setString(1, status);
-                    if (status.equals("Consult")) {
-                        statement2.setString(2, Session.getUser_name());
+                    if (status.equals("Consult") || status.equals("Hold") || status.equals("Second Opinion")) {
+                        String doctor = Session.getUser_name();
+                        if (status.equals("Second Opinion")) {
+                            doctor = referer;
+                        }
+                        statement2.setString(2, doctor);
                         statement2.setString(3, PMINumber);
                         statement2.setString(4, TimeEpisode);
                     } else {

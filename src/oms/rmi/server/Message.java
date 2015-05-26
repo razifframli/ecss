@@ -54,7 +54,7 @@ public interface Message extends Remote {
     
     //consultation queue
     boolean isConsult(String pmino) throws RemoteException;
-    String[] simplifyCheckBiodata(String pmiNo, String time) throws RemoteException;
+    String[] simplifyCheckBiodata(String pmiNo, String time, String doctor) throws RemoteException;
     
     //Pharmacy order drug
     void addAUTOGENERATE_ONO(String oNo) throws RemoteException;
@@ -105,7 +105,7 @@ public interface Message extends Remote {
     void insertD(String [] dispense) throws RemoteException;
     void insertOrder(String [] order)throws RemoteException;
     
-    void updateStatEpisode(String PMINumber, String TimeEpisode, String status, String doctor) 
+    void updateStatEpisode(String PMINumber, String TimeEpisode, String status, String doctor, String referer) 
             throws RemoteException;
     void updateStatEpisode2(String PMINumber, String TimeEpisode, String now) 
             throws RemoteException;

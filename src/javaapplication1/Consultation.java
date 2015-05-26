@@ -462,11 +462,28 @@ public class Consultation extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+    
+    private static void setDropDownTime() {
+        time_to_hour.removeAllItems();
+        time_to_minute.removeAllItems();
+        time_to_second.removeAllItems();
+        for (int i = 0; i < 24; i++) {
+            String time = (i < 10) ? ("0"+i) : (""+i);
+            time_to_hour.addItem(time);
+        }
+        for (int i = 0; i < 60; i++) {
+            String time = (i < 10) ? ("0"+i) : (""+i);
+            time_to_minute.addItem(time);
+            time_to_second.addItem(time);
+        }
+    }
 
     /** Creates new form Consultation */
     public Consultation() {
         //LongRunProcess.check_network2();
         initComponents();
+        
+        setDropDownTime();
         
         loadDrug();
         
@@ -972,7 +989,6 @@ public class Consultation extends javax.swing.JFrame {
         jPanel31 = new javax.swing.JPanel();
         jScrollPane58 = new javax.swing.JScrollPane();
         jPanel71 = new javax.swing.JPanel();
-        jPanel73 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jTabbedPane6 = new javax.swing.JTabbedPane();
         jPanel32 = new javax.swing.JPanel();
@@ -1095,6 +1111,10 @@ public class Consultation extends javax.swing.JFrame {
         jPanel85 = new javax.swing.JPanel();
         rbtn_mcts_mc = new javax.swing.JRadioButton();
         rbtn_mcts_ts = new javax.swing.JRadioButton();
+        time_from = new javax.swing.JTextField();
+        time_to_hour = new javax.swing.JComboBox();
+        time_to_minute = new javax.swing.JComboBox();
+        time_to_second = new javax.swing.JComboBox();
         jScrollPane13 = new javax.swing.JScrollPane();
         tbl_note_1 = new javax.swing.JTable();
         btn_discharge = new javax.swing.JButton();
@@ -1467,7 +1487,7 @@ public class Consultation extends javax.swing.JFrame {
         });
 
         jPanel2.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(0, new java.awt.Color(64, 64, 64), new java.awt.Color(0, 0, 0), new java.awt.Color(128, 128, 128), new java.awt.Color(192, 192, 192)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(64, 64, 64), new java.awt.Color(0, 0, 0), new java.awt.Color(128, 128, 128), new java.awt.Color(192, 192, 192)));
         jPanel2.setPreferredSize(new java.awt.Dimension(1008, 502));
 
         jTextArea7.setColumns(20);
@@ -1694,7 +1714,7 @@ public class Consultation extends javax.swing.JFrame {
                                     .addComponent(btnSrcComplaint, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel47Layout.createSequentialGroup()
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.PREFERRED_SIZE, 142, Short.MAX_VALUE)
+                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                                             .addComponent(rbtn_gen_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4676,35 +4696,15 @@ public class Consultation extends javax.swing.JFrame {
 
         jPanel71.setBackground(new java.awt.Color(173, 182, 200));
 
-        jPanel73.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel73.setBorder(javax.swing.BorderFactory.createTitledBorder("Observation Procedure Result"));
-
-        javax.swing.GroupLayout jPanel73Layout = new javax.swing.GroupLayout(jPanel73);
-        jPanel73.setLayout(jPanel73Layout);
-        jPanel73Layout.setHorizontalGroup(
-            jPanel73Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 675, Short.MAX_VALUE)
-        );
-        jPanel73Layout.setVerticalGroup(
-            jPanel73Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 131, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout jPanel71Layout = new javax.swing.GroupLayout(jPanel71);
         jPanel71.setLayout(jPanel71Layout);
         jPanel71Layout.setHorizontalGroup(
             jPanel71Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel71Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel73, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+            .addGap(0, 782, Short.MAX_VALUE)
         );
         jPanel71Layout.setVerticalGroup(
             jPanel71Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel71Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel73, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+            .addGap(0, 327, Short.MAX_VALUE)
         );
 
         jScrollPane58.setViewportView(jPanel71);
@@ -5173,7 +5173,7 @@ public class Consultation extends javax.swing.JFrame {
         jPanel7.setPreferredSize(new java.awt.Dimension(623, 800));
 
         jPanel45.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel45.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel45.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         lbl_drugNameOListSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbl_drugNameOListSearch.setText("Search :");
@@ -5274,7 +5274,7 @@ public class Consultation extends javax.swing.JFrame {
         txt_productNameOList.setEditable(false);
 
         jPanel74.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel74.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug Details", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel74.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         lbl_dosageOList.setText("Drug Strength :");
 
@@ -5454,7 +5454,7 @@ public class Consultation extends javax.swing.JFrame {
         );
 
         jPanel9.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Previous History of Drug", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Previous History of Drug", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         tbl_drug.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -5590,7 +5590,7 @@ public class Consultation extends javax.swing.JFrame {
         jPanel43.setBackground(new java.awt.Color(173, 182, 200));
 
         jPanel8.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Second Opinion", 0, 0, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Second Opinion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
 
         cbx_referral_doctor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- Please Select a Doctor --" }));
 
@@ -5658,7 +5658,7 @@ public class Consultation extends javax.swing.JFrame {
         );
 
         jPanel75.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel75.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "List of Second Opinion", 0, 0, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
+        jPanel75.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "List of Second Opinion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
 
         tbl_referral_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -5898,7 +5898,7 @@ public class Consultation extends javax.swing.JFrame {
         jPanel70.setBackground(new java.awt.Color(173, 182, 200));
 
         jPanel72.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel72.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Medical Certification (MC) and Time Slip", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel72.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Medical Certification (MC) and Time Slip", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         date_from.setDateFormatString("dd/MM/yyyy");
 
@@ -5979,6 +5979,14 @@ public class Consultation extends javax.swing.JFrame {
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
+        time_from.setEnabled(false);
+
+        time_to_hour.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00" }));
+
+        time_to_minute.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00" }));
+
+        time_to_second.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00" }));
+
         javax.swing.GroupLayout jPanel72Layout = new javax.swing.GroupLayout(jPanel72);
         jPanel72.setLayout(jPanel72Layout);
         jPanel72Layout.setHorizontalGroup(
@@ -5990,8 +5998,6 @@ public class Consultation extends javax.swing.JFrame {
                     .addComponent(jLabel19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel72Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(date_from, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(date_to, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel72Layout.createSequentialGroup()
                         .addGroup(jPanel72Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btn_generate_mc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -6001,8 +6007,21 @@ public class Consultation extends javax.swing.JFrame {
                                 .addComponent(MC_clrBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btn_generate_timeslip, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel85, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(422, Short.MAX_VALUE))
+                        .addComponent(jPanel85, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel72Layout.createSequentialGroup()
+                        .addGroup(jPanel72Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(date_to, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                            .addComponent(date_from, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel72Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel72Layout.createSequentialGroup()
+                                .addComponent(time_to_hour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(time_to_minute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(time_to_second, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(time_from))))
+                .addContainerGap(372, Short.MAX_VALUE))
         );
         jPanel72Layout.setVerticalGroup(
             jPanel72Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -6010,11 +6029,16 @@ public class Consultation extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel72Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
-                    .addComponent(date_from, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(date_from, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(time_from, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel72Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(date_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23))
+                    .addComponent(jLabel23)
+                    .addGroup(jPanel72Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(time_to_hour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(time_to_minute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(time_to_second, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel72Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel72Layout.createSequentialGroup()
                         .addGroup(jPanel72Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -6041,9 +6065,9 @@ public class Consultation extends javax.swing.JFrame {
         jPanel70Layout.setVerticalGroup(
             jPanel70Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel70Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addContainerGap()
                 .addComponent(jPanel72, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(334, Short.MAX_VALUE))
+                .addContainerGap(366, Short.MAX_VALUE))
         );
 
         jScrollPane30.setViewportView(jPanel70);
@@ -7124,7 +7148,7 @@ public class Consultation extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -9975,6 +9999,11 @@ public class Consultation extends javax.swing.JFrame {
         }
         vph.setVisible(false);
         que.setVisible(false);
+        
+        // set hold status
+        Queue updatequeue = new Queue();
+        updatequeue.updateStatusEpisode(txt_pPmiNo.getText(), EpisodeTime, "Hold", "");
+        
         hold();
     }//GEN-LAST:event_btn_holdActionPerformed
 
@@ -10032,6 +10061,7 @@ public class Consultation extends javax.swing.JFrame {
                         break;
                     }
                 }
+                System.out.println("Status Found: |"+found+"|");
                 if (found) {
                     this.setSelectedAppointment(idpms, time);
                     this.setVisible(true);
@@ -10464,6 +10494,10 @@ public class Consultation extends javax.swing.JFrame {
                         //                        ArrayList<String> listOnline = Func.readXML("online");
                         //                        Registry myRegistry = LocateRegistry.getRegistry(listOnline.get(0), 1099);
                         //                        Message impl = (Message) myRegistry.lookup("myMessage");
+                        
+                        Queue updatequeue = new Queue();
+                        updatequeue.updateStatusEpisode(txt_pPmiNo.getText(), EpisodeTime, "Second Opinion", cbx_doctor);
+                        
                         boolean stat = DBConnection.getImpl().addReferral(ref);
                         Consultation.showOnline();
                         if (stat) {
@@ -10664,11 +10698,6 @@ public class Consultation extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txt_drugNameOListSearchKeyReleased
-
-    private void PN_clrBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PN_clrBtnActionPerformed
-        // TODO add your handling code here:
-        txt_pNotes.setText("");
-    }//GEN-LAST:event_PN_clrBtnActionPerformed
 
     private void PN_accptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PN_accptBtnActionPerformed
         // TODO add your handling code here:
@@ -12052,6 +12081,11 @@ public class Consultation extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_substractActionPerformed
 
+    private void PN_clrBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PN_clrBtnActionPerformed
+        // TODO add your handling code here:
+        txt_pNotes.setText("");
+    }//GEN-LAST:event_PN_clrBtnActionPerformed
+
     public boolean checkPatient() {
         String pmiNo = txt_pName.getText();
         if (pmiNo.length() == 0) {
@@ -13347,8 +13381,8 @@ public class Consultation extends javax.swing.JFrame {
             row_count = 0;
             setBtnOn();
 
-            Queue updatequeue = new Queue();
-            updatequeue.updateStatusEpisode(txt_pPmiNo.getText(), EpisodeTime, "Hold");
+//            Queue updatequeue = new Queue();
+//            updatequeue.updateStatusEpisode(txt_pPmiNo.getText(), EpisodeTime, "Hold");
 
 //            Session.setPrev_stat(false);
 //            Session.setCurr_stat(false);
@@ -13946,6 +13980,7 @@ public class Consultation extends javax.swing.JFrame {
             if (stat_mc1 || stat_mc2) {
 
                 Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+                //Format formatter2 = new SimpleDateFormat("HH:mm:ss");
                 String date_from1 = "";
                 String date_to1 = "";
                 try {
@@ -13957,6 +13992,14 @@ public class Consultation extends javax.swing.JFrame {
                 }
                 
                 time2 = Func.getTimeNow();
+                
+                try {
+                    time2 = time_to_hour.getSelectedItem().toString() + ":"
+                            + time_to_minute.getSelectedItem().toString() + ":"
+                            + time_to_second.getSelectedItem().toString();
+                    //J.o("", time2, 0);
+                } catch (Exception e) {
+                }
 
                 ArrayList<String> masa = new ArrayList<String>();
                 masa.add(time1);
@@ -14198,6 +14241,7 @@ public class Consultation extends javax.swing.JFrame {
         String timeStart = selectedTime;
         timeStart.replaceAll("\\s+","");
         time1 = timeStart;
+        time_from.setText(time1);
         //J.o("test time", "|"+selectedTime+"|"+time1+"|", 0);
         
         jTextArea7.setText("");
@@ -14213,10 +14257,7 @@ public class Consultation extends javax.swing.JFrame {
             //
             AppointmentInfo = appointment.getAppointmentBiodata(selectedAppointment, selectedTime);
             //Friza getEHR
-            
-            Queue updatequeue = new Queue();
-            updatequeue.updateStatusEpisode(selectedAppointment, selectedTime, "Consult");
-            
+
         } catch (Exception ex) {
             System.out.println(ex);
             return;
@@ -14243,6 +14284,13 @@ public class Consultation extends javax.swing.JFrame {
 
         String str_pdi = AppointmentInfo[0] + "|" + AppointmentInfo[2] + "|" + Session.getUser_name();
         setBtnOff();
+        
+        try {
+            Queue updatequeue = new Queue();
+            updatequeue.updateStatusEpisode(selectedAppointment, selectedTime, "Consult", "");
+
+        } catch (Exception e) {
+        }
 
         txt_pPmiNo.setText(AppointmentInfo[0]);
         txt_pName.setText(AppointmentInfo[2]);
@@ -15277,7 +15325,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel70;
     private javax.swing.JPanel jPanel71;
     private javax.swing.JPanel jPanel72;
-    private javax.swing.JPanel jPanel73;
     private javax.swing.JPanel jPanel74;
     private javax.swing.JPanel jPanel75;
     private javax.swing.JPanel jPanel76;
@@ -15486,6 +15533,10 @@ public class Consultation extends javax.swing.JFrame {
     public javax.swing.JTable tbl_sh;
     public static javax.swing.JTable tbl_vts;
     private com.toedter.calendar.JDateChooser tfieldDate;
+    public static javax.swing.JTextField time_from;
+    public static javax.swing.JComboBox time_to_hour;
+    public static javax.swing.JComboBox time_to_minute;
+    public static javax.swing.JComboBox time_to_second;
     public static javax.swing.JTree tree_physical_exam;
     public static javax.swing.JTree tree_procedure;
     public static javax.swing.JTextArea txt_BldCmmnt;
