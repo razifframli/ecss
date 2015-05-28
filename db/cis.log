@@ -1,3 +1,0 @@
-/*C4*/SET SCHEMA PUBLIC
-INSERT INTO PMS_EPISODE VALUES('9305180855147','26/05/2015','NUR UMIRA BINTI MUSTAFA','930518085514','-','Matric No.','B031210001','-','General Outpatient','Walk-in','-','Government','Student','Outpatient Discipline','-','-','Common Queue','-','Normal','-','-','-','-','-','-','-','-',' 15:27:51','Waiting','Klinik UTeM Induk')
-COMMIT

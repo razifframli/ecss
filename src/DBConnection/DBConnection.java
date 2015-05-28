@@ -30,6 +30,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -2686,5 +2687,34 @@ public class DBConnection {
             e.printStackTrace();
         }
         return data;
+    }
+    
+    public static boolean isAlreadyRegistered(String pmino) {
+        boolean status = false;
+        try {
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String sql = "SELECT * "
+                    + "FROM PMS_EPISODE "
+                    + "WHERE PMI_NO = ? "
+                    + "AND (STATUS LIKE '%Consult%' "
+                    + "OR STATUS LIKE '%Waiting%' "
+                    + "OR STATUS LIKE '%Hold%' "
+                    + "OR STATUS LIKE '%Second Opinion%') "
+                    + "AND EPISODE_DATE = ? ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, pmino);
+            ps.setString(2, sdf.format(date));
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                status = true;
+            } else {
+                status = false;
+            }
+        } catch (Exception e) {
+            status = false;
+            e.printStackTrace();
+        }
+        return status;
     }
 }
