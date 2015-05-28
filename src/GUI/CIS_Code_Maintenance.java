@@ -183,7 +183,7 @@ public class CIS_Code_Maintenance extends javax.swing.JFrame {
         }
         ArrayList<PhysicalExamBean> pe_3 = DBConnection.getPhysicalExamAll(3);
         for (int i = 0; i < pe_3.size() && i < 400; i++) {
-            tbl_pe_3.getModel().setValueAt(i+"|"+pe_3.get(i).getPe_cd(), i, 0);
+            tbl_pe_3.getModel().setValueAt(pe_3.get(i).getPe_cd(), i, 0);
             tbl_pe_3.getModel().setValueAt(pe_3.get(i).getPe_name(), i, 1);
             tbl_pe_3.getModel().setValueAt(pe_3.get(i).getPe_parent(), i, 2);
             tbl_pe_3.getModel().setValueAt(pe_3.get(i).getPe_status(), i, 3);

@@ -16,6 +16,9 @@ import javax.swing.table.TableModel;
 
 public interface Message extends Remote {
     
+    // registration
+    boolean isAlreadyRegistered(String pmino) throws RemoteException;
+    
     // CIS order drug
     ResultSet getDrugCIS(String search) throws RemoteException;
     

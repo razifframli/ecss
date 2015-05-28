@@ -5004,6 +5004,11 @@ public class Registration extends javax.swing.JFrame {
             J.o("Blank Information", "Please use a proper PMI No.!", 0);
             return;
         }
+        
+        if (new Patient(this).isAlreadyRegistered(pmiNo)) {
+            J.o("Already Registered", "Sorry! This patient is already registered!", 0);
+            return;
+        }
 
         registerPatient[0] = tfieldPMINoRegistration.getText();
         Calendar today = Calendar.getInstance();

@@ -351,6 +351,17 @@ public class Patient {
         ps.executeUpdate();
 //        ps2.executeUpdate();
     }
+     
+     public boolean isAlreadyRegistered(String pmino) {
+         boolean status = false;
+         try {
+             status = DBConnection.getImpl().isAlreadyRegistered(pmino);
+         } catch (Exception e) {
+             J.o("Offline", "Network to server is offline!", 0);
+             status = DBConnection.isAlreadyRegistered(pmino);
+         }
+         return status;
+     }
 
      //save patient employment information into database
      public void registerAndCreateQueue(String[] queue) throws ClassNotFoundException, SQLException
