@@ -727,7 +727,7 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jScrollPane13" pref="296" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane13" pref="304" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jTabbedPane2" min="-2" pref="782" max="-2" attributes="0"/>
                                   </Group>
