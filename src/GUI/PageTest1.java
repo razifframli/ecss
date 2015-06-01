@@ -43,11 +43,21 @@ public class PageTest1 extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Destroy Call");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -130,6 +140,42 @@ public class PageTest1 extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (ConnectCSS.getStatusCallingSystem().equals("on")) {
+            try {
+//                Registry myRegistry = LocateRegistry.getRegistry(ConnectCSS.getHostCallingSystem(), ConnectCSS.getPortCallingSystem());
+//                Message impl = (Message) myRegistry.lookup("myCalling");
+//
+//                impl.setCall(pdi);
+
+                DBConnection.getImplCalling().setCall(patientTest);
+
+            } catch (Exception ex) {
+                J.o("Offline", "Connection to calling system is offline!", 0);
+                //ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (ConnectCSS.getStatusCallingSystem().equals("on")) {
+            try {
+//                Registry myRegistry = LocateRegistry.getRegistry(ConnectCSS.getHostCallingSystem(), ConnectCSS.getPortCallingSystem());
+//                Message impl = (Message) myRegistry.lookup("myCalling");
+//
+//                impl.destroyCall(pmino);
+                
+                DBConnection.getImplCalling().destroyCall(patientTest);
+
+            } catch (Exception ex) {
+                J.o("Offline", "Connection to calling system is offline!", 0);
+                //ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

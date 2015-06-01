@@ -14272,13 +14272,15 @@ public class Consultation extends javax.swing.JFrame {
             if (AppointmentInfo[0].equals("") && AppointmentInfo[0].length() == 0) {
                 J.o("Invalid Patient", "Invalid patient!\n"
                         + "This patient currently been consulted or no patient with this ID.\n"
-                        + "Pleae select another patient ..", 0);
+                        + "Please select another patient ..", 0);
+                btn_exit.setEnabled(true);
                 return;
             }
         } catch (Exception e) {
             J.o("Invalid Patient", "Invalid patient!\n"
                     + "This patient currently been consulted or no patient with this ID.\n"
-                    + "Pleae select another patient ..", 0);
+                    + "Please select another patient ..", 0);
+            btn_exit.setEnabled(true);
             e.printStackTrace();
             return;
         }
@@ -14288,13 +14290,14 @@ public class Consultation extends javax.swing.JFrame {
         System.out.println("wat to print 2: : " + AppointmentInfo[2]);
 
         String str_pdi = AppointmentInfo[0] + "|" + AppointmentInfo[2] + "|" + Session.getUser_name();
-        setBtnOff();
+        
         
         try {
             Queue updatequeue = new Queue();
             updatequeue.updateStatusEpisode(selectedAppointment, selectedTime, "Consult", "");
-
+            setBtnOff();
         } catch (Exception e) {
+            return;
         }
 
         txt_pPmiNo.setText(AppointmentInfo[0]);
