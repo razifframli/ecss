@@ -254,6 +254,43 @@ public class Pharmacy extends javax.swing.JFrame{
         initComponents();
         S.oln("Hello CIS 1 cannot use");
         
+        loadDrug();
+    }
+    
+    public void loadDrug() {
+        try {
+            int num_rows = 24;
+            String sql = "SELECT * "
+                    + "FROM PIS_MDC2 ";
+            String params[] = {};
+            ArrayList<ArrayList<String>> data1 = DBConnection.getImpl().getQuery(sql, num_rows, params);
+            for (int j = 0; j < data1.size(); j++) {
+                //System.out.println("DRUG "+j+": "+data1.get(i)+"\n");
+                String UD_MDC_CODE = data1.get(j).get(0);
+                int num_rows1 = data1.get(j).size();
+                String sql1 = "SELECT * "
+                        + "FROM PIS_MDC2 "
+                        + "WHERE UD_MDC_CODE = ? ";
+                PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
+                ps1.setString(1, UD_MDC_CODE);
+                ResultSet rs1 = ps1.executeQuery();
+                if (!rs1.next()) {
+                    S.oln("Drug code "+UD_MDC_CODE+" not in the local list.. Adding it..");
+                    String params1 = "";
+                    for (int k = 0; k < num_rows1-1; k++) {
+                        params1 += "'"+data1.get(j).get(k)+"',";
+                    }
+                    params1 += "'"+data1.get(j).get(num_rows1-1)+"'";
+                    String sql2 = "INSERT INTO PIS_MDC2 VALUES("+params1+")";
+                    PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
+                    ps2.execute();
+                }
+            }
+            S.oln("Done sync drug.. Alhamdulillah..");
+        } catch (Exception e) {
+            S.oln("Cannot sync drug! Network down!!");
+            e.printStackTrace();
+        }
     }
 //    public Pharmacy(String pmino){
 //        initComponents();
