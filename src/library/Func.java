@@ -30,6 +30,7 @@ public class Func {
     public final static String DATE_FORMAT_2 = "yyyy-MM-dd HH:mm:ss";
     public final static String PEM_SEPARATOR_TO_DB = ",";
     public final static String PEM_SEPARATOR_FROM_DB = "^";
+    public final static String SPECIAL_CHARACTER = "'\"#&";
     
     public static String getCodePemToDB(String code) {
         String str = "";
@@ -257,6 +258,7 @@ public class Func {
                     }
                 }
             } else {
+                System.out.println("Saiz userData tak sama!");
                 stat= false;
             }
         } catch (Exception e) {
@@ -322,6 +324,9 @@ public class Func {
             if (data.contains("Select")) {
                 data = "-";
             }
+            for (int i = 0; i < Func.SPECIAL_CHARACTER.length(); i++) {
+                data = data.replaceAll(String.valueOf(Func.SPECIAL_CHARACTER.charAt(i)), " ");
+            }
         } catch (Exception e) {
             //e.printStackTrace();
             data = "-";
@@ -385,5 +390,39 @@ public class Func {
         Node nValue = (Node) nlList.item(0);
 
         return nValue.getNodeValue();
+    }
+    
+    public static void callPatient(String pdi) {
+        if (ConnectCSS.getStatusCallingSystem().equals("on")) {
+            try {
+//                Registry myRegistry = LocateRegistry.getRegistry(ConnectCSS.getHostCallingSystem(), ConnectCSS.getPortCallingSystem());
+//                Message impl = (Message) myRegistry.lookup("myCalling");
+//
+//                impl.setCall(pdi);
+
+                DBConnection.getImplCalling().setCall(pdi);
+
+            } catch (Exception ex) {
+                J.o("Offline", "Connection to calling system is offline!", 0);
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public static void destroyPatientQueue(String pmino) {
+        if (ConnectCSS.getStatusCallingSystem().equals("on")) {
+            try {
+//                Registry myRegistry = LocateRegistry.getRegistry(ConnectCSS.getHostCallingSystem(), ConnectCSS.getPortCallingSystem());
+//                Message impl = (Message) myRegistry.lookup("myCalling");
+//
+//                impl.destroyCall(pmino);
+
+                DBConnection.getImplCalling().destroyCall(pmino);
+
+            } catch (Exception ex) {
+                J.o("Offline", "Connection to calling system is offline!", 0);
+                //ex.printStackTrace();
+            }
+        }
     }
 }

@@ -4461,6 +4461,7 @@ public class Pharmacy extends javax.swing.JFrame{
 //            Session.setCurr_stat(false);
 
             JOptionPane.showMessageDialog(null, "Drugs have been dispensed!");
+            Func.destroyPatientQueue(txt_pmiNo.getText());
         }//else
 
         resetTable();
@@ -7655,6 +7656,12 @@ jScrollPane17.setViewportView(tbl_drugOList);
         
         int index_row = tbl_patientInQueue.getSelectedRow();
         int index_col = tbl_patientInQueue.getSelectedColumn();
+        
+        String pmiNo = tbl_patientInQueue.getValueAt(index_row, 0).toString();
+        String name = tbl_patientInQueue.getValueAt(index_row, 1).toString();
+        String str_pdi = pmiNo + "|" + name + "|" 
+                + Session.getUser_name() + "|Pharmacy" ;
+        Func.callPatient(str_pdi);
         
         try {
             if(!tbl_patientInQueue.getValueAt(index_row, index_col).equals("")) {

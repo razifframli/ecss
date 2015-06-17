@@ -4584,6 +4584,10 @@ public class Registration extends javax.swing.JFrame {
         PatientBiodata[32] = cboxPostalStatePatient.getSelectedItem().toString();
         PatientBiodata[33] = cboxPostalCountryPatient.getSelectedItem().toString();
         PatientBiodata[34] = tfieldHandphoneNoPatient.getText();
+        
+        for (int i = 0; i < PatientBiodata.length; i++) {
+            PatientBiodata[i] = Func.trim(PatientBiodata[i]);
+        }
 
         //String patMSG = createFormat(PatientBiodata);
 

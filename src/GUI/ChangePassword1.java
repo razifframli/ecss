@@ -184,20 +184,23 @@ public class ChangePassword1 extends javax.swing.JFrame {
         }
         
         boolean stat = DBConnection.changePassword(Session.getUser_id(), pwd);
+        boolean stat2 = false;
         
         try {
-            LongRunProcess.check_network2();
-            if (Session.getPrev_stat()) { //Online 
-                ArrayList<String> listOnline = Func.readXML("online");
-                Registry myRegistry = LocateRegistry.getRegistry(listOnline.get(0), 1099);
-                Message impl = (Message) myRegistry.lookup("myMessage");
-                impl.changePassword(Session.getUser_id(), pwd);
-            }
+//            LongRunProcess.check_network2();
+//            if (Session.getPrev_stat()) { //Online 
+//                ArrayList<String> listOnline = Func.readXML("online");
+//                Registry myRegistry = LocateRegistry.getRegistry(listOnline.get(0), 1099);
+//                Message impl = (Message) myRegistry.lookup("myMessage");
+//                impl.changePassword(Session.getUser_id(), pwd);
+//            }
+            stat2 = DBConnection.getImpl().changePassword(Session.getUser_id(), pwd);
         } catch (Exception e) {
+            stat2 = false;
             J.o("Network Error", "Warning! Password don't changed ..\nError: "+e.getMessage(), 0);
         }
         
-        if (stat) {
+        if (stat && stat2) {
             J.o("Change Password", "Change Password Success ..", 1);
             Account1.txt_pwd.setText(Func.getPwd1(pwd));
             Session.setPassword(pwd);

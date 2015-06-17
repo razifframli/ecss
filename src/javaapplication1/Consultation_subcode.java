@@ -86,7 +86,7 @@ public class Consultation_subcode {
             }
 
             try {
-                cons.destroyPatientQueue(PMI);
+                Func.destroyPatientQueue(PMI);
             } catch (Exception e) {
                 e.printStackTrace();
             }

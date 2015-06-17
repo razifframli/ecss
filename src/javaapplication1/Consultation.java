@@ -10044,6 +10044,11 @@ public class Consultation extends javax.swing.JFrame {
             //        } catch (SQLException ex) {
             //            Logger.getLogger(Consultation.class.getName()).log(Level.SEVERE, null, ex);
             //        }
+        
+        // start time
+        long startTime = System.currentTimeMillis();
+        
+        // process
         try {
             Queue queue1 = new Queue();
             Vector<Vector<String>> data = queue1.getQueueNameList("");
@@ -10079,6 +10084,13 @@ public class Consultation extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        // end time
+        long endTime = System.currentTimeMillis();
+        long diffTime = endTime - startTime;
+        boolean status = DBConnection.captureResponseTime(
+                "SELECT NEW PATIENT FROM QUEUE", diffTime);
+        
     }//GEN-LAST:event_btn_nextActionPerformed
 
     private void btn_dischargeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dischargeActionPerformed
@@ -12505,7 +12517,7 @@ public class Consultation extends javax.swing.JFrame {
             }
 
             try {
-                destroyPatientQueue(PMI);
+                Func.destroyPatientQueue(PMI);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -14184,40 +14196,6 @@ public class Consultation extends javax.swing.JFrame {
 //        });
     }
     
-    private void callPatient(String pdi) {
-        if (ConnectCSS.getStatusCallingSystem().equals("on")) {
-            try {
-//                Registry myRegistry = LocateRegistry.getRegistry(ConnectCSS.getHostCallingSystem(), ConnectCSS.getPortCallingSystem());
-//                Message impl = (Message) myRegistry.lookup("myCalling");
-//
-//                impl.setCall(pdi);
-                
-                DBConnection.getImplCalling().setCall(pdi);
-
-            } catch (Exception ex) {
-                J.o("Offline", "Connection to calling system is offline!", 0);
-                //ex.printStackTrace();
-            }
-        }
-    }
-    
-    public void destroyPatientQueue(String pmino) {
-        if (ConnectCSS.getStatusCallingSystem().equals("on")) {
-            try {
-//                Registry myRegistry = LocateRegistry.getRegistry(ConnectCSS.getHostCallingSystem(), ConnectCSS.getPortCallingSystem());
-//                Message impl = (Message) myRegistry.lookup("myCalling");
-//
-//                impl.destroyCall(pmino);
-                
-                DBConnection.getImplCalling().destroyCall(pmino);
-
-            } catch (Exception ex) {
-                J.o("Offline", "Connection to calling system is offline!", 0);
-                //ex.printStackTrace();
-            }
-        }
-    }
-    
     private void setBtnOff() {
         btn_sPatient.setEnabled(false);
         btn_next.setEnabled(false);
@@ -14289,8 +14267,8 @@ public class Consultation extends javax.swing.JFrame {
         System.out.println("wat to print 1: : " + AppointmentInfo[1]);
         System.out.println("wat to print 2: : " + AppointmentInfo[2]);
 
-        String str_pdi = AppointmentInfo[0] + "|" + AppointmentInfo[2] + "|" + Session.getUser_name();
-        
+        String str_pdi = AppointmentInfo[0] + "|" + AppointmentInfo[2] + "|" 
+                + Session.getUser_name() + "|" +Session.getData_user().get(17);
         
         try {
             Queue updatequeue = new Queue();
@@ -14983,7 +14961,7 @@ public class Consultation extends javax.swing.JFrame {
         
         //3. Display at screen/all tab
 
-        callPatient(str_pdi);
+        Func.callPatient(str_pdi);
     }
 
     //Online Indicator

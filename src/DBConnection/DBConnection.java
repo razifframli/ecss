@@ -1672,6 +1672,7 @@ public class DBConnection {
             PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
             ps1.setString(1, user_id);
             ps1.execute();
+            
             String sql2 = "DELETE FROM ADM_USER_ACCESS "
                     + "WHERE USER_ID = ? ";
             PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
@@ -1694,7 +1695,7 @@ public class DBConnection {
             }
             sql4 += ")";
             PreparedStatement ps4 = Session.getCon_x(1000).prepareStatement(sql4);
-            for (int i = 0 + num_cols1, j = 0; i < num_cols2 + num_cols1; i++, j++) {
+            for (int i = num_cols1, j = 0; i < (num_cols2 + num_cols1); i++, j++) {
                 ps4.setString(j+1, data.get(i));
             }
             ps4.execute();
@@ -1743,6 +1744,22 @@ public class DBConnection {
             String sql = "UPDATE adm_user SET password = ? WHERE user_id = ? ";
             PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
             ps.setString(1, pwd);
+            ps.setString(2, userid);
+            ps.execute();
+            stat = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            stat = false;
+        }
+        return stat;
+    }
+    
+    public static boolean changeRoomNo(String userid, String roomNo) {
+        boolean stat = false;
+        try {
+            String sql = "UPDATE adm_user SET room_no = ? WHERE user_id = ? ";
+            PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
+            ps.setString(1, roomNo);
             ps.setString(2, userid);
             ps.execute();
             stat = true;
@@ -2711,6 +2728,27 @@ public class DBConnection {
             } else {
                 status = false;
             }
+        } catch (Exception e) {
+            status = false;
+            e.printStackTrace();
+        }
+        return status;
+    }
+    
+    public static boolean captureResponseTime(String process, long timetaken) {
+        boolean status = false;
+        try {
+//            Date date1 = new Date();
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String date = sdf.format(date1);
+            java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+            String sql = "INSERT INTO CIS_RESPONSETIME VALUES (?, ?, ?) ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, process);
+            ps.setString(2, timetaken+"");
+            ps.setDate(3, date);
+            ps.execute();
+            status = true;
         } catch (Exception e) {
             status = false;
             e.printStackTrace();

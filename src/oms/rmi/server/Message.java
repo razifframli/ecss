@@ -41,6 +41,9 @@ public interface Message extends Remote {
     // change password
     boolean changePassword(String userid, String pwd) throws RemoteException;
     
+    // change room no
+    boolean changeRoomNo(String userid, String roomNo) throws RemoteException;
+    
     // update pms_patient_biodata
     boolean updatePmsPatientBiodata(String pmino, ArrayList<String> column, ArrayList<String> data) throws RemoteException;
     
