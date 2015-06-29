@@ -369,15 +369,15 @@ public class Consultation extends javax.swing.JFrame {
     public void setTutup() {
         jTabbedPane5.setEnabledAt(2, false);
         jTabbedPane5.setEnabledAt(3, false);
-        jTabbedPane5.setEnabledAt(4, false);
+        //jTabbedPane5.setEnabledAt(4, false);
         jTabbedPane6.setEnabledAt(2, false);
         jTabbedPane7.setEnabledAt(0, false);
         jTabbedPane7.setEnabledAt(1, false);
         jTabbedPane7.setEnabledAt(3, false);
         jTabbedPane7.setEnabledAt(4, false);
         jTabbedPane7.setEnabledAt(7, false);
-        lbl_previous_visit_date.setVisible(false);
-        Consultation.tbl_vts.setVisible(false);
+//        lbl_previous_visit_date.setVisible(false);
+//        Consultation.tbl_vts.setVisible(false);
     }
     
     private int max_ref_tbl = 50;
@@ -386,7 +386,7 @@ public class Consultation extends javax.swing.JFrame {
     private void clearTblRef() {
         for (int j = 0; j < max_ref_tbl; j++) {
             for (int k = 0; k < col_ref_tbl; k++) {
-                tbl_referral_list.getModel().setValueAt("", j, k);
+//                tbl_referral_list.getModel().setValueAt("", j, k);
             }
         }
     }
@@ -398,19 +398,19 @@ public class Consultation extends javax.swing.JFrame {
 //                ArrayList<String> listOnline = Func.readXML("online");
 //                Registry myRegistry = LocateRegistry.getRegistry(listOnline.get(0), 1099);
 //                Message impl = (Message) myRegistry.lookup("myMessage");
-                ArrayList<ArrayList<String>> getRef = DBConnection.getImpl().getReferral(Session.getUser_id());
-                if (getRef.size() > 0) {
-                    for (int j = 0; j < getRef.size() && j < max_ref_tbl; j++) {
-                        tbl_referral_list.getModel().setValueAt(getRef.get(j).get(1), j, 0);
-                        tbl_referral_list.getModel().setValueAt(getRef.get(j).get(0), j, 1);
-                        tbl_referral_list.getModel().setValueAt(getRef.get(j).get(15), j, 2);
-                        tbl_referral_list.getModel().setValueAt(getRef.get(j).get(13), j, 3);
-                        tbl_referral_list.getModel().setValueAt(getRef.get(j).get(11), j, 4);
-                    }
-                }
-                Consultation.showOnline();
+//                ArrayList<ArrayList<String>> getRef = DBConnection.getImpl().getReferral(Session.getUser_id());
+//                if (getRef.size() > 0) {
+//                    for (int j = 0; j < getRef.size() && j < max_ref_tbl; j++) {
+//                        tbl_referral_list.getModel().setValueAt(getRef.get(j).get(1), j, 0);
+//                        tbl_referral_list.getModel().setValueAt(getRef.get(j).get(0), j, 1);
+//                        tbl_referral_list.getModel().setValueAt(getRef.get(j).get(15), j, 2);
+//                        tbl_referral_list.getModel().setValueAt(getRef.get(j).get(13), j, 3);
+//                        tbl_referral_list.getModel().setValueAt(getRef.get(j).get(11), j, 4);
+//                    }
+//                }
+//                Consultation.showOnline();
             } catch (Exception e) {
-                Consultation.showOffline();
+//                Consultation.showOffline();
                 //J.o("Network Offline", "Network to Server is Offline!!", 0);
                 //e.printStackTrace();
             }
@@ -490,7 +490,7 @@ public class Consultation extends javax.swing.JFrame {
         
         setDropDownTime();
         
-        loadDrug();
+        //loadDrug();
         
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
         
@@ -793,12 +793,6 @@ public class Consultation extends javax.swing.JFrame {
         jPanel24 = new javax.swing.JPanel();
         jScrollPane37 = new javax.swing.JScrollPane();
         jPanel12 = new javax.swing.JPanel();
-        lbl_alldate = new javax.swing.JLabel();
-        jPanel57 = new javax.swing.JPanel();
-        jScrollPane40 = new javax.swing.JScrollPane();
-        tbl_alg = new javax.swing.JTable();
-        jScrollPane28 = new javax.swing.JScrollPane();
-        jTextArea14 = new javax.swing.JTextArea();
         jPanel58 = new javax.swing.JPanel();
         lb_allergySearch = new javax.swing.JLabel();
         txt_allergySearch = new javax.swing.JTextField();
@@ -862,9 +856,6 @@ public class Consultation extends javax.swing.JFrame {
         jLabel30 = new javax.swing.JLabel();
         btn_vitalSignClear = new javax.swing.JButton();
         btn_vitalSignAccept = new javax.swing.JButton();
-        lbl_previous_visit_date = new javax.swing.JLabel();
-        jScrollPane80 = new javax.swing.JScrollPane();
-        tbl_vts = new javax.swing.JTable();
         jPanel77 = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
@@ -1043,7 +1034,6 @@ public class Consultation extends javax.swing.JFrame {
         jPanel37 = new javax.swing.JPanel();
         jScrollPane12 = new javax.swing.JScrollPane();
         jPanel7 = new javax.swing.JPanel();
-        lbl_drgdate = new javax.swing.JLabel();
         jPanel45 = new javax.swing.JPanel();
         lbl_drugNameOListSearch = new javax.swing.JLabel();
         txt_drugNameOListSearch = new javax.swing.JTextField();
@@ -1073,6 +1063,7 @@ public class Consultation extends javax.swing.JFrame {
         btn_drugClear = new javax.swing.JButton();
         jLabel61 = new javax.swing.JLabel();
         txt_packagetype = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane29 = new javax.swing.JScrollPane();
         tbl_drug = new javax.swing.JTable();
@@ -1089,10 +1080,6 @@ public class Consultation extends javax.swing.JFrame {
         txt_referral_comment = new javax.swing.JTextArea();
         jButton4 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jPanel75 = new javax.swing.JPanel();
-        jScrollPane15 = new javax.swing.JScrollPane();
-        tbl_referral_list = new javax.swing.JTable();
-        jButton8 = new javax.swing.JButton();
         jPanel41 = new javax.swing.JPanel();
         jScrollPane62 = new javax.swing.JScrollPane();
         jPanel44 = new javax.swing.JPanel();
@@ -1719,7 +1706,7 @@ public class Consultation extends javax.swing.JFrame {
                                     .addComponent(btnSrcComplaint, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel47Layout.createSequentialGroup()
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.PREFERRED_SIZE, 142, Short.MAX_VALUE)
+                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                                             .addComponent(rbtn_gen_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2727,66 +2714,6 @@ public class Consultation extends javax.swing.JFrame {
         jPanel12.setBackground(new java.awt.Color(173, 182, 200));
         jPanel12.setPreferredSize(new java.awt.Dimension(623, 582));
 
-        jPanel57.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel57.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Previous History of Allergy"));
-
-        tbl_alg.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Allergy Name", "Since When", "Comments"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbl_alg.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_algMouseClicked(evt);
-            }
-        });
-        jScrollPane40.setViewportView(tbl_alg);
-
-        jScrollPane28.setBackground(new java.awt.Color(173, 182, 200));
-
-        jTextArea14.setBackground(new java.awt.Color(236, 233, 216));
-        jTextArea14.setColumns(20);
-        jTextArea14.setRows(5);
-        jScrollPane28.setViewportView(jTextArea14);
-
-        javax.swing.GroupLayout jPanel57Layout = new javax.swing.GroupLayout(jPanel57);
-        jPanel57.setLayout(jPanel57Layout);
-        jPanel57Layout.setHorizontalGroup(
-            jPanel57Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel57Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane40, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel57Layout.setVerticalGroup(
-            jPanel57Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel57Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel57Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane40, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jPanel58.setBackground(new java.awt.Color(173, 182, 200));
         jPanel58.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Allergy"));
 
@@ -2893,35 +2820,17 @@ public class Consultation extends javax.swing.JFrame {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_alldate, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jPanel57, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 112, Short.MAX_VALUE)))
-                .addContainerGap())
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jPanel58, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 142, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jPanel58, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lbl_alldate, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(209, 209, 209))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addComponent(jPanel57, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
 
         jScrollPane37.setViewportView(jPanel12);
@@ -3384,6 +3293,11 @@ public class Consultation extends javax.swing.JFrame {
         jPanel15.setBackground(new java.awt.Color(173, 182, 200));
 
         jTabbedPane5.setBackground(new java.awt.Color(173, 182, 200));
+        jTabbedPane5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane5MouseClicked(evt);
+            }
+        });
 
         jScrollPane11.setPreferredSize(new java.awt.Dimension(625, 2000));
 
@@ -3413,44 +3327,6 @@ public class Consultation extends javax.swing.JFrame {
                 btn_vitalSignAcceptActionPerformed(evt);
             }
         });
-
-        lbl_previous_visit_date.setText("Previous Visit Date:");
-
-        tbl_vts.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Height", "Weight", "Pulse", "BMI", "Head Circumference", "Temperature", "Systolic", "Diastolic"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbl_vts.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_vtsMouseClicked(evt);
-            }
-        });
-        jScrollPane80.setViewportView(tbl_vts);
 
         jPanel77.setBackground(new java.awt.Color(173, 182, 200));
         jPanel77.setBorder(javax.swing.BorderFactory.createTitledBorder("Glasgow Coma Scale"));
@@ -4350,24 +4226,18 @@ public class Consultation extends javax.swing.JFrame {
                             .addComponent(jPanel83, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel82, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel77, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbl_previous_visit_date, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel81, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel80, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel79, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel78, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel84, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(57, Short.MAX_VALUE))))
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane80, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(btn_vitalSignAccept)
-                        .addGap(31, 31, 31)
-                        .addComponent(btn_vitalSignClear)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(239, 239, 239)
+                .addComponent(btn_vitalSignAccept)
+                .addGap(31, 31, 31)
+                .addComponent(btn_vitalSignClear)
+                .addGap(0, 355, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4394,11 +4264,7 @@ public class Consultation extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_vitalSignAccept)
                     .addComponent(btn_vitalSignClear))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_previous_visit_date)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane80, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(671, Short.MAX_VALUE))
         );
 
         jScrollPane11.setViewportView(jPanel6);
@@ -5396,6 +5262,13 @@ public class Consultation extends javax.swing.JFrame {
 
         txt_packagetype.setEditable(false);
 
+        jButton5.setText("<html><center>\nDownload<br />\nDrug</center>\n</html>");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel45Layout = new javax.swing.GroupLayout(jPanel45);
         jPanel45.setLayout(jPanel45Layout);
         jPanel45Layout.setHorizontalGroup(
@@ -5422,39 +5295,40 @@ public class Consultation extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_packagetype, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_drugAccept)
-                    .addComponent(btn_drugClear, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton5)
+                    .addComponent(btn_drugAccept, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_drugClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel45Layout.setVerticalGroup(
             jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel45Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_drugNameOListSearch)
+                    .addComponent(txt_drugNameOListSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel61)
+                    .addComponent(txt_packagetype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_productNameOList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_productNameOList1))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel45Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_drugNameOListSearch)
-                            .addComponent(txt_drugNameOListSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(stock_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel24)
-                            .addComponent(jLabel61)
-                            .addComponent(txt_packagetype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_productNameOList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_productNameOList1))
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel74, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel45Layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
                         .addComponent(btn_drugAccept)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_drugClear)))
+                        .addComponent(btn_drugClear))
+                    .addComponent(jPanel74, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -5520,13 +5394,9 @@ public class Consultation extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(663, 663, 663)
-                        .addComponent(lbl_drgdate, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel45, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel45, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -5536,9 +5406,7 @@ public class Consultation extends javax.swing.JFrame {
                 .addComponent(jPanel45, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                .addComponent(lbl_drgdate, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         jScrollPane12.setViewportView(jPanel7);
@@ -5662,137 +5530,21 @@ public class Consultation extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel75.setBackground(new java.awt.Color(173, 182, 200));
-        jPanel75.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "List of Second Opinion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
-
-        tbl_referral_list.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Episode Time", "PMI No.", "Referral From", "Health Facility", "Comment"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbl_referral_list.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_referral_listMouseClicked(evt);
-            }
-        });
-        jScrollPane15.setViewportView(tbl_referral_list);
-
-        jButton8.setText("Refresh");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel75Layout = new javax.swing.GroupLayout(jPanel75);
-        jPanel75.setLayout(jPanel75Layout);
-        jPanel75Layout.setHorizontalGroup(
-            jPanel75Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel75Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel75Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
-                    .addGroup(jPanel75Layout.createSequentialGroup()
-                        .addComponent(jButton8)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel75Layout.setVerticalGroup(
-            jPanel75Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel75Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jPanel43Layout = new javax.swing.GroupLayout(jPanel43);
         jPanel43.setLayout(jPanel43Layout);
         jPanel43Layout.setHorizontalGroup(
             jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel43Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel75, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(504, Short.MAX_VALUE))
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(883, Short.MAX_VALUE))
         );
         jPanel43Layout.setVerticalGroup(
             jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel43Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel75, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(489, Short.MAX_VALUE))
         );
 
         jScrollPane60.setViewportView(jPanel43);
@@ -7153,7 +6905,7 @@ public class Consultation extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -7885,17 +7637,17 @@ public class Consultation extends javax.swing.JFrame {
                     tsttab7[group1] = "";
                 }
             }
-            jTextArea14.setText("");
-            for (int p1 = 0; p1 < q5; p1++) {
-                if ("".equals(tsttab7[p1])) {
-                    p1 = p1 + 1;
-                }
-
-                jTextArea14.append(tsttab7[p1]);
-            }
-
-            jTextArea7.append("\nAllergy\n" + jTextArea14.getText());
-            tab7s = "\nAllergy\n" + jTextArea14.getText();
+//            jTextArea14.setText("");
+//            for (int p1 = 0; p1 < q5; p1++) {
+//                if ("".equals(tsttab7[p1])) {
+//                    p1 = p1 + 1;
+//                }
+//
+//                jTextArea14.append(tsttab7[p1]);
+//            }
+//
+//            jTextArea7.append("\nAllergy\n" + jTextArea14.getText());
+//            tab7s = "\nAllergy\n" + jTextArea14.getText();
 
             if (tab8 > 0) {
                 jTextArea7.append(tab8s);
@@ -9317,13 +9069,13 @@ public class Consultation extends javax.swing.JFrame {
 
         if (v == 0) {
             if (tab7 > 0 || tab7 == 0) {
-                jTextArea14.append("\n" + (q5 + 1) + ") "
-                        + "Type: " + allergy_name
-                        + ", Comment: " + allergy_comments
-                        + ",\nDate : " + allergy_date + "\n");
-                tab7s = "\n" + (q5 + 1) + ") " + "Type: " + allergy_name + ", Comment: " + allergy_comments + ",\nDate : " + allergy_date + "\n";
-                tsttab7[q5] = tab7s;
-                jTextArea7.append("\nAllergy\n" + jTextArea14.getText());
+//                jTextArea14.append("\n" + (q5 + 1) + ") "
+//                        + "Type: " + allergy_name
+//                        + ", Comment: " + allergy_comments
+//                        + ",\nDate : " + allergy_date + "\n");
+//                tab7s = "\n" + (q5 + 1) + ") " + "Type: " + allergy_name + ", Comment: " + allergy_comments + ",\nDate : " + allergy_date + "\n";
+//                tsttab7[q5] = tab7s;
+//                jTextArea7.append("\nAllergy\n" + jTextArea14.getText());
 
                 //to retrieve update value
                 allergysub[q5][0] = algSnomedId;
@@ -9336,7 +9088,7 @@ public class Consultation extends javax.swing.JFrame {
             }
 
             tab7 = tab7 + 1;
-            tab7s = "\nAllergy\n" + jTextArea14.getText();
+//            tab7s = "\nAllergy\n" + jTextArea14.getText();
         } else {
 
             String update = "Type: " + allergy_name + ", Comment: " + allergy_comments + ",\nDate : " + allergy_date + "\n";
@@ -9356,17 +9108,17 @@ public class Consultation extends javax.swing.JFrame {
             }
 
 
-            jTextArea14.setText("");
-            for (int p1 = 0; p1 < q5; p1++) {
-                if ("".equals(tsttab7[p1])) {
-                    p1 = p1 + 1;
-                }
-
-                jTextArea14.append(tsttab7[p1]);
-            }
-
-            jTextArea7.append("\nAllergy\n" + jTextArea14.getText());
-            tab7s = "\nAllergy\n" + jTextArea14.getText();
+//            jTextArea14.setText("");
+//            for (int p1 = 0; p1 < q5; p1++) {
+//                if ("".equals(tsttab7[p1])) {
+//                    p1 = p1 + 1;
+//                }
+//
+//                jTextArea14.append(tsttab7[p1]);
+//            }
+//
+//            jTextArea7.append("\nAllergy\n" + jTextArea14.getText());
+//            tab7s = "\nAllergy\n" + jTextArea14.getText();
             v = v - 1;
         }
 
@@ -10418,49 +10170,6 @@ public class Consultation extends javax.swing.JFrame {
         accept_btn_pos();
     }//GEN-LAST:event_btn_ProcAccActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        //        LongRunProcess.check_network2();
-        getReferral();
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void tbl_referral_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_referral_listMouseClicked
-        // TODO add your handling code here:
-        if (btn_next.isEnabled()) {
-            int rowIndex = tbl_referral_list.getSelectedRow();
-            String pmino = (String) tbl_referral_list.getValueAt(rowIndex, 1);
-            String selectedTime = (String) tbl_referral_list.getValueAt(rowIndex, 0);
-            if (pmino.length() > 0 && !pmino.equals("")) {
-                //                LongRunProcess.check_network2();
-                //                if (Session.getPrev_stat()) { //online
-                    try {
-                        //                        ArrayList<String> listOnline = Func.readXML("online");
-                        //                        Registry myRegistry = LocateRegistry.getRegistry(listOnline.get(0), 1099);
-                        //                        Message impl = (Message) myRegistry.lookup("myMessage");
-                        boolean stat = DBConnection.getImpl().delReferral(pmino, selectedTime);
-                        Consultation.showOnline();
-                        if (stat) {
-                            this.setSelectedAppointment(pmino, selectedTime);
-                            setBtnOff();
-                            getReferral();
-                        } else {
-                            J.o("Referral Patient Failed", "Referral Patient Failed!!", 0);
-                        }
-                    } catch (Exception e) {
-                        Consultation.showOffline();
-                        J.o("Network Offline", "Network to Server is Offline!!", 0);
-                        e.printStackTrace();
-                    }
-                    //                } else {
-                    //                    Consultation.showOffline();
-                    //                    J.o("Network Offline", "Network to Server is Offline!!", 0);
-                    //                }
-            }
-        } else {
-            J.o("Cannot Select Patient", "Please discharge/hold the current patient first!", 0);
-        }
-    }//GEN-LAST:event_tbl_referral_listMouseClicked
-
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         cbx_referral_doctor.setSelectedIndex(0);
@@ -11016,52 +10725,6 @@ public class Consultation extends javax.swing.JFrame {
         accept_button_pem();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void tbl_vtsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_vtsMouseClicked
-
-        try {
-            if (checkPatient()) {
-                return;
-            }
-            int rowIndex = tbl_vts.getSelectedRow();
-            String hei = (String) tbl_vts.getValueAt(rowIndex, 0);
-            String wei = (String) tbl_vts.getValueAt(rowIndex, 1);
-            String pul = (String) tbl_vts.getValueAt(rowIndex, 2);
-            String bmi = (String) tbl_vts.getValueAt(rowIndex, 3);
-            String hea = (String) tbl_vts.getValueAt(rowIndex, 4);
-            String tem = (String) tbl_vts.getValueAt(rowIndex, 5);
-            String sysx = (String) tbl_vts.getValueAt(rowIndex, 6);
-            String diax = (String) tbl_vts.getValueAt(rowIndex, 7);
-            String sys[] = sysx.split(",");
-            String dia[] = diax.split(",");
-            txt_height.setText(hei);
-            txt_weight.setText(wei);
-            txt_pulse.setText(pul);
-            double height = Double.parseDouble(txt_height.getText().trim());
-            double weight = Double.parseDouble(txt_weight.getText().trim());
-            double total = Math.round((weight / (height * height)) * 10000);
-            txt_bmi.setText(total + "");
-            if (total <= 18) {
-                txt_weightStatus.setText("Underweight");
-            } else if (total <= 24) {
-                txt_weightStatus.setText("Normal weight");
-            } else if (total <= 29) {
-                txt_weightStatus.setText("Overweight");
-            } else {
-                txt_weightStatus.setText("Obesity");
-            }
-            txt_headCircumference.setText(hea);
-            txt_temperature.setText(tem);
-            txt_systolic.setText(sys[0]);
-            txt_diastolic.setText(dia[0]);
-            txt_systolic1.setText(sys[1]);
-            txt_diastolic1.setText(dia[1]);
-            txt_systolic2.setText(sys[2]);
-            txt_diastolic2.setText(dia[2]);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }//GEN-LAST:event_tbl_vtsMouseClicked
-
     private void txt_pulseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_pulseKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_pulseKeyReleased
@@ -11342,25 +11005,6 @@ public class Consultation extends javax.swing.JFrame {
         if(checkPatient()) return;
         Searching.searchAllergy1(this);
     }//GEN-LAST:event_txt_allergySearchKeyReleased
-
-    private void tbl_algMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_algMouseClicked
-        try {
-            if (checkPatient()) {
-                return;
-            }
-            int rowIndex = tbl_alg.getSelectedRow();
-            String problem = (String) tbl_alg.getValueAt(rowIndex, 0);
-            String since = (String) tbl_alg.getValueAt(rowIndex, 1);
-            String comment = (String) tbl_alg.getValueAt(rowIndex, 2);
-            txt_allergySearch.setText(problem);
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = dateFormat.parse(since);
-            txt_allergyDate2.setDate(date);
-            txt_allergyComments.setText(comment);
-        } catch (Exception ex) {
-            Logger.getLogger(Consultation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_tbl_algMouseClicked
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
@@ -12102,6 +11746,23 @@ public class Consultation extends javax.swing.JFrame {
         // TODO add your handling code here:
         txt_pNotes.setText("");
     }//GEN-LAST:event_PN_clrBtnActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        loadDrug();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTabbedPane5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane5MouseClicked
+        // TODO add your handling code here:
+        if(checkPatient()) { 
+            jTabbedPane5.setSelectedIndex(0);
+            return;
+        }
+        if (jTabbedPane5.getSelectedIndex() == 4) {
+            jTabbedPane5.setSelectedIndex(0);
+            new ObservationProcedure(txt_pPmiNo.getText()).setVisible(true);
+        }
+    }//GEN-LAST:event_jTabbedPane5MouseClicked
 
     public boolean checkPatient() {
         String pmiNo = txt_pName.getText();
@@ -14199,7 +13860,7 @@ public class Consultation extends javax.swing.JFrame {
     private void setBtnOff() {
         btn_sPatient.setEnabled(false);
         btn_next.setEnabled(false);
-        tbl_referral_list.setEnabled(false);
+//        tbl_referral_list.setEnabled(false);
         btn_exit.setEnabled(false);
         
         btn_hold.setEnabled(true);
@@ -14210,7 +13871,7 @@ public class Consultation extends javax.swing.JFrame {
     protected void setBtnOn() {
         btn_sPatient.setEnabled(true);
         btn_next.setEnabled(true);
-        tbl_referral_list.setEnabled(true);
+//        tbl_referral_list.setEnabled(true);
         btn_exit.setEnabled(true);
         
         btn_hold.setEnabled(false);
@@ -14517,9 +14178,9 @@ public class Consultation extends javax.swing.JFrame {
                 if (row[5] > 0) {
                     String alg_str = "";
                     for (int i = 0; i < row[5] && i < rows_tbl; i++) {
-                        tbl_alg.getModel().setValueAt(msg[5][i][2], i, 0);
-                        tbl_alg.getModel().setValueAt(msg[5][i][3], i, 1);
-                        tbl_alg.getModel().setValueAt(msg[5][i][4], i, 2);
+//                        tbl_alg.getModel().setValueAt(msg[5][i][2], i, 0);
+//                        tbl_alg.getModel().setValueAt(msg[5][i][3], i, 1);
+//                        tbl_alg.getModel().setValueAt(msg[5][i][4], i, 2);
                         alg_str += msg[5][i][2] + "|";
                     }
                     LookupController CBoxloader = new LookupController();
@@ -14554,14 +14215,14 @@ public class Consultation extends javax.swing.JFrame {
                             double height = Double.parseDouble(msg[8][i][9]);
                             double weight = Double.parseDouble(msg[8][i][8]);
                             double bmi = calcBMI_Math(height, weight);
-                            tbl_vts.getModel().setValueAt("" + msg[8][i][9], i, 0);
-                            tbl_vts.getModel().setValueAt("" + msg[8][i][8], i, 1);
-                            tbl_vts.getModel().setValueAt("" + msg[8][i][13], i, 2);
-                            tbl_vts.getModel().setValueAt("" + bmi, i, 3);
-                            tbl_vts.getModel().setValueAt("" + msg[8][i][10], i, 4);
-                            tbl_vts.getModel().setValueAt("" + msg[8][i][1], i, 5);
-                            tbl_vts.getModel().setValueAt("" + msg[8][i][2] + "," + msg[8][i][6] + "," + msg[8][i][4], i, 6);
-                            tbl_vts.getModel().setValueAt("" + msg[8][i][3] + "," + msg[8][i][7] + "," + msg[8][i][5], i, 7);
+//                            tbl_vts.getModel().setValueAt("" + msg[8][i][9], i, 0);
+//                            tbl_vts.getModel().setValueAt("" + msg[8][i][8], i, 1);
+//                            tbl_vts.getModel().setValueAt("" + msg[8][i][13], i, 2);
+//                            tbl_vts.getModel().setValueAt("" + bmi, i, 3);
+//                            tbl_vts.getModel().setValueAt("" + msg[8][i][10], i, 4);
+//                            tbl_vts.getModel().setValueAt("" + msg[8][i][1], i, 5);
+//                            tbl_vts.getModel().setValueAt("" + msg[8][i][2] + "," + msg[8][i][6] + "," + msg[8][i][4], i, 6);
+//                            tbl_vts.getModel().setValueAt("" + msg[8][i][3] + "," + msg[8][i][7] + "," + msg[8][i][5], i, 7);
                         } catch (Exception e) {
                         }
                     }
@@ -15148,8 +14809,8 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox10;
     private javax.swing.JComboBox jComboBox11;
@@ -15293,7 +14954,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel54;
     private javax.swing.JPanel jPanel55;
     private javax.swing.JPanel jPanel56;
-    private javax.swing.JPanel jPanel57;
     private javax.swing.JPanel jPanel58;
     private javax.swing.JPanel jPanel59;
     private javax.swing.JPanel jPanel6;
@@ -15312,7 +14972,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel71;
     private javax.swing.JPanel jPanel72;
     private javax.swing.JPanel jPanel74;
-    private javax.swing.JPanel jPanel75;
     private javax.swing.JPanel jPanel76;
     private javax.swing.JPanel jPanel77;
     private javax.swing.JPanel jPanel78;
@@ -15333,7 +14992,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
-    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane18;
@@ -15347,7 +15005,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane25;
     private javax.swing.JScrollPane jScrollPane26;
     private javax.swing.JScrollPane jScrollPane27;
-    private javax.swing.JScrollPane jScrollPane28;
     private javax.swing.JScrollPane jScrollPane29;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane30;
@@ -15361,7 +15018,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane38;
     private javax.swing.JScrollPane jScrollPane39;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane40;
     private javax.swing.JScrollPane jScrollPane41;
     private javax.swing.JScrollPane jScrollPane42;
     private javax.swing.JScrollPane jScrollPane43;
@@ -15396,7 +15052,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane78;
     private javax.swing.JScrollPane jScrollPane79;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane80;
     private javax.swing.JScrollPane jScrollPane82;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPopupMenu.Separator jSeparator7;
@@ -15414,7 +15069,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     private javax.swing.JTextArea jTextArea10;
     private javax.swing.JTextArea jTextArea12;
-    private javax.swing.JTextArea jTextArea14;
     private javax.swing.JTextArea jTextArea18;
     private javax.swing.JTextArea jTextArea19;
     private javax.swing.JTextArea jTextArea21;
@@ -15424,7 +15078,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JLabel lb_allergySearch;
     public javax.swing.JLabel lblDOB;
     protected static javax.swing.JLabel lblStatus;
-    public javax.swing.JLabel lbl_alldate;
     private javax.swing.JLabel lbl_allergyComments;
     private javax.swing.JLabel lbl_allergyDate;
     private javax.swing.JLabel lbl_cSeverity;
@@ -15443,7 +15096,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_disabilityType;
     public javax.swing.JLabel lbl_disdate;
     private javax.swing.JLabel lbl_dosageOList;
-    public javax.swing.JLabel lbl_drgdate;
     private javax.swing.JLabel lbl_drugNameOListSearch;
     private javax.swing.JLabel lbl_duration;
     private javax.swing.JLabel lbl_durationOList;
@@ -15468,7 +15120,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_pRace;
     private javax.swing.JLabel lbl_pSex;
     private javax.swing.JLabel lbl_pStatus;
-    private javax.swing.JLabel lbl_previous_visit_date;
     private javax.swing.JLabel lbl_productNameOList1;
     private javax.swing.JLabel lbl_quantityOList;
     public javax.swing.JLabel lbl_shdate;
@@ -15503,7 +15154,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JTable tblQueue;
     private javax.swing.JTable tblQueue1;
     public static javax.swing.JTable tbl_HPI1;
-    public javax.swing.JTable tbl_alg;
     public javax.swing.JTable tbl_cc;
     public javax.swing.JTable tbl_dab;
     public javax.swing.JTable tbl_dgs;
@@ -15515,9 +15165,7 @@ public class Consultation extends javax.swing.JFrame {
     public static javax.swing.JTable tbl_pgcs;
     public javax.swing.JTable tbl_pmh;
     public static javax.swing.JTable tbl_productname;
-    public static javax.swing.JTable tbl_referral_list;
     public javax.swing.JTable tbl_sh;
-    public static javax.swing.JTable tbl_vts;
     private com.toedter.calendar.JDateChooser tfieldDate;
     public static javax.swing.JTextField time_from;
     public static javax.swing.JComboBox time_to_hour;

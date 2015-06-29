@@ -429,46 +429,46 @@ public class PatientRecordGUI extends javax.swing.JFrame {
                        vsweight = rs4.getString("HEIGHT");
                        vsheight = rs4.getString("WEIGHT");
                        vspulse = rs4.getString("PULSE");
-                       consultation.tbl_vts.setValueAt(vsweight,index3,0);
-                       consultation.tbl_vts.setValueAt(vsheight,index3,1);
-                       consultation.tbl_vts.setValueAt(vspulse,index3,2);
+//                       consultation.tbl_vts.setValueAt(vsweight,index3,0);
+//                       consultation.tbl_vts.setValueAt(vsheight,index3,1);
+//                       consultation.tbl_vts.setValueAt(vspulse,index3,2);
                        index3++;
                     }
 
                     //Display data to text fields frm vital sign table
-                    consultation.tbl_vts.addMouseListener(new java.awt.event.MouseAdapter(){
-                    public void mouseClicked(java.awt.event.MouseEvent evt) {
-
-                         try
-                         {
-                                //Connection conn = DatabaseConnection.connect();
-                                int selectedVSRow = consultation.tbl_vts.getSelectedRow();
-                                String selectedVS =  consultation.tbl_vts.getValueAt(selectedVSRow, 1).toString();
-
-                                String sql="SELECT * FROM VITAL_SIGN WHERE ENCOUNTER_DATE=? AND WEIGHT =?";
-                                //prepare the sql query and execute it
-                                PreparedStatement ps4 = Session.getCon_x(1000).prepareStatement(sql);
-                                ps4.setString(1,consultation.lbl_vsdate.getText());
-                                ps4.setString(2,selectedVS);
-                                ResultSet rs4 = ps4.executeQuery();
-
-                                while(rs4.next())
-                                {
-                                   consultation.txt_height.setText(rs4.getString("HEIGHT"));
-                                   consultation.txt_weight.setText(rs4.getString("WEIGHT"));
-                                   consultation.txt_bmi.setText(rs4.getString("BMI"));
-                                   consultation.txt_weightStatus.setText(rs4.getString("WEIGHT_STATUS"));
-                                   consultation.txt_headCircumference.setText(rs4.getString("HEAD_CIRCUM"));
-                                   consultation.txt_temperature.setText(rs4.getString("TEMP"));
-                                   consultation.txt_pulse.setText(rs4.getString("PULSE"));
-                                }
-                          }
-                          catch(Exception ex)
-                          {
-                                System.out.print(ex);
-                          }
-                    }
-                    });//end tbl_vs
+//                    consultation.tbl_vts.addMouseListener(new java.awt.event.MouseAdapter(){
+//                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+//
+//                         try
+//                         {
+//                                //Connection conn = DatabaseConnection.connect();
+//                                int selectedVSRow = consultation.tbl_vts.getSelectedRow();
+//                                String selectedVS =  consultation.tbl_vts.getValueAt(selectedVSRow, 1).toString();
+//
+//                                String sql="SELECT * FROM VITAL_SIGN WHERE ENCOUNTER_DATE=? AND WEIGHT =?";
+//                                //prepare the sql query and execute it
+//                                PreparedStatement ps4 = Session.getCon_x(1000).prepareStatement(sql);
+//                                ps4.setString(1,consultation.lbl_vsdate.getText());
+//                                ps4.setString(2,selectedVS);
+//                                ResultSet rs4 = ps4.executeQuery();
+//
+//                                while(rs4.next())
+//                                {
+//                                   consultation.txt_height.setText(rs4.getString("HEIGHT"));
+//                                   consultation.txt_weight.setText(rs4.getString("WEIGHT"));
+//                                   consultation.txt_bmi.setText(rs4.getString("BMI"));
+//                                   consultation.txt_weightStatus.setText(rs4.getString("WEIGHT_STATUS"));
+//                                   consultation.txt_headCircumference.setText(rs4.getString("HEAD_CIRCUM"));
+//                                   consultation.txt_temperature.setText(rs4.getString("TEMP"));
+//                                   consultation.txt_pulse.setText(rs4.getString("PULSE"));
+//                                }
+//                          }
+//                          catch(Exception ex)
+//                          {
+//                                System.out.print(ex);
+//                          }
+//                    }
+//                    });//end tbl_vs
 
                     //Display data in drug table
                     String sql5="SELECT * FROM DRUG_ADDICT WHERE ENCOUNTER_DATE=?";
@@ -592,7 +592,7 @@ public class PatientRecordGUI extends javax.swing.JFrame {
                     PreparedStatement ps7 = Session.getCon_x(1000).prepareStatement(sql7);
                     ps7.setString(1,selectedDate);
                     ResultSet rs7 = ps7.executeQuery();
-                    consultation.lbl_alldate.setText(selectedDate);
+//                    consultation.lbl_alldate.setText(selectedDate);
 
                     int index6=0;
                     while(rs7.next())
@@ -600,41 +600,41 @@ public class PatientRecordGUI extends javax.swing.JFrame {
                        System.out.print("all");
                        allType = rs7.getString("ALL_NAME");
                        allDate = rs7.getString("ALL_FROMDATE");
-                       consultation.tbl_alg.setValueAt(allType,index6,0);
-                       consultation.tbl_alg.setValueAt(allDate,index6,1);
+//                       consultation.tbl_alg.setValueAt(allType,index6,0);
+//                       consultation.tbl_alg.setValueAt(allDate,index6,1);
                        index6++;
                     }
 
                     //Display data to text fields frm ALLERGY table
-                    consultation.tbl_alg.addMouseListener(new java.awt.event.MouseAdapter(){
-                    public void mouseClicked(java.awt.event.MouseEvent evt) {
-
-                         try
-                         {
-                                //Connection conn = DatabaseConnection.connect();
-                                int selectedAllRow = consultation.tbl_alg.getSelectedRow();
-                                String selectedAll =  consultation.tbl_alg.getValueAt(selectedAllRow, 0).toString();
-
-                                String sql="SELECT * FROM ALLERGY WHERE ENCOUNTER_DATE=? AND ALL_NAME =?";
-                                //prepare the sql query and execute it
-                                PreparedStatement ps7 = Session.getCon_x(1000).prepareStatement(sql);
-                                ps7.setString(1,consultation.lbl_alldate.getText());
-                                ps7.setString(2,selectedAll);
-                                ResultSet rs7 = ps7.executeQuery();
-
-                                while(rs7.next())
-                                {
-                                   consultation.txt_allergySearch.setText(rs7.getString("ALL_NAME"));
-                                   consultation.txt_allergyDate2.setDate(rs7.getDate("ALL_FROMDATE"));
-                                   consultation.txt_allergyComments.setText(rs7.getString("ALL_COM"));
-                                }
-                          }
-                          catch(Exception ex)
-                          {
-                                System.out.print(ex);
-                          }
-                    }
-                    });//end tbl_all
+//                    consultation.tbl_alg.addMouseListener(new java.awt.event.MouseAdapter(){
+//                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+//
+//                         try
+//                         {
+//                                //Connection conn = DatabaseConnection.connect();
+//                                int selectedAllRow = consultation.tbl_alg.getSelectedRow();
+//                                String selectedAll =  consultation.tbl_alg.getValueAt(selectedAllRow, 0).toString();
+//
+//                                String sql="SELECT * FROM ALLERGY WHERE ENCOUNTER_DATE=? AND ALL_NAME =?";
+//                                //prepare the sql query and execute it
+//                                PreparedStatement ps7 = Session.getCon_x(1000).prepareStatement(sql);
+//                                ps7.setString(1,consultation.lbl_alldate.getText());
+//                                ps7.setString(2,selectedAll);
+//                                ResultSet rs7 = ps7.executeQuery();
+//
+//                                while(rs7.next())
+//                                {
+//                                   consultation.txt_allergySearch.setText(rs7.getString("ALL_NAME"));
+//                                   consultation.txt_allergyDate2.setDate(rs7.getDate("ALL_FROMDATE"));
+//                                   consultation.txt_allergyComments.setText(rs7.getString("ALL_COM"));
+//                                }
+//                          }
+//                          catch(Exception ex)
+//                          {
+//                                System.out.print(ex);
+//                          }
+//                    }
+//                    });//end tbl_all
 
                     //Display data in social history table
                     String sql8="SELECT * FROM SOCIAL_HISTORY WHERE ENCOUNTER_DATE=?";

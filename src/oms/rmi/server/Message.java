@@ -25,6 +25,7 @@ public interface Message extends Remote {
     // procedure
     String insertPOS(String PMI, String dataPOS) throws RemoteException;
     ArrayList<ArrayList<String>> getProcedures() throws RemoteException;
+    ArrayList<ArrayList<String>> getProceduresBasedOnPmiNo(String pmiNo) throws RemoteException;
     ArrayList<ArrayList<String>> getProcedureDetail(String orderNo) throws RemoteException;
     boolean updateProcedures(ArrayList<ArrayList<String>> prod) throws RemoteException;
     

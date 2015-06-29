@@ -167,8 +167,8 @@ public class EHR_Central {
             String ehr_central = DBConnection.getImpl().insertEHRCentral(status, PMI, data, episodeDate); //Insert CIS
             if (status == 1) {
                 String dto = DBConnection.getImpl().insertDTO(PMI, dataDTO);
-                String pos = DBConnection.getImpl().insertPOS(PMI, dataPOS);
             }
+            String pos = DBConnection.getImpl().insertPOS(PMI, dataPOS);
             System.out.println(ehr_central);
 
             System.out.println(".....Message Sent....");
