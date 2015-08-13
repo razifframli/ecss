@@ -182,7 +182,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Version 16.10");
+        jLabel6.setText("Version 16.11");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
