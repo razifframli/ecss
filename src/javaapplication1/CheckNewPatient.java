@@ -7,6 +7,7 @@
 package javaapplication1;
 
 import Helper.VoiceOutput;
+import Helper.VoiceOutput2;
 import api.Queue;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -54,7 +55,8 @@ public class CheckNewPatient implements Runnable {
                         cons.setAlwaysOnTop(false);
                     }
                     cons.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                    VoiceOutput.getSound("Doctor, you've got new patient");
+//                    VoiceOutput.getSound("Doctor, you've got new patient");
+                    VoiceOutput2.speak("Doctor, you've got new patient");
                 } else {
                     cons.setAlwaysOnTop(false);
                 }

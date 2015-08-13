@@ -124,13 +124,17 @@ public class EHR_Central {
         String data = header + patientInfo;
         String dataDTO = data;
         String dataPOS = data;
+        boolean isDTO = false;
+        boolean isPOS = false;
         for(int i = 0; i < msgs.length; i++) {
             if(msgs[i].length() > 0) {
                 data += msgs[i];
                 if(msgs[i].split("\\|")[0].contains("DTO")) {
+                    isDTO = true;
                     dataDTO += msgs[i];
                 }
                 if(msgs[i].split("\\|")[0].contains("POS")) {
+                    isPOS = true;
                     dataPOS += msgs[i];
                 }
             }
@@ -166,9 +170,13 @@ public class EHR_Central {
             //String IC = "891031075331"; //for testing purpose
             String ehr_central = DBConnection.getImpl().insertEHRCentral(status, PMI, data, episodeDate); //Insert CIS
             if (status == 1) {
-                String dto = DBConnection.getImpl().insertDTO(PMI, dataDTO);
+                if (isDTO) {
+                    String dto = DBConnection.getImpl().insertDTO(PMI, dataDTO);
+                }
             }
-            String pos = DBConnection.getImpl().insertPOS(PMI, dataPOS);
+            if (isPOS) {
+                String pos = DBConnection.getImpl().insertPOS(PMI, dataPOS);
+            }
             System.out.println(ehr_central);
 
             System.out.println(".....Message Sent....");

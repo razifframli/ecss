@@ -57,7 +57,7 @@ public class ObservationProcedure extends javax.swing.JFrame {
         lbl_doctor_id = new javax.swing.JLabel();
         pnl_procedures1 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        tbl_procedure_detail = new javax.swing.JTable();
+        tbl_procedure_detail2 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -187,68 +187,68 @@ public class ObservationProcedure extends javax.swing.JFrame {
 
         lbl_doctor_id.setText("-");
 
-        tbl_procedure_detail.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_procedure_detail2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Procedure Code", "Procedure Name", "Comments", "Status"
+                "Procedure Code", "Procedure Name", "Comments", "Doctor's Comments", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -259,7 +259,7 @@ public class ObservationProcedure extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane7.setViewportView(tbl_procedure_detail);
+        jScrollPane7.setViewportView(tbl_procedure_detail2);
 
         javax.swing.GroupLayout pnl_procedures1Layout = new javax.swing.GroupLayout(pnl_procedures1);
         pnl_procedures1.setLayout(pnl_procedures1Layout);
@@ -377,16 +377,16 @@ public class ObservationProcedure extends javax.swing.JFrame {
     private final static int NUM_COLS_MASTER = 6;
     private final static int NUM_ROWS_MASTER = 50;
     
-    private final static int NUM_COLS_DETAIL = 4;
+    private final static int NUM_COLS_DETAIL = 5;
     private final static int NUM_ROWS_DETAIL = 50;
     
     protected void clearProcedureDetailTable() {
         try {
             for (int i = 0; i < NUM_ROWS_DETAIL; i++) {
                 for (int j = 0; j < NUM_COLS_DETAIL-1; j++) {
-                    tbl_procedure_detail.getModel().setValueAt("", i, j);
+                    tbl_procedure_detail2.getModel().setValueAt("", i, j);
                 }
-                tbl_procedure_detail.getModel().setValueAt(false, i, NUM_COLS_DETAIL-1);
+                tbl_procedure_detail2.getModel().setValueAt(false, i, NUM_COLS_DETAIL-1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -415,11 +415,12 @@ public class ObservationProcedure extends javax.swing.JFrame {
             clearProcedureDetailTable();
             ArrayList<ArrayList<String>> getProcedureDetail = DBConnection.getImpl().getProcedureDetail(orderNo);
             for (int i = 0; i < getProcedureDetail.size() && i < NUM_ROWS_DETAIL; i++) {
-                tbl_procedure_detail.setValueAt(getProcedureDetail.get(i).get(1), i, 0);
-                tbl_procedure_detail.setValueAt(getProcedureDetail.get(i).get(2), i, 1);
-                tbl_procedure_detail.setValueAt(getProcedureDetail.get(i).get(3), i, 2);
-                boolean status = (getProcedureDetail.get(i).get(4).equals("1")) ? (false) : (true);
-                tbl_procedure_detail.setValueAt(status, i, 3);
+                tbl_procedure_detail2.setValueAt(getProcedureDetail.get(i).get(1), i, 0);
+                tbl_procedure_detail2.setValueAt(getProcedureDetail.get(i).get(2), i, 1);
+                tbl_procedure_detail2.setValueAt(getProcedureDetail.get(i).get(3), i, 2);
+                tbl_procedure_detail2.setValueAt(getProcedureDetail.get(i).get(4), i, 3);
+                boolean status = (getProcedureDetail.get(i).get(5).equals("1")) ? (false) : (true);
+                tbl_procedure_detail2.setValueAt(status, i, 4);
             }
 
         } catch (Exception ex) {
@@ -433,15 +434,16 @@ public class ObservationProcedure extends javax.swing.JFrame {
         String orderNo = lbl_order_no.getText();
         ArrayList<ArrayList<String>> prod1 = new ArrayList<ArrayList<String>>();
         for (int i = 0; i < NUM_ROWS_DETAIL; i++) {
-            if (!tbl_procedure_detail.getModel().getValueAt(i, 0).equals("")
-                && Boolean.parseBoolean(tbl_procedure_detail.getModel().getValueAt(i, 3).toString()) == true) {
-                String procedure_cd = (String) tbl_procedure_detail.getValueAt(i, 0);
-                String procedure_name = (String) tbl_procedure_detail.getValueAt(i, 1);
-                String comments = (String) tbl_procedure_detail.getValueAt(i, 2);
-                boolean status = (Boolean) tbl_procedure_detail.getValueAt(i, 3);
-                System.out.println(procedure_cd+"|"+procedure_name+"|"+comments+"|"+status);
+            if (!tbl_procedure_detail2.getModel().getValueAt(i, 0).equals("") && Boolean.parseBoolean(tbl_procedure_detail2.getModel().getValueAt(i, 4).toString()) == true) {
+                String procedure_cd = (String) tbl_procedure_detail2.getValueAt(i, 0);
+                String procedure_name = (String) tbl_procedure_detail2.getValueAt(i, 1);
+                String comments = (String) tbl_procedure_detail2.getValueAt(i, 2);
+                String comments_doc = (String) tbl_procedure_detail2.getValueAt(i, 3);
+                boolean status = (Boolean) tbl_procedure_detail2.getValueAt(i, 4);
+                System.out.println(procedure_cd+"|"+procedure_name+"|"+comments+"|"+comments_doc+"|"+status);
                 ArrayList<String> data_prod = new ArrayList<String>();
                 data_prod.add(comments);
+                data_prod.add(comments_doc);
                 String status1 = (status == true) ? ("2") : ("1");
                 data_prod.add(status1);
                 data_prod.add(orderNo);
@@ -484,9 +486,9 @@ public class ObservationProcedure extends javax.swing.JFrame {
             }
             for (int i = 0; i < NUM_ROWS_DETAIL; i++) {
                 for (int j = 0; j < NUM_COLS_DETAIL-1; j++) {
-                    tbl_procedure_detail.getModel().setValueAt("", i, j);
+                    tbl_procedure_detail2.getModel().setValueAt("", i, j);
                 }
-                tbl_procedure_detail.getModel().setValueAt(false, i, NUM_COLS_DETAIL-1);
+                tbl_procedure_detail2.getModel().setValueAt(false, i, NUM_COLS_DETAIL-1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -536,11 +538,7 @@ public class ObservationProcedure extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     protected static javax.swing.JLabel lbl_arrival_date;
@@ -551,9 +549,7 @@ public class ObservationProcedure extends javax.swing.JFrame {
     protected static javax.swing.JLabel lbl_order_no;
     protected static javax.swing.JPanel pnl_procedures;
     protected static javax.swing.JPanel pnl_procedures1;
-    protected static javax.swing.JTable tbl_procedure_detail;
-    protected static javax.swing.JTable tbl_procedures;
-    protected static javax.swing.JTable tbl_procedures1;
+    protected static javax.swing.JTable tbl_procedure_detail2;
     protected static javax.swing.JTable tbl_procedures2;
     // End of variables declaration//GEN-END:variables
 }

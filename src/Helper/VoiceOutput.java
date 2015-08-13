@@ -20,9 +20,9 @@ import javazoom.jl.decoder.JavaLayerException;
  */
 public class VoiceOutput {
     public static void main(String[] args) {
-        VoiceOutput.getSound("Hai, saya umaq!");
+        VoiceOutput.getSound1("Hai, saya umaq!");
     }
-    public static void getSound(String str) {
+    public static void getSound1(String str) {
         InputStream sound = null;
         try {
             Audio audio = Audio.getInstance();

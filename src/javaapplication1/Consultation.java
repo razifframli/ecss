@@ -9764,6 +9764,26 @@ public class Consultation extends javax.swing.JFrame {
         hold();
     }//GEN-LAST:event_btn_holdActionPerformed
 
+    // declare start time variable
+    private static long startTime_x1 = System.currentTimeMillis();
+    
+    // start time method
+    public static void startingTime() {
+        startTime_x1 = System.currentTimeMillis();
+    }
+    
+    // end time method
+    public static void endingTime(String title) {
+        // end time
+        long endTime = System.currentTimeMillis();
+        long diffTime = endTime - startTime_x1;
+        boolean status = DBConnection.captureResponseTime(title, diffTime);
+
+        System.out.println("Title: " + title);
+        System.out.println("Status Response Time: " + status);
+        System.out.println("Diff Time: " + diffTime);
+    }
+    
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
         //        try {
             //            String sql = "SELECT PMI_NO,NAME,EPISODE_TIME,CONSULTATION_ROOM,"
@@ -9840,8 +9860,12 @@ public class Consultation extends javax.swing.JFrame {
         // end time
         long endTime = System.currentTimeMillis();
         long diffTime = endTime - startTime;
-        boolean status = DBConnection.captureResponseTime(
-                "SELECT NEW PATIENT FROM QUEUE", diffTime);
+        String title = "SELECT NEXT PATIENT FROM QUEUE";
+        boolean status = DBConnection.captureResponseTime(title, diffTime);
+        
+        System.out.println("Title: " + title);
+        System.out.println("Status Response Time: " + status);
+        System.out.println("Diff Time: " + diffTime);
         
     }//GEN-LAST:event_btn_nextActionPerformed
 
@@ -10370,6 +10394,8 @@ public class Consultation extends javax.swing.JFrame {
             return;
         }
 
+        startingTime();
+        
         String dtraden = txt_drugNameOListSearch.getText();
         if (dtraden.equals("")) {
             for (int i = 0; i < 50; i++) {
@@ -10423,6 +10449,8 @@ public class Consultation extends javax.swing.JFrame {
                 }
             }
         }
+        
+        endingTime("SEARCH DRUG");
     }//GEN-LAST:event_txt_drugNameOListSearchKeyReleased
 
     private void PN_accptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PN_accptBtnActionPerformed
@@ -11444,6 +11472,9 @@ public class Consultation extends javax.swing.JFrame {
     
     private void btn_sPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sPatientActionPerformed
 
+        // start time
+        long startTime = System.currentTimeMillis();
+        
         //LongRunProcess.change_status_network();
         que.setVisible(false);
         que.setState(que.NORMAL);
@@ -11452,6 +11483,17 @@ public class Consultation extends javax.swing.JFrame {
         if(que.isVisible()) {
             que.list_Queue(1, "");
         }
+        
+        // end time
+        long endTime = System.currentTimeMillis();
+        long diffTime = endTime - startTime;
+        String title = "LIST PATIENTS FROM QUEUE";
+        boolean status = DBConnection.captureResponseTime(title, diffTime);
+        
+        System.out.println("Title: " + title);
+        System.out.println("Status Response Time: " + status);
+        System.out.println("Diff Time: " + diffTime);
+        
         //jFrame1.setVisible(true);
     }//GEN-LAST:event_btn_sPatientActionPerformed
 
@@ -11749,7 +11791,9 @@ public class Consultation extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        startingTime();
         loadDrug();
+        endingTime("SYNC DRUG FROM CENTRAL SERVER");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTabbedPane5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane5MouseClicked
@@ -12850,15 +12894,17 @@ public class Consultation extends javax.swing.JFrame {
                         zz++;
                         String diagnosisCode = note_array[zz++].split(": ")[1];
                         String diagnosisDesc = note_array[zz++].split(": ")[1];
+                        String procedure_cd = note_array[zz++].split(": ")[1];
                         String procedure_desc_line = note_array[zz++].split(": ")[1];
+                        
                         String procedure_desc = procedure_desc_line.split(Func.SEPARATOR_LINK)[procedure_desc_line.split(Func.SEPARATOR_LINK).length-1];
-                        String procedure_cd = "";
-                        for (int level = 1; level <= Func.NUM_LEVEL_PROCEDURE; level++) {
-                            ArrayList<String> procedure_detail = DBConnection.getProcedureDetail2(level, procedure_desc);
-                            if (procedure_detail.size() > 0) {
-                                procedure_cd = procedure_detail.get(0);
-                            }
-                        }
+//                        String procedure_cd = "";
+//                        for (int level = 1; level <= Func.NUM_LEVEL_PROCEDURE; level++) {
+//                            ArrayList<String> procedure_detail = DBConnection.getProcedureDetail2(level, procedure_desc);
+//                            if (procedure_detail.size() > 0) {
+//                                procedure_cd = procedure_detail.get(0);
+//                            }
+//                        }
                         String data[] = {
                             diagnosisCode+"^"+diagnosisDesc+"^"+diagnosisCode,
                             procedure_cd+"^"+procedure_desc+"^"+procedure_cd,
@@ -13764,11 +13810,20 @@ public class Consultation extends javax.swing.JFrame {
         } else {
             String procedure_name = (String) node.getUserObject();
             
+            String procedure_cd = "-";
+            for (int j = 0; j < Func.NUM_LEVEL_PROCEDURE; j++) {
+                ArrayList<String> temp = DBConnection.getProcedureDetail2(j+1, procedure_name);
+                if (temp.size() > 0) {
+                    procedure_cd = temp.get(0);
+                }
+            }
+            
             String procedure = Func.getProcedureLink(procedure_name);
             
             String data[] = {"Procedure Order",
                 "Problem Code: " + Func.trim(problemCode),
                 "Problem Desc: " + Func.trim(problemDesc),
+                "Procedure Code: " + Func.trim(procedure_cd),
                 "Procedure: " + Func.trim(procedure)
             };
             setData(data, 18); //18 for POS

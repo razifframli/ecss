@@ -757,15 +757,17 @@ public class Consultation_subcode {
                         zz++;
                         String diagnosisCode = note_array[zz++].split(": ")[1];
                         String diagnosisDesc = note_array[zz++].split(": ")[1];
+                        String procedure_cd = note_array[zz++].split(": ")[1];
                         String procedure_desc_line = note_array[zz++].split(": ")[1];
+                        
                         String procedure_desc = procedure_desc_line.split(Func.SEPARATOR_LINK)[procedure_desc_line.split(Func.SEPARATOR_LINK).length-1];
-                        String procedure_cd = "";
-                        for (int level = 1; level <= Func.NUM_LEVEL_PROCEDURE; level++) {
-                            ArrayList<String> procedure_detail = DBConnection.getProcedureDetail2(level, procedure_desc);
-                            if (procedure_detail.size() > 0) {
-                                procedure_cd = procedure_detail.get(0);
-                            }
-                        }
+//                        String procedure_cd = "";
+//                        for (int level = 1; level <= Func.NUM_LEVEL_PROCEDURE; level++) {
+//                            ArrayList<String> procedure_detail = DBConnection.getProcedureDetail2(level, procedure_desc);
+//                            if (procedure_detail.size() > 0) {
+//                                procedure_cd = procedure_detail.get(0);
+//                            }
+//                        }
                         String data[] = {
                             diagnosisCode+"^"+diagnosisDesc+"^"+diagnosisCode,
                             procedure_cd+"^"+procedure_desc+"^"+procedure_cd,

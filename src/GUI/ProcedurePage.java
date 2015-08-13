@@ -822,7 +822,7 @@ public class ProcedurePage extends javax.swing.JFrame {
                 tbl_procedure_detail.setValueAt(getProcedureDetail.get(i).get(1), i, 0);
                 tbl_procedure_detail.setValueAt(getProcedureDetail.get(i).get(2), i, 1);
                 tbl_procedure_detail.setValueAt(getProcedureDetail.get(i).get(3), i, 2);
-                boolean status = (getProcedureDetail.get(i).get(4).equals("1")) ? (false) : (true);
+                boolean status = (getProcedureDetail.get(i).get(5).equals("1")) ? (false) : (true);
                 tbl_procedure_detail.setValueAt(status, i, 3);
             }
             
@@ -848,6 +848,7 @@ public class ProcedurePage extends javax.swing.JFrame {
                 System.out.println(procedure_cd+"|"+procedure_name+"|"+comments+"|"+status);
                 ArrayList<String> data_prod = new ArrayList<String>();
                 data_prod.add(comments);
+                data_prod.add("");
                 String status1 = (status == true) ? ("2") : ("1");
                 data_prod.add(status1);
                 data_prod.add(orderNo);
