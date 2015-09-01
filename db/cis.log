@@ -1,6 +1,0 @@
-/*C5*/SET SCHEMA PUBLIC
-INSERT INTO PMS_EPISODE VALUES('9305180855147','13/08/2015','NUR UMIRA BINTI MUSTAFA','930518085514','-','Matric No.','B031210001','-','General Outpatient','Walk-in','-','Government','Student','Outpatient Discipline','-','-','Common Queue','-','Normal','-','-','-','-','-','-','-','-',' 16:30:23','Waiting','Klinik UTeM Induk')
-COMMIT
-INSERT INTO JOURNAL_FILE VALUES(267,'9305180855147','2015-06-16 10:32:23.000000','MSH|^~|CIS|Klinik UTeM Induk^Outpatient Discipline^-|CIS|Klinik UTeM Induk^Outpatient Discipline^-|2015-06-16  10:32:23|||||||||||||<cr>\u000aPDI|9305180855147|NUR UMIRA BINTI MUSTAFA^930518085514^-^Female^18/05/1993^-^-^|<cr>\u000aDGS|2015-06-16  10:32:23|tp001^Final^^16/06/2015^18R50R509^Fever, unspecified^18R50R509^Fever, unspecified^^-^^-^^^^-^^^ ^2015-06-16  10:32:23^^2015-06-16  10:32:23^Klinik UTeM Induk^umaq01^Umaq Mukhtar^|<cr>\u000a','T',1)
-COMMIT
-ROLLBACK
