@@ -474,6 +474,8 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup3">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup5">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -727,7 +729,7 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jScrollPane13" pref="296" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane13" pref="304" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jTabbedPane2" min="-2" pref="782" max="-2" attributes="0"/>
                                   </Group>
@@ -6252,12 +6254,19 @@
                                                                       <Component id="btnSrcDiagnosis" min="-2" max="-2" attributes="0"/>
                                                                       <Component id="btn_diagnosisAccept" max="32767" attributes="0"/>
                                                                       <Component id="btn_diagnosisClear" alignment="0" max="32767" attributes="0"/>
+                                                                      <Component id="rbtn_per_search_dgs" alignment="1" pref="0" max="32767" attributes="0"/>
+                                                                      <Component id="rbtn_gen_search_dgs" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
+                                                                  </Group>
+                                                                  <EmptySpace max="-2" attributes="0"/>
+                                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                                      <Component id="btn_substract_dgs" min="-2" pref="41" max="-2" attributes="0"/>
+                                                                      <Component id="btn_plus_dgs" min="-2" pref="41" max="-2" attributes="0"/>
                                                                   </Group>
                                                               </Group>
                                                           </Group>
                                                       </Group>
                                                   </Group>
-                                                  <EmptySpace pref="134" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="40" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -6282,7 +6291,19 @@
                                                       <Component id="btnSrcDiagnosis" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPane7" min="-2" pref="142" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jScrollPane7" min="-2" pref="142" max="-2" attributes="0"/>
+                                                      <Component id="rbtn_gen_search_dgs" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
+                                                          <Component id="rbtn_per_search_dgs" min="-2" pref="16" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="btn_plus_dgs" min="-2" pref="15" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="btn_substract_dgs" min="-2" pref="14" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="3" attributes="0">
                                                       <Component id="lbl_dSeverity" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -6534,6 +6555,57 @@
                                         <Component class="javax.swing.JLabel" name="lbl_diagdate">
                                           <AuxValues>
                                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                                          </AuxValues>
+                                        </Component>
+                                        <Component class="javax.swing.JRadioButton" name="rbtn_gen_search_dgs">
+                                          <Properties>
+                                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="c8" green="b6" red="ad" type="rgb"/>
+                                            </Property>
+                                            <Property name="selected" type="boolean" value="true"/>
+                                            <Property name="text" type="java.lang.String" value="Generic Search"/>
+                                          </Properties>
+                                          <Events>
+                                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rbtn_gen_search_dgsMouseClicked"/>
+                                          </Events>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                                          </AuxValues>
+                                        </Component>
+                                        <Component class="javax.swing.JRadioButton" name="rbtn_per_search_dgs">
+                                          <Properties>
+                                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="c8" green="b6" red="ad" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Personalized Search"/>
+                                          </Properties>
+                                          <Events>
+                                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rbtn_per_search_dgsMouseClicked"/>
+                                          </Events>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                                          </AuxValues>
+                                        </Component>
+                                        <Component class="javax.swing.JButton" name="btn_plus_dgs">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="+"/>
+                                          </Properties>
+                                          <Events>
+                                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_plus_dgsActionPerformed"/>
+                                          </Events>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                                          </AuxValues>
+                                        </Component>
+                                        <Component class="javax.swing.JButton" name="btn_substract_dgs">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="-"/>
+                                          </Properties>
+                                          <Events>
+                                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_substract_dgsActionPerformed"/>
+                                          </Events>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                                           </AuxValues>
                                         </Component>
                                       </SubComponents>

@@ -65,6 +65,7 @@ public class Login extends javax.swing.JFrame {
             t.start();
             
             Session.setCon_x();
+            Session.setCon_x2();
         }
         
         /*

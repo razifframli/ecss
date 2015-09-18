@@ -19,6 +19,7 @@ public class ConnectCSS {
     private static String user;
     private static String pass;
     private static String url;
+    private static String url2;
     private static String on;
     
     private static String hostCallingSystem;
@@ -48,6 +49,15 @@ public class ConnectCSS {
         user = "SA";
         pass = "";
         url = "jdbc:hsqldb:file:db/cis;shutdown=true";
+        on = "false";
+    }
+    
+    public static void offline2() {
+        ip = "127.0.0.1";
+        db = "";
+        user = "SA";
+        pass = "";
+        url2 = "jdbc:hsqldb:file:db_per/cis_per;shutdown=true";
         on = "false";
     }
 
@@ -212,5 +222,13 @@ public class ConnectCSS {
 
     public static void setStatusCallingSystem(String aStatusCallingSystem) {
         statusCallingSystem = aStatusCallingSystem;
+    }
+
+    public static String getUrl2() {
+        return url2;
+    }
+
+    public static void setUrl2(String aUrl2) {
+        url2 = aUrl2;
     }
 }

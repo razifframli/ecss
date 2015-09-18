@@ -48,6 +48,7 @@ import oms.rmi.server.Message;
 public class DBConnection {
 
     private static String dbURL = "jdbc:hsqldb:file:db/cis;shutdown=true";
+    private static String dbURL2 = "jdbc:hsqldb:file:db_per/cis_per;shutdown=true";
     //private static String dbURL = Config.getDbUrlLocal(); 
     //  /dist/lib/userdata
     private static Connection conn = createConnection();
@@ -213,8 +214,15 @@ public class DBConnection {
         S.oln("Offline DB");
         return DriverManager.getConnection(Config.getDbUrlLocal(), Config.getUserLocal(), Config.getPassLocal());
     }
-
-    //friza
+    
+    public static Connection offline2() throws ClassNotFoundException, SQLException {
+        System.out.println(".......Type of database : Local");
+        System.out.println(".......Path of userdata :" + dbURL2);
+        System.out.println(".......Username: SA, Password: - ");
+        Class.forName("org.hsqldb.jdbc.JDBCDriver");
+        S.oln("Offline DB");
+        return DriverManager.getConnection(Config.getDbUrlLocal(), Config.getUserLocal(), Config.getPassLocal());
+    }
     
     public static void shutdown() throws SQLException {
 

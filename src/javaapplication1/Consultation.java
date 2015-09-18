@@ -14,6 +14,7 @@ import GUI.PGCS_GUI;
 import GUI.PrescriptionNote;
 import GUI.Procedures_GUI;
 import GUI.QueueList;
+import Helper.FileReadWrite;
 import Helper.J;
 import Helper.S;
 import Helper.Session;
@@ -605,9 +606,14 @@ public class Consultation extends javax.swing.JFrame {
         
         buttonGroup3.add(rbtn_gen_search);
         buttonGroup3.add(rbtn_per_search);
+        buttonGroup5.add(rbtn_gen_search_dgs);
+        buttonGroup5.add(rbtn_per_search_dgs);
         btn_plus.setEnabled(true);
         btn_substract.setEnabled(false);
+        btn_plus_dgs.setEnabled(true);
+        btn_substract_dgs.setEnabled(false);
         Searching.searchStatus = 1;
+        Searching.searchStatus_dgs = 1;
     }
 
     /** This method is called from within the constructor to
@@ -655,6 +661,7 @@ public class Consultation extends javax.swing.JFrame {
         rbtn_grp_diagnosis = new javax.swing.ButtonGroup();
         txt_allergyDate3 = new com.toedter.calendar.JDateChooser();
         buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup5 = new javax.swing.ButtonGroup();
         mainPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -1016,6 +1023,10 @@ public class Consultation extends javax.swing.JFrame {
         btn_diagnosisClear = new javax.swing.JButton();
         btnSrcDiagnosis = new javax.swing.JButton();
         lbl_diagdate = new javax.swing.JLabel();
+        rbtn_gen_search_dgs = new javax.swing.JRadioButton();
+        rbtn_per_search_dgs = new javax.swing.JRadioButton();
+        btn_plus_dgs = new javax.swing.JButton();
+        btn_substract_dgs = new javax.swing.JButton();
         jPanel33 = new javax.swing.JPanel();
         jPanel65 = new javax.swing.JPanel();
         jLabel62 = new javax.swing.JLabel();
@@ -1706,7 +1717,7 @@ public class Consultation extends javax.swing.JFrame {
                                     .addComponent(btnSrcComplaint, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel47Layout.createSequentialGroup()
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.PREFERRED_SIZE, 142, Short.MAX_VALUE)
                                             .addComponent(rbtn_gen_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4755,6 +4766,37 @@ public class Consultation extends javax.swing.JFrame {
             }
         });
 
+        rbtn_gen_search_dgs.setBackground(new java.awt.Color(173, 182, 200));
+        rbtn_gen_search_dgs.setSelected(true);
+        rbtn_gen_search_dgs.setText("Generic Search");
+        rbtn_gen_search_dgs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbtn_gen_search_dgsMouseClicked(evt);
+            }
+        });
+
+        rbtn_per_search_dgs.setBackground(new java.awt.Color(173, 182, 200));
+        rbtn_per_search_dgs.setText("Personalized Search");
+        rbtn_per_search_dgs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbtn_per_search_dgsMouseClicked(evt);
+            }
+        });
+
+        btn_plus_dgs.setText("+");
+        btn_plus_dgs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_plus_dgsActionPerformed(evt);
+            }
+        });
+
+        btn_substract_dgs.setText("-");
+        btn_substract_dgs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_substract_dgsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel64Layout = new javax.swing.GroupLayout(jPanel64);
         jPanel64.setLayout(jPanel64Layout);
         jPanel64Layout.setHorizontalGroup(
@@ -4794,8 +4836,14 @@ public class Consultation extends javax.swing.JFrame {
                                 .addGroup(jPanel64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnSrcDiagnosis)
                                     .addComponent(btn_diagnosisAccept, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btn_diagnosisClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(134, Short.MAX_VALUE))
+                                    .addComponent(btn_diagnosisClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(rbtn_per_search_dgs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(rbtn_gen_search_dgs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btn_substract_dgs, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_plus_dgs, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel64Layout.setVerticalGroup(
             jPanel64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4815,7 +4863,16 @@ public class Consultation extends javax.swing.JFrame {
                     .addComponent(txt_diagnosisSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSrcDiagnosis))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbtn_gen_search_dgs, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel64Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(rbtn_per_search_dgs, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel64Layout.createSequentialGroup()
+                        .addComponent(btn_plus_dgs, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_substract_dgs, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_dSeverity)
@@ -6905,7 +6962,7 @@ public class Consultation extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -10553,7 +10610,7 @@ public class Consultation extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_pNotesKeyReleased
 
     private void btnSrcDiagnosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSrcDiagnosisActionPerformed
-        if(checkPatient()) return;
+//        if(checkPatient()) return;
         Searching.searchDiagnosis(this);
     }//GEN-LAST:event_btnSrcDiagnosisActionPerformed
 
@@ -10576,7 +10633,7 @@ public class Consultation extends javax.swing.JFrame {
 
     private void txt_diagnosisSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_diagnosisSearchKeyReleased
         // TODO add your handling code here:
-        if(checkPatient()) return;
+//        if(checkPatient()) return;
         Searching.searchDiagnosis(this);
     }//GEN-LAST:event_txt_diagnosisSearchKeyReleased
 
@@ -11421,13 +11478,13 @@ public class Consultation extends javax.swing.JFrame {
     }//GEN-LAST:event_lbx_complaintSearchMouseClicked
 
     private void btnSrcComplaintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSrcComplaintActionPerformed
-        if(checkPatient()) return;
+//        if(checkPatient()) return;
         Searching.searchCCN1(this);
     }//GEN-LAST:event_btnSrcComplaintActionPerformed
 
     private void txt_complaintSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_complaintSearchKeyReleased
         // TODO add your handling code here:
-        if(checkPatient()) return;
+//        if(checkPatient()) return;
         Searching.searchCCN1(this);
     }//GEN-LAST:event_txt_complaintSearchKeyReleased
 
@@ -11807,6 +11864,138 @@ public class Consultation extends javax.swing.JFrame {
             new ObservationProcedure(txt_pPmiNo.getText()).setVisible(true);
         }
     }//GEN-LAST:event_jTabbedPane5MouseClicked
+
+    private void rbtn_gen_search_dgsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtn_gen_search_dgsMouseClicked
+        // TODO add your handling code here:
+        btn_plus_dgs.setEnabled(true);
+        btn_substract_dgs.setEnabled(false);
+        Searching.searchStatus_dgs = 1;
+    }//GEN-LAST:event_rbtn_gen_search_dgsMouseClicked
+
+    private void rbtn_per_search_dgsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtn_per_search_dgsMouseClicked
+        // TODO add your handling code here:
+        btn_plus_dgs.setEnabled(false);
+        btn_substract_dgs.setEnabled(true);
+        Searching.searchStatus_dgs = 2;
+    }//GEN-LAST:event_rbtn_per_search_dgsMouseClicked
+
+    public static final String fileNameDGS = "DGS";
+    
+    private void btn_plus_dgsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_plus_dgsActionPerformed
+        // TODO add your handling code here:
+        try {
+            String searchcbx = txt_diagnosisSearch.getText();
+            if (!Searching.isSearchDiagnosis(searchcbx)) {
+                J.o("Invalid", "Invalid Diagnosis!", 0);
+                return;
+                
+                // 1. get timestamp [year:month:day:hour:minute:seconds].
+//                Calendar n = Calendar.getInstance();
+//                String code = n.get(Calendar.YEAR)+""
+//                        //+n.get(Calendar.MONTH)+""
+//                        //+n.get(Calendar.DAY_OF_MONTH)+""
+//                        +n.get(Calendar.HOUR_OF_DAY)+""
+//                        +n.get(Calendar.MINUTE)+""
+//                        +n.get(Calendar.SECOND)+""
+//                        +n.get(Calendar.MILLISECOND)+"";
+                
+                // 2. append code 'S' with timestamp.
+//                String last_seq_num = "DGS"+code;
+                
+                // 3. add into DGS file.
+//                FileReadWrite frw = new FileReadWrite(this.fileNameDGS);
+//                ArrayList<String> dgss = frw.read();
+//                dgss.add(last_seq_num + "|" + searchcbx);
+//                for (int j = 0; j < dgss.size(); j++) {
+//                    boolean append = !(j == 0);
+//                    frw.write(dgss.get(j), append);
+//                    frw.write(true);
+//                }
+//                
+//                J.o("Add Success", "Add Success ..", 1);
+                
+            } else {
+                
+                String sql = "SELECT * FROM icd10_codes "
+                        + "where UCASE(icd10_desc) like UCASE(?) order by icd10_desc ";
+                PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+                ps.setString(1, searchcbx);
+                ResultSet rs = ps.executeQuery();
+                String code = "";
+                if (rs.next()) {
+                    code = rs.getString(1);
+//                    sql = "INSERT INTO CIS_PERSONALIZED_CODE VALUES(?, ?) ";
+//                    PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql);
+//                    ps2.setString(1, code);
+//                    ps2.setString(2, searchcbx);
+//                    ps2.execute();
+                    
+                    FileReadWrite frw = new FileReadWrite(this.fileNameDGS);
+                    ArrayList<String> dgss = frw.read();
+                    dgss.add(code + "|" + searchcbx);
+                    for (int j = 0; j < dgss.size(); j++) {
+                        boolean append = !(j == 0);
+                        frw.write(dgss.get(j), append);
+                        frw.write(true);
+                    }
+                    
+                    J.o("Add Success", "Add Success ..", 1);
+                } else {
+                    J.o("Add Fail", "Add Fail !!", 0);
+                }
+            }
+        } catch (Exception e) {
+            J.o("Database Error", "Database error: "+e.getMessage(), 0);
+        }
+    }//GEN-LAST:event_btn_plus_dgsActionPerformed
+
+    private void btn_substract_dgsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_substract_dgsActionPerformed
+        // TODO add your handling code here:
+        try {
+            String searchcbx = txt_diagnosisSearch.getText();
+            if (!Searching.isSearchDiagnosis(searchcbx)) {
+                J.o("Invalid", "Invalid Diagnosis!", 0);
+                return;
+            } else {
+                String sql = "SELECT * FROM icd10_codes "
+                        + "where UCASE(icd10_desc) like UCASE(?) order by icd10_desc ";
+                PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+                ps.setString(1, searchcbx);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    String code = rs.getString(1);
+//                    sql = "DELETE FROM CIS_PERSONALIZED_CODE WHERE CPC_DESC = ? ";
+//                    PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql);
+//                    ps2.setString(1, searchcbx);
+//                    ps2.execute();
+                    
+                    FileReadWrite frw = new FileReadWrite(this.fileNameDGS);
+                    ArrayList<String> dgss = frw.read();
+                    int index = -1;
+                    for (int j = 0; j < dgss.size(); j++) {
+                        String codeFile = dgss.get(j).split("\\|")[0];
+                        if (codeFile.equals(code)) {
+                            index = j;
+                        }
+                    }
+                    if (index != -1) {
+                        dgss.remove(index);
+                    }
+                    for (int j = 0; j < dgss.size(); j++) {
+                        boolean append = !(j == 0);
+                        frw.write(dgss.get(j), append);
+                        frw.write(true);
+                    }
+                    
+                    J.o("Remove Success", "Remove Success ..", 1);
+                } else {
+                    J.o("Remove Fail", "Remove Fail !!", 0);
+                }
+            }
+        } catch (Exception e) {
+            J.o("Database Error", "Database error: "+e.getMessage(), 0);
+        }
+    }//GEN-LAST:event_btn_substract_dgsActionPerformed
 
     public boolean checkPatient() {
         String pmiNo = txt_pName.getText();
@@ -14827,10 +15016,12 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JButton btn_pHistoryOk1;
     private javax.swing.JButton btn_pHistoryOk2;
     public static javax.swing.JButton btn_plus;
+    public static javax.swing.JButton btn_plus_dgs;
     private javax.swing.JButton btn_sPatient;
     private javax.swing.JButton btn_sclAccept;
     private javax.swing.JButton btn_sclClear;
     public static javax.swing.JButton btn_substract;
+    public static javax.swing.JButton btn_substract_dgs;
     protected static javax.swing.JButton btn_viewHistory;
     private javax.swing.JButton btn_vitalSignAccept;
     private javax.swing.JButton btn_vitalSignClear;
@@ -14838,6 +15029,7 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
     protected static javax.swing.JComboBox cb_durationOList;
     protected static javax.swing.JComboBox cb_durationTypeOList;
     protected static javax.swing.JComboBox cb_frequencyOList;
@@ -15200,11 +15392,13 @@ public class Consultation extends javax.swing.JFrame {
     public static javax.swing.JRadioButton rbtn_cActive1;
     public static javax.swing.JRadioButton rbtn_cInactive1;
     public static javax.swing.JRadioButton rbtn_gen_search;
+    public static javax.swing.JRadioButton rbtn_gen_search_dgs;
     private javax.swing.ButtonGroup rbtn_grp_diagnosis;
     private javax.swing.ButtonGroup rbtn_grp_mcts;
     private javax.swing.JRadioButton rbtn_mcts_mc;
     private javax.swing.JRadioButton rbtn_mcts_ts;
     public static javax.swing.JRadioButton rbtn_per_search;
+    public static javax.swing.JRadioButton rbtn_per_search_dgs;
     protected static javax.swing.JTextField stock_qty;
     private javax.swing.JTable tblQueue;
     private javax.swing.JTable tblQueue1;

@@ -1,5 +1,6 @@
 package library;
 
+import Helper.FileReadWrite;
 import Helper.J;
 import Helper.S;
 import Helper.Session;
@@ -35,6 +36,7 @@ public class Searching {
      * 2 = personalized search
      */
     public static int searchStatus = 1;
+    public static int searchStatus_dgs = 1;
     
     public static void searchDrug(final Consultation cons) {
         //get pmiNo selected
@@ -500,16 +502,32 @@ public class Searching {
             try {
 //                tempQuery = "SELECT RCC_DESC FROM READCODE_CHIEF_COMPLAINT "
 //                        + "where UCASE(RCC_DESC) like UCASE(?) ";
-                cons.tempQuery = "SELECT * FROM icd10_codes "
-                        + "where UCASE(icd10_desc) like UCASE(?) ";
-                ps = Session.getCon_x(1000).prepareStatement(cons.tempQuery);
-                ps.setString(1, ch);
-                cons.rs = ps.executeQuery();
-                while (cons.rs.next()) {
-                    cons.name = cons.rs.getString("icd10_desc");
-                    cons.listModel.addElement(cons.name);
+                if (searchStatus_dgs == 1) {
+                    cons.tempQuery = "SELECT * FROM icd10_codes "
+                            + "where UCASE(icd10_desc) like UCASE(?) ";
+                    ps = Session.getCon_x(1000).prepareStatement(cons.tempQuery);
+                    ps.setString(1, "%"+ch+"%");
+                    cons.rs = ps.executeQuery();
+                    while (cons.rs.next()) {
+                        cons.name = cons.rs.getString("icd10_desc");
+                        cons.listModel.addElement(cons.name);
+                    }
+                    cons.lbx_diagnosisSearch.setModel(cons.listModel);
+                } else if (searchStatus_dgs == 2) {
+                    FileReadWrite frw = new FileReadWrite(cons.fileNameDGS);
+                    ArrayList<String> dgss = frw.read();
+                    for (int i = 0; i < dgss.size(); i++) {
+                        try {
+                            cons.name = dgss.get(i).split("\\|")[1];
+                            if (cons.name.toUpperCase().contains(ch.toUpperCase())) {
+                                cons.listModel.addElement(cons.name);
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Error FileWrite: "+e.getMessage());
+                        }
+                    }
+                    cons.lbx_diagnosisSearch.setModel(cons.listModel);
                 }
-                cons.lbx_diagnosisSearch.setModel(cons.listModel);
             } catch (Exception ex) {
             }
         }

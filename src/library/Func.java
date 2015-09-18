@@ -368,6 +368,7 @@ public class Func {
                 ConnectCSS.online();
             } else {
                 ConnectCSS.offline();
+//                ConnectCSS.offline2();
             }
             data.add(ConnectCSS.getIp().equals("-") ? "" : ConnectCSS.getIp());
             data.add(ConnectCSS.getDb().equals("-") ? "" : ConnectCSS.getDb());
@@ -375,10 +376,12 @@ public class Func {
             data.add(ConnectCSS.getPass().equals("-") ? "" : ConnectCSS.getPass());
             data.add(ConnectCSS.getUrl().equals("-") ? "" : ConnectCSS.getUrl());
             data.add(ConnectCSS.getOn().equals("-") ? "" : ConnectCSS.getOn());
+//            data.add(ConnectCSS.getUrl2().equals("-") ? "" : ConnectCSS.getUrl2());
             
         } catch (Exception ex) {
             //Logger.getLogger(Func.class.getName()).log(Level.SEVERE, null, ex);
             J.o("File Network Problem", ex.getMessage(), 0);
+            ex.printStackTrace();
             System.exit(1);
         }
         return data;

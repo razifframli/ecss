@@ -8,6 +8,7 @@ public class Config {
     private static String userServer;
     private static String passServer;
     private static String dbUrlLocal;
+    private static String dbUrlLocal2;
     private static String userLocal;
     private static String passLocal;
     
@@ -46,6 +47,12 @@ public class Config {
     }
     public static void setDbUrlLocal(String dbUrlLocal) {
         Config.dbUrlLocal = dbUrlLocal;
+    }
+    public static String getDbUrlLocal2() {
+        return Config.dbUrlLocal2;
+    }
+    public static void setDbUrlLocal2(String dbUrlLocal) {
+        Config.dbUrlLocal2 = dbUrlLocal;
     }
     public static String getUserLocal() {
         return Config.userLocal;
