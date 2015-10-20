@@ -2278,7 +2278,6 @@ public class Pharmacy extends javax.swing.JFrame{
                 return canEdit [columnIndex];
             }
         });
-        tbl_productname.setGridColor(new java.awt.Color(255, 255, 255));
         tbl_productname.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_productnameMouseClicked(evt);
@@ -5264,7 +5263,7 @@ public class Pharmacy extends javax.swing.JFrame{
         //get selected row number
         int rowNo = tbl_drugOList.getSelectedRow();
 
-        productName = (String) tbl_drugOList.getValueAt(rowNo, 1);
+        productName = (String) tbl_drugOList.getValueAt(rowNo, 1); 
         frequency = (String) tbl_drugOList.getValueAt(rowNo, 2);
         route = (String) tbl_drugOList.getValueAt(rowNo, 3);
         dosageForm = (String) tbl_drugOList.getValueAt(rowNo, 4);
@@ -8246,7 +8245,23 @@ jScrollPane17.setViewportView(tbl_drugOList);
         } else if(txt_expdate.getDate() == null) 
         { 
             JOptionPane.showMessageDialog(btn_addmdc, "Please select expired date!");
-        }
+        }else if(txt_drugNameMDC.getText().equals("")){  //20151006 Lim Kai Li -- Add validation
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter trade name to add!");
+        }else if(txt_ingredientCode.getText().equals("")){
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter generic name to add!");
+        }else if(txt_drugRoute.getText().equals("")){
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter drug route to add!");
+        }else if(txt_drugStrength.getText().equals("")){
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter drug strength to add!");
+        }else if(txt_costPrice.getText().equals("")){
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter purchase price to add!");
+        }else if(txt_sellprice.getText().equals("")){
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter sell price to add!");
+        }else if(txt_Lqty.getText().equals("")){
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter dosage to add!");
+        }else if(txt_cautionary.getText().equals("")){
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter cautionary to add!");
+        }   // 20151006 Lim Kai Li -- Add validation END
         else {
 
             //get input from textfield
