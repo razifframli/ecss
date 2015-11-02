@@ -1,3 +1,0 @@
-AppointmentGUI.StringValues
-AppointmentGUI.APDU
-AppointmentGUI.MyKad

@@ -9,6 +9,7 @@ import BluethoothCompo.bluetoothGUI;
 import DBConnection.DBConnection;
 import GUI.AppointmentList;
 import GUI.GCS_GUI;
+import GUI.Login;
 import GUI.MainPage;
 import GUI.PGCS_GUI;
 import GUI.PrescriptionNote;
@@ -11879,7 +11880,10 @@ public class Consultation extends javax.swing.JFrame {
         Searching.searchStatus_dgs = 2;
     }//GEN-LAST:event_rbtn_per_search_dgsMouseClicked
 
-    public static final String fileNameDGS = "DGS";
+    static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+    static String par = fi.getParent()+"/";
+//    static String par = "";
+    public static final String fileNameDGS = par+"DGS";
     
     private void btn_plus_dgsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_plus_dgsActionPerformed
         // TODO add your handling code here:
@@ -13301,6 +13305,7 @@ public class Consultation extends javax.swing.JFrame {
 //            Session.setCurr_stat(false);
             //Session.setCon_x();
 
+            CheckNewPatient.active = false;
             new Consultation().setVisible(true);
             this.dispose();
 

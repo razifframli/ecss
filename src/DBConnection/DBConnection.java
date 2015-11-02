@@ -15,10 +15,12 @@ import Bean.JournalFileBean;
 import Bean.PatientBean;
 import Bean.PhysicalExamBean;
 import Bean.StaffBean;
+import GUI.Login;
 import Helper.J;
 import Helper.S;
 import Helper.Session;
 import config.Config;
+import java.io.File;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -47,8 +49,11 @@ import oms.rmi.server.Message;
  */
 public class DBConnection {
 
-    private static String dbURL = "jdbc:hsqldb:file:db/cis;shutdown=true";
-    private static String dbURL2 = "jdbc:hsqldb:file:db_per/cis_per;shutdown=true";
+    static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+    static String par = fi.getParent()+"/";
+//    static String par = "";
+    private static String dbURL = "jdbc:hsqldb:file:"+par+"db/cis;shutdown=true";
+    private static String dbURL2 = "jdbc:hsqldb:file:"+par+"db_per/cis_per;shutdown=true";
     //private static String dbURL = Config.getDbUrlLocal(); 
     //  /dist/lib/userdata
     private static Connection conn = createConnection();

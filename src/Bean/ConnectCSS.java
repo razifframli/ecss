@@ -4,8 +4,10 @@
  */
 package Bean;
 
+import GUI.Login;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
@@ -48,7 +50,10 @@ public class ConnectCSS {
         db = "";
         user = "SA";
         pass = "";
-        url = "jdbc:hsqldb:file:db/cis;shutdown=true";
+        File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        String par = fi.getParent()+"/";
+//        String par = "";
+        url = "jdbc:hsqldb:file:"+par+"db/cis;shutdown=true";
         on = "false";
     }
     
@@ -166,11 +171,15 @@ public class ConnectCSS {
     }
     
     public static String[] getIpCall() {
+        File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        String par = fi.getParent()+"/";
+//        String par = "";
+//        System.out.println("pa:"+fi.getParent());
         String data[] = new String[4];
         try {
             // Open the file that is the first 
             // command line parameter
-            FileInputStream fstream = new FileInputStream("ipcall");
+            FileInputStream fstream = new FileInputStream(par+"ipcall");
             // Get the object of DataInputStream
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
