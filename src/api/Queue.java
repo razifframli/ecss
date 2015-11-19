@@ -76,7 +76,7 @@ public class Queue {
         return stat;
     }
        
-    public Vector getQueueNameList(String name) throws Exception {
+    public Vector getQueueNameList(String name, int tanda) throws Exception {
         
         Vector<Vector<String>> QueueVector = new Vector<Vector<String>>();
         
@@ -124,6 +124,10 @@ public class Queue {
                         queue.add(rs.getString(4));//room
                         queue.add(rs.getString(5));//doctor
                         queue.add(rs.getString(6));
+                        
+                        if (tanda == 2) {
+                            queue.add("DELETE");
+                        } 
 
                         QueueVector.add(queue);
                     }

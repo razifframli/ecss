@@ -221,7 +221,7 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnOnlineSearch" min="-2" pref="27" max="-2" attributes="0"/>
-                                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1466,7 +1466,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                   <Component id="pnl_IC_PersonMasterIndex" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="142" max="32767" attributes="0"/>
+                                  <EmptySpace pref="99" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2272,7 +2272,7 @@
                                                           <Component id="tfieldHandphoneNoPatient" alignment="0" max="32767" attributes="1"/>
                                                           <Component id="cboxStatePatient" alignment="0" max="32767" attributes="1"/>
                                                           <Component id="tfieldHomephonePatient" alignment="0" max="32767" attributes="1"/>
-                                                          <Component id="cboxPostalTown" alignment="0" pref="176" max="32767" attributes="1"/>
+                                                          <Component id="cboxPostalTown" alignment="0" max="32767" attributes="1"/>
                                                           <Component id="cboxTownCode" alignment="0" max="32767" attributes="1"/>
                                                       </Group>
                                                   </Group>
@@ -2822,7 +2822,7 @@
                                       <Component id="jPanel31" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                                       <Component id="jPanel32" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="231" max="32767" attributes="0"/>
+                                      <EmptySpace pref="185" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -2834,7 +2834,7 @@
                                           <Component id="jPanel31" max="32767" attributes="0"/>
                                           <Component id="jPanel32" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="269" max="32767" attributes="0"/>
+                                      <EmptySpace pref="230" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -4191,7 +4191,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jScrollPane7" min="-2" pref="228" max="-2" attributes="0"/>
-                                          <EmptySpace pref="12" max="32767" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                 </DimensionLayout>

@@ -9881,7 +9881,7 @@ public class Consultation extends javax.swing.JFrame {
         // process
         try {
             Queue queue1 = new Queue();
-            Vector<Vector<String>> data = queue1.getQueueNameList("");
+            Vector<Vector<String>> data = queue1.getQueueNameList("", 1);
             String idpms = "-";
             String time = "-";
             String status = "-";

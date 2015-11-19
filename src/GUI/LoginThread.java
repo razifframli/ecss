@@ -14,9 +14,15 @@ import Helper.Session;
  */
 public class LoginThread implements Runnable {
 
+    public static boolean running = true;
+    
     public void run() {
         
-        Login.lf.setVisible(true);
+        while(running) {
+            Login.lf.setVisible(true);
+            Login.lf.lbl_wait.setText("<html>Please Wait ..<br />Connecting Database ...</html>");
+            break;
+        }
         
     }
     

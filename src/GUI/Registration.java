@@ -6821,7 +6821,7 @@ public class Registration extends javax.swing.JFrame {
         clearSearch();
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    protected RegQueueList que = new RegQueueList();
+    public static RegQueueList que = new RegQueueList();
     
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:

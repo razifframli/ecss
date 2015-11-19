@@ -48,6 +48,12 @@ public class Login extends javax.swing.JFrame {
     /** Creates new form Login */
     public Login() {
         
+//        Thread t = new Thread(new LoginThread());
+//        t.start();
+//            LoginThread.running = true;
+        lf.setVisible(true);
+        lf.lbl_wait.setText("<html>Please Wait ..<br />Connecting Database ...</html>");
+        
         Session.startUp();
         if(Session.getNum_open_db() == 1) {
             
@@ -61,12 +67,12 @@ public class Login extends javax.swing.JFrame {
             Session.setPrev_stat(false);
             Session.setCurr_stat(false);
             
-            Thread t = new Thread(new LoginThread());
-            t.start();
-            
             Session.setCon_x();
             Session.setCon_x2();
         }
+        
+//        LoginThread.running = false;
+        lf.dispose();
         
         /*
          * Checking Network

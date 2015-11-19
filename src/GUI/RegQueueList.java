@@ -6,9 +6,13 @@
 
 package GUI;
 
+import Helper.J;
 import Helper.S;
 import api.Queue;
+import java.rmi.RemoteException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,7 +38,7 @@ public class RegQueueList extends javax.swing.JFrame {
 
                 switch(stat) {
                     case 1:
-                        data = queue1.getQueueNameList(ch);
+                        data = queue1.getQueueNameList(ch, 2);
                         break;
                     case 2:
                         data = queue1.getQueueIcList(ch);
@@ -49,6 +53,7 @@ public class RegQueueList extends javax.swing.JFrame {
                 header.add("CONSULTATION_ROOM");
                 header.add("DOCTOR");
                 header.add("STATUS");
+                header.add("ACTION");
 
 
                 tblQueue.setModel(new javax.swing.table.DefaultTableModel(data, header) {
@@ -91,9 +96,22 @@ public class RegQueueList extends javax.swing.JFrame {
 
             },
             new String [] {
-                "PMI_NO", "NAME", "EPISODE_TIME", "CONSULTATION_ROOM", "DOCTOR", "STATUS"
+                "PMI_NO", "NAME", "EPISODE_TIME", "CONSULTATION_ROOM", "DOCTOR", "STATUS", "ACTION"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblQueue.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblQueueMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblQueue);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,6 +136,30 @@ public class RegQueueList extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblQueueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQueueMouseClicked
+        // TODO add your handling code here:
+        
+        int index = tblQueue.getSelectedColumn();
+        if (index == 6) {
+            String pmiNo = (String) tblQueue.getValueAt(0, index);
+            String time = (String) tblQueue.getValueAt(2, index);
+            
+//            String query = "DELETE FROM PMS_EPISODE WHERE PMI_NO = ? AND EPISODE_TIME = ? ";
+//            String data[] = {pmiNo, time};
+//            try {
+//                boolean statExec = DBConnection.DBConnection.getImpl().setQuery(query, data);
+//                if (statExec) {
+//                    Registration.que.dispose();
+//                } else {
+//                    J.o("Error While Deleting", "Opss! There's an error while deleting that data. ..", 0);
+//                }
+//            } catch (RemoteException ex) {
+//                J.o("Error While Deleting", "Opss!\nThere's an error while deleting that data.\nError: "+ex.getMessage(), 0);
+//                ex.printStackTrace();
+//            }
+        }
+    }//GEN-LAST:event_tblQueueMouseClicked
 
     /**
      * @param args the command line arguments
