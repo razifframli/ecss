@@ -431,22 +431,31 @@ public class Consultation extends javax.swing.JFrame {
     
     public void loadDrug() {
         try {
+            
+            // get all from server db
             int num_rows = 24;
             String sql = "SELECT * "
                     + "FROM PIS_MDC2 ";
             String params[] = {};
             ArrayList<ArrayList<String>> data1 = DBConnection.getImpl().getQuery(sql, num_rows, params);
+            
+            // delete all from local db
+            String sql1 = "TRUNCATE TABLE PIS_MDC2 ";
+            PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
+            ps1.execute();
+            
+            // load all drug from server into local db
             for (int j = 0; j < data1.size(); j++) {
                 //System.out.println("DRUG "+j+": "+data1.get(i)+"\n");
                 String UD_MDC_CODE = data1.get(j).get(0);
                 int num_rows1 = data1.get(j).size();
-                String sql1 = "SELECT * "
-                        + "FROM PIS_MDC2 "
-                        + "WHERE UD_MDC_CODE = ? ";
-                PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
-                ps1.setString(1, UD_MDC_CODE);
-                ResultSet rs1 = ps1.executeQuery();
-                if (!rs1.next()) {
+//                String sql1 = "SELECT * "
+//                        + "FROM PIS_MDC2 "
+//                        + "WHERE UD_MDC_CODE = ? ";
+//                PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
+//                ps1.setString(1, UD_MDC_CODE);
+//                ResultSet rs1 = ps1.executeQuery();
+//                if (!rs1.next()) {
                     S.oln("Drug code "+UD_MDC_CODE+" not in the local list.. Adding it..");
                     String params1 = "";
                     for (int k = 0; k < num_rows1-1; k++) {
@@ -456,7 +465,7 @@ public class Consultation extends javax.swing.JFrame {
                     String sql2 = "INSERT INTO PIS_MDC2 VALUES("+params1+")";
                     PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
                     ps2.execute();
-                }
+//                }
             }
             S.oln("Done sync drug.. Alhamdulillah..");
         } catch (Exception e) {
