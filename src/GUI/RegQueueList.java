@@ -56,7 +56,7 @@ public class RegQueueList extends javax.swing.JFrame {
                 header.add("ACTION");
 
 
-                tblQueue.setModel(new javax.swing.table.DefaultTableModel(data, header) {
+                tblQueueREG.setModel(new javax.swing.table.DefaultTableModel(data, header) {
 
                     @Override
                     public boolean isCellEditable(int row, int column) {
@@ -83,7 +83,7 @@ public class RegQueueList extends javax.swing.JFrame {
 
         label1 = new java.awt.Label();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblQueue = new javax.swing.JTable();
+        tblQueueREG = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patient Queue List");
@@ -91,7 +91,7 @@ public class RegQueueList extends javax.swing.JFrame {
         label1.setBackground(new java.awt.Color(204, 204, 204));
         label1.setText("PATIENT QUEUE LIST");
 
-        tblQueue.setModel(new javax.swing.table.DefaultTableModel(
+        tblQueueREG.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -107,12 +107,12 @@ public class RegQueueList extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblQueue.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblQueueREG.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblQueueMouseClicked(evt);
+                tblQueueREGMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblQueue);
+        jScrollPane1.setViewportView(tblQueueREG);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,29 +137,35 @@ public class RegQueueList extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblQueueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQueueMouseClicked
+    private void tblQueueREGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQueueREGMouseClicked
         // TODO add your handling code here:
         
-        int index = tblQueue.getSelectedColumn();
+        int index = tblQueueREG.getSelectedColumn();
         if (index == 6) {
-            String pmiNo = (String) tblQueue.getValueAt(0, index);
-            String time = (String) tblQueue.getValueAt(2, index);
             
-//            String query = "DELETE FROM PMS_EPISODE WHERE PMI_NO = ? AND EPISODE_TIME = ? ";
-//            String data[] = {pmiNo, time};
-//            try {
-//                boolean statExec = DBConnection.DBConnection.getImpl().setQuery(query, data);
-//                if (statExec) {
-//                    Registration.que.dispose();
-//                } else {
-//                    J.o("Error While Deleting", "Opss! There's an error while deleting that data. ..", 0);
-//                }
-//            } catch (RemoteException ex) {
-//                J.o("Error While Deleting", "Opss!\nThere's an error while deleting that data.\nError: "+ex.getMessage(), 0);
-//                ex.printStackTrace();
-//            }
+            int rowIndex = tblQueueREG.getSelectedRow();
+            String pmiNo = tblQueueREG.getValueAt(rowIndex, 0).toString();
+            String time = tblQueueREG.getValueAt(rowIndex, 2).toString();
+            
+            System.out.println("pmiNo:"+pmiNo);
+            System.out.println("time:"+time);
+            
+            String query = "DELETE FROM PMS_EPISODE WHERE PMI_NO = ? AND EPISODE_TIME = ? ";
+            String data[] = {pmiNo, time};
+            try {
+                boolean statExec = DBConnection.DBConnection.getImpl().setQuery(query, data);
+                if (statExec) {
+                    J.o("Succeed", "Succeed deleting patient in queue.", 1);
+                    Registration.que.dispose();
+                } else {
+                    J.o("Error While Deleting", "Opss! There's an error while deleting that data. ..", 0);
+                }
+            } catch (RemoteException ex) {
+                J.o("Error While Deleting", "Opss!\nThere's an error while deleting that data.\nError: "+ex.getMessage(), 0);
+                ex.printStackTrace();
+            }
         }
-    }//GEN-LAST:event_tblQueueMouseClicked
+    }//GEN-LAST:event_tblQueueREGMouseClicked
 
     /**
      * @param args the command line arguments
@@ -199,6 +205,6 @@ public class RegQueueList extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label label1;
-    private javax.swing.JTable tblQueue;
+    public static javax.swing.JTable tblQueueREG;
     // End of variables declaration//GEN-END:variables
 }

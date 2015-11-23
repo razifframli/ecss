@@ -95,7 +95,7 @@ public class Queue {
 //                Message impl = (Message) myRegistry.lookup("myMessage");
                 // call server's method	
 
-                QueueVector = DBConnection.getImpl().getQueueNameList(name, Session.getHfc_code());
+                QueueVector = DBConnection.getImpl().getQueueNameList(name, Session.getHfc_code(), tanda);
 
                 //System.out.println(".....Message Sent....");
             } catch (Exception e) {

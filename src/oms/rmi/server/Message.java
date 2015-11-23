@@ -117,7 +117,7 @@ public interface Message extends Remote {
     void updateStatEpisode2(String PMINumber, String TimeEpisode, String now) 
             throws RemoteException;
     
-    Vector getQueueNameList(String name, String hfcCode) throws RemoteException;
+    Vector getQueueNameList(String name, String hfcCode, int tanda) throws RemoteException;
     
     String [] getAutoGen(int stat) throws RemoteException;
     
