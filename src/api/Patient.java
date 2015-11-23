@@ -1665,7 +1665,7 @@ public class Patient {
                 String sql1 = "SELECT * "
                         + "FROM PMS_EPISODE "
                         + "WHERE PMI_NO = ? "
-                        + "AND STATUS NOT LIKE 'Consult' "
+                        + "AND (STATUS NOT LIKE 'Consult' OR (STATUS LIKE 'Consult' AND DOCTOR = ?)) "
                         + "AND EPISODE_DATE = ? "
                         + "AND (DOCTOR = ? OR DOCTOR = '-') ";
                 try {

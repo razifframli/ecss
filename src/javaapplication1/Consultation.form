@@ -1053,11 +1053,7 @@
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" attributes="0">
                                                               <Group type="102" alignment="0" attributes="0">
-                                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                                      <Component id="btn_complaintClear" alignment="0" max="32767" attributes="0"/>
-                                                                      <Component id="btn_complaintAccept" alignment="0" pref="89" max="32767" attributes="0"/>
-                                                                  </Group>
-                                                                  <EmptySpace max="32767" attributes="0"/>
+                                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                                                   <Component id="jScrollPane20" min="-2" pref="0" max="-2" attributes="1"/>
                                                               </Group>
                                                               <Group type="102" attributes="0">
@@ -1069,10 +1065,14 @@
                                                                               <Component id="rbtn_gen_search" max="32767" attributes="0"/>
                                                                           </Group>
                                                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                                          <Group type="103" groupAlignment="0" attributes="0">
-                                                                              <Component id="btn_plus" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                                              <Component id="btn_substract" alignment="1" min="-2" pref="41" max="-2" attributes="0"/>
+                                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                                              <Component id="btn_plus" max="32767" attributes="0"/>
+                                                                              <Component id="btn_substract" max="32767" attributes="0"/>
                                                                           </Group>
+                                                                      </Group>
+                                                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                                          <Component id="btn_complaintAccept" alignment="0" max="32767" attributes="0"/>
+                                                                          <Component id="btn_complaintClear" alignment="0" pref="89" max="32767" attributes="0"/>
                                                                       </Group>
                                                                   </Group>
                                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -1098,27 +1098,31 @@
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
                                                       <Group type="102" attributes="0">
                                                           <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
-                                                              <Component id="rbtn_gen_search" min="-2" pref="15" max="-2" attributes="0"/>
+                                                              <Component id="rbtn_gen_search" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
+                                                              <Group type="102" alignment="0" attributes="0">
+                                                                  <Component id="btn_plus" min="-2" pref="15" max="-2" attributes="0"/>
+                                                                  <EmptySpace max="-2" attributes="0"/>
+                                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                                      <Component id="btn_substract" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                                                                      <Component id="rbtn_per_search" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                                                                  </Group>
+                                                              </Group>
                                                           </Group>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Group type="103" groupAlignment="2" attributes="0">
-                                                              <Component id="lbl_cSeverity" alignment="2" min="-2" max="-2" attributes="0"/>
-                                                              <Component id="cbx_cSeverity" alignment="2" min="-2" max="-2" attributes="0"/>
-                                                              <Component id="lbl_site" alignment="2" min="-2" max="-2" attributes="0"/>
-                                                              <Component id="cbx_site" alignment="2" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
-                                                      <Group type="102" attributes="0">
-                                                          <Component id="btn_plus" min="-2" pref="15" max="-2" attributes="0"/>
+                                                          <Component id="btn_complaintAccept" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Group type="103" groupAlignment="3" attributes="0">
-                                                              <Component id="btn_substract" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                                                              <Component id="rbtn_per_search" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
-                                                          </Group>
+                                                          <Component id="btn_complaintClear" min="-2" max="-2" attributes="0"/>
                                                       </Group>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="2" attributes="0">
+                                                      <Component id="lbl_cSeverity" alignment="2" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="cbx_cSeverity" alignment="2" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_site" alignment="2" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="cbx_site" alignment="2" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1131,14 +1135,9 @@
                                                               <Component id="lbl_duration" alignment="2" min="-2" max="-2" attributes="0"/>
                                                           </Group>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Group type="103" groupAlignment="0" attributes="0">
                                                               <Component id="lbl_complaintComment" min="-2" max="-2" attributes="0"/>
-                                                              <Group type="102" alignment="0" attributes="0">
-                                                                  <Component id="btn_complaintAccept" min="-2" max="-2" attributes="0"/>
-                                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                                  <Component id="btn_complaintClear" min="-2" max="-2" attributes="0"/>
-                                                              </Group>
-                                                              <Component id="jScrollPane5" pref="0" max="32767" attributes="0"/>
+                                                              <Component id="jScrollPane5" min="-2" pref="70" max="-2" attributes="0"/>
                                                           </Group>
                                                           <EmptySpace pref="7" max="32767" attributes="0"/>
                                                           <Component id="lbl_ccdate" min="-2" pref="15" max="-2" attributes="0"/>
@@ -1885,7 +1884,14 @@
                                                   <Component id="btnSrcComplaint1" alignment="2" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jScrollPane47" min="-2" pref="156" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jScrollPane47" min="-2" pref="156" max="-2" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="PMH_AccptrBtn" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="PMH_clearBtn" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
@@ -1897,16 +1903,9 @@
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="jScrollPane48" min="-2" pref="55" max="-2" attributes="0"/>
-                                                      <Group type="102" attributes="0">
-                                                          <Component id="PMH_AccptrBtn" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace max="32767" attributes="0"/>
-                                                          <Component id="PMH_clearBtn" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
+                                                  <Component id="jScrollPane48" min="-2" pref="55" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace pref="21" max="32767" attributes="0"/>
+                                              <EmptySpace pref="30" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
@@ -2195,21 +2194,23 @@
                                                   <Component id="btnSrcSocialHistory1" alignment="2" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jScrollPane49" min="-2" pref="144" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jScrollPane49" min="-2" pref="144" max="-2" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="FH_accptBtn" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="FH_clrBtn" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="2" attributes="0">
                                                   <Component id="jLabel52" alignment="2" min="-2" max="-2" attributes="0"/>
                                                   <Component id="FH_Relationship" alignment="2" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel53" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="FH_accptBtn" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="FH_clrBtn" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="jScrollPane50" alignment="0" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="jScrollPane50" alignment="0" min="-2" pref="64" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace pref="35" max="32767" attributes="0"/>
                                           </Group>
@@ -2466,7 +2467,14 @@
                                                       <Component id="btnSrcSocialHistory" alignment="2" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPane26" min="-2" pref="163" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jScrollPane26" min="-2" pref="163" max="-2" attributes="0"/>
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="btn_sclAccept" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="btn_sclClear" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="2" attributes="0">
                                                       <Component id="jLabel66" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -2475,16 +2483,9 @@
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="jLabel67" min="-2" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                          <Component id="jScrollPane27" min="-2" pref="49" max="-2" attributes="0"/>
-                                                          <Group type="102" attributes="0">
-                                                              <Component id="btn_sclAccept" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace max="32767" attributes="0"/>
-                                                              <Component id="btn_sclClear" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
+                                                      <Component id="jScrollPane27" min="-2" pref="49" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                                   <Component id="lbl_shdate" min="-2" pref="14" max="-2" attributes="0"/>
                                                   <EmptySpace pref="14" max="32767" attributes="0"/>
                                               </Group>
@@ -3110,7 +3111,14 @@
                                                       <Component id="btnSrcAllergy" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPane24" min="-2" pref="148" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jScrollPane24" min="-2" pref="148" max="-2" attributes="0"/>
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="btn_allergyAccept" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="btn_allergyClear" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="lbl_allergyDate" min="-2" max="-2" attributes="0"/>
@@ -3120,13 +3128,8 @@
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="lbl_allergyComments" min="-2" max="-2" attributes="0"/>
                                                       <Component id="jScrollPane25" min="-2" pref="49" max="-2" attributes="0"/>
-                                                      <Group type="102" attributes="0">
-                                                          <Component id="btn_allergyAccept" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="btn_allergyClear" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
                                                   </Group>
-                                                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="47" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -3308,7 +3311,7 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
+                                                      <EmptySpace min="0" pref="44" max="32767" attributes="0"/>
                                                       <Component id="lbl_immdate" min="-2" pref="14" max="-2" attributes="0"/>
                                                       <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
                                                   </Group>
@@ -3458,12 +3461,18 @@
                                                   <Component id="lbl_immSearch" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jScrollPane9" alignment="0" pref="353" max="32767" attributes="1"/>
+                                                      <Component id="jScrollPane9" alignment="0" pref="374" max="32767" attributes="1"/>
                                                       <Component id="txt_immSearch" alignment="0" max="32767" attributes="1"/>
                                                   </Group>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="btnSrcImmunisation" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="btnSrcImmunisation" min="-2" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="btn_immAccept" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="btn_immClear" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <EmptySpace max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
@@ -3475,18 +3484,13 @@
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Group type="102" attributes="0">
                                                           <Component id="txt_immDate1" min="-2" pref="276" max="-2" attributes="0"/>
-                                                          <EmptySpace max="32767" attributes="0"/>
+                                                          <EmptySpace pref="208" max="32767" attributes="0"/>
                                                       </Group>
                                                       <Group type="102" attributes="0">
                                                           <Component id="jScrollPane10" max="32767" attributes="1"/>
-                                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="btn_immAccept" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="btn_immClear" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -3500,25 +3504,24 @@
                                                       <Component id="btnSrcImmunisation" alignment="2" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jScrollPane9" pref="176" max="32767" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Component id="jScrollPane10" min="-2" pref="50" max="-2" attributes="0"/>
-                                                              <Component id="lbl_immComment" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                                          <Group type="103" groupAlignment="1" attributes="0">
-                                                              <Component id="txt_immDate1" min="-2" max="-2" attributes="0"/>
-                                                              <Component id="lbl_immDate" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
-                                                      <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jScrollPane9" pref="176" max="32767" attributes="0"/>
+                                                      <Group type="102" attributes="0">
                                                           <Component id="btn_immAccept" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Component id="btn_immClear" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                                       </Group>
+                                                  </Group>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jScrollPane10" min="-2" pref="50" max="-2" attributes="0"/>
+                                                      <Component id="lbl_immComment" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="txt_immDate1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_immDate" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                               </Group>
@@ -3783,16 +3786,14 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Group type="102" attributes="0">
-                                                          <Group type="103" groupAlignment="2" attributes="0">
-                                                              <Component id="lbl_disabilityType" alignment="2" min="-2" max="-2" attributes="0"/>
-                                                              <Component id="txt_disabilityType" alignment="2" min="-2" max="-2" attributes="0"/>
-                                                              <Component id="btnSrcDisability" alignment="2" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jScrollPane21" min="-2" pref="137" max="-2" attributes="0"/>
-                                                      </Group>
+                                                  <Group type="103" groupAlignment="2" attributes="0">
+                                                      <Component id="lbl_disabilityType" alignment="2" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="txt_disabilityType" alignment="2" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btnSrcDisability" alignment="2" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jScrollPane21" min="-2" pref="137" max="-2" attributes="0"/>
                                                       <Group type="102" attributes="0">
                                                           <Component id="btn_dAccept" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
@@ -6293,15 +6294,23 @@
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="jScrollPane7" min="-2" pref="142" max="-2" attributes="0"/>
-                                                      <Component id="rbtn_gen_search_dgs" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
-                                                          <Component id="rbtn_per_search_dgs" min="-2" pref="16" max="-2" attributes="0"/>
-                                                      </Group>
                                                       <Group type="102" attributes="0">
                                                           <Component id="btn_plus_dgs" min="-2" pref="15" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Component id="btn_substract_dgs" min="-2" pref="14" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" attributes="0">
+                                                          <Group type="103" groupAlignment="0" attributes="0">
+                                                              <Component id="rbtn_gen_search_dgs" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
+                                                              <Group type="102" alignment="0" attributes="0">
+                                                                  <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
+                                                                  <Component id="rbtn_per_search_dgs" min="-2" pref="16" max="-2" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="btn_diagnosisAccept" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="btn_diagnosisClear" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
@@ -6319,12 +6328,8 @@
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="lbl_complaintComment1" min="-2" max="-2" attributes="0"/>
-                                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                          <Group type="102" attributes="0">
-                                                              <Component id="btn_diagnosisAccept" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace max="32767" attributes="0"/>
-                                                              <Component id="btn_diagnosisClear" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                                           <Component id="jScrollPane75" min="-2" pref="56" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
@@ -7041,13 +7046,15 @@
                                                           <Component id="txt_packagetype" min="-2" pref="77" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="jButton5" max="32767" attributes="0"/>
-                                                      <Component id="btn_drugAccept" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="btn_drugClear" alignment="0" max="32767" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="btn_drugAccept" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="btn_drugClear" alignment="0" max="32767" attributes="0"/>
+                                                      </Group>
                                                   </Group>
-                                                  <EmptySpace pref="87" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="81" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -7062,7 +7069,13 @@
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="jScrollPane17" min="-2" pref="115" max="-2" attributes="0"/>
-                                                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="btn_drugAccept" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="btn_drugClear" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -7077,14 +7090,7 @@
                                                       <Component id="lbl_productNameOList1" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" attributes="0">
-                                                          <Component id="btn_drugAccept" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="btn_drugClear" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="jPanel74" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
+                                                  <Component id="jPanel74" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
