@@ -8274,7 +8274,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             JOptionPane.showMessageDialog(btn_addmdc, "Please select expired date!");
         }else if(txt_drugNameMDC.getText().equals("")){  //20151006 Lim Kai Li -- Add validation
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter trade name to add!");
-        }else if(txt_ingredientCode.getText().equals("")){
+        }else if(txt_ingredientCode.getText().equals("")){  //20151006 Lim Kai Li -- Add validation
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter generic name to add!");
         }else if(txt_drugRoute.getText().equals("")){
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter drug route to add!");
