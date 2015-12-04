@@ -8,7 +8,7 @@
  *
  * Created on Mar 13, 2011, 1:28:11 AM
  */
-//update by Hariz 20151010
+
 package GUI;
 
 //connection db & others
@@ -550,17 +550,6 @@ public class Pharmacy extends javax.swing.JFrame{
         tpnl_pharmacy = new javax.swing.JTabbedPane();
         pnl_drugOrder = new javax.swing.JPanel();
         tab_drugOrder = new javax.swing.JTabbedPane();
-        pnl_patientList = new javax.swing.JPanel();
-        label2 = new java.awt.Label();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tbl_patientInQueue = new javax.swing.JTable();
-        btn_refresh = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        txt_search_OrderNo = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        btn_search = new javax.swing.JButton();
-        jLblIC = new javax.swing.JLabel();
-        txt_search_pol1 = new javax.swing.JTextField();
         pnl_patientDrugOrder = new javax.swing.JPanel();
         lbl_patientInfo = new java.awt.Label();
         jPanel20 = new javax.swing.JPanel();
@@ -574,6 +563,16 @@ public class Pharmacy extends javax.swing.JFrame{
         tbl_drugOrder = new javax.swing.JTable();
         lbl_doctor = new javax.swing.JLabel();
         txt_doctor = new javax.swing.JTextField();
+        jPanel38 = new javax.swing.JPanel();
+        jLabel42 = new javax.swing.JLabel();
+        order_no2 = new javax.swing.JTextField();
+        jLabel43 = new javax.swing.JLabel();
+        order_date2 = new javax.swing.JTextField();
+        jLabel44 = new javax.swing.JLabel();
+        loc_code = new javax.swing.JTextField();
+        jLabel45 = new javax.swing.JLabel();
+        arrival_date = new javax.swing.JTextField();
+        jScrollPane10 = new javax.swing.JScrollPane();
         jPanel37 = new javax.swing.JPanel();
         lbl_patientName = new javax.swing.JLabel();
         lbl_pmiNo = new javax.swing.JLabel();
@@ -591,15 +590,8 @@ public class Pharmacy extends javax.swing.JFrame{
         lbl_bloodType = new javax.swing.JLabel();
         txt_bloodType = new javax.swing.JTextField();
         cbAllergy = new javax.swing.JComboBox();
-        jPanel38 = new javax.swing.JPanel();
-        jLabel42 = new javax.swing.JLabel();
-        order_no2 = new javax.swing.JTextField();
-        jLabel43 = new javax.swing.JLabel();
-        order_date2 = new javax.swing.JTextField();
-        jLabel44 = new javax.swing.JLabel();
-        loc_code = new javax.swing.JTextField();
-        jLabel45 = new javax.swing.JLabel();
-        arrival_date = new javax.swing.JTextField();
+        jScrollPane18 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         pnl_prepareOrderList = new javax.swing.JPanel();
         lbl_prepareDrugOrderOList = new java.awt.Label();
         jPanel21 = new javax.swing.JPanel();
@@ -663,6 +655,17 @@ public class Pharmacy extends javax.swing.JFrame{
         order_no = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel27 = new javax.swing.JLabel();
+        pnl_patientList = new javax.swing.JPanel();
+        label2 = new java.awt.Label();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbl_patientInQueue = new javax.swing.JTable();
+        btn_refresh = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        txt_search_OrderNo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btn_search = new javax.swing.JButton();
+        jLblIC = new javax.swing.JLabel();
+        txt_search_pol1 = new javax.swing.JTextField();
         pnl_convertAndManage = new javax.swing.JPanel();
         tpnl_manageDCode = new javax.swing.JTabbedPane();
         pnl_atc = new javax.swing.JPanel();
@@ -1247,159 +1250,6 @@ public class Pharmacy extends javax.swing.JFrame{
 
         tpnl_pharmacy.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        label2.setBackground(new java.awt.Color(51, 51, 255));
-        label2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label2.setForeground(new java.awt.Color(255, 255, 255));
-        label2.setText(" Patients");
-
-        tbl_patientInQueue.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "PMI No.", "Name", "Order Date", "Location Code", "Arrival Date", "Doctor's Name"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbl_patientInQueue.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_patientInQueueMouseClicked(evt);
-            }
-        });
-        jScrollPane5.setViewportView(tbl_patientInQueue);
-
-        btn_refresh.setText("Refresh");
-        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_refreshActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("PMI No :");
-
-        btn_search.setText("Search");
-        btn_search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchActionPerformed(evt);
-            }
-        });
-
-        jLblIC.setText("Order No :");
-
-        txt_search_pol1.setText("PMS");
-        txt_search_pol1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_search_pol1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_search_pol1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_search))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLblIC, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_search_OrderNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(106, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(btn_search)
-                    .addComponent(txt_search_pol1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLblIC)
-                    .addComponent(txt_search_OrderNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout pnl_patientListLayout = new javax.swing.GroupLayout(pnl_patientList);
-        pnl_patientList.setLayout(pnl_patientListLayout);
-        pnl_patientListLayout.setHorizontalGroup(
-            pnl_patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnl_patientListLayout.createSequentialGroup()
-                .addGap(167, 167, 167)
-                .addGroup(pnl_patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnl_patientListLayout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(272, 272, 272)
-                        .addComponent(btn_refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1007, Short.MAX_VALUE))
-        );
-        pnl_patientListLayout.setVerticalGroup(
-            pnl_patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_patientListLayout.createSequentialGroup()
-                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(437, Short.MAX_VALUE))
-        );
-
-        tab_drugOrder.addTab("Patient Order List", pnl_patientList);
-
         lbl_patientInfo.setBackground(new java.awt.Color(51, 51, 255));
         lbl_patientInfo.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         lbl_patientInfo.setForeground(new java.awt.Color(255, 255, 255));
@@ -1755,115 +1605,6 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel37.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patient Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-
-        lbl_patientName.setText("Patient Name :");
-
-        lbl_pmiNo.setText("PMI No :");
-
-        txt_pmiNo.setEditable(false);
-        txt_pmiNo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        txt_patientName.setEditable(false);
-        txt_patientName.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        lbl_icNo.setText("IC No :");
-
-        txt_icNo.setEditable(false);
-        txt_icNo.setBorder(null);
-
-        lbl_sex.setText("Gender :");
-
-        txt_sex.setEditable(false);
-        txt_sex.setBorder(null);
-
-        lbl_race.setText("Race :");
-
-        lbl_birthDate.setText("Birth Date :");
-
-        txt_birthDate.setEditable(false);
-        txt_birthDate.setBorder(null);
-
-        txt_race.setEditable(false);
-        txt_race.setBorder(null);
-
-        lbl_allergy.setText("Allergy :");
-
-        lbl_bloodType.setText("Blood Type :");
-
-        txt_bloodType.setEditable(false);
-        txt_bloodType.setBorder(null);
-
-        cbAllergy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- No Allergy --" }));
-        cbAllergy.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        javax.swing.GroupLayout jPanel37Layout = new javax.swing.GroupLayout(jPanel37);
-        jPanel37.setLayout(jPanel37Layout);
-        jPanel37Layout.setHorizontalGroup(
-            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel37Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_patientName)
-                    .addComponent(lbl_pmiNo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_pmiNo)
-                    .addComponent(txt_patientName, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel37Layout.createSequentialGroup()
-                        .addComponent(lbl_icNo)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_icNo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel37Layout.createSequentialGroup()
-                        .addComponent(lbl_sex)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_sex, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_birthDate)
-                    .addComponent(lbl_race))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_race)
-                    .addComponent(txt_birthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_bloodType)
-                    .addComponent(lbl_allergy))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_bloodType, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(cbAllergy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel37Layout.setVerticalGroup(
-            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel37Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_patientName)
-                    .addComponent(txt_patientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_icNo)
-                    .addComponent(txt_icNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_birthDate)
-                    .addComponent(txt_birthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_bloodType)
-                    .addComponent(txt_bloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_pmiNo)
-                    .addComponent(txt_pmiNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_sex)
-                    .addComponent(txt_sex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_race)
-                    .addComponent(txt_race, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_allergy)
-                    .addComponent(cbAllergy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-
         jLabel42.setText("Order No :");
 
         order_no2.setBackground(new java.awt.Color(240, 240, 240));
@@ -1920,38 +1661,171 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel37.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patient Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+
+        lbl_patientName.setText("Patient Name :");
+
+        lbl_pmiNo.setText("PMI No :");
+
+        txt_pmiNo.setEditable(false);
+        txt_pmiNo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        txt_patientName.setEditable(false);
+        txt_patientName.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        lbl_icNo.setText("IC No :");
+
+        txt_icNo.setEditable(false);
+        txt_icNo.setBorder(null);
+
+        lbl_sex.setText("Gender :");
+
+        txt_sex.setEditable(false);
+        txt_sex.setBorder(null);
+
+        lbl_race.setText("Race :");
+
+        lbl_birthDate.setText("Birth Date :");
+
+        txt_birthDate.setEditable(false);
+        txt_birthDate.setBorder(null);
+
+        txt_race.setEditable(false);
+        txt_race.setBorder(null);
+
+        lbl_allergy.setText("Allergy :");
+
+        lbl_bloodType.setText("Blood Type :");
+
+        txt_bloodType.setEditable(false);
+        txt_bloodType.setBorder(null);
+
+        cbAllergy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- No Allergy --" }));
+        cbAllergy.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Type", "Date", "Diagnosis", "Severity", "Laterality", "Comment"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane18.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel37Layout = new javax.swing.GroupLayout(jPanel37);
+        jPanel37.setLayout(jPanel37Layout);
+        jPanel37Layout.setHorizontalGroup(
+            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel37Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel37Layout.createSequentialGroup()
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_patientName)
+                            .addComponent(lbl_pmiNo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_pmiNo)
+                            .addComponent(txt_patientName, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(59, 59, 59)
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel37Layout.createSequentialGroup()
+                                .addComponent(lbl_icNo)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_icNo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel37Layout.createSequentialGroup()
+                                .addComponent(lbl_sex)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_sex, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_birthDate)
+                            .addComponent(lbl_race))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_race)
+                            .addComponent(txt_birthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_bloodType)
+                            .addComponent(lbl_allergy))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_bloodType, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(cbAllergy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane18))
+                .addContainerGap())
+        );
+        jPanel37Layout.setVerticalGroup(
+            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel37Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_patientName)
+                    .addComponent(txt_patientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_icNo)
+                    .addComponent(txt_icNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_birthDate)
+                    .addComponent(txt_birthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_bloodType)
+                    .addComponent(txt_bloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_pmiNo)
+                    .addComponent(txt_pmiNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_sex)
+                    .addComponent(txt_sex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_race)
+                    .addComponent(txt_race, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_allergy)
+                    .addComponent(cbAllergy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(350, Short.MAX_VALUE))
+        );
+
+        jScrollPane10.setViewportView(jPanel37);
+
         javax.swing.GroupLayout pnl_patientDrugOrderLayout = new javax.swing.GroupLayout(pnl_patientDrugOrder);
         pnl_patientDrugOrder.setLayout(pnl_patientDrugOrderLayout);
         pnl_patientDrugOrderLayout.setHorizontalGroup(
             pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lbl_patientInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnl_patientDrugOrderLayout.createSequentialGroup()
-                .addGroup(pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_patientDrugOrderLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jPanel37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnl_patientDrugOrderLayout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(749, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(1011, Short.MAX_VALUE))
         );
         pnl_patientDrugOrderLayout.setVerticalGroup(
             pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_patientDrugOrderLayout.createSequentialGroup()
                 .addComponent(lbl_patientInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         tab_drugOrder.addTab("Patient Drug Dispense", pnl_patientDrugOrder);
@@ -2594,7 +2468,7 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addContainerGap()
                         .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lbl_prepareDrugOrderOList, javax.swing.GroupLayout.PREFERRED_SIZE, 1261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(702, Short.MAX_VALUE))
+                .addContainerGap(964, Short.MAX_VALUE))
         );
         pnl_prepareOrderListLayout.setVerticalGroup(
             pnl_prepareOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2619,10 +2493,163 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         tab_drugOrder.addTab(" Drug Order", pnl_prepareOrderList);
+
+        label2.setBackground(new java.awt.Color(51, 51, 255));
+        label2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        label2.setForeground(new java.awt.Color(255, 255, 255));
+        label2.setText(" Patients");
+
+        tbl_patientInQueue.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "PMI No.", "Name", "Order Date", "Location Code", "Arrival Date", "Doctor's Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_patientInQueue.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_patientInQueueMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tbl_patientInQueue);
+
+        btn_refresh.setText("Refresh");
+        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_refreshActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("PMI No :");
+
+        btn_search.setText("Search");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
+
+        jLblIC.setText("Order No :");
+
+        txt_search_pol1.setText("PMS");
+        txt_search_pol1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_search_pol1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_search_pol1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_search))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLblIC, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_search_OrderNo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(106, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(btn_search)
+                    .addComponent(txt_search_pol1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLblIC)
+                    .addComponent(txt_search_OrderNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnl_patientListLayout = new javax.swing.GroupLayout(pnl_patientList);
+        pnl_patientList.setLayout(pnl_patientListLayout);
+        pnl_patientListLayout.setHorizontalGroup(
+            pnl_patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnl_patientListLayout.createSequentialGroup()
+                .addGap(167, 167, 167)
+                .addGroup(pnl_patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnl_patientListLayout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(272, 272, 272)
+                        .addComponent(btn_refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(1269, Short.MAX_VALUE))
+        );
+        pnl_patientListLayout.setVerticalGroup(
+            pnl_patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_patientListLayout.createSequentialGroup()
+                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(437, Short.MAX_VALUE))
+        );
+
+        tab_drugOrder.addTab("Patient Order List", pnl_patientList);
 
         javax.swing.GroupLayout pnl_drugOrderLayout = new javax.swing.GroupLayout(pnl_drugOrder);
         pnl_drugOrder.setLayout(pnl_drugOrderLayout);
@@ -2952,7 +2979,7 @@ public class Pharmacy extends javax.swing.JFrame{
         pnl_atcLayout.setHorizontalGroup(
             pnl_atcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lbl_searchDrugATC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbl_drugATCDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 1998, Short.MAX_VALUE)
+            .addComponent(lbl_drugATCDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 2260, Short.MAX_VALUE)
             .addGroup(pnl_atcLayout.createSequentialGroup()
                 .addGroup(pnl_atcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_atcLayout.createSequentialGroup()
@@ -2963,7 +2990,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addGroup(pnl_atcLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(757, Short.MAX_VALUE))
+                .addContainerGap(1019, Short.MAX_VALUE))
         );
         pnl_atcLayout.setVerticalGroup(
             pnl_atcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2977,7 +3004,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(pnl_atcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap(365, Short.MAX_VALUE))
         );
 
         tpnl_manageDCode.addTab("ATC", pnl_atc);
@@ -3381,7 +3408,7 @@ public class Pharmacy extends javax.swing.JFrame{
 
         jLabel34.setText("Packaging :");
 
-        cdpack2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "AMP", "AP", "BAG", "BLPK", "BOT", "BOTAP", "BOTDIS", "BOTDR", "BOTGL", "BOTPL", "BOTPU", "BOTSPR", "BOTUD", "BOX", "BOXUD", "CAN", "CSTR", "CRTN", "CTG", "CASE", "CELLO", "CTR", "CUP", "CUPUD", "CYL", "DEW", "DLPK", "DSPK", "DRUM", "INHL", "INHLRE", "JAR", "JUG", "KIT", "NS", "PKG", "PKGCOM", "PKT", "POU", "SUPSACK", "SYR", "SYRGL", "SYRPL", "TABMIND", "TANK", "TRAY", "TUBE", "TUBEAP", "VIAL", "VIALDIS", "VIALGL", "VIALMD", "VIALPAT", "VIALPHR", "VIALPIG", "VIALPL", "VIALSD", "VIALSU" }));
+        cdpack2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "AMP", "AP", "BAG", "BLPK", "BOT", "BOTAP", "BOTDIS", "BOTDR", "BOTGL", "BOTPL", "BOTPU", "BOTSPR", "BOTUD", "BOX", "BOXUD", "CAN", "CSTR", "CRTN", "CTG", "CASE", "CELLO", "CTR", "CUP", "CUPUD", "CYL", "DEW", "DLPK", "DSPK", "DRUM", "INHL", "INHLRE", "JAR", "JUG", "KIT", "NS", "PKG", "PKGCOM", "PKT", "POU", "SUPSACK", "SYR", "SYRGL", "SYRPL", "TABMIND", "TANK", "TRAY", "TUBE", "TUBEAP", "VIAL", "VIALDIS", "VIALGL", "VIALMD", "VIALPAT", "VIALPHR", "VIALPIG", "VIALPL", "VIALSD", "VIALSU", "DROPS" }));
 
         jLabel31.setText("Purchase Price :");
 
@@ -3588,10 +3615,10 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(777, Short.MAX_VALUE))
+                .addContainerGap(1042, Short.MAX_VALUE))
             .addGroup(pnl_mdcLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 697, Short.MAX_VALUE))
+                .addGap(0, 959, Short.MAX_VALUE))
         );
         pnl_mdcLayout.setVerticalGroup(
             pnl_mdcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3736,7 +3763,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(pnl_importLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1407, Short.MAX_VALUE))
+                .addContainerGap(1669, Short.MAX_VALUE))
         );
         pnl_importLayout.setVerticalGroup(
             pnl_importLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3748,7 +3775,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(lbl_browseFileConvert1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(579, Short.MAX_VALUE))
+                .addContainerGap(571, Short.MAX_VALUE))
         );
 
         tpnl_manageDCode.addTab("Import", pnl_import);
@@ -3893,13 +3920,13 @@ public class Pharmacy extends javax.swing.JFrame{
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_userInfoUpdateStock2, javax.swing.GroupLayout.DEFAULT_SIZE, 1998, Short.MAX_VALUE)
+            .addComponent(lbl_userInfoUpdateStock2, javax.swing.GroupLayout.DEFAULT_SIZE, 2260, Short.MAX_VALUE)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(968, Short.MAX_VALUE))
+                .addContainerGap(1242, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3909,7 +3936,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(617, Short.MAX_VALUE))
+                .addContainerGap(609, Short.MAX_VALUE))
         );
 
         tpnl_manageDCode.addTab("Add Supplier", jPanel13);
@@ -3946,7 +3973,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(btnMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(330, 330, 330)
                 .addComponent(btnYearly, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1141, Short.MAX_VALUE))
+                .addContainerGap(1215, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3956,7 +3983,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(btnDaily, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnYearly, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(921, Short.MAX_VALUE))
+                .addContainerGap(795, Short.MAX_VALUE))
         );
 
         tpnl_manageDCode.addTab("Dispensed Report", jPanel2);
@@ -3969,7 +3996,7 @@ public class Pharmacy extends javax.swing.JFrame{
         );
         pnl_convertAndManageLayout.setVerticalGroup(
             pnl_convertAndManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tpnl_manageDCode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
+            .addComponent(tpnl_manageDCode, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         tpnl_pharmacy.addTab("INVENTORY", pnl_convertAndManage);
@@ -8849,6 +8876,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
@@ -8856,6 +8884,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
+    private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane20;
@@ -8871,6 +8900,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jT_S3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTatc;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
