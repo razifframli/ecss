@@ -459,10 +459,11 @@ public class Consultation extends javax.swing.JFrame {
                     S.oln("Drug code "+UD_MDC_CODE+" not in the local list.. Adding it..");
                     String params1 = "";
                     for (int k = 0; k < num_rows1-1; k++) {
-                        params1 += "'"+data1.get(j).get(k)+"',";
+                        params1 += "'"+data1.get(j).get(k).replace('\'', ' ')+"',";
                     }
-                    params1 += "'"+data1.get(j).get(num_rows1-1)+"'";
+                    params1 += "'"+data1.get(j).get(num_rows1-1).replace('\'', ' ')+"'";
                     String sql2 = "INSERT INTO PIS_MDC2 VALUES("+params1+")";
+                    System.out.println("\n\nsqlDrug:"+sql2);
                     PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
                     ps2.execute();
 //                }

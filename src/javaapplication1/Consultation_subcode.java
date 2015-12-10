@@ -354,7 +354,7 @@ public class Consultation_subcode {
                             date.toString(), //22
                             Session.getHfc_code(), //23
                             Session.getUser_id(), //24
-                            Session.getUser_name(), //25
+                            Session.getUser_name(), //25 doctor name
                             
                             gcs_points, //26
                             gcs_result, //27
@@ -614,8 +614,8 @@ public class Consultation_subcode {
                         }
                         
                         String data[] = {
-                            ProblemCode + "^" + ProblemDesc + "^" + ProblemCode,
-                            UD_MDC_Code + "^" + ProductName + "-"+ActiveIngredient + "^" + UD_MDC_Code,
+                            ProblemCode + "^" + ProblemDesc + "^ICD10",
+                            UD_MDC_Code + "^" + ProductName + "-"+ActiveIngredient + "^MDC",
                             "" + "^" + DrugForm + "^" + "",
                             "" + "^" + "" + "^" + "",
                             "" + "^" + Frequency + "^" + "",
