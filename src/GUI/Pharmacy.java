@@ -8280,11 +8280,16 @@ jScrollPane17.setViewportView(tbl_drugOList);
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter drug route to add!");
         }else if(txt_drugStrength.getText().equals("")){
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter drug strength to add!");
-        }else if(txt_costPrice.getText().equals("")){
+        }
+        /*else if(txt_costPrice.getText().equals(""))
+        {
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter purchase price to add!");
-        }else if(txt_sellprice.getText().equals("")){
+        }
+        else if(txt_sellprice.getText().equals(""))
+        {
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter sell price to add!");
-        }else if(txt_Lqty.getText().equals("")){
+        } */
+        else if(txt_Lqty.getText().equals("")){
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter dosage to add!");
         }else if(txt_cautionary.getText().equals("")){
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter cautionary to add!");
