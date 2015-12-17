@@ -1081,7 +1081,9 @@
                                               <Component id="jButton5" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="btn_dispense" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                              <Component id="btnCallPatient" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="btn_PrintLabel" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="413" max="-2" attributes="0"/>
                                           </Group>
@@ -1099,6 +1101,7 @@
                                           <Component id="btn_dispense" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="btn_PrintLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnCallPatient" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
@@ -1218,6 +1221,15 @@
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_PrintLabelActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnCallPatient">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Call Patient"/>
+                                <Property name="toolTipText" type="java.lang.String" value=""/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCallPatientActionPerformed"/>
                               </Events>
                             </Component>
                           </SubComponents>
