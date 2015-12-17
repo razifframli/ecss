@@ -1565,7 +1565,6 @@ public class Pharmacy extends javax.swing.JFrame{
         });
 
         btnCallPatient.setText("Call Patient");
-        btnCallPatient.setToolTipText("");
         btnCallPatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCallPatientActionPerformed(evt);
@@ -1586,9 +1585,9 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addComponent(jButton5)
                         .addGap(18, 18, 18)
                         .addComponent(btn_dispense)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnCallPatient)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCallPatient)
+                        .addGap(18, 18, 18)
                         .addComponent(btn_PrintLabel)
                         .addGap(413, 413, 413))))
         );
@@ -8683,13 +8682,12 @@ public void toExcel(JTable tbl_mdc, File file){
     }//GEN-LAST:event_btnMonthlyActionPerformed
 
     private void btnCallPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCallPatientActionPerformed
-        
+        // TODO add your handling code here:
         String name = txt_patientName.getText();
         String pmiNo = txt_pmiNo.getText();
         String str_pdi = pmiNo + "|" + name + "|" 
                 + Session.getUser_name() + "|Pharmacy" ;
         Func.callPatient(str_pdi);
-        
     }//GEN-LAST:event_btnCallPatientActionPerformed
    
     void fnCreateXLS(String strSQL , String fName)
