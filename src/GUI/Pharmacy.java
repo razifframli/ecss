@@ -8490,7 +8490,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 
             } catch (Exception e) {
                 System.out.println("insert pis mdc2" + e);
-                JOptionPane.showMessageDialog(btn_addmdc, "Duplicate Drugs Code!");
+                JOptionPane.showMessageDialog(btn_addmdc, "Duplicate Drugs Code!"); //20151217 LIM KAI LI
                 e.printStackTrace();
             }
         }
