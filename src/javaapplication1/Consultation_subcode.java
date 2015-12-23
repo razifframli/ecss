@@ -84,6 +84,8 @@ public class Consultation_subcode {
             for (int zz = 0; zz < 200; zz++) {
                 msgs[zz] = "";
             }
+            
+            String orc = "";
 
             try {
                 Func.destroyPatientQueue(PMI);
