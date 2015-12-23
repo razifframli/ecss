@@ -569,6 +569,7 @@ public class Pharmacy extends javax.swing.JFrame{
         btn_dispense = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         btn_PrintLabel = new javax.swing.JButton();
+        btnCallPatient = new javax.swing.JButton();
         jPanel36 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbl_drugOrder = new javax.swing.JTable();
@@ -1563,6 +1564,13 @@ public class Pharmacy extends javax.swing.JFrame{
             }
         });
 
+        btnCallPatient.setText("Call Patient");
+        btnCallPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCallPatientActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
@@ -1577,6 +1585,8 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addComponent(jButton5)
                         .addGap(18, 18, 18)
                         .addComponent(btn_dispense)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCallPatient)
                         .addGap(18, 18, 18)
                         .addComponent(btn_PrintLabel)
                         .addGap(413, 413, 413))))
@@ -1590,7 +1600,8 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_dispense)
                     .addComponent(jButton5)
-                    .addComponent(btn_PrintLabel))
+                    .addComponent(btn_PrintLabel)
+                    .addComponent(btnCallPatient))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -8280,11 +8291,16 @@ jScrollPane17.setViewportView(tbl_drugOList);
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter drug route to add!");
         }else if(txt_drugStrength.getText().equals("")){
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter drug strength to add!");
-        }else if(txt_costPrice.getText().equals("")){
+        }
+        /*else if(txt_costPrice.getText().equals(""))
+        {
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter purchase price to add!");
-        }else if(txt_sellprice.getText().equals("")){
+        }
+        else if(txt_sellprice.getText().equals(""))
+        {
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter sell price to add!");
-        }else if(txt_Lqty.getText().equals("")){
+        } */
+        else if(txt_Lqty.getText().equals("")){
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter dosage to add!");
         }else if(txt_cautionary.getText().equals("")){
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter cautionary to add!");
@@ -8472,7 +8488,8 @@ jScrollPane17.setViewportView(tbl_drugOList);
             cClassification.setSelectedItem("");
                 
             } catch (Exception e) {
-                System.out.println("insert pis mdc2" + e);
+                JOptionPane.showMessageDialog(btn_addmdc, "Duplicate Drugs Code!");
+                System.out.println("insert pis mdc2" + e); 
                 e.printStackTrace();
             }
         }
@@ -8663,6 +8680,15 @@ public void toExcel(JTable tbl_mdc, File file){
         
         fnCreateXLS(strSql,"Monthly_Dispensed_Drug.xls");
     }//GEN-LAST:event_btnMonthlyActionPerformed
+
+    private void btnCallPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCallPatientActionPerformed
+        // TODO add your handling code here:
+        String name = txt_patientName.getText();
+        String pmiNo = txt_pmiNo.getText();
+        String str_pdi = pmiNo + "|" + name + "|" 
+                + Session.getUser_name() + "|Pharmacy" ;
+        Func.callPatient(str_pdi);
+    }//GEN-LAST:event_btnCallPatientActionPerformed
    
     void fnCreateXLS(String strSQL , String fName)
     {
@@ -8736,6 +8762,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JDialog Spatient;
     private javax.swing.JPanel Spatient_panel;
     private javax.swing.JTextField arrival_date;
+    private javax.swing.JButton btnCallPatient;
     private javax.swing.JButton btnDaily;
     private javax.swing.JButton btnMonthly;
     private static javax.swing.JButton btnStatus;
