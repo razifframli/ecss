@@ -1773,6 +1773,11 @@ public class Pharmacy extends javax.swing.JFrame{
 
         order_no2.setBackground(new java.awt.Color(240, 240, 240));
         order_no2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        order_no2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                order_no2ActionPerformed(evt);
+            }
+        });
 
         jLabel43.setText("Order Date :");
 
@@ -4054,7 +4059,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 413, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 409, Short.MAX_VALUE)
                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4063,7 +4068,7 @@ public class Pharmacy extends javax.swing.JFrame{
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -7696,10 +7701,10 @@ jScrollPane17.setViewportView(tbl_drugOList);
         
         String pmiNo = tbl_patientInQueue.getValueAt(index_row, 0).toString();
         String name = tbl_patientInQueue.getValueAt(index_row, 1).toString();
-        String str_pdi = pmiNo + "|" + name + "|" 
-                + Session.getUser_name() + "|Pharmacy" ;
-        Func.callPatient(str_pdi);
-        
+//        String str_pdi = pmiNo + "|" + name + "|" 
+//                + Session.getUser_name() + "|Pharmacy" ;
+//        Func.callPatient(str_pdi);
+//        
         try {
             if(!tbl_patientInQueue.getValueAt(index_row, index_col).equals("")) {
                 tab_drugOrder.setSelectedIndex(1);
@@ -8689,6 +8694,10 @@ public void toExcel(JTable tbl_mdc, File file){
                 + Session.getUser_name() + "|Pharmacy" ;
         Func.callPatient(str_pdi);
     }//GEN-LAST:event_btnCallPatientActionPerformed
+
+    private void order_no2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_order_no2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_order_no2ActionPerformed
    
     void fnCreateXLS(String strSQL , String fName)
     {
