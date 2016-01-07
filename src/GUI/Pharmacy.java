@@ -762,12 +762,13 @@ public class Pharmacy extends javax.swing.JFrame{
         cInstruction = new javax.swing.JComboBox();
         lbl_instructionOList1 = new javax.swing.JLabel();
         lbl_cautionary = new javax.swing.JLabel();
-        txt_cautionary = new javax.swing.JTextField();
+        cLqtyT = new javax.swing.JComboBox();
+        jScrollPane24 = new javax.swing.JScrollPane();
+        txt_cautionary = new javax.swing.JTextArea();
         jLabel30 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        cClassification = new javax.swing.JComboBox();
         txt_expdate = new com.toedter.calendar.JDateChooser();
-        cLqtyT = new javax.swing.JComboBox();
+        cClassification = new javax.swing.JComboBox();
         pnl_import = new javax.swing.JPanel();
         lbl_browseFileConvert = new java.awt.Label();
         jPanel25 = new javax.swing.JPanel();
@@ -1399,7 +1400,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(437, Short.MAX_VALUE))
+                .addContainerGap(632, Short.MAX_VALUE))
         );
 
         tab_drugOrder.addTab("Patient Order List", pnl_patientList);
@@ -1994,7 +1995,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(295, Short.MAX_VALUE))
         );
 
         tab_drugOrder.addTab("Patient Drug Dispense", pnl_patientDrugOrder);
@@ -2662,7 +2663,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         tab_drugOrder.addTab(" Drug Order", pnl_prepareOrderList);
@@ -3020,7 +3021,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(pnl_atcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(506, Short.MAX_VALUE))
         );
 
         tpnl_manageDCode.addTab("ATC", pnl_atc);
@@ -3503,53 +3504,70 @@ public class Pharmacy extends javax.swing.JFrame{
 
         lbl_cautionary.setText("Cautionary :");
 
+        cLqtyT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "ml", "garg", "supp", "puff", " " }));
+
+        txt_cautionary.setColumns(20);
+        txt_cautionary.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        txt_cautionary.setLineWrap(true);
+        txt_cautionary.setRows(5);
+        txt_cautionary.setWrapStyleWord(true);
+        txt_cautionary.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jScrollPane24.setViewportView(txt_cautionary);
+
         jLabel30.setText("Expired Date :");
 
         jLabel33.setText("Classification :");
-
-        cClassification.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Antacid/ Anti Spasmodic", "Anti Diarrheal", "Anti Dyspepsia", "Anti- Gout Agents", "Anti- Obesity", "Anti-Ashmatic & Bronchodilator", "Antibiotic", "Antiemetic / Anti Vertigo", "Anti-fungal", "Antihelmintic", "Anti-Histamine", "Antiseptic", "Anti-viral", "Cough & Cold Preparations", "Creams & Ointment", "Drugs Used in Substance  Dependence ", "Eye/Ear Drop", "Haermorrhoids", "Injection", "IV Drips", "Laxatives", "Lozenges", "Mucolytics Agents", "Nebulizer", "Nose prep", "NSAIDs", "Oral prep", "Oral Steroids", "Others", "Peripheral vasodilators/  migraine drug", "Shampoo", "Urinary Preparation", "Vitamin & supplements" }));
-        cClassification.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txt_expdate.setDateFormatString("dd/MM/yyyy");
         txt_expdate.setMaxSelectableDate(new java.util.Date(253370739713000L));
         txt_expdate.setMinSelectableDate(new java.util.Date(-62135794687000L));
 
-        cLqtyT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "ml", "garg", "supp", "puff", " " }));
+        cClassification.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Antacid/ Anti Spasmodic", "Anti Diarrheal", "Anti Dyspepsia", "Anti- Gout Agents", "Anti- Obesity", "Anti-Ashmatic & Bronchodilator", "Antibiotic", "Antiemetic / Anti Vertigo", "Anti-fungal", "Antihelmintic", "Anti-Histamine", "Antiseptic", "Anti-viral", "Cough & Cold Preparations", "Creams & Ointment", "Drugs Used in Substance  Dependence ", "Eye/Ear Drop", "Haermorrhoids", "Injection", "IV Drips", "Laxatives", "Lozenges", "Mucolytics Agents", "Nebulizer", "Nose prep", "NSAIDs", "Oral prep", "Oral Steroids", "Others", "Peripheral vasodilators/  migraine drug", "Shampoo", "Urinary Preparation", "Vitamin & supplements" }));
+        cClassification.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel33)
-                    .addComponent(jLabel30)
-                    .addComponent(lbl_cautionary)
-                    .addComponent(lbl_instructionOList1)
-                    .addComponent(lbl_durationOList1)
-                    .addComponent(lbl_frequencyOList1)
-                    .addComponent(lbl_quantityOList1))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addComponent(cClassification, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel30))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cClassification, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                                .addComponent(txt_expdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(77, 77, 77))))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_cautionary)
+                            .addComponent(lbl_instructionOList1)
+                            .addComponent(lbl_durationOList1)
+                            .addComponent(lbl_frequencyOList1)
+                            .addComponent(lbl_quantityOList1))
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(txt_Lqty, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cLqtyT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel16Layout.createSequentialGroup()
+                                        .addComponent(txt_Lqty, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cLqtyT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel16Layout.createSequentialGroup()
+                                        .addComponent(cLduration, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(62, 62, 62)
+                                        .addComponent(cLdurationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cLfrequency, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cInstruction, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(92, 92, 92))
                             .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(cLduration, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(cLdurationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(cLfrequency, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cInstruction, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_expdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_cautionary, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(92, 92, 92))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane24)
+                                .addContainerGap())))))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3573,9 +3591,9 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(lbl_instructionOList1)
                     .addComponent(cInstruction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_cautionary)
-                    .addComponent(txt_cautionary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane24, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel30)
@@ -3584,7 +3602,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel33)
                     .addComponent(cClassification, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
@@ -3596,9 +3614,11 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(436, 436, 436))
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3628,7 +3648,7 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_mdcLayout.createSequentialGroup()
                         .addGap(59, 59, 59)
-                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 1148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(1042, Short.MAX_VALUE))
@@ -3791,7 +3811,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(lbl_browseFileConvert1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(571, Short.MAX_VALUE))
+                .addContainerGap(754, Short.MAX_VALUE))
         );
 
         tpnl_manageDCode.addTab("Import", pnl_import);
@@ -3952,7 +3972,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(609, Short.MAX_VALUE))
+                .addContainerGap(804, Short.MAX_VALUE))
         );
 
         tpnl_manageDCode.addTab("Add Supplier", jPanel13);
@@ -3999,7 +4019,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(btnDaily, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnYearly, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(795, Short.MAX_VALUE))
+                .addContainerGap(1000, Short.MAX_VALUE))
         );
 
         tpnl_manageDCode.addTab("Dispensed Report", jPanel2);
@@ -4059,7 +4079,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 409, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 403, Short.MAX_VALUE)
                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4068,7 +4088,7 @@ public class Pharmacy extends javax.swing.JFrame{
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -8927,6 +8947,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JScrollPane jScrollPane21;
     private javax.swing.JScrollPane jScrollPane22;
     private javax.swing.JScrollPane jScrollPane23;
+    private javax.swing.JScrollPane jScrollPane24;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -9045,7 +9066,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JTextField txt_bodOList;
     private javax.swing.JTextField txt_categoryCode;
     private javax.swing.JTextArea txt_caution;
-    private javax.swing.JTextField txt_cautionary;
+    private javax.swing.JTextArea txt_cautionary;
     private javax.swing.JTextField txt_costPrice;
     private javax.swing.JTextField txt_dadvisory_code;
     private javax.swing.JTextField txt_datc_code;

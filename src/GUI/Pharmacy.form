@@ -862,7 +862,7 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jScrollPane5" min="-2" pref="373" max="-2" attributes="0"/>
-                                  <EmptySpace pref="437" max="32767" attributes="0"/>
+                                  <EmptySpace pref="632" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1033,7 +1033,7 @@
                                   <Component id="jPanel36" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jPanel20" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="158" max="32767" attributes="0"/>
+                                  <EmptySpace pref="295" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1869,7 +1869,7 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jPanel21" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                                  <EmptySpace pref="74" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2963,7 +2963,7 @@
                                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                                       <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="365" max="32767" attributes="0"/>
+                                  <EmptySpace pref="506" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -3364,7 +3364,7 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                                          <Component id="jPanel18" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jPanel18" min="-2" pref="1148" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -3696,10 +3696,13 @@
                                       <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jPanel16" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jPanel16" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="436" max="-2" attributes="0"/>
+                                          </Group>
                                           <Component id="jPanel6" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="49" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -4372,40 +4375,55 @@
                                 <DimensionLayout dim="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel30" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_cautionary" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_instructionOList1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_durationOList1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_frequencyOList1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_quantityOList1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
-                                                  <Component id="cClassification" max="32767" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
                                                   <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Group type="102" attributes="0">
-                                                          <Component id="txt_Lqty" min="-2" pref="84" max="-2" attributes="1"/>
-                                                          <EmptySpace max="32767" attributes="0"/>
-                                                          <Component id="cLqtyT" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" attributes="0">
-                                                          <Component id="cLduration" min="-2" pref="42" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                                                          <Component id="cLdurationType" max="32767" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="cLfrequency" alignment="0" max="32767" attributes="1"/>
-                                                      <Component id="cInstruction" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="txt_expdate" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="txt_cautionary" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel30" alignment="1" min="-2" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="cClassification" alignment="0" max="32767" attributes="0"/>
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <Component id="txt_expdate" max="32767" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="lbl_cautionary" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_instructionOList1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_durationOList1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_frequencyOList1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_quantityOList1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" attributes="0">
+                                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="1" attributes="0">
+                                                              <Group type="102" attributes="0">
+                                                                  <Component id="txt_Lqty" min="-2" pref="84" max="-2" attributes="1"/>
+                                                                  <EmptySpace max="32767" attributes="0"/>
+                                                                  <Component id="cLqtyT" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
+                                                              <Group type="102" attributes="0">
+                                                                  <Component id="cLduration" min="-2" pref="42" max="-2" attributes="0"/>
+                                                                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                                                                  <Component id="cLdurationType" max="32767" attributes="0"/>
+                                                              </Group>
+                                                              <Component id="cLfrequency" alignment="0" max="32767" attributes="1"/>
+                                                              <Component id="cInstruction" alignment="0" max="32767" attributes="0"/>
+                                                          </Group>
+                                                          <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                          <Component id="jScrollPane24" max="32767" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -4437,9 +4455,9 @@
                                               <Component id="cInstruction" alignment="2" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="2" attributes="0">
-                                              <Component id="lbl_cautionary" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txt_cautionary" alignment="2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lbl_cautionary" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jScrollPane24" min="-2" pref="80" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="2" attributes="0">
@@ -4451,7 +4469,7 @@
                                               <Component id="jLabel33" alignment="2" min="-2" max="-2" attributes="0"/>
                                               <Component id="cClassification" alignment="2" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace pref="32" max="32767" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                 </DimensionLayout>
@@ -4568,8 +4586,45 @@
                                     <Property name="text" type="java.lang.String" value="Cautionary :"/>
                                   </Properties>
                                 </Component>
-                                <Component class="javax.swing.JTextField" name="txt_cautionary">
+                                <Component class="javax.swing.JComboBox" name="cLqtyT">
+                                  <Properties>
+                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                      <StringArray count="6">
+                                        <StringItem index="0" value="-"/>
+                                        <StringItem index="1" value="ml"/>
+                                        <StringItem index="2" value="garg"/>
+                                        <StringItem index="3" value="supp"/>
+                                        <StringItem index="4" value="puff"/>
+                                        <StringItem index="5" value=" "/>
+                                      </StringArray>
+                                    </Property>
+                                  </Properties>
                                 </Component>
+                                <Container class="javax.swing.JScrollPane" name="jScrollPane24">
+                                  <AuxValues>
+                                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                                  </AuxValues>
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                  <SubComponents>
+                                    <Component class="javax.swing.JTextArea" name="txt_cautionary">
+                                      <Properties>
+                                        <Property name="columns" type="int" value="20"/>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Tahoma" size="11" style="0"/>
+                                        </Property>
+                                        <Property name="lineWrap" type="boolean" value="true"/>
+                                        <Property name="rows" type="int" value="5"/>
+                                        <Property name="wrapStyleWord" type="boolean" value="true"/>
+                                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                                            <EtchetBorder/>
+                                          </Border>
+                                        </Property>
+                                      </Properties>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
                                 <Component class="javax.swing.JLabel" name="jLabel30">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Expired Date :"/>
@@ -4579,6 +4634,16 @@
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Classification :"/>
                                   </Properties>
+                                </Component>
+                                <Component class="com.toedter.calendar.JDateChooser" name="txt_expdate">
+                                  <Properties>
+                                    <Property name="dateFormatString" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="&quot;dd/MM/yyyy&quot;" type="code"/>
+                                    </Property>
+                                  </Properties>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txt_expdate.setMaxSelectableDate(new java.util.Date(253370739713000L));&#xa;txt_expdate.setMinSelectableDate(new java.util.Date(-62135794687000L));"/>
+                                  </AuxValues>
                                 </Component>
                                 <Component class="javax.swing.JComboBox" name="cClassification">
                                   <Properties>
@@ -4627,30 +4692,6 @@
                                     </Property>
                                   </Properties>
                                 </Component>
-                                <Component class="com.toedter.calendar.JDateChooser" name="txt_expdate">
-                                  <Properties>
-                                    <Property name="dateFormatString" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                                      <Connection code="&quot;dd/MM/yyyy&quot;" type="code"/>
-                                    </Property>
-                                  </Properties>
-                                  <AuxValues>
-                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txt_expdate.setMaxSelectableDate(new java.util.Date(253370739713000L));&#xa;txt_expdate.setMinSelectableDate(new java.util.Date(-62135794687000L));"/>
-                                  </AuxValues>
-                                </Component>
-                                <Component class="javax.swing.JComboBox" name="cLqtyT">
-                                  <Properties>
-                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="6">
-                                        <StringItem index="0" value="-"/>
-                                        <StringItem index="1" value="ml"/>
-                                        <StringItem index="2" value="garg"/>
-                                        <StringItem index="3" value="supp"/>
-                                        <StringItem index="4" value="puff"/>
-                                        <StringItem index="5" value=" "/>
-                                      </StringArray>
-                                    </Property>
-                                  </Properties>
-                                </Component>
                               </SubComponents>
                             </Container>
                           </SubComponents>
@@ -4691,7 +4732,7 @@
                                   <Component id="lbl_browseFileConvert1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                   <Component id="jPanel28" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace pref="571" max="32767" attributes="0"/>
+                                  <EmptySpace pref="754" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -4896,7 +4937,7 @@
                                       <Component id="jPanel26" max="32767" attributes="0"/>
                                       <Component id="jPanel3" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="609" max="32767" attributes="0"/>
+                                  <EmptySpace pref="804" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -5151,7 +5192,7 @@
                                       <Component id="btnMonthly" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                                       <Component id="btnYearly" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="795" max="32767" attributes="0"/>
+                                  <EmptySpace pref="1000" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -5216,7 +5257,7 @@
                   <Component id="jToolBar3" min="-2" pref="176" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jToolBar2" min="-2" pref="108" max="-2" attributes="0"/>
-                  <EmptySpace pref="409" max="32767" attributes="0"/>
+                  <EmptySpace pref="403" max="32767" attributes="0"/>
                   <Component id="lblStatus" min="-2" pref="53" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnStatus" min="-2" pref="31" max="-2" attributes="0"/>
@@ -5227,7 +5268,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="btnStatus" alignment="1" min="-2" pref="25" max="-2" attributes="1"/>
