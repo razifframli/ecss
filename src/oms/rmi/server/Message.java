@@ -144,7 +144,7 @@ public interface Message extends Remote {
 
     String insertDTO(String PMI, String dataDTO) throws RemoteException;
     
-    ArrayList<ArrayList<String>> getOrderMasterAll(int stat, String pmi_no, String order_no) throws RemoteException;
+    ArrayList<ArrayList<String>> getOrderMasterAll(int stat, String pmi_no, String order_no, String hfc_code) throws RemoteException;
     
     void insertPatientBiodata(String [] biodata) throws RemoteException;
     

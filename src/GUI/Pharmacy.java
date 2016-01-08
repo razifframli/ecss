@@ -335,7 +335,7 @@ public class Pharmacy extends javax.swing.JFrame{
 //                Message impl = (Message) myRegistry.lookup("myMessage");
                 // call server's method	
                 
-                om = DBConnection.getImpl().getOrderMasterAll(stat, pmi_no, order_no);
+                om = DBConnection.getImpl().getOrderMasterAll(stat, pmi_no, order_no, Session.getHfc_code());
                 S.oln("Get Order Master");
                 showOnline();
                 for (int i = 0; i < 30 && i < om.size(); i++) {
