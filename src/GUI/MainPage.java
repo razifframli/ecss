@@ -89,7 +89,8 @@ public class MainPage extends javax.swing.JFrame {
     private void setRole() {
         hideAllBtn();
         try {
-            String role = Session.getData_user().get(19);
+            String role = Session.getData_user().get(20); // role code
+            System.out.println("role:|"+role+"|");
             if (role.equals("SYSTEM ADMINISTRATOR")) {
 //                btnPAS.setEnabled(true);
 //                btn_CodeMaintenance.setEnabled(true);
@@ -159,6 +160,7 @@ public class MainPage extends javax.swing.JFrame {
         btn_logOut = new javax.swing.JButton();
         btn_report = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btn_CodeMaintenance1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Clinical Support System");
@@ -274,6 +276,14 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
+        btn_CodeMaintenance1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/12.png"))); // NOI18N
+        btn_CodeMaintenance1.setToolTipText("Procedure Order System");
+        btn_CodeMaintenance1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CodeMaintenance1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout back1Layout = new javax.swing.GroupLayout(back1);
         back1.setLayout(back1Layout);
         back1Layout.setHorizontalGroup(
@@ -306,7 +316,9 @@ public class MainPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_adt, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_CodeMaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_CodeMaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_CodeMaintenance1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         back1Layout.setVerticalGroup(
@@ -320,12 +332,14 @@ public class MainPage extends javax.swing.JFrame {
                     .addComponent(btn_snomed, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(back1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(back1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_pms, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_consultation, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_pharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_report, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(back1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(back1Layout.createSequentialGroup()
-                        .addGroup(back1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_pms, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_consultation, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_pharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(back1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_datamanagement, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_adt, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,7 +348,7 @@ public class MainPage extends javax.swing.JFrame {
                         .addGroup(back1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_logOut)
                             .addComponent(jButton1)))
-                    .addComponent(btn_report, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_CodeMaintenance1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48))
         );
 
@@ -465,6 +479,12 @@ public class MainPage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btn_CodeMaintenance1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CodeMaintenance1ActionPerformed
+        // TODO add your handling code here:
+        new ProcedurePage().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_CodeMaintenance1ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -481,6 +501,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JButton btnPAS;
     private javax.swing.JButton btnPatientAppointment;
     private javax.swing.JButton btn_CodeMaintenance;
+    private javax.swing.JButton btn_CodeMaintenance1;
     private javax.swing.JButton btn_adt;
     private javax.swing.JButton btn_consultation;
     private javax.swing.JButton btn_datamanagement;

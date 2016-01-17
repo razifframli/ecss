@@ -4,8 +4,10 @@
  */
 package Bean;
 
+import GUI.Login;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
@@ -19,12 +21,15 @@ public class ConnectCSS {
     private static String user;
     private static String pass;
     private static String url;
+    private static String url2;
     private static String on;
     
     private static String hostCallingSystem;
     private static int portCallingSystem;
     
     private static int portRMI;
+    
+    private static String statusCallingSystem;
     
     public static void online() {
         try {
@@ -45,7 +50,19 @@ public class ConnectCSS {
         db = "";
         user = "SA";
         pass = "";
-        url = "jdbc:hsqldb:file:db/cis;shutdown=true";
+        File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        String par = fi.getParent()+"/";
+//        String par = "";
+        url = "jdbc:hsqldb:file:"+par+"db/cis;shutdown=true";
+        on = "false";
+    }
+    
+    public static void offline2() {
+        ip = "127.0.0.1";
+        db = "";
+        user = "SA";
+        pass = "";
+        url2 = "jdbc:hsqldb:file:db_per/cis_per;shutdown=true";
         on = "false";
     }
 
@@ -154,11 +171,15 @@ public class ConnectCSS {
     }
     
     public static String[] getIpCall() {
-        String data[] = new String[3];
+        File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        String par = fi.getParent()+"/";
+//        String par = "";
+//        System.out.println("pa:"+fi.getParent());
+        String data[] = new String[4];
         try {
             // Open the file that is the first 
             // command line parameter
-            FileInputStream fstream = new FileInputStream("ipcall");
+            FileInputStream fstream = new FileInputStream(par+"ipcall");
             // Get the object of DataInputStream
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -180,6 +201,10 @@ public class ConnectCSS {
                 if (pecah[0].equals("ipserver")) {
                     data[2] = pecah[1];
                 }
+                // Get Calling System Status
+                if (pecah[0].equals("callsys")) {
+                    data[3] = pecah[1];
+                }
             }
             //Close the input stream
             in.close();
@@ -192,5 +217,27 @@ public class ConnectCSS {
     public static int getPortRMI() {
         portRMI = 1099;
         return portRMI;
+    }
+
+    public static String getStatusCallingSystem() {
+        try {
+            statusCallingSystem = getIpCall()[3];
+        } catch (Exception e) {
+            statusCallingSystem = "off";
+            e.printStackTrace();
+        }
+        return statusCallingSystem;
+    }
+
+    public static void setStatusCallingSystem(String aStatusCallingSystem) {
+        statusCallingSystem = aStatusCallingSystem;
+    }
+
+    public static String getUrl2() {
+        return url2;
+    }
+
+    public static void setUrl2(String aUrl2) {
+        url2 = aUrl2;
     }
 }

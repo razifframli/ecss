@@ -11,6 +11,8 @@ import Helper.J;
 import Helper.S;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.jms.JMSException;
 import library.Q;
 
@@ -47,10 +49,16 @@ public class EHR_Central {
 
     //Method for storing formatted message into Journal File
     public void insertJournal(int status, String header, String patientInfo, 
-            String msgs[], String PMI)
-            throws ClassNotFoundException, SQLException {
+            String msgs[], String PMI, String date1)
+            throws ClassNotFoundException, SQLException, ParseException {
         System.out.println("......Start insertJournal.......");
-        Date date = new Date(new java.util.Date().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new java.sql.Date(System.currentTimeMillis());
+        try {
+            date = Date.valueOf(date1);
+        } catch (Exception eee) {
+            date = new java.sql.Date(System.currentTimeMillis());
+        }
         String data = header + patientInfo;
         for(int i = 0; i < msgs.length; i++) {
             if(msgs[i].length() > 0) {
@@ -110,16 +118,24 @@ public class EHR_Central {
     //Method for storing formatted message into Central database
     public void insertCentral(int status, String header, String patientInfo, 
             String msgs[], 
-            String PMI) throws ClassNotFoundException, SQLException {
+            String PMI,
+            String episodeDate) throws ClassNotFoundException, SQLException {
 
-        Date date = new Date(new java.util.Date().getTime());
         String data = header + patientInfo;
         String dataDTO = data;
+        String dataPOS = data;
+        boolean isDTO = false;
+        boolean isPOS = false;
         for(int i = 0; i < msgs.length; i++) {
             if(msgs[i].length() > 0) {
                 data += msgs[i];
                 if(msgs[i].split("\\|")[0].contains("DTO")) {
+                    isDTO = true;
                     dataDTO += msgs[i];
+                }
+                if(msgs[i].split("\\|")[0].contains("POS")) {
+                    isPOS = true;
+                    dataPOS += msgs[i];
                 }
             }
         }
@@ -152,9 +168,16 @@ public class EHR_Central {
             //impl.sayHello("..Friza ");
 
             //String IC = "891031075331"; //for testing purpose
-            String s = DBConnection.getImpl().insertEHRCentral(status, PMI, data); //Insert CIS
-            String s2 = DBConnection.getImpl().insertDTO(PMI, dataDTO);
-            System.out.println(s);
+            String ehr_central = DBConnection.getImpl().insertEHRCentral(status, PMI, data, episodeDate); //Insert CIS
+            if (status == 1) {
+                if (isDTO) {
+                    String dto = DBConnection.getImpl().insertDTO(PMI, dataDTO);
+                }
+            }
+            if (isPOS) {
+                String pos = DBConnection.getImpl().insertPOS(PMI, dataPOS);
+            }
+            System.out.println(ehr_central);
 
             System.out.println(".....Message Sent....");
         } catch (Exception e) {
@@ -165,7 +188,8 @@ public class EHR_Central {
     
     //Method for storing formatted message into Central database
     public boolean insertCentralSync(int status, String data, 
-            String PMI) throws ClassNotFoundException, SQLException {
+            String PMI,
+            String episodeDate) throws ClassNotFoundException, SQLException {
         
         boolean stat = false;
 
@@ -197,7 +221,7 @@ public class EHR_Central {
             //impl.sayHello("..Friza ");
 
             //String IC = "891031075331"; //for testing purpose
-            String s = DBConnection.getImpl().insertEHRCentral(status, PMI, data); //Insert CIS
+            String s = DBConnection.getImpl().insertEHRCentral(status, PMI, data, episodeDate); //Insert CIS
             //String s2 = impl.insertDTO(PMI, dataDTO);
             System.out.println(s);
 

@@ -125,9 +125,9 @@ public class TextFileReader {
                         //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
                         //java.util.Date parsedDate = dateFormat.parse(date);
                         //java.sql.Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-                        this.consultation.tbl_vts.getModel().setValueAt(height, vts, 0);
-                        this.consultation.tbl_vts.getModel().setValueAt(weight, vts, 1);
-                        this.consultation.tbl_vts.getModel().setValueAt(pulse, vts, 2);
+//                        this.consultation.tbl_vts.getModel().setValueAt(height, vts, 0);
+//                        this.consultation.tbl_vts.getModel().setValueAt(weight, vts, 1);
+//                        this.consultation.tbl_vts.getModel().setValueAt(pulse, vts, 2);
 
                         vts++;
                     }

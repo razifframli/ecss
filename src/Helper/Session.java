@@ -31,6 +31,7 @@ public class Session {
     private static String password;
     private static boolean logged_in;
     private static Connection con_x;
+    private static Connection con_x2;
     private static boolean prev_stat;
     private static boolean curr_stat;
     private static int num_open_db = 1;
@@ -57,6 +58,7 @@ public class Session {
         Config.setDbUrlLocal(listOffline.get(4));
         Config.setUserLocal(listOffline.get(2));
         Config.setPassLocal(listOffline.get(3));
+        Config.setDbUrlLocal2(listOffline.get(5));
         
 //        ConnectCSS.online();
 //        Config.setIpServer(ConnectCSS.getIp());
@@ -133,6 +135,26 @@ public class Session {
         con_x = DBConnection.createConnection();
         Login.lf.dispose();
     }
+    
+    public static Connection getCon_x2(int time) {
+        //S.oln("Prev Stat: "+Session.getPrev_stat());
+        //Session.setCurr_stat(NetworkStatus.DoPing(Config.getIpServer(), time));
+        Session.setCurr_stat(Session.getPrev_stat());
+        //S.oln("Curr Stat: "+Session.getCurr_stat());
+        if(Session.getCurr_stat() != Session.getPrev_stat()) {
+            Session.lineMessage();
+            Session.setPrev_stat(Session.getCurr_stat());
+            Session.setCon_x2();
+        }
+        return con_x2;
+    } 
+    public static void setCon_x2() {
+        
+        
+        con_x2 = DBConnection.createConnection();
+        Login.lf.dispose();
+    }
+    
     public static boolean getPrev_stat() {
         return prev_stat;
     }

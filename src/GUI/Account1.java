@@ -43,9 +43,10 @@ public class Account1 extends javax.swing.JFrame {
         txt_email.setText(d.get(13));
         txt_startdate.setText(Func.sqltodate(d.get(15)));
         txt_enddate.setText(Func.sqltodate(d.get(16)));
-        txt_role.setText(d.get(19));
-        txt_discipline.setText(d.get(20));
-        txt_subdiscipline.setText(d.get(21));
+        txt_roomno.setText(d.get(17));
+        txt_role.setText(d.get(20));
+        txt_discipline.setText(d.get(21));
+        txt_subdiscipline.setText(d.get(22));
     }
 
     /**
@@ -62,6 +63,7 @@ public class Account1 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -97,6 +99,8 @@ public class Account1 extends javax.swing.JFrame {
         txt_role = new javax.swing.JLabel();
         txt_discipline = new javax.swing.JLabel();
         txt_subdiscipline = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txt_roomno = new javax.swing.JLabel();
 
         jLabel19.setText("Home Phone No. : ");
 
@@ -126,6 +130,13 @@ public class Account1 extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Change Room No.");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -134,6 +145,8 @@ public class Account1 extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -142,7 +155,8 @@ public class Account1 extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User Profile", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
@@ -215,6 +229,10 @@ public class Account1 extends javax.swing.JFrame {
 
         txt_subdiscipline.setText("jLabel10");
 
+        jLabel10.setText("Room No. :");
+
+        txt_roomno.setText("jLabel10");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -257,7 +275,10 @@ public class Account1 extends javax.swing.JFrame {
                                 .addComponent(txt_icno, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel27))
-                            .addComponent(txt_homephone, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txt_homephone, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel10))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -282,7 +303,8 @@ public class Account1 extends javax.swing.JFrame {
                                     .addComponent(txt_enddate, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_role, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_discipline, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_subdiscipline, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txt_subdiscipline, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_roomno, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -339,7 +361,9 @@ public class Account1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txt_homephone))
+                    .addComponent(txt_homephone)
+                    .addComponent(jLabel10)
+                    .addComponent(txt_roomno))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -382,6 +406,11 @@ public class Account1 extends javax.swing.JFrame {
         changePassword1.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new ChangeRoomNo1(txt_roomno.getText()).setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -420,7 +449,9 @@ public class Account1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -455,6 +486,7 @@ public class Account1 extends javax.swing.JFrame {
     private javax.swing.JLabel txt_officephone;
     public static javax.swing.JLabel txt_pwd;
     private javax.swing.JLabel txt_role;
+    public static javax.swing.JLabel txt_roomno;
     private javax.swing.JLabel txt_startdate;
     private javax.swing.JLabel txt_subdiscipline;
     private javax.swing.JLabel txt_userid;

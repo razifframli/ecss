@@ -76,16 +76,16 @@ public class Queue {
         return stat;
     }
        
-    public Vector getQueueNameList(String name) throws Exception {
+    public Vector getQueueNameList(String name, int tanda) throws Exception {
         
         Vector<Vector<String>> QueueVector = new Vector<Vector<String>>();
         
 //        LongRunProcess.check_network2();
 //        if (Session.getPrev_stat()) {
             //Read BLOB from EHR_Central
-            System.err.println();
-            System.err.println("Server Online");
-            System.out.println("Start invoke remote server");
+            //System.err.println();
+            //System.err.println("Server Online");
+            //System.out.println("Start invoke remote server");
             try {
                 // fire to server port 1099
 //                ArrayList<String> listOnline = Func.readXML("online");
@@ -95,9 +95,9 @@ public class Queue {
 //                Message impl = (Message) myRegistry.lookup("myMessage");
                 // call server's method	
 
-                QueueVector = DBConnection.getImpl().getQueueNameList(name, Session.getHfc_code());
+                QueueVector = DBConnection.getImpl().getQueueNameList(name, Session.getHfc_code(), tanda);
 
-                System.out.println(".....Message Sent....");
+                //System.out.println(".....Message Sent....");
             } catch (Exception e) {
                 //offline
                 
@@ -105,7 +105,7 @@ public class Queue {
                         + "STATUS,EPISODE_DATE FROM PMS_EPISODE "
                         + "WHERE NAME LIKE upper(?) "
                         + "AND HEALTH_FACILITY_CODE = ? "
-                        + "AND STATUS NOT LIKE 'Consult' "
+                        //+ "AND STATUS NOT LIKE 'Consult' "
                         + "AND STATUS NOT LIKE 'Discharge' "
                         + "AND STATUS NOT LIKE 'Missing' "
                         + "ORDER BY EPISODE_TIME ASC";
@@ -124,6 +124,10 @@ public class Queue {
                         queue.add(rs.getString(4));//room
                         queue.add(rs.getString(5));//doctor
                         queue.add(rs.getString(6));
+                        
+                        if (tanda == 2) {
+                            queue.add("DELETE");
+                        } 
 
                         QueueVector.add(queue);
                     }
@@ -285,7 +289,7 @@ public class Queue {
 
     }
     
-    public void updateStatusEpisode(String PMINumber, String TimeEpisode, String status) {
+    public void updateStatusEpisode(String PMINumber, String TimeEpisode, String status, String referer) {
         
 //        LongRunProcess.check_network2();
 //        if (Session.getPrev_stat()) {
@@ -302,7 +306,7 @@ public class Queue {
 //                Message impl = (Message) myRegistry.lookup("myMessage");
                 // call server's method	
                 
-                DBConnection.getImpl().updateStatEpisode(PMINumber, TimeEpisode, status, Session.getUser_name());
+                DBConnection.getImpl().updateStatEpisode(PMINumber, TimeEpisode, status, Session.getUser_name(), referer);
 
                 System.out.println(".....Message Sent....");
             } catch (Exception e) {
@@ -312,7 +316,7 @@ public class Queue {
                     //offline
                     S.oln("-- Offline --");
                     String plussql = "";
-                    if (status.equals("Consult")) {
+                    if (status.equals("Consult") || status.equals("Hold") || status.equals("Second Opinion")) {
                         plussql = ", DOCTOR=?";
                     }
                     PreparedStatement statement2 = Session.getCon_x(100).prepareStatement("UPDATE PMS_EPISODE "
@@ -321,8 +325,12 @@ public class Queue {
                             + "WHERE PMI_NO=? "
                             + "AND EPISODE_TIME=?");
                     statement2.setString(1, status);
-                    if (status.equals("Consult")) {
-                        statement2.setString(2, Session.getUser_name());
+                    if (status.equals("Consult") || status.equals("Hold") || status.equals("Second Opinion")) {
+                        String doctor = Session.getUser_name();
+                        if (status.equals("Second Opinion")) {
+                            doctor = referer;
+                        }
+                        statement2.setString(2, doctor);
                         statement2.setString(3, PMINumber);
                         statement2.setString(4, TimeEpisode);
                     } else {

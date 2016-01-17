@@ -6,17 +6,21 @@
 package DBConnection;
 
 import Bean.CIS_Procedure;
+import Bean.ConnectCSS;
 import Bean.DrugOrderBean;
 import Bean.GCS_Month;
 import Bean.GCS_Response;
 import Bean.GCS_Scale;
+import Bean.JournalFileBean;
 import Bean.PatientBean;
 import Bean.PhysicalExamBean;
 import Bean.StaffBean;
+import GUI.Login;
 import Helper.J;
 import Helper.S;
 import Helper.Session;
 import config.Config;
+import java.io.File;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -28,6 +32,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -44,7 +49,11 @@ import oms.rmi.server.Message;
  */
 public class DBConnection {
 
-    private static String dbURL = "jdbc:hsqldb:file:db/cis;shutdown=true";
+    static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+    static String par = fi.getParent()+"/";
+//    static String par = "";
+    private static String dbURL = "jdbc:hsqldb:file:"+par+"db/cis;shutdown=true";
+    private static String dbURL2 = "jdbc:hsqldb:file:"+par+"db_per/cis_per;shutdown=true";
     //private static String dbURL = Config.getDbUrlLocal(); 
     //  /dist/lib/userdata
     private static Connection conn = createConnection();
@@ -92,6 +101,7 @@ public class DBConnection {
 //    private static String oS;//full partial
     
     private static Message impl;
+    private static Message implCalling;
     
     public static void startRMI()
     {
@@ -106,6 +116,12 @@ public class DBConnection {
             //Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
             //Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            Registry myRegistry = LocateRegistry.getRegistry(ConnectCSS.getHostCallingSystem(), ConnectCSS.getPortCallingSystem());
+            implCalling = (Message) myRegistry.lookup("myCalling");
+        } catch (Exception e) {
         }
     }
     public static Message getImpl()
@@ -127,6 +143,23 @@ public class DBConnection {
             }
         }
         return impl;
+    }
+    public static Message getImplCalling()
+    {
+        try {
+            implCalling.sayHello("get rmi");
+        } catch (Exception e) {
+            try {
+                // fire to server port 1099
+                Registry myRegistry = LocateRegistry.getRegistry(ConnectCSS.getHostCallingSystem(), ConnectCSS.getPortCallingSystem());
+                implCalling = (Message) myRegistry.lookup("myCalling");
+            } catch (RemoteException ex) {
+                //Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NotBoundException ex) {
+                //Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return implCalling;
     }
 
     public static Connection getConnInstance()
@@ -186,8 +219,15 @@ public class DBConnection {
         S.oln("Offline DB");
         return DriverManager.getConnection(Config.getDbUrlLocal(), Config.getUserLocal(), Config.getPassLocal());
     }
-
-    //friza
+    
+    public static Connection offline2() throws ClassNotFoundException, SQLException {
+        System.out.println(".......Type of database : Local");
+        System.out.println(".......Path of userdata :" + dbURL2);
+        System.out.println(".......Username: SA, Password: - ");
+        Class.forName("org.hsqldb.jdbc.JDBCDriver");
+        S.oln("Offline DB");
+        return DriverManager.getConnection(Config.getDbUrlLocal(), Config.getUserLocal(), Config.getPassLocal());
+    }
     
     public static void shutdown() throws SQLException {
 
@@ -363,8 +403,8 @@ public class DBConnection {
     public static String getProductNameDrug(String ud_mdc_code) {
         String productName = "";
         try {
-            String sql = "SELECT DRUG_PRODUCT_NAME "
-                    + "FROM PIS_MDC "
+            String sql = "SELECT * "
+                    + "FROM PIS_MDC2 "
                     + "WHERE UD_MDC_CODE = ? ";
             //prepare the sql query and execute it
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
@@ -375,7 +415,8 @@ public class DBConnection {
             if (result.next()) {
                 //read data get from database to all fields
 
-                productName = result.getString("DRUG_PRODUCT_NAME");
+//                productName = result.getString("DRUG_PRODUCT_NAME");
+                productName = result.getString("D_TRADE_NAME");
 
             }
             //clean the results and data
@@ -500,22 +541,22 @@ public class DBConnection {
             //* * * * * * * * * * * * * * * * * * * * * * * * * * * 
                 try {
 
-                    String sql2 = "SELECT STOCK_QTY "
-                            + "FROM PIS_MDC "
+                    String sql2 = "SELECT * "
+                            + "FROM PIS_MDC2 "
                             + "where UD_MDC_Code = ?";
                     PreparedStatement ps3 = Session.getCon_x(1000).prepareStatement(sql2);
                     ps3.setString(1, drugCode);
                     ResultSet rs2 = ps3.executeQuery();
                     while (rs2.next()) {
-                        drugQty = rs2.getInt("STOCK_QTY");
+                        drugQty = rs2.getInt("D_STOCK_QTY");
                         drugQty -= (old_qty_dispensed);
                         S.oln("show data"+drugQty);   
                     }
                         
 
                         try {
-                            String sql3 = "UPDATE PIS_MDC "
-                                    + "SET STOCK_QTY = ? "
+                            String sql3 = "UPDATE PIS_MDC2 "
+                                    + "SET D_STOCK_QTY = ? "
                                     + "where UD_MDC_CODE = ?";
                             PreparedStatement ps4 = Session.getCon_x(1000).prepareStatement(sql3);
                             ps4.setInt(1, drugQty);
@@ -558,22 +599,22 @@ public class DBConnection {
         //* * * * * * * * * * * * * * * * * * * * * * * * * * * 
               try {
 
-                  String sql2 = "SELECT STOCK_QTY "
-                          + "FROM PIS_MDC "
+                  String sql2 = "SELECT * "
+                          + "FROM PIS_MDC2 "
                           + "where UD_MDC_Code = ?";
                   PreparedStatement ps3 = Session.getCon_x(1000).prepareStatement(sql2);
                   ps3.setString(1, drugCode);
                   ResultSet rs2 = ps3.executeQuery();
                   while (rs2.next()) {
-                      drugQty = rs2.getInt("STOCK_QTY");
+                      drugQty = rs2.getInt("D_STOCK_QTY");
                       drugQty -= (old_qty_dispensed);
                       S.oln("show data" + drugQty);
                   }
 
 
                   try {
-                      String sql3 = "UPDATE PIS_MDC "
-                              + "SET STOCK_QTY = ? "
+                      String sql3 = "UPDATE PIS_MDC2 "
+                              + "SET D_STOCK_QTY = ? "
                               + "where UD_MDC_CODE = ?";
                       PreparedStatement ps4 = Session.getCon_x(1000).prepareStatement(sql3);
                       ps4.setInt(1, drugQty);
@@ -1053,8 +1094,8 @@ public class DBConnection {
                //get data from table PIS_MDC
                try
                {
-                    String sql1="SELECT Drug_Product_Name, Def_Route_Code "
-                            + "FROM PIS_MDC "
+                    String sql1="SELECT * "
+                            + "FROM PIS_MDC2 "
                             + "WHERE UD_MDC_Code = ?";
 
                     //prepare the sql query and execute it
@@ -1065,8 +1106,10 @@ public class DBConnection {
                     while(result1.next())
                     {
                        //read data get from database to all fields
-                       productName = result1.getString("Drug_Product_Name");
-                       route = result1.getString("Def_Route_Code");
+//                       productName = result1.getString("Drug_Product_Name");
+//                       route = result1.getString("Def_Route_Code");
+                       productName = result1.getString("D_TRADE_NAME");
+                       route = result1.getString("D_ROUTE_CODE");
                     }
                 }catch(Exception ex){
                     System.out.println("dbc 1 "+ex.getMessage());
@@ -1076,7 +1119,7 @@ public class DBConnection {
                try
                {
                     //String sql1="SELECT MDC_Stock_Qty FROM PIS_MDC_PHARMACY WHERE UD_MDC_Code = ?";
-                    String sql1="SELECT STOCK_QTY FROM PIS_MDC WHERE UD_MDC_Code = ?";//11012013
+                    String sql1="SELECT * FROM PIS_MDC2 WHERE UD_MDC_Code = ?";//11012013
 
                     //prepare the sql query and execute it
                     PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
@@ -1086,7 +1129,7 @@ public class DBConnection {
                     while(result1.next())
                     {
                        //read data get from database to all fields
-                       stockQty1 = result1.getInt("STOCK_QTY");
+                       stockQty1 = result1.getInt("D_STOCK_QTY");
 
                        if(stockQty1 != 0)
                        {
@@ -1186,11 +1229,13 @@ public class DBConnection {
 //                    totalQty = frequency1 * qtyPerTime1 * duration1;
                     totalQty1 = Double.toString(totalQty);
                     
+                    String generic_name = "";
+                    
                     try {
 //                        String sql1 = "SELECT Drug_Product_Name, Def_Route_Code "
 //                                + "FROM PIS_MDC "
 //                                + "WHERE UD_MDC_Code = ?";
-                        String sql1 = "SELECT D_TRADE_NAME, D_ROUTE_CODE "
+                        String sql1 = "SELECT * "
                                 + "FROM PIS_MDC2 "
                                 + "WHERE UD_MDC_CODE = ? ";
 
@@ -1199,11 +1244,15 @@ public class DBConnection {
                         ps1.setString(1, mdcCode);
                         ResultSet result1 = ps1.executeQuery();
 
-                        while (result1.next()) {
+                        if (result1.next()) {
                             //read data get from database to all fields
-                            productName = result1.getString("Drug_Product_Name");
-                            route = result1.getString("Def_Route_Code");
-                            stockQty1 = result1.getInt("STOCK_QTY");
+//                            productName = result1.getString("Drug_Product_Name");
+//                            route = result1.getString("Def_Route_Code");
+//                            stockQty1 = result1.getInt("STOCK_QTY");
+                            productName = result1.getString("D_TRADE_NAME");
+                            route = result1.getString("D_ROUTE_CODE");
+                            stockQty1 = result1.getInt("D_STOCK_QTY");
+                            generic_name = result1.getString("D_GNR_NAME");
 
                             if (stockQty1 != 0) {
                                 stockQty = "Available";
@@ -1231,6 +1280,8 @@ public class DBConnection {
                     d.add(orderStatus); //12
                     d.add(stockQty1+""); //13
                     d.add(stockQty+""); //14
+                    
+                    d.add(generic_name); //15
                     
                     data.add(d);
                 }
@@ -1322,8 +1373,8 @@ public class DBConnection {
 
                 //get data from table PIS_MDC
                 try {
-                    String sql1 = "SELECT Drug_Product_Name, Def_Route_Code "
-                            + "FROM PIS_MDC "
+                    String sql1 = "SELECT * "
+                            + "FROM PIS_MDC2 "
                             + "WHERE UD_MDC_Code = ?";
 
                     //prepare the sql query and execute it
@@ -1333,8 +1384,10 @@ public class DBConnection {
 
                     while (result1.next()) {
                         //read data get from database to all fields
-                        productName = result1.getString("Drug_Product_Name");
-                        route = result1.getString("Def_Route_Code");
+//                        productName = result1.getString("Drug_Product_Name");
+//                        route = result1.getString("Def_Route_Code");
+                        productName = result1.getString("D_TRADE_NAME");
+                        route = result1.getString("D_ROUTE_CODE");
                     }
                 } catch (Exception ex) {
                     System.out.println("dbc 1 " + ex.getMessage());
@@ -1343,7 +1396,7 @@ public class DBConnection {
                 //get data from table PMS_MDC_PHARMACY
                 try {
                     //String sql1="SELECT MDC_Stock_Qty FROM PIS_MDC_PHARMACY WHERE UD_MDC_Code = ?";
-                    String sql1 = "SELECT STOCK_QTY FROM PIS_MDC WHERE UD_MDC_Code = ?";//11012013
+                    String sql1 = "SELECT * FROM PIS_MDC2 WHERE UD_MDC_Code = ?";//11012013
 
                     //prepare the sql query and execute it
                     PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
@@ -1352,7 +1405,7 @@ public class DBConnection {
 
                     while (result1.next()) {
                         //read data get from database to all fields
-                        stockQty1 = result1.getInt("STOCK_QTY");
+                        stockQty1 = result1.getInt("D_STOCK_QTY");
 
                         if (stockQty1 != 0) {
                             stockQty = "Available";
@@ -1612,7 +1665,7 @@ public class DBConnection {
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                for (int i = 0; i < 22; i++) {
+                for (int i = 0; i < 23; i++) {
                     data.add(rs.getString(i + 1));
                 }
             }
@@ -1624,7 +1677,7 @@ public class DBConnection {
     
     public static boolean copyDataStaff(String user_id, ArrayList<String> data) {
         boolean stat = false;
-        int num_cols1 = 17;
+        int num_cols1 = 18;
         int num_cols2 = 5;
         try {
             String sql1 = "DELETE FROM ADM_USER "
@@ -1632,6 +1685,7 @@ public class DBConnection {
             PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
             ps1.setString(1, user_id);
             ps1.execute();
+            
             String sql2 = "DELETE FROM ADM_USER_ACCESS "
                     + "WHERE USER_ID = ? ";
             PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
@@ -1654,7 +1708,7 @@ public class DBConnection {
             }
             sql4 += ")";
             PreparedStatement ps4 = Session.getCon_x(1000).prepareStatement(sql4);
-            for (int i = 0 + num_cols1, j = 0; i < num_cols2 + num_cols1; i++, j++) {
+            for (int i = num_cols1, j = 0; i < (num_cols2 + num_cols1); i++, j++) {
                 ps4.setString(j+1, data.get(i));
             }
             ps4.execute();
@@ -1703,6 +1757,22 @@ public class DBConnection {
             String sql = "UPDATE adm_user SET password = ? WHERE user_id = ? ";
             PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
             ps.setString(1, pwd);
+            ps.setString(2, userid);
+            ps.execute();
+            stat = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            stat = false;
+        }
+        return stat;
+    }
+    
+    public static boolean changeRoomNo(String userid, String roomNo) {
+        boolean stat = false;
+        try {
+            String sql = "UPDATE adm_user SET room_no = ? WHERE user_id = ? ";
+            PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
+            ps.setString(1, roomNo);
             ps.setString(2, userid);
             ps.execute();
             stat = true;
@@ -1772,6 +1842,44 @@ public class DBConnection {
             String sql = "SELECT * FROM "+table+" WHERE "+pcd+" = ? ";
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
             ps.setString(1, procedure_cd);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int sizeCol = 3;
+                if (level != 1) {
+                    sizeCol = 4;
+                }
+                for (int i = 0; i < sizeCol; i++) {
+                    data.add(rs.getString(i+1));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
+    public static ArrayList<String> getProcedureDetail2(int level, String procedure_name) {
+        ArrayList<String> data = new ArrayList<String>();
+        String table = "CIS_PROCEDURE";
+        String pcd = "PROCEDURE_NAME";
+        try {
+            switch (level) {
+                case 1:
+                    table = "CIS_PROCEDURE";
+                    pcd = "PROCEDURE_NAME";
+                    break;
+                case 2:
+                    table = "CIS_PROCEDURE_1";
+                    pcd = "PROCEDURE_1_NAME";
+                    break;
+                case 3:
+                    table = "CIS_PROCEDURE_2";
+                    pcd = "PROCEDURE_2_NAME";
+                    break;
+            }
+            String sql = "SELECT * FROM "+table+" WHERE UCASE("+pcd+") LIKE UCASE(?) ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, "%"+procedure_name+"%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int sizeCol = 3;
@@ -2032,7 +2140,8 @@ public class DBConnection {
                     + "WHERE g1.response_code = g2.response_code "
                     + "AND g1.month_code = g3.month_code "
                     + "AND g1.response_code = ? "
-                    + "AND g1.month_code = ? ";
+                    + "AND g1.month_code = ? "
+                    + "ORDER BY g1.scale_code ASC ";
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
             ps.setString(1, parent.getResponse_code());
             ps.setString(2, month.getMonth_code());
@@ -2344,6 +2453,80 @@ public class DBConnection {
         return pe;
     }
     
+    public static PhysicalExamBean getPhysicalExam2(int level, PhysicalExamBean pe) {
+        try {
+            String column = "physical_exam_cd, physical_exam_name, status";
+            String table = "cis_physical_exam_system";
+            String where = "UCASE(physical_exam_name) LIKE UCASE(?)";
+            switch (level) {
+                case 1:
+                    column = "pe_1_cd, pe_1_name, physical_exam_cd, status";
+                    table = "cis_pe_1";
+                    where = "UCASE(pe_1_name) LIKE UCASE(?)";
+                    break;
+                case 2:
+                    column = "pe_2_cd, pe_2_name, pe_1_cd, status";
+                    table = "cis_pe_2";
+                    where = "UCASE(pe_2_name) LIKE UCASE(?)";
+                    break;
+                case 3:
+                    column = "pe_3_cd, pe_3_name, pe_2_cd, status";
+                    table = "cis_pe_3";
+                    where = "UCASE(pe_3_name) LIKE UCASE(?)";
+                    break;
+                case 4:
+                    column = "pe_4_cd, pe_4_name, pe_3_cd, status";
+                    table = "cis_pe_4";
+                    where = "UCASE(pe_4_name) LIKE UCASE(?)";
+                    break;
+                case 5:
+                    column = "pe_5_cd, pe_5_name, pe_4_cd, status";
+                    table = "cis_pe_5";
+                    where = "UCASE(pe_5_name) LIKE UCASE(?)";
+                    break;
+                case 6:
+                    column = "pe_6_cd, pe_6_name, pe_5_cd, status";
+                    table = "cis_pe_6";
+                    where = "UCASE(pe_6_name) LIKE UCASE(?)";
+                    break;
+                case 7:
+                    column = "pe_7_cd, pe_7_name, pe_6_cd, status";
+                    table = "cis_pe_7";
+                    where = "UCASE(pe_7_name) LIKE UCASE(?)";
+                    break;
+            }
+            String sql = "SELECT "+column+" FROM "+table+" WHERE "+where+" ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, "%"+pe.getPe_name()+"%");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                switch (level) {
+                    case 0:
+                    default:
+                        pe.setPe_cd(rs.getString(1));
+                        pe.setPe_name(rs.getString(2));
+                        pe.setPe_status(rs.getString(3));
+                        break;
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        pe.setPe_cd(rs.getString(1));
+                        pe.setPe_name(rs.getString(2));
+                        pe.setPe_parent(rs.getString(3));
+                        pe.setPe_status(rs.getString(4));
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pe;
+    }
+    
     public static ArrayList<PhysicalExamBean> getPhysicalExamAll(int level) {
         ArrayList<PhysicalExamBean> pe = new ArrayList<PhysicalExamBean>();
         try {
@@ -2434,5 +2617,155 @@ public class DBConnection {
         PhysicalExamBean peb = DBConnection.getPhysicalExam(size-1, peb_temp);
         pe_name += peb.getPe_name();
         return pe_name;
+    }
+    
+    public static boolean truncateJournalFile(String pmiNo) {
+        boolean status = false;
+        try {
+            String sql = "DELETE FROM JOURNAL_FILE "
+                    + "WHERE (STATUS = 'T' "
+                    + "OR STATUS = 't') "
+                    + "AND STATUS2 = 1 "
+                    + "AND PMI_NO = ? ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, pmiNo);
+            ps.execute();
+            status = true;
+        } catch (Exception e) {
+            status = false;
+            e.printStackTrace();
+        }
+        return status;
+    }
+    
+    public static boolean insertJournalFile(String centralCode, String pmiNoTemp, String txnDate, String txnDataBlob, String statusDischarge) {
+        boolean status = false;
+        try {
+            String sql = "INSERT INTO JOURNAL_FILE VALUES(?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, centralCode);
+            ps.setString(2, pmiNoTemp);
+            ps.setString(3, txnDate);
+            ps.setString(4, txnDataBlob);
+            ps.setString(5, "T");
+            ps.setInt(6, Integer.parseInt(statusDischarge));
+            ps.execute();
+            status = true;
+        } catch (Exception e) {
+            status = false;
+            e.printStackTrace();
+        }
+        return status;
+    }
+    
+    public static ArrayList<JournalFileBean> getJournalFile(String pmiNo) {
+        ArrayList<JournalFileBean> data = new ArrayList<JournalFileBean>();
+        try {
+            String sql = "SELECT * "
+                    + "FROM JOURNAL_FILE "
+                    + "WHERE (STATUS = 'T' "
+                    + "OR STATUS = 't') "
+                    + "AND STATUS2 = 1 "
+                    + "AND PMI_NO = ? ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, pmiNo);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                JournalFileBean jfb = new JournalFileBean();
+//                String aa = "";
+//                for (int i = 1; i <= 6; i++) {
+//                    aa += rs.getString(i) + "\n";
+//                }
+//                J.o(pmiNo, aa, 2);
+                jfb.setCentralCode(rs.getString(1));
+                jfb.setPmiNo(rs.getString(2));
+                jfb.setTxnDate(rs.getString(3));
+                jfb.setTxnDataBlob(rs.getString(4));
+                jfb.setStatusSync(rs.getString(5));
+                jfb.setStatusDischarge(rs.getInt(6));
+                data.add(jfb);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
+    public static JournalFileBean getJournalFile_episode(String pmiNo, String episodeDate) {
+        JournalFileBean data = new JournalFileBean();
+        try {
+            String sql = "SELECT * "
+                    + "FROM JOURNAL_FILE "
+                    + "WHERE (STATUS = 'T' "
+                    + "OR STATUS = 't') "
+                    + "AND STATUS2 = 1 "
+                    + "AND PMI_NO = ? "
+                    + "AND TXNDATE = ? ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, pmiNo);
+            ps.setString(2, episodeDate);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                data.setCentralCode(rs.getString(1));
+                data.setPmiNo(rs.getString(2));
+                data.setTxnDate(rs.getString(3));
+                data.setTxnDataBlob(rs.getString(4));
+                data.setStatusSync(rs.getString(5));
+                data.setStatusDischarge(rs.getInt(6));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
+    public static boolean isAlreadyRegistered(String pmino) {
+        boolean status = false;
+        try {
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String sql = "SELECT * "
+                    + "FROM PMS_EPISODE "
+                    + "WHERE PMI_NO = ? "
+                    + "AND (STATUS LIKE '%Consult%' "
+                    + "OR STATUS LIKE '%Waiting%' "
+                    + "OR STATUS LIKE '%Hold%' "
+                    + "OR STATUS LIKE '%Second Opinion%') "
+                    + "AND EPISODE_DATE = ? ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, pmino);
+            ps.setString(2, sdf.format(date));
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                status = true;
+            } else {
+                status = false;
+            }
+        } catch (Exception e) {
+            status = false;
+            e.printStackTrace();
+        }
+        return status;
+    }
+    
+    public static boolean captureResponseTime(String process, long timetaken) {
+        boolean status = false;
+        try {
+//            Date date1 = new Date();
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String date = sdf.format(date1);
+            java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+            String sql = "INSERT INTO CIS_RESPONSETIME VALUES (?, ?, ?) ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, process);
+            ps.setString(2, timetaken+"");
+            ps.setDate(3, date);
+            ps.execute();
+            status = true;
+        } catch (Exception e) {
+            status = false;
+            e.printStackTrace();
+        }
+        return status;
     }
 }

@@ -1,0 +1,2562 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package javaapplication1;
+
+import Bean.JournalFileBean;
+import DBConnection.DBConnection;
+import Helper.J;
+import Helper.S;
+import Process.MainRetrieval;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javaapplication1.Consultation.FH_Comments;
+import static javaapplication1.Consultation.FH_Relationship;
+import static javaapplication1.Consultation.HPI_DetailstxtArea;
+import static javaapplication1.Consultation.cb_durationOList;
+import static javaapplication1.Consultation.cb_durationTypeOList;
+import static javaapplication1.Consultation.cb_frequencyOList;
+import static javaapplication1.Consultation.cb_instructionOList;
+import static javaapplication1.Consultation.cbx_cSeverity;
+import static javaapplication1.Consultation.cbx_dSeverity;
+import static javaapplication1.Consultation.cbx_laterality;
+import static javaapplication1.Consultation.cbx_site;
+import static javaapplication1.Consultation.dbx_laterality;
+import static javaapplication1.Consultation.dbx_site;
+import static javaapplication1.Consultation.jRadioButton1;
+import static javaapplication1.Consultation.jRadioButton2;
+import static javaapplication1.Consultation.rbtn_cActive1;
+import static javaapplication1.Consultation.rbtn_cInactive1;
+import static javaapplication1.Consultation.tbl_HPI1;
+import static javaapplication1.Consultation.txt_FHSearch;
+import static javaapplication1.Consultation.txt_PMHComment;
+import static javaapplication1.Consultation.txt_PMHSearch;
+import static javaapplication1.Consultation.txt_allergyComments;
+import static javaapplication1.Consultation.txt_allergyDate2;
+import static javaapplication1.Consultation.txt_allergySearch;
+import static javaapplication1.Consultation.txt_complaintComment;
+import static javaapplication1.Consultation.txt_complaintSearch;
+import static javaapplication1.Consultation.txt_dComments;
+import static javaapplication1.Consultation.txt_dDate1;
+import static javaapplication1.Consultation.txt_date1;
+import static javaapplication1.Consultation.txt_diagComment;
+import static javaapplication1.Consultation.txt_diagnosisSearch;
+import static javaapplication1.Consultation.txt_disabilityType;
+import static javaapplication1.Consultation.txt_drugNameOListSearch;
+import static javaapplication1.Consultation.txt_duration;
+import static javaapplication1.Consultation.txt_immComment;
+import static javaapplication1.Consultation.txt_immDate1;
+import static javaapplication1.Consultation.txt_immSearch;
+import static javaapplication1.Consultation.txt_quantityOList;
+import static javaapplication1.Consultation.txt_socialComment;
+import static javaapplication1.Consultation.txt_socialDate1;
+import static javaapplication1.Consultation.txt_socialProblem;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import library.Func;
+
+/**
+ *
+ * @author End User
+ */
+public class ViewPatientHistory extends javax.swing.JFrame {
+
+    private static String pmi_no;
+    private static int num_rows = 100;
+    public final static int NUM_LATEST = 50;
+    
+    /**
+     * Creates new form ViewPatientHistory
+     * @param pmiNo
+     */
+    public ViewPatientHistory() {
+        initComponents();
+    }
+    
+    public void setData(String pmiNo) {
+        pmi_no = pmiNo;
+
+        // get journal_file clinical records
+        ArrayList<JournalFileBean> jfb = DBConnection.getJournalFile(pmiNo);
+//        String dataBlob = "";
+
+//        J.o(pmiNo, pmiNo+"|"+jfb.size(), 2);
+        for (int k = 0; k < jfb.size(); k++) {
+            String dataTemp = jfb.get(k).getTxnDataBlob();
+            String episodeDate = jfb.get(k).getTxnDate();
+            
+            MainRetrieval mrxx = new MainRetrieval();
+            mrxx.startProcess(dataTemp);
+            String msh[][] = mrxx.getData("MSH");
+
+//            J.o(pmiNo, 
+//                    jfb.get(k).getCentralCode()+")("
+//                    +jfb.get(k).getPmiNo()+")("
+//                    +jfb.get(k).getStatusSync()+")("
+//                    +jfb.get(k).getTxnDataBlob()+")("
+//                    +jfb.get(k).getTxnDate()+")("
+//                    +jfb.get(k).getStatusDischarge(), 2);
+            tbl_episode.setValueAt(episodeDate, k, 0);
+            tbl_episode.setValueAt(msh[0][2], k, 1);
+            tbl_episode.setValueAt(msh[0][3], k, 2);
+            tbl_episode.setValueAt(msh[0][4], k, 3);
+
+//            dataBlob += dataTemp;
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel4 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_episode = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel46 = new javax.swing.JPanel();
+        jScrollPane32 = new javax.swing.JScrollPane();
+        tbl_cc = new javax.swing.JTable();
+        jPanel48 = new javax.swing.JPanel();
+        jScrollPane46 = new javax.swing.JScrollPane();
+        tbl_HPI1 = new javax.swing.JTable();
+        jPanel50 = new javax.swing.JPanel();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        tbl_pmh = new javax.swing.JTable();
+        jPanel52 = new javax.swing.JPanel();
+        jScrollPane79 = new javax.swing.JScrollPane();
+        tbl_fmh = new javax.swing.JTable();
+        jPanel55 = new javax.swing.JPanel();
+        jScrollPane42 = new javax.swing.JScrollPane();
+        tbl_sh = new javax.swing.JTable();
+        jPanel57 = new javax.swing.JPanel();
+        jScrollPane40 = new javax.swing.JScrollPane();
+        tbl_alg = new javax.swing.JTable();
+        jPanel59 = new javax.swing.JPanel();
+        jScrollPane34 = new javax.swing.JScrollPane();
+        tbl_imu = new javax.swing.JTable();
+        jPanel62 = new javax.swing.JPanel();
+        jScrollPane41 = new javax.swing.JScrollPane();
+        tbl_dab = new javax.swing.JTable();
+        jPanel65 = new javax.swing.JPanel();
+        jScrollPane36 = new javax.swing.JScrollPane();
+        tbl_dgs = new javax.swing.JTable();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane29 = new javax.swing.JScrollPane();
+        tbl_drug = new javax.swing.JTable();
+        jPanel10 = new javax.swing.JPanel();
+        jScrollPane30 = new javax.swing.JScrollPane();
+        tbl_pem = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Patient Lifetime Health Records");
+        setBackground(new java.awt.Color(173, 182, 200));
+
+        jPanel4.setBackground(new java.awt.Color(173, 182, 200));
+
+        jButton1.setText("Close");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Episode"));
+
+        tbl_episode.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Health Facility", "Discipline", "Sub-Discipline"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_episode.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_episodeMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbl_episode);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel2.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Medical History"));
+
+        jPanel3.setBackground(new java.awt.Color(173, 182, 200));
+
+        jPanel46.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel46.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Chief Complaints"));
+
+        tbl_cc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Problem", "Severity", "Site", "Duration", "Laterality", "Comment"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_cc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_ccMouseClicked(evt);
+            }
+        });
+        jScrollPane32.setViewportView(tbl_cc);
+
+        javax.swing.GroupLayout jPanel46Layout = new javax.swing.GroupLayout(jPanel46);
+        jPanel46.setLayout(jPanel46Layout);
+        jPanel46Layout.setHorizontalGroup(
+            jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel46Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane32, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel46Layout.setVerticalGroup(
+            jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel46Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane32, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel48.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel48.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "History of Present Illness"));
+
+        tbl_HPI1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Episode Date", "Details"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_HPI1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_HPI1MouseClicked(evt);
+            }
+        });
+        jScrollPane46.setViewportView(tbl_HPI1);
+
+        javax.swing.GroupLayout jPanel48Layout = new javax.swing.GroupLayout(jPanel48);
+        jPanel48.setLayout(jPanel48Layout);
+        jPanel48Layout.setHorizontalGroup(
+            jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel48Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane46)
+                .addContainerGap())
+        );
+        jPanel48Layout.setVerticalGroup(
+            jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel48Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane46, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel50.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel50.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Past Medical History"));
+
+        tbl_pmh.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Problem", "Status", "Comment"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_pmh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_pmhMouseClicked(evt);
+            }
+        });
+        jScrollPane16.setViewportView(tbl_pmh);
+
+        javax.swing.GroupLayout jPanel50Layout = new javax.swing.GroupLayout(jPanel50);
+        jPanel50.setLayout(jPanel50Layout);
+        jPanel50Layout.setHorizontalGroup(
+            jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel50Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel50Layout.setVerticalGroup(
+            jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel50Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel52.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel52.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Family Medical History"));
+
+        tbl_fmh.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Problem", "Relationship", "Comment"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_fmh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_fmhMouseClicked(evt);
+            }
+        });
+        jScrollPane79.setViewportView(tbl_fmh);
+
+        javax.swing.GroupLayout jPanel52Layout = new javax.swing.GroupLayout(jPanel52);
+        jPanel52.setLayout(jPanel52Layout);
+        jPanel52Layout.setHorizontalGroup(
+            jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel52Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane79, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel52Layout.setVerticalGroup(
+            jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel52Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane79, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel55.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel55.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Social History"));
+
+        tbl_sh.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Problem", "Since When", "Comments"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_sh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_shMouseClicked(evt);
+            }
+        });
+        jScrollPane42.setViewportView(tbl_sh);
+
+        javax.swing.GroupLayout jPanel55Layout = new javax.swing.GroupLayout(jPanel55);
+        jPanel55.setLayout(jPanel55Layout);
+        jPanel55Layout.setHorizontalGroup(
+            jPanel55Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel55Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane42, javax.swing.GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE)
+                .addGap(15, 15, 15))
+        );
+        jPanel55Layout.setVerticalGroup(
+            jPanel55Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel55Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane42, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel57.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel57.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Allergy"));
+
+        tbl_alg.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Allergy Name", "Since When", "Comments"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_alg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_algMouseClicked(evt);
+            }
+        });
+        jScrollPane40.setViewportView(tbl_alg);
+
+        javax.swing.GroupLayout jPanel57Layout = new javax.swing.GroupLayout(jPanel57);
+        jPanel57.setLayout(jPanel57Layout);
+        jPanel57Layout.setHorizontalGroup(
+            jPanel57Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel57Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane40)
+                .addContainerGap())
+        );
+        jPanel57Layout.setVerticalGroup(
+            jPanel57Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel57Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane40, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel59.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel59.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Immunisation"));
+
+        tbl_imu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Immunisation Name", "Comment", "Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_imu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_imuMouseClicked(evt);
+            }
+        });
+        jScrollPane34.setViewportView(tbl_imu);
+
+        javax.swing.GroupLayout jPanel59Layout = new javax.swing.GroupLayout(jPanel59);
+        jPanel59.setLayout(jPanel59Layout);
+        jPanel59Layout.setHorizontalGroup(
+            jPanel59Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel59Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane34)
+                .addContainerGap())
+        );
+        jPanel59Layout.setVerticalGroup(
+            jPanel59Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel59Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane34, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel62.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel62.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Disability"));
+
+        tbl_dab.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Disability", "Since When", "Comments"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_dab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_dabMouseClicked(evt);
+            }
+        });
+        jScrollPane41.setViewportView(tbl_dab);
+
+        javax.swing.GroupLayout jPanel62Layout = new javax.swing.GroupLayout(jPanel62);
+        jPanel62.setLayout(jPanel62Layout);
+        jPanel62Layout.setHorizontalGroup(
+            jPanel62Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel62Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane41)
+                .addContainerGap())
+        );
+        jPanel62Layout.setVerticalGroup(
+            jPanel62Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel62Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane41, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel65.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel65.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Diagnosis"));
+
+        tbl_dgs.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Type", "Date", "Diagnosis", "Severity", "Site", "Laterality", "Comment"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_dgs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_dgsMouseClicked(evt);
+            }
+        });
+        jScrollPane36.setViewportView(tbl_dgs);
+
+        javax.swing.GroupLayout jPanel65Layout = new javax.swing.GroupLayout(jPanel65);
+        jPanel65.setLayout(jPanel65Layout);
+        jPanel65Layout.setHorizontalGroup(
+            jPanel65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel65Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane36)
+                .addContainerGap())
+        );
+        jPanel65Layout.setVerticalGroup(
+            jPanel65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel65Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane36, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel9.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Medication"));
+
+        tbl_drug.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Active Ingredient", "Product Name", "Quantity", "Frequency", "Duration", "Instruction"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_drug.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_drugMouseClicked(evt);
+            }
+        });
+        jScrollPane29.setViewportView(tbl_drug);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane29)
+                .addGap(22, 22, 22))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane29, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        jPanel10.setBackground(new java.awt.Color(173, 182, 200));
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Physical Examination"));
+
+        tbl_pem.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Code", "Exam Name", "Comment"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane30.setViewportView(tbl_pem);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane30)
+                .addGap(22, 22, 22))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane30, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel48, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel52, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel55, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel57, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel59, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel62, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel65, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel48, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel50, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel52, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel55, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel57, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel59, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel62, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel65, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(133, Short.MAX_VALUE))
+        );
+
+        jScrollPane2.setViewportView(jPanel3);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 909, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void deleteAllTableRows(JTable table) {
+        for (int i = 0; i < num_rows; i++) {
+            try {
+                for (int j = 0; j < num_rows; j++) {
+                    table.getModel().setValueAt("", i, j);
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    private void clearTableChild() {
+        deleteAllTableRows(tbl_HPI1);
+        deleteAllTableRows(tbl_alg);
+        deleteAllTableRows(tbl_cc);
+        deleteAllTableRows(tbl_dab);
+        deleteAllTableRows(tbl_dgs);
+        deleteAllTableRows(tbl_drug);
+        deleteAllTableRows(tbl_fmh);
+        deleteAllTableRows(tbl_imu);
+        deleteAllTableRows(tbl_pmh);
+        deleteAllTableRows(tbl_sh);
+        deleteAllTableRows(tbl_pem);
+    }
+    
+    private void tbl_episodeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_episodeMouseClicked
+        // TODO add your handling code here:
+        int row1 = tbl_episode.getSelectedRow();
+        String episodeDate = (String) tbl_episode.getValueAt(row1, 0);
+        JournalFileBean jfb = DBConnection.getJournalFile_episode(pmi_no, episodeDate);
+        
+        clearTableChild();
+        
+        /**
+         * latest 7 history *
+         */
+        int rows_tbl = num_rows;
+        int data_limit = 100;
+        MainRetrieval mr[] = new MainRetrieval[data_limit];
+        for (int i = 0; i < data_limit; i++) {
+            mr[i] = new MainRetrieval();
+            mr[i].startProcess(jfb.getTxnDataBlob());
+        }
+        String msg[][][] = new String[data_limit][data_limit][data_limit];
+        int row[] = new int[data_limit];
+        msg[0] = mr[0].getData("CCN");
+        row[0] = mr[0].getRowNums();
+        msg[1] = mr[1].getData("HPI");
+        row[1] = mr[1].getRowNums();
+        msg[2] = mr[2].getData("PMH");
+        row[2] = mr[2].getRowNums();
+        msg[3] = mr[3].getData("FMH");
+        row[3] = mr[3].getRowNums();
+        msg[4] = mr[4].getData("SOH");
+        row[4] = mr[4].getRowNums();
+        msg[5] = mr[5].getData("ALG");
+        row[5] = mr[5].getRowNums();
+        msg[6] = mr[6].getData("IMU");
+        row[6] = mr[6].getRowNums();
+        msg[7] = mr[7].getData("DAB");
+        row[7] = mr[7].getRowNums();
+        msg[8] = mr[8].getData("VTS");
+        row[8] = mr[8].getRowNums();
+        msg[9] = mr[9].getData("DGS");
+        row[9] = mr[9].getRowNums();
+        msg[10] = mr[10].getData("DTO");
+        row[10] = mr[10].getRowNums();
+        msg[11] = mr[11].getData("PEM");
+        row[11] = mr[11].getRowNums();
+        try {
+            if (row[0] > 0) {
+                for (int i = 0; i < row[0] && i < rows_tbl; i++) {
+                    tbl_cc.getModel().setValueAt(msg[0][i][0], i, 0);
+                    tbl_cc.getModel().setValueAt(msg[0][i][2], i, 1);
+                    tbl_cc.getModel().setValueAt(msg[0][i][4], i, 2);
+                    tbl_cc.getModel().setValueAt(msg[0][i][9], i, 3);
+                    tbl_cc.getModel().setValueAt(msg[0][i][5], i, 4);
+                    tbl_cc.getModel().setValueAt(msg[0][i][11], i, 5);
+                    tbl_cc.getModel().setValueAt(msg[0][i][12], i, 6);
+                }
+            }
+            if (row[1] > 0) {
+                for (int i = 0; i < row[1] && i < rows_tbl; i++) {
+                    tbl_HPI1.getModel().setValueAt(msg[1][i][0], i, 0);
+                    tbl_HPI1.getModel().setValueAt(msg[1][i][1], i, 1);
+                }
+            }
+            if (row[2] > 0) {
+                for (int i = 0; i < row[2] && i < rows_tbl; i++) {
+                    tbl_pmh.getModel().setValueAt(msg[2][i][0], i, 0);
+                    tbl_pmh.getModel().setValueAt(msg[2][i][2], i, 1);
+                    tbl_pmh.getModel().setValueAt(msg[2][i][3], i, 2);
+                    tbl_pmh.getModel().setValueAt(msg[2][i][6], i, 3);
+                }
+            }
+            if (row[3] > 0) {
+                for (int i = 0; i < row[3] && i < rows_tbl; i++) {
+                    tbl_fmh.getModel().setValueAt(msg[3][i][0], i, 0);
+                    tbl_fmh.getModel().setValueAt(msg[3][i][5], i, 1);
+                    tbl_fmh.getModel().setValueAt(msg[3][i][1], i, 2);
+                    tbl_fmh.getModel().setValueAt(msg[3][i][7], i, 3);
+                }
+            }
+            if (row[4] > 0) {
+                for (int i = 0; i < row[4] && i < rows_tbl; i++) {
+                    tbl_sh.getModel().setValueAt(msg[4][i][0], i, 0);
+                    tbl_sh.getModel().setValueAt(msg[4][i][2], i, 1);
+                    tbl_sh.getModel().setValueAt(msg[4][i][8], i, 2);
+                    tbl_sh.getModel().setValueAt(msg[4][i][12], i, 3);
+                }
+            }
+            if (row[5] > 0) {
+                for (int i = 0; i < row[5] && i < rows_tbl; i++) {
+                    tbl_alg.getModel().setValueAt(msg[5][i][0], i, 0);
+                    tbl_alg.getModel().setValueAt(msg[5][i][2], i, 1);
+                    tbl_alg.getModel().setValueAt(msg[5][i][3], i, 2);
+                    tbl_alg.getModel().setValueAt(msg[5][i][4], i, 3);
+                }
+            }
+            if (row[6] > 0) {
+                for (int i = 0; i < row[6] && i < rows_tbl; i++) {
+                    tbl_imu.getModel().setValueAt(msg[6][i][0], i, 0);
+                    tbl_imu.getModel().setValueAt(msg[6][i][2], i, 1);
+                    tbl_imu.getModel().setValueAt(msg[6][i][4], i, 2);
+                    tbl_imu.getModel().setValueAt(msg[6][i][3], i, 3);
+                }
+            }
+            if (row[7] > 0) {
+                for (int i = 0; i < row[7] && i < rows_tbl; i++) {
+                    tbl_dab.getModel().setValueAt(msg[7][i][0], i, 0);
+                    tbl_dab.getModel().setValueAt(msg[7][i][2], i, 1);
+                    tbl_dab.getModel().setValueAt(msg[7][i][3], i, 2);
+                    tbl_dab.getModel().setValueAt("", i, 3);
+                }
+            }
+//                if (row[8] > 0) {
+//                    for (int i = 0; i < row[8] && i < rows_tbl; i++) {
+//                        double height = Double.parseDouble(msg[8][i][9].trim());
+//                        double weight = Double.parseDouble(msg[8][i][8].trim());
+//                        double bmi = Math.round((weight / (height * height)) * 10000);
+//                        tbl_vts.getModel().setValueAt("" + msg[8][i][9], i, 0);
+//                        tbl_vts.getModel().setValueAt("" + msg[8][i][8], i, 1);
+//                        tbl_vts.getModel().setValueAt("" + msg[8][i][13], i, 2);
+//                        tbl_vts.getModel().setValueAt("" + bmi, i, 3);
+//                        tbl_vts.getModel().setValueAt("" + msg[8][i][10], i, 4);
+//                        tbl_vts.getModel().setValueAt("" + msg[8][i][1], i, 5);
+//                        tbl_vts.getModel().setValueAt("" + msg[8][i][2] + "," + msg[8][i][6] + "," + msg[8][i][4], i, 6);
+//                        tbl_vts.getModel().setValueAt("" + msg[8][i][3] + "," + msg[8][i][7] + "," + msg[8][i][5], i, 7);
+//                    }
+//                }
+            if (row[9] > 0) {
+                for (int i = 0; i < row[9] && i < rows_tbl; i++) {
+                    tbl_dgs.getModel().setValueAt(msg[9][i][0], i, 0);
+                    tbl_dgs.getModel().setValueAt(msg[9][i][2], i, 1);
+                    tbl_dgs.getModel().setValueAt(msg[9][i][4], i, 2);
+                    tbl_dgs.getModel().setValueAt(msg[9][i][8], i, 3);
+                    tbl_dgs.getModel().setValueAt(msg[9][i][10], i, 4);
+                    tbl_dgs.getModel().setValueAt(msg[9][i][12], i, 5);
+                    tbl_dgs.getModel().setValueAt(msg[9][i][16], i, 6);
+                    tbl_dgs.getModel().setValueAt(msg[9][i][19], i, 7);
+                }
+            }
+            if (row[10] > 0) {
+                for (int i = 0; i < row[10] && i < rows_tbl; i++) {
+                    String ud_mdc_code = msg[10][i][4];
+                    String product_name = DBConnection.getProductNameDrug(ud_mdc_code);
+                    tbl_drug.getModel().setValueAt(msg[10][i][0], i, 0);
+                    tbl_drug.getModel().setValueAt(msg[10][i][5], i, 1);
+                    tbl_drug.getModel().setValueAt(product_name, i, 2);
+                    tbl_drug.getModel().setValueAt(msg[10][i][23], i, 3);
+                    tbl_drug.getModel().setValueAt(msg[10][i][14], i, 4);
+                    tbl_drug.getModel().setValueAt(msg[10][i][22], i, 5);
+                    tbl_drug.getModel().setValueAt(msg[10][i][27], i, 6);
+                }
+            }
+            if (row[11] > 0) {
+                for (int i = 0; i < row[11] && i < rows_tbl; i++) {
+                    tbl_pem.getModel().setValueAt(msg[11][i][0], i, 0);
+                    tbl_pem.getModel().setValueAt(msg[11][i][3], i, 1);
+                    tbl_pem.getModel().setValueAt(msg[11][i][4], i, 2);
+                    tbl_pem.getModel().setValueAt(msg[11][i][6], i, 3);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_tbl_episodeMouseClicked
+
+    private void setTabPatient(int parent, int child) {
+        Consultation.jTabbedPane2.setSelectedIndex(parent);
+        Consultation.jTabbedPane4.setSelectedIndex(child);
+        setVisible(false);
+    }
+    
+    private void tbl_ccMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ccMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tbl_cc.getSelectedRow();
+        String problem = (String) tbl_cc.getValueAt(rowIndex, 1);
+        String severe = (String) tbl_cc.getValueAt(rowIndex, 2);
+        String comment = (String) tbl_cc.getValueAt(rowIndex, 3);
+        String duration = (String) tbl_cc.getValueAt(rowIndex, 4);
+        String side = (String) tbl_cc.getValueAt(rowIndex, 5);
+        String laterality = (String) tbl_cc.getValueAt(rowIndex, 6);
+        txt_complaintSearch.setText(problem);
+        Func.cmbSelectInput(cbx_cSeverity, severe);
+        txt_complaintComment.setText(comment);
+        txt_duration.setText(duration);
+        Func.cmbSelectInput(cbx_site, side);
+        Func.cmbSelectInput(cbx_laterality, laterality);
+        
+        setTabPatient(0, 0);
+    }//GEN-LAST:event_tbl_ccMouseClicked
+
+    private void tbl_HPI1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_HPI1MouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tbl_HPI1.getSelectedRow();
+        String details = (String) tbl_HPI1.getValueAt(rowIndex, 1);
+        HPI_DetailstxtArea.setText(details);
+        
+        setTabPatient(0, 1);
+    }//GEN-LAST:event_tbl_HPI1MouseClicked
+
+    private void tbl_pmhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_pmhMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tbl_pmh.getSelectedRow();
+        String problem = (String) tbl_pmh.getValueAt(rowIndex, 1);
+        String status = (String) tbl_pmh.getValueAt(rowIndex, 2);
+        String comment = (String) tbl_pmh.getValueAt(rowIndex, 3);
+        txt_PMHSearch.setText(problem);
+        if (status.equals("Active")) {
+            rbtn_cActive1.setSelected(true);
+            rbtn_cInactive1.setSelected(false);
+        } else {
+            rbtn_cActive1.setSelected(false);
+            rbtn_cInactive1.setSelected(true);
+        }
+        txt_PMHComment.setText(comment);
+        
+        setTabPatient(0, 2);
+    }//GEN-LAST:event_tbl_pmhMouseClicked
+
+    private void tbl_fmhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_fmhMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tbl_cc.getSelectedRow();
+        String problem = (String) tbl_cc.getValueAt(rowIndex, 1);
+        String relationship = (String) tbl_cc.getValueAt(rowIndex, 2);
+        String comment = (String) tbl_cc.getValueAt(rowIndex, 3);
+        txt_FHSearch.setText(problem);
+        Func.cmbSelectInput(FH_Relationship, relationship);
+        FH_Comments.setText(comment);
+        
+        setTabPatient(0, 3);
+    }//GEN-LAST:event_tbl_fmhMouseClicked
+
+    private void tbl_shMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_shMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tbl_sh.getSelectedRow();
+        String problem = (String) tbl_sh.getValueAt(rowIndex, 1);
+        String since = (String) tbl_sh.getValueAt(rowIndex, 2);
+        String comment = (String) tbl_sh.getValueAt(rowIndex, 3);
+        txt_socialProblem.setText(problem);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date = dateFormat.parse(since);
+            txt_socialDate1.setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(ViewPatientHistory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txt_socialComment.setText(comment);
+        
+        setTabPatient(0, 4);
+    }//GEN-LAST:event_tbl_shMouseClicked
+
+    private void tbl_algMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_algMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tbl_alg.getSelectedRow();
+        String problem = (String) tbl_alg.getValueAt(rowIndex, 1);
+        String since = (String) tbl_alg.getValueAt(rowIndex, 2);
+        String comment = (String) tbl_alg.getValueAt(rowIndex, 3);
+        txt_allergySearch.setText(problem);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date = dateFormat.parse(since);
+            txt_allergyDate2.setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(ViewPatientHistory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txt_allergyComments.setText(comment);
+        
+        setTabPatient(0, 6);
+    }//GEN-LAST:event_tbl_algMouseClicked
+
+    private void tbl_imuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_imuMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tbl_imu.getSelectedRow();
+        String problem = (String) tbl_imu.getValueAt(rowIndex, 1);
+        String comment = (String) tbl_imu.getValueAt(rowIndex, 2);
+        String tarikh = (String) tbl_imu.getValueAt(rowIndex, 3);
+        txt_immSearch.setText(problem);
+        txt_immComment.setText(comment);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date = dateFormat.parse(tarikh);
+            txt_immDate1.setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(ViewPatientHistory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        setTabPatient(0, 7);
+    }//GEN-LAST:event_tbl_imuMouseClicked
+
+    private void tbl_dabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_dabMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tbl_dab.getSelectedRow();
+        String problem = (String) tbl_dab.getValueAt(rowIndex, 1);
+        String tarikh = (String) tbl_dab.getValueAt(rowIndex, 2);
+        String comment = (String) tbl_dab.getValueAt(rowIndex, 3);
+        txt_disabilityType.setText(problem);
+        try {
+            if (tarikh.equals("")) {
+                tarikh = "0000-00-00";
+            }
+        } catch (Exception eex) {
+            tarikh = "0000-00-00";
+        }
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            Date date = dateFormat.parse(tarikh);
+            txt_dDate1.setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(ViewPatientHistory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txt_dComments.setText(comment);
+        
+        setTabPatient(0, 8);
+    }//GEN-LAST:event_tbl_dabMouseClicked
+
+    private void tbl_dgsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_dgsMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tbl_dgs.getSelectedRow();
+        String type = (String) tbl_dgs.getValueAt(rowIndex, 1);
+        String date1 = (String) tbl_dgs.getValueAt(rowIndex, 2);
+        String diagnosis = (String) tbl_dgs.getValueAt(rowIndex, 3);
+        String severity = (String) tbl_dgs.getValueAt(rowIndex, 4);
+        String site = (String) tbl_dgs.getValueAt(rowIndex, 5);
+        String laterality = (String) tbl_dgs.getValueAt(rowIndex, 6);
+        String comment = (String) tbl_dgs.getValueAt(rowIndex, 7);
+        if (type.equals("Final")) {
+            jRadioButton1.setSelected(true);
+            jRadioButton2.setSelected(false);
+        } else {
+            jRadioButton1.setSelected(false);
+            jRadioButton2.setSelected(true);
+        }
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            Date date = dateFormat.parse(date1);
+            txt_date1.setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(ViewPatientHistory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txt_diagnosisSearch.setText(diagnosis);
+        Func.cmbSelectInput(cbx_dSeverity, severity);
+        Func.cmbSelectInput(dbx_site, site);
+        Func.cmbSelectInput(dbx_laterality, laterality);
+        txt_diagComment.setText(comment);
+        
+        setTabPatient(2, 0);
+    }//GEN-LAST:event_tbl_dgsMouseClicked
+
+    private void tbl_drugMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_drugMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tbl_drug.getSelectedRow();
+        String act = (String) tbl_drug.getValueAt(rowIndex, 1);
+        String pro = (String) tbl_drug.getValueAt(rowIndex, 2);
+        String qty = (String) tbl_drug.getValueAt(rowIndex, 3);
+        String fre = (String) tbl_drug.getValueAt(rowIndex, 4);
+        int dur = Integer.parseInt(tbl_drug.getValueAt(rowIndex, 5).toString());
+        String ins = (String) tbl_drug.getValueAt(rowIndex, 6);
+
+        txt_drugNameOListSearch.setText(act);
+        Consultation.setDrugAct();
+
+        Consultation.setProductNameTbl(pro);
+
+        Func.cmbSelectInput(cb_frequencyOList, fre);
+        Func.cmbSelectInput(cb_instructionOList, ins);
+
+        int fre2 = Integer.parseInt(Consultation.getFrequencyCode(fre));
+        int new_qty = (Integer.parseInt(qty) / fre2) / dur;
+        txt_quantityOList.setText("" + new_qty);
+
+        if (dur % 30 == 0) {
+            dur /= 30;
+            Func.cmbSelectInput(cb_durationOList, "" + dur);
+            Func.cmbSelectInput(cb_durationTypeOList, "Month");
+        } else if (dur % 7 == 0) {
+            dur /= 7;
+            Func.cmbSelectInput(cb_durationOList, "" + dur);
+            Func.cmbSelectInput(cb_durationTypeOList, "Week");
+        } else {
+            Func.cmbSelectInput(cb_durationOList, "" + dur);
+            Func.cmbSelectInput(cb_durationTypeOList, "Day");
+        }
+        
+        setTabPatient(3, 2);
+    }//GEN-LAST:event_tbl_drugMouseClicked
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ViewPatientHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ViewPatientHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ViewPatientHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ViewPatientHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                //new ViewPatientHistory().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel46;
+    private javax.swing.JPanel jPanel48;
+    private javax.swing.JPanel jPanel50;
+    private javax.swing.JPanel jPanel52;
+    private javax.swing.JPanel jPanel55;
+    private javax.swing.JPanel jPanel57;
+    private javax.swing.JPanel jPanel59;
+    private javax.swing.JPanel jPanel62;
+    private javax.swing.JPanel jPanel65;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane16;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane29;
+    private javax.swing.JScrollPane jScrollPane30;
+    private javax.swing.JScrollPane jScrollPane32;
+    private javax.swing.JScrollPane jScrollPane34;
+    private javax.swing.JScrollPane jScrollPane36;
+    private javax.swing.JScrollPane jScrollPane40;
+    private javax.swing.JScrollPane jScrollPane41;
+    private javax.swing.JScrollPane jScrollPane42;
+    private javax.swing.JScrollPane jScrollPane46;
+    private javax.swing.JScrollPane jScrollPane79;
+    public static javax.swing.JTable tbl_HPI1;
+    public javax.swing.JTable tbl_alg;
+    public javax.swing.JTable tbl_cc;
+    public javax.swing.JTable tbl_dab;
+    public javax.swing.JTable tbl_dgs;
+    public javax.swing.JTable tbl_drug;
+    protected static javax.swing.JTable tbl_episode;
+    public javax.swing.JTable tbl_fmh;
+    public javax.swing.JTable tbl_imu;
+    public javax.swing.JTable tbl_pem;
+    public javax.swing.JTable tbl_pmh;
+    public javax.swing.JTable tbl_sh;
+    // End of variables declaration//GEN-END:variables
+}

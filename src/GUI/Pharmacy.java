@@ -60,17 +60,25 @@ import Helper.J;
 import Process.MainRetrieval;
 import api.Queue;
 import api.LookupController;
+import com.itextpdf.text.log.SysoLogger;
 import java.awt.Color;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import javaapplication1.DriversLocation;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Iterator;
 import javaapplication1.PDFiText;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import jxl.CellType;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
 
 /**
  *
@@ -200,7 +208,7 @@ public class Pharmacy extends javax.swing.JFrame{
 //    ArrayList data2;
     
     private static int max_row_drug = 100;
-    private static int max_col_drug = 7;
+    private static int max_col_drug = 9;
     
     /**
      * NEW VAR DRUG 
@@ -247,6 +255,43 @@ public class Pharmacy extends javax.swing.JFrame{
         initComponents();
         S.oln("Hello CIS 1 cannot use");
         
+        loadDrug();
+    }
+    
+    public void loadDrug() {
+        try {
+            int num_rows = 24;
+            String sql = "SELECT * "
+                    + "FROM PIS_MDC2 ";
+            String params[] = {};
+            ArrayList<ArrayList<String>> data1 = DBConnection.getImpl().getQuery(sql, num_rows, params);
+            for (int j = 0; j < data1.size(); j++) {
+                //System.out.println("DRUG "+j+": "+data1.get(i)+"\n");
+                String UD_MDC_CODE = data1.get(j).get(0);
+                int num_rows1 = data1.get(j).size();
+                String sql1 = "SELECT * "
+                        + "FROM PIS_MDC2 "
+                        + "WHERE UD_MDC_CODE = ? ";
+                PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
+                ps1.setString(1, UD_MDC_CODE);
+                ResultSet rs1 = ps1.executeQuery();
+                if (!rs1.next()) {
+                    S.oln("Drug code "+UD_MDC_CODE+" not in the local list.. Adding it..");
+                    String params1 = "";
+                    for (int k = 0; k < num_rows1-1; k++) {
+                        params1 += "'"+data1.get(j).get(k)+"',";
+                    }
+                    params1 += "'"+data1.get(j).get(num_rows1-1)+"'";
+                    String sql2 = "INSERT INTO PIS_MDC2 VALUES("+params1+")";
+                    PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
+                    ps2.execute();
+                }
+            }
+            S.oln("Done sync drug.. Alhamdulillah..");
+        } catch (Exception e) {
+            S.oln("Cannot sync drug! Network down!!");
+            e.printStackTrace();
+        }
     }
 //    public Pharmacy(String pmino){
 //        initComponents();
@@ -291,7 +336,7 @@ public class Pharmacy extends javax.swing.JFrame{
 //                Message impl = (Message) myRegistry.lookup("myMessage");
                 // call server's method	
                 
-                om = DBConnection.getImpl().getOrderMasterAll(stat, pmi_no, order_no);
+                om = DBConnection.getImpl().getOrderMasterAll(stat, pmi_no, order_no, Session.getHfc_code());
                 S.oln("Get Order Master");
                 showOnline();
                 for (int i = 0; i < 30 && i < om.size(); i++) {
@@ -525,11 +570,22 @@ public class Pharmacy extends javax.swing.JFrame{
         btn_dispense = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         btn_PrintLabel = new javax.swing.JButton();
+        btnCallPatient = new javax.swing.JButton();
         jPanel36 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbl_drugOrder = new javax.swing.JTable();
         lbl_doctor = new javax.swing.JLabel();
         txt_doctor = new javax.swing.JTextField();
+        jPanel38 = new javax.swing.JPanel();
+        jLabel42 = new javax.swing.JLabel();
+        order_no2 = new javax.swing.JTextField();
+        jLabel43 = new javax.swing.JLabel();
+        order_date2 = new javax.swing.JTextField();
+        jLabel44 = new javax.swing.JLabel();
+        loc_code = new javax.swing.JTextField();
+        jLabel45 = new javax.swing.JLabel();
+        arrival_date = new javax.swing.JTextField();
+        jScrollPane10 = new javax.swing.JScrollPane();
         jPanel37 = new javax.swing.JPanel();
         lbl_patientName = new javax.swing.JLabel();
         lbl_pmiNo = new javax.swing.JLabel();
@@ -547,15 +603,8 @@ public class Pharmacy extends javax.swing.JFrame{
         lbl_bloodType = new javax.swing.JLabel();
         txt_bloodType = new javax.swing.JTextField();
         cbAllergy = new javax.swing.JComboBox();
-        jPanel38 = new javax.swing.JPanel();
-        jLabel42 = new javax.swing.JLabel();
-        order_no2 = new javax.swing.JTextField();
-        jLabel43 = new javax.swing.JLabel();
-        order_date2 = new javax.swing.JTextField();
-        jLabel44 = new javax.swing.JLabel();
-        loc_code = new javax.swing.JTextField();
-        jLabel45 = new javax.swing.JLabel();
-        arrival_date = new javax.swing.JTextField();
+        jScrollPane18 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         pnl_prepareOrderList = new javax.swing.JPanel();
         lbl_prepareDrugOrderOList = new java.awt.Label();
         jPanel21 = new javax.swing.JPanel();
@@ -714,12 +763,13 @@ public class Pharmacy extends javax.swing.JFrame{
         cInstruction = new javax.swing.JComboBox();
         lbl_instructionOList1 = new javax.swing.JLabel();
         lbl_cautionary = new javax.swing.JLabel();
-        txt_cautionary = new javax.swing.JTextField();
+        cLqtyT = new javax.swing.JComboBox();
+        jScrollPane24 = new javax.swing.JScrollPane();
+        txt_cautionary = new javax.swing.JTextArea();
         jLabel30 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        cClassification = new javax.swing.JComboBox();
         txt_expdate = new com.toedter.calendar.JDateChooser();
-        cLqtyT = new javax.swing.JComboBox();
+        cClassification = new javax.swing.JComboBox();
         pnl_import = new javax.swing.JPanel();
         lbl_browseFileConvert = new java.awt.Label();
         jPanel25 = new javax.swing.JPanel();
@@ -1339,7 +1389,7 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addGap(272, 272, 272)
                         .addComponent(btn_refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1007, Short.MAX_VALUE))
+                .addContainerGap(1269, Short.MAX_VALUE))
         );
         pnl_patientListLayout.setVerticalGroup(
             pnl_patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1351,7 +1401,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(437, Short.MAX_VALUE))
+                .addContainerGap(632, Short.MAX_VALUE))
         );
 
         tab_drugOrder.addTab("Patient Order List", pnl_patientList);
@@ -1366,116 +1416,116 @@ public class Pharmacy extends javax.swing.JFrame{
         //int rowIndex = tbl_drugList.getSelectedRow();
         tbl_drugList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Drug Code", "Drug Desc", "Instruction", "Qty Order", "Qty Supply", "Qty Dispensed", "Status"
+                "Drug Code", "Drug Desc", "Dosage", "Frequency", "Duration", "Qty Order", "Qty Supply", "Qty Dispensed", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, true, true
+                false, false, false, false, false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1516,6 +1566,13 @@ public class Pharmacy extends javax.swing.JFrame{
             }
         });
 
+        btnCallPatient.setText("Call Patient");
+        btnCallPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCallPatientActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
@@ -1530,6 +1587,8 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addComponent(jButton5)
                         .addGap(18, 18, 18)
                         .addComponent(btn_dispense)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCallPatient)
                         .addGap(18, 18, 18)
                         .addComponent(btn_PrintLabel)
                         .addGap(413, 413, 413))))
@@ -1543,7 +1602,8 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_dispense)
                     .addComponent(jButton5)
-                    .addComponent(btn_PrintLabel))
+                    .addComponent(btn_PrintLabel)
+                    .addComponent(btnCallPatient))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1552,116 +1612,116 @@ public class Pharmacy extends javax.swing.JFrame{
         int rowIndex = tbl_drugOrder.getSelectedRow();
         tbl_drugOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Drug Code", "Drug Desc", "Instruction", "Qty Order", "Qty Supply", "Qty Dispensed", "Status"
+                "Drug Code", "Drug Desc", "Dosage", "Frequency", "Duration", "Qty Order", "Qty Supply", "Qty Dispensed", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1711,119 +1771,15 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel37.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patient Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-
-        lbl_patientName.setText("Patient Name :");
-
-        lbl_pmiNo.setText("PMI No :");
-
-        txt_pmiNo.setEditable(false);
-        txt_pmiNo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        txt_patientName.setEditable(false);
-        txt_patientName.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        lbl_icNo.setText("IC No :");
-
-        txt_icNo.setEditable(false);
-        txt_icNo.setBorder(null);
-
-        lbl_sex.setText("Gender :");
-
-        txt_sex.setEditable(false);
-        txt_sex.setBorder(null);
-
-        lbl_race.setText("Race :");
-
-        lbl_birthDate.setText("Birth Date :");
-
-        txt_birthDate.setEditable(false);
-        txt_birthDate.setBorder(null);
-
-        txt_race.setEditable(false);
-        txt_race.setBorder(null);
-
-        lbl_allergy.setText("Allergy :");
-
-        lbl_bloodType.setText("Blood Type :");
-
-        txt_bloodType.setEditable(false);
-        txt_bloodType.setBorder(null);
-
-        cbAllergy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- No Allergy --" }));
-        cbAllergy.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        javax.swing.GroupLayout jPanel37Layout = new javax.swing.GroupLayout(jPanel37);
-        jPanel37.setLayout(jPanel37Layout);
-        jPanel37Layout.setHorizontalGroup(
-            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel37Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_patientName)
-                    .addComponent(lbl_pmiNo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_pmiNo)
-                    .addComponent(txt_patientName, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel37Layout.createSequentialGroup()
-                        .addComponent(lbl_icNo)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_icNo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel37Layout.createSequentialGroup()
-                        .addComponent(lbl_sex)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_sex, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_birthDate)
-                    .addComponent(lbl_race))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_race)
-                    .addComponent(txt_birthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_bloodType)
-                    .addComponent(lbl_allergy))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_bloodType, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(cbAllergy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel37Layout.setVerticalGroup(
-            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel37Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_patientName)
-                    .addComponent(txt_patientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_icNo)
-                    .addComponent(txt_icNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_birthDate)
-                    .addComponent(txt_birthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_bloodType)
-                    .addComponent(txt_bloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_pmiNo)
-                    .addComponent(txt_pmiNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_sex)
-                    .addComponent(txt_sex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_race)
-                    .addComponent(txt_race, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_allergy)
-                    .addComponent(cbAllergy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-
         jLabel42.setText("Order No :");
 
         order_no2.setBackground(new java.awt.Color(240, 240, 240));
         order_no2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        order_no2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                order_no2ActionPerformed(evt);
+            }
+        });
 
         jLabel43.setText("Order Date :");
 
@@ -1876,38 +1832,171 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel37.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patient Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+
+        lbl_patientName.setText("Patient Name :");
+
+        lbl_pmiNo.setText("PMI No :");
+
+        txt_pmiNo.setEditable(false);
+        txt_pmiNo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        txt_patientName.setEditable(false);
+        txt_patientName.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        lbl_icNo.setText("IC No :");
+
+        txt_icNo.setEditable(false);
+        txt_icNo.setBorder(null);
+
+        lbl_sex.setText("Gender :");
+
+        txt_sex.setEditable(false);
+        txt_sex.setBorder(null);
+
+        lbl_race.setText("Race :");
+
+        lbl_birthDate.setText("Birth Date :");
+
+        txt_birthDate.setEditable(false);
+        txt_birthDate.setBorder(null);
+
+        txt_race.setEditable(false);
+        txt_race.setBorder(null);
+
+        lbl_allergy.setText("Allergy :");
+
+        lbl_bloodType.setText("Blood Type :");
+
+        txt_bloodType.setEditable(false);
+        txt_bloodType.setBorder(null);
+
+        cbAllergy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- No Allergy --" }));
+        cbAllergy.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Episode Date", "Onset Date", "Diagnosis", "Severity", "Comment"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane18.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel37Layout = new javax.swing.GroupLayout(jPanel37);
+        jPanel37.setLayout(jPanel37Layout);
+        jPanel37Layout.setHorizontalGroup(
+            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel37Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel37Layout.createSequentialGroup()
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_patientName)
+                            .addComponent(lbl_pmiNo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_pmiNo)
+                            .addComponent(txt_patientName, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(59, 59, 59)
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel37Layout.createSequentialGroup()
+                                .addComponent(lbl_icNo)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_icNo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel37Layout.createSequentialGroup()
+                                .addComponent(lbl_sex)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_sex, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_birthDate)
+                            .addComponent(lbl_race))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_race)
+                            .addComponent(txt_birthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_bloodType)
+                            .addComponent(lbl_allergy))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_bloodType, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(cbAllergy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane18))
+                .addContainerGap())
+        );
+        jPanel37Layout.setVerticalGroup(
+            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel37Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_patientName)
+                    .addComponent(txt_patientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_icNo)
+                    .addComponent(txt_icNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_birthDate)
+                    .addComponent(txt_birthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_bloodType)
+                    .addComponent(txt_bloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_pmiNo)
+                    .addComponent(txt_pmiNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_sex)
+                    .addComponent(txt_sex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_race)
+                    .addComponent(txt_race, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_allergy)
+                    .addComponent(cbAllergy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(350, Short.MAX_VALUE))
+        );
+
+        jScrollPane10.setViewportView(jPanel37);
+
         javax.swing.GroupLayout pnl_patientDrugOrderLayout = new javax.swing.GroupLayout(pnl_patientDrugOrder);
         pnl_patientDrugOrder.setLayout(pnl_patientDrugOrderLayout);
         pnl_patientDrugOrderLayout.setHorizontalGroup(
             pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lbl_patientInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnl_patientDrugOrderLayout.createSequentialGroup()
-                .addGroup(pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_patientDrugOrderLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jPanel37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnl_patientDrugOrderLayout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(749, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(1011, Short.MAX_VALUE))
         );
         pnl_patientDrugOrderLayout.setVerticalGroup(
             pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_patientDrugOrderLayout.createSequentialGroup()
                 .addComponent(lbl_patientInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap(295, Short.MAX_VALUE))
         );
 
         tab_drugOrder.addTab("Patient Drug Dispense", pnl_patientDrugOrder);
@@ -2234,7 +2323,6 @@ public class Pharmacy extends javax.swing.JFrame{
                 return canEdit [columnIndex];
             }
         });
-        tbl_productname.setGridColor(new java.awt.Color(255, 255, 255));
         tbl_productname.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_productnameMouseClicked(evt);
@@ -2551,7 +2639,7 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addContainerGap()
                         .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lbl_prepareDrugOrderOList, javax.swing.GroupLayout.PREFERRED_SIZE, 1261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(702, Short.MAX_VALUE))
+                .addContainerGap(964, Short.MAX_VALUE))
         );
         pnl_prepareOrderListLayout.setVerticalGroup(
             pnl_prepareOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2576,7 +2664,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         tab_drugOrder.addTab(" Drug Order", pnl_prepareOrderList);
@@ -2909,7 +2997,7 @@ public class Pharmacy extends javax.swing.JFrame{
         pnl_atcLayout.setHorizontalGroup(
             pnl_atcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lbl_searchDrugATC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbl_drugATCDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 1998, Short.MAX_VALUE)
+            .addComponent(lbl_drugATCDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 2260, Short.MAX_VALUE)
             .addGroup(pnl_atcLayout.createSequentialGroup()
                 .addGroup(pnl_atcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_atcLayout.createSequentialGroup()
@@ -2920,7 +3008,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addGroup(pnl_atcLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(757, Short.MAX_VALUE))
+                .addContainerGap(1019, Short.MAX_VALUE))
         );
         pnl_atcLayout.setVerticalGroup(
             pnl_atcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2934,7 +3022,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(pnl_atcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap(506, Short.MAX_VALUE))
         );
 
         tpnl_manageDCode.addTab("ATC", pnl_atc);
@@ -2977,6 +3065,7 @@ public class Pharmacy extends javax.swing.JFrame{
         });
 
         jButton10.setText("truncate");
+        jButton10.setEnabled(false);
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -3337,7 +3426,7 @@ public class Pharmacy extends javax.swing.JFrame{
 
         jLabel34.setText("Packaging :");
 
-        cdpack2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "AMP", "AP", "BAG", "BLPK", "BOT", "BOTAP", "BOTDIS", "BOTDR", "BOTGL", "BOTPL", "BOTPU", "BOTSPR", "BOTUD", "BOX", "BOXUD", "CAN", "CSTR", "CRTN", "CTG", "CASE", "CELLO", "CTR", "CUP", "CUPUD", "CYL", "DEW", "DLPK", "DSPK", "DRUM", "INHL", "INHLRE", "JAR", "JUG", "KIT", "NS", "PKG", "PKGCOM", "PKT", "POU", "SUPSACK", "SYR", "SYRGL", "SYRPL", "TABMIND", "TANK", "TRAY", "TUBE", "TUBEAP", "VIAL", "VIALDIS", "VIALGL", "VIALMD", "VIALPAT", "VIALPHR", "VIALPIG", "VIALPL", "VIALSD", "VIALSU" }));
+        cdpack2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "AMP", "AP", "BAG", "BLPK", "BOT", "BOTAP", "BOTDIS", "BOTDR", "BOTGL", "BOTPL", "BOTPU", "BOTSPR", "BOTUD", "BOX", "BOXUD", "CAN", "CSTR", "CRTN", "CTG", "CASE", "CELLO", "CTR", "CUP", "CUPUD", "CYL", "DEW", "DLPK", "DSPK", "DRUM", "INHL", "INHLRE", "JAR", "JUG", "KIT", "NS", "PKG", "PKGCOM", "PKT", "POU", "SUPSACK", "SYR", "SYRGL", "SYRPL", "TABMIND", "TANK", "TRAY", "TUBE", "TUBEAP", "VIAL", "VIALDIS", "VIALGL", "VIALMD", "VIALPAT", "VIALPHR", "VIALPIG", "VIALPL", "VIALSD", "VIALSU", "DROPS" }));
 
         jLabel31.setText("Purchase Price :");
 
@@ -3406,7 +3495,7 @@ public class Pharmacy extends javax.swing.JFrame{
 
         lbl_durationOList1.setText("Duration :");
 
-        cLduration.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "1", "2", "3", "4", "5", "6" }));
+        cLduration.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6" }));
 
         cLdurationType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Day", "Week", "Month" }));
 
@@ -3416,53 +3505,70 @@ public class Pharmacy extends javax.swing.JFrame{
 
         lbl_cautionary.setText("Cautionary :");
 
+        cLqtyT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "ml", "garg", "supp", "puff", " " }));
+
+        txt_cautionary.setColumns(20);
+        txt_cautionary.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        txt_cautionary.setLineWrap(true);
+        txt_cautionary.setRows(5);
+        txt_cautionary.setWrapStyleWord(true);
+        txt_cautionary.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jScrollPane24.setViewportView(txt_cautionary);
+
         jLabel30.setText("Expired Date :");
 
         jLabel33.setText("Classification :");
-
-        cClassification.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Antacid/ Anti Spasmodic", "Anti Diarrheal", "Anti Dyspepsia", "Anti- Gout Agents", "Anti- Obesity", "Anti-Ashmatic & Bronchodilator", "Antibiotic", "Antiemetic / Anti Vertigo", "Anti-fungal", "Antihelmintic", "Anti-Histamine", "Antiseptic", "Anti-viral", "Cough & Cold Preparations", "Creams & Ointment", "Drugs Used in Substance  Dependence ", "Eye/Ear Drop", "Haermorrhoids", "Injection", "IV Drips", "Laxatives", "Lozenges", "Mucolytics Agents", "Nebulizer", "Nose prep", "NSAIDs", "Oral prep", "Oral Steroids", "Others", "Peripheral vasodilators/  migraine drug", "Shampoo", "Urinary Preparation", "Vitamin & supplements" }));
-        cClassification.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txt_expdate.setDateFormatString("dd/MM/yyyy");
         txt_expdate.setMaxSelectableDate(new java.util.Date(253370739713000L));
         txt_expdate.setMinSelectableDate(new java.util.Date(-62135794687000L));
 
-        cLqtyT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "ml", "garg", "supp", "puff", " " }));
+        cClassification.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Antacid/ Anti Spasmodic", "Anti Diarrheal", "Anti Dyspepsia", "Anti- Gout Agents", "Anti- Obesity", "Anti-Ashmatic & Bronchodilator", "Antibiotic", "Antiemetic / Anti Vertigo", "Anti-fungal", "Antihelmintic", "Anti-Histamine", "Antiseptic", "Anti-viral", "Cough & Cold Preparations", "Creams & Ointment", "Drugs Used in Substance  Dependence ", "Eye/Ear Drop", "Haermorrhoids", "Injection", "IV Drips", "Laxatives", "Lozenges", "Mucolytics Agents", "Nebulizer", "Nose prep", "NSAIDs", "Oral prep", "Oral Steroids", "Others", "Peripheral vasodilators/  migraine drug", "Shampoo", "Urinary Preparation", "Vitamin & supplements" }));
+        cClassification.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel33)
-                    .addComponent(jLabel30)
-                    .addComponent(lbl_cautionary)
-                    .addComponent(lbl_instructionOList1)
-                    .addComponent(lbl_durationOList1)
-                    .addComponent(lbl_frequencyOList1)
-                    .addComponent(lbl_quantityOList1))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addComponent(cClassification, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel30))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cClassification, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                                .addComponent(txt_expdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(77, 77, 77))))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_cautionary)
+                            .addComponent(lbl_instructionOList1)
+                            .addComponent(lbl_durationOList1)
+                            .addComponent(lbl_frequencyOList1)
+                            .addComponent(lbl_quantityOList1))
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(txt_Lqty, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cLqtyT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel16Layout.createSequentialGroup()
+                                        .addComponent(txt_Lqty, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cLqtyT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel16Layout.createSequentialGroup()
+                                        .addComponent(cLduration, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(62, 62, 62)
+                                        .addComponent(cLdurationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cLfrequency, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cInstruction, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(92, 92, 92))
                             .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(cLduration, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(cLdurationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(cLfrequency, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cInstruction, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_expdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_cautionary, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(92, 92, 92))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane24)
+                                .addContainerGap())))))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3486,9 +3592,9 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(lbl_instructionOList1)
                     .addComponent(cInstruction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_cautionary)
-                    .addComponent(txt_cautionary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane24, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel30)
@@ -3497,7 +3603,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel33)
                     .addComponent(cClassification, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
@@ -3509,9 +3615,11 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(436, 436, 436))
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3541,13 +3649,13 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_mdcLayout.createSequentialGroup()
                         .addGap(59, 59, 59)
-                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 1148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(777, Short.MAX_VALUE))
+                .addContainerGap(1042, Short.MAX_VALUE))
             .addGroup(pnl_mdcLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 697, Short.MAX_VALUE))
+                .addGap(0, 959, Short.MAX_VALUE))
         );
         pnl_mdcLayout.setVerticalGroup(
             pnl_mdcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3692,7 +3800,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(pnl_importLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1407, Short.MAX_VALUE))
+                .addContainerGap(1669, Short.MAX_VALUE))
         );
         pnl_importLayout.setVerticalGroup(
             pnl_importLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3704,7 +3812,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(lbl_browseFileConvert1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(579, Short.MAX_VALUE))
+                .addContainerGap(754, Short.MAX_VALUE))
         );
 
         tpnl_manageDCode.addTab("Import", pnl_import);
@@ -3849,13 +3957,13 @@ public class Pharmacy extends javax.swing.JFrame{
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_userInfoUpdateStock2, javax.swing.GroupLayout.DEFAULT_SIZE, 1998, Short.MAX_VALUE)
+            .addComponent(lbl_userInfoUpdateStock2, javax.swing.GroupLayout.DEFAULT_SIZE, 2260, Short.MAX_VALUE)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(968, Short.MAX_VALUE))
+                .addContainerGap(1242, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3865,7 +3973,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(617, Short.MAX_VALUE))
+                .addContainerGap(804, Short.MAX_VALUE))
         );
 
         tpnl_manageDCode.addTab("Add Supplier", jPanel13);
@@ -3902,7 +4010,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(btnMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(330, 330, 330)
                 .addComponent(btnYearly, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1141, Short.MAX_VALUE))
+                .addContainerGap(1215, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3912,7 +4020,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(btnDaily, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnYearly, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(921, Short.MAX_VALUE))
+                .addContainerGap(1000, Short.MAX_VALUE))
         );
 
         tpnl_manageDCode.addTab("Dispensed Report", jPanel2);
@@ -3925,7 +4033,7 @@ public class Pharmacy extends javax.swing.JFrame{
         );
         pnl_convertAndManageLayout.setVerticalGroup(
             pnl_convertAndManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tpnl_manageDCode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
+            .addComponent(tpnl_manageDCode, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         tpnl_pharmacy.addTab("INVENTORY", pnl_convertAndManage);
@@ -4093,8 +4201,15 @@ public class Pharmacy extends javax.swing.JFrame{
             dLdurationType = (String) cLdurationType.getSelectedItem();
             dLadvisory = (String) cInstruction.getSelectedItem();
             dLcaution = txt_cautionary.getText();
-            Format formatter2 = new SimpleDateFormat("dd/MM/yyyy");
-            dLexpdate = formatter2.format(txt_expdate.getDate());//date
+            if(txt_expdate.getDate() != null && !txt_expdate.getDate().equals(""))
+            {
+                Format formatter2 = new SimpleDateFormat("dd/MM/yyyy");
+                dLexpdate = formatter2.format(txt_expdate.getDate());//date
+            }
+            else
+            {
+                dLexpdate = "";
+            }
             dLclassification = (String) cClassification.getSelectedItem();
             supname = (String) cb_supplierUStock.getSelectedItem();
 
@@ -4118,10 +4233,10 @@ public class Pharmacy extends javax.swing.JFrame{
                 ps.setString(6, ddosage);
                 ps.setString(7, dstrength);
                 ps.setString(8, dLadvisory);
-                ps.setString(9, dstockqty);
-                ps.setString(10, dLqty);//d
+                ps.setDouble(9, Double.parseDouble(dstockqty));
+                ps.setDouble(10, Double.parseDouble(dLqty));//d
                 ps.setString(11, dLqtyt);
-                ps.setString(12, dLduration );//n
+                ps.setInt(12, Integer.parseInt(dLduration));//n
                 ps.setString(13, dLdurationType );
                 ps.setString(14, dLfreq );
                 ps.setString(15, dLcaution );
@@ -4129,14 +4244,53 @@ public class Pharmacy extends javax.swing.JFrame{
                 ps.setString(17, dLclassification );
                 ps.setString(18, dstatus);
                 ps.setString(19, dloccode);
-                ps.setString(20, dsellp);//d
-                ps.setString(21, dcostp);//d
-                ps.setString(22, dpackaging);
+                ps.setDouble(20, Double.parseDouble(dsellp));//d
+                ps.setDouble(21, Double.parseDouble(dcostp));//d
+                ps.setInt(22, Integer.parseInt(dpackaging));
                 ps.setString(23, dpackagingType);
-                ps.setString(24, dpriceppack);
+                ps.setDouble(24, Double.parseDouble(dpriceppack));
+                ps.setString(25, dmdc);
                 //update data
                 ps.executeUpdate();
-                              
+                
+                try {
+                    String [] arrPS = new String[25];
+                    arrPS[0]=(dmdc);
+                    arrPS[1]=("Utem");
+                    arrPS[2]=(dtraden);
+                    arrPS[3]=(dgnrn);
+                    arrPS[4]=(droute);
+                    arrPS[5]=(ddosage);
+                    arrPS[6]=(dstrength);
+                    arrPS[7]=(dLadvisory);
+                    arrPS[8]=(dstockqty);
+                    arrPS[9]=(dLqty);
+                    arrPS[10]=(dLqtyt);
+                    arrPS[11]=(dLduration);
+                    arrPS[12]=(dLdurationType);
+                    arrPS[13]=(dLfreq);
+                    arrPS[14]=(dLcaution);
+                    arrPS[15]=(dLexpdate);
+                    arrPS[16]=(dLclassification);
+                    arrPS[17]=(dstatus);
+                    arrPS[18]=(dloccode);
+                    arrPS[19]=(dsellp);
+                    arrPS[20]=(dcostp);
+                    arrPS[21]=(dpackaging);
+                    arrPS[22]=(dpackagingType);
+                    arrPS[23]=(dpriceppack);
+                    arrPS[24]=(dmdc);
+                    
+                    Boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
+                    String ggr = "";
+                } catch (Exception e) {
+                    System.out.println("got error.."+e.getMessage());
+                    JOptionPane.showMessageDialog(null, "Unable to save at central Server. Please try again soon");
+                }
+                
+                //popup windows update success
+                JOptionPane.showMessageDialog(btn_updateMDC, "Update success!");
+                
                 String sql1 = "INSERT INTO PIS_PRODUCT_SUPPLIER (Update_Stock_Date, Staff_ID, Supplier_ID, UD_MDC_Code) VALUES (?,?,?,?)";
 
                 //prepare sql query and execute it
@@ -4150,9 +4304,6 @@ public class Pharmacy extends javax.swing.JFrame{
                 
                 //update data
                 ps1.execute();
-
-                //popup windows update success
-                JOptionPane.showMessageDialog(btn_updateMDC, "Update success!");
 
                 //clear textfield
                 txt_mdcCode.setText("");
@@ -4294,7 +4445,7 @@ public class Pharmacy extends javax.swing.JFrame{
                         int d_qty = 0;
                         
                         try {
-                            d_qty = Integer.parseInt(tbl_drugList.getValueAt(i, 5).toString());
+                            d_qty = Integer.parseInt(tbl_drugList.getValueAt(i, 7).toString()); // change from 5 to 7 - hadi
                             instruction = String.valueOf(tbl_drugList.getValueAt(i, 2).toString());
                         } catch (Exception eex) {
                             d_qty = 0;
@@ -4347,7 +4498,7 @@ public class Pharmacy extends javax.swing.JFrame{
 
                         try {
 
-                            d_qty = Integer.parseInt(tbl_drugList.getValueAt(i, 5).toString());
+                            d_qty = Integer.parseInt(tbl_drugList.getValueAt(i, 7).toString()); //change from 5 to 7 - hadi
                             instruction = String.valueOf(tbl_drugList.getValueAt(i, 2).toString());
                         } catch (Exception eex) {
                             d_qty = 0;
@@ -4373,12 +4524,21 @@ public class Pharmacy extends javax.swing.JFrame{
 //            Session.setCurr_stat(false);
 
             JOptionPane.showMessageDialog(null, "Drugs have been dispensed!");
+            Func.destroyPatientQueue(txt_pmiNo.getText());
         }//else
 
         resetTable();
         clearQueue();
         tab_drugOrder.setSelectedIndex(0);
         getQueue();
+
+        //clear data from jTable1 - hadi
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j >= 6; j++) {
+                jTable1.getModel().setValueAt("", i, j);
+                }
+        }
+        //
     }//GEN-LAST:event_btn_dispenseActionPerformed
 
     private void btn_browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browseActionPerformed
@@ -5175,7 +5335,7 @@ public class Pharmacy extends javax.swing.JFrame{
         //get selected row number
         int rowNo = tbl_drugOList.getSelectedRow();
 
-        productName = (String) tbl_drugOList.getValueAt(rowNo, 1);
+        productName = (String) tbl_drugOList.getValueAt(rowNo, 1); 
         frequency = (String) tbl_drugOList.getValueAt(rowNo, 2);
         route = (String) tbl_drugOList.getValueAt(rowNo, 3);
         dosageForm = (String) tbl_drugOList.getValueAt(rowNo, 4);
@@ -5748,6 +5908,7 @@ public class Pharmacy extends javax.swing.JFrame{
     }//GEN-LAST:event_tbl_drugOrderMouseClicked
 
     private void tbl_drugListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_drugListMouseClicked
+
         //get the clicked row
         int r = tbl_drugList.getSelectedRow();
         int c = tbl_drugList.getSelectedColumn();
@@ -5773,6 +5934,7 @@ public class Pharmacy extends javax.swing.JFrame{
             }
         } catch (Exception e) {
         }
+        
     }//GEN-LAST:event_tbl_drugListMouseClicked
 public void setSelectedAppointment(String selectedAppointment, String selectedTime) {
         
@@ -5785,7 +5947,7 @@ public void setSelectedAppointment(String selectedAppointment, String selectedTi
 
         try {
             //
-            AppointmentInfo = appointment.getAppointmentBiodata(selectedAppointment);
+            AppointmentInfo = appointment.getAppointmentBiodata(selectedAppointment, selectedTime);
             //Friza getEHR
             
         } catch (Exception ex) {
@@ -5858,7 +6020,7 @@ public void setSelectedAppointment(String selectedAppointment, String selectedTi
                     
                     DBConnection.getImpl().sayHello("UMAR");
 
-                    ArrayList<String> arData = DBConnection.getImpl().getEHRRecords(pmiNo); // get PMS by IC
+                    ArrayList<String> arData = DBConnection.getImpl().getEHRRecords(pmiNo, 1); // get PMS by IC
                     cpyFile = arData.get(0);
                     status = arData.get(1);
                     cpyFile_history = arData.get(2);
@@ -6050,6 +6212,7 @@ public void setSelectedAppointment(String selectedAppointment, String selectedTi
 
     }
 public void resetTable(){
+
     //reset tbl order
     tbl_drugOList.setModel(new javax.swing.table.DefaultTableModel(
     new Object [][] {
@@ -6088,7 +6251,7 @@ txt_doctor.setText("");
 jScrollPane17.setViewportView(tbl_drugOList);
     
     for(int i = 0; i < 100; i++) {
-        for(int j = 0; j < 7; j++) {
+        for(int j = 0; j < 9; j++) {
             tbl_drugOrder.getModel().setValueAt("", i, j);
             tbl_drugList.getModel().setValueAt("", i, j);
         }
@@ -6192,7 +6355,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
         }
         
         try {
-            AppointmentInfo = appointment.getAppointmentBiodata(pmiNo);
+            AppointmentInfo = appointment.getAppointmentBiodata(pmiNo, "");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -7373,6 +7536,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int i = 1;
         try {
             //String source = "C:/PSMII_v7.3/data_mdc.csv";
             String source = "assets/pis_mdc2.csv";
@@ -7383,25 +7547,80 @@ jScrollPane17.setViewportView(tbl_drugOList);
             javax.swing.JFileChooser FC2=new JFileChooser("assets/");
             FC2.showOpenDialog(this);
             FC2.setCurrentDirectory(new File("db/"));
-             
+            
+            FileInputStream fis = new FileInputStream(FC2.getSelectedFile());
+            
+            HSSFWorkbook workbook = new HSSFWorkbook(fis);
+            HSSFSheet sheet = workbook.getSheetAt(0);
+            Iterator<Row> rowIterator = sheet.iterator();
+            rowIterator.next();
+                   
+            while(rowIterator.hasNext())
+            {
+                i++;
+                Row row = rowIterator.next();     
+                if(!ispkPISMDC2exist(row.getCell(0).toString()))
+                {
+                    ArrayList<String> strArr = new ArrayList<String>();
+                    for (int n = row.getFirstCellNum() ;  n < row.getLastCellNum() && n < 24; n++)
+                    {
+                        if(n == 8 || n == 9 || n == 11 || n == 19 || n == 20 || n == 21 || n == 23)
+                        {
+                            if(row.getCell(n) ==null )
+                            {
+                                strArr.add("1");
+                            }
+                            else if(row.getCell(n).toString().equals(""))
+                            {
+                                strArr.add("1");
+                            }
+                            else
+                            {
+                                strArr.add(row.getCell(n).toString());
+                            }
+                        }
+                        else if( n == 15 && row.getCell(n)!=null && !row.getCell(n).toString().equals("") ) // to convert date so that length will be fix to 10
+                        {
+                            Calendar cal = Calendar.getInstance();                           
+                            cal.setTime(new SimpleDateFormat("dd-MMM-yyyy").parse(row.getCell(n).toString()));
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                            dLexpdate = sdf.format(cal.getTime());//date
+                            strArr.add(dLexpdate);
+                        }
+                        else
+                        {
+                            strArr.add(row.getCell(n)==null ? "" :row.getCell(n).toString());
+                        }
+                    }
+                    fnInsertPISMDC2(strArr);
+                    //String ggrr = "";
+                }
+            }
             //name of source file
             //File file = new File(source);
             //File sourceFile = new File(file.getAbsoluteFile()+source);
             //File sourceFile = new File(file.getAbsoluteFile()+filename);
-            File sourceFile = new File(source);
-            String name = sourceFile.getName();
-          
-            File targetFile = new File(target+name);
-            System.out.println("Copying file from " + sourceFile.getName() +" to "+source+ " from Java Program");
+//            File sourceFile = new File(source);
+//            String name = sourceFile.getName();
+//          
+//            File targetFile = new File(target+name);
+//            System.out.println("Copying file from " + sourceFile.getName() +" to "+source+ " from Java Program");
             //JOptionPane.showMessageDialog(btn_updateUStock, "Please select a drug to update its stock data!");
            
             //copy file from one location to other
-            FileUtils.copyFile(sourceFile, targetFile);
+//            FileUtils.copyFile(sourceFile, targetFile);
             
-            JOptionPane.showMessageDialog(null, "Copying of file from Java program is completed\n");
+            JOptionPane.showMessageDialog(null, "Import Data From XLS done");
             System.out.println("Copying of file from Java program is completed\n");
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Unable to Import. Please ensure file XLS Excel 2003 only");
             Logger.getLogger(Pharmacy.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException sqlEx)
+        {
+            System.out.println(sqlEx+".Stuck at line :"+i);
+        } catch(ParseException parEx)
+        {
+            System.out.println(parEx);
         }
         
 //       //TEST 2
@@ -7431,13 +7650,102 @@ jScrollPane17.setViewportView(tbl_drugOList);
 //        jTextField1.setText(urlAdd);
     }//GEN-LAST:event_jButton2ActionPerformed
     
+    //fn to insert to tbl PIS_MDC2  -- Hariz 20141229
+    private void fnInsertPISMDC2 ( ArrayList<String> arrData  ) throws SQLException
+    {
+  
+        String sql = "INSERT INTO PIS_MDC2 "
+                        + "(UD_MDC_CODE,UD_ATC_CODE, D_TRADE_NAME,D_GNR_NAME,D_ROUTE_CODE,"
+                        + "D_FORM_CODE,D_STRENGTH,D_ADVISORY_CODE,D_STOCK_QTY,D_QTY,D_QTYT,"
+                        + "D_DURATION,D_DURATIONT,D_FREQUENCY,D_CAUTION_CODE, D_EXP_DATE, D_CLASSIFICATION,"
+                        + "STATUS, D_LOCATION_CODE, D_SELL_PRICE, D_COST_PRICE,D_PACKAGING,D_PACKAGINGT,"
+                        + "D_PRICE_PPACK )"
+                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+
+        //prepare sql query and execute it
+        PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+        
+        if(arrData.size() != 24) //IMPORTANT..If more table column added, need to change this also meh..
+        {
+            int arrSize = arrData.size();
+            for(; arrSize < 24 ; arrSize++)
+            {
+                if(arrSize == 8 || arrSize == 9 || arrSize == 11 || arrSize == 19 || arrSize == 20 || arrSize == 21 || arrSize == 23)
+                {
+                    arrData.add("1"); 
+                }
+                else
+                {
+                   arrData.add(""); 
+                }
+                
+            }
+            
+        }
+        for(int i = 1 ; i <=  arrData.size() ; i++)
+        {
+//            if(i == 9 || i == 10 || i == 12 || i == 20 || i == 21 || i == 22 || i == 24)
+//            {
+//                ps.setDouble(i, Double.parseDouble(arrData.get(i-1)));
+//            }
+//            else
+            {
+              ps.setString(i, arrData.get(i-1));  
+            }
+            
+        }
+              
+
+        ps.execute();
+        
+        try {
+            String [] fixArrData = new String[arrData.size()];
+            fixArrData = arrData.toArray(fixArrData);
+            Boolean bool = DBConnection.getImpl().setQuery(sql, fixArrData);
+            String ej = "ehhhh";
+            
+        } catch (Exception e) {
+        }
+    }
+    
+   
+    private boolean ispkPISMDC2exist(String ud_mdc_code) throws SQLException
+    {
+        String sql = "Select UD_MDC_CODE from PIS_MDC2 where UD_MDC_CODE = ?";
+        
+        PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+        ps.setString(1,ud_mdc_code);
+        
+        ResultSet rs = ps.executeQuery();
+        boolean boo = rs.next();
+        return boo;
+        
+    }
+     //fn to insert to tbl PIS_MDC2  -- Hariz 20141229 END
+    
     private void tbl_patientInQueueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_patientInQueueMouseClicked
 
+        //to edit tbl_drugList with single click - hadi
+        ((DefaultCellEditor) tbl_drugList.getDefaultEditor(Object.class)).setClickCountToStart(1);
+
+        for (int i = 0; i < tbl_drugList.getColumnModel().getColumnCount(); i++) {
+            final DefaultCellEditor defaultEditor = (DefaultCellEditor) tbl_drugList.getDefaultEditor(tbl_drugList.getColumnClass(i));
+            defaultEditor.setClickCountToStart(1);
+        }
+        //
+        
         resetTable();
         
         int index_row = tbl_patientInQueue.getSelectedRow();
         int index_col = tbl_patientInQueue.getSelectedColumn();
         
+        String pmiNo = tbl_patientInQueue.getValueAt(index_row, 0).toString();
+        String name = tbl_patientInQueue.getValueAt(index_row, 1).toString();
+//        String str_pdi = pmiNo + "|" + name + "|" 
+//                + Session.getUser_name() + "|Pharmacy" ;
+//        Func.callPatient(str_pdi);
+//        
         try {
             if(!tbl_patientInQueue.getValueAt(index_row, index_col).equals("")) {
                 tab_drugOrder.setSelectedIndex(1);
@@ -7506,6 +7814,39 @@ jScrollPane17.setViewportView(tbl_drugOList);
                     order_date2.setText(pisom.get(2));
                     loc_code.setText(pisom.get(3));
                 }
+                
+                //add data to jTable1. Add & edit by hadi                
+                ArrayList<String> C_TXNDATE_data = DBConnection.getImpl().getEHRRecords(pmiNo, 1);
+
+                System.out.println(C_TXNDATE_data.get(2));
+
+                MainRetrieval mr = new MainRetrieval();
+                String txndata1 = C_TXNDATE_data.get(2);
+                mr.startProcess(txndata1);
+
+                String[][] dataDGS = mr.getData("DGS");
+                int rowsDGS = mr.getRowNums();
+
+                int patient_dgs_row = 0;
+                if (rowsDGS > 0) {
+                  for (int dgs_n = 0; dgs_n < rowsDGS; dgs_n++)
+                  {
+                    System.out.println("orderDate " + orderDate);
+                    System.out.println("Episode date " + dataDGS[dgs_n][0]);
+                    if (orderDate.compareTo(dataDGS[dgs_n][0]) == 0)
+                    {
+
+                      this.jTable1.getModel().setValueAt(dataDGS[dgs_n][0], patient_dgs_row, 0);
+                      this.jTable1.getModel().setValueAt(dataDGS[dgs_n][20], patient_dgs_row, 1);
+                      this.jTable1.getModel().setValueAt(dataDGS[dgs_n][8], patient_dgs_row, 2);
+                      this.jTable1.getModel().setValueAt(dataDGS[dgs_n][10], patient_dgs_row, 3);
+                      this.jTable1.getModel().setValueAt(dataDGS[dgs_n][19], patient_dgs_row, 4);
+                      patient_dgs_row++;
+                      System.out.println("patient_dgs_row " + patient_dgs_row);
+                      System.out.println("dgs_n " + dgs_n);
+                    }
+                  }
+                }                
 
                 ArrayList<ArrayList<String>> od = DBConnection.getImpl().getDrugOrderDetail(order_no2.getText());
 
@@ -7514,15 +7855,18 @@ jScrollPane17.setViewportView(tbl_drugOList);
 
                 //put od data into drug order
                 for (int i = 0; i < od.size(); i++) {
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(0), row1, 0); //0
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(1), row1, 1); //1
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(7), row1, 2); //7
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(10), row1, 3); //9
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(13), row1, 4); //13
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(9), row1, 5); //11
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(12), row1, 6); //12
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(0), row1, 0);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(1), row1, 1);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(6), row1, 2);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(2), row1, 3);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(8), row1, 4);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(10), row1, 5);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(13), row1, 6);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(9), row1, 7);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(12), row1, 8);
                     row1++;
                 }
+                //
 
                 System.out.println(".....Message Sent....");
             } catch (Exception e) {
@@ -7558,22 +7902,6 @@ jScrollPane17.setViewportView(tbl_drugOList);
                     loc_code.setText(pisom.get(3));
                 }
 
-                ArrayList<ArrayList<String>> od = DBConnection.getDrugOrderDetail(order_no2.getText());
-
-                row1 = 0;
-                row2 = 0;
-
-                //put od data into drug order
-                for (int i = 0; i < od.size(); i++) {
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(0), row1, 0);
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(1), row1, 1);
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(7), row1, 2);
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(10), row1, 3);//9
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(13), row1, 4);
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(11), row1, 5);//11
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(12), row1, 6);
-                    row1++;
-                }
 
                 pnl_patientDrugOrder = new javax.swing.JPanel();
                 pnl_patientDrugOrder.setVisible(true);
@@ -7587,6 +7915,31 @@ jScrollPane17.setViewportView(tbl_drugOList);
 //        }
 //        Session.setPrev_stat(false);
 //        Session.setCurr_stat(false);
+            
+        //expand column width - hadi    
+            tbl_drugOrder.getColumnModel().getColumn(0).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(1).setPreferredWidth(300);
+            tbl_drugOrder.getColumnModel().getColumn(2).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(3).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(4).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(6).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(7).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(8).setPreferredWidth(35);
+            tbl_drugOrder.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+           
+            tbl_drugList.getColumnModel().getColumn(0).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(1).setPreferredWidth(300);
+            tbl_drugList.getColumnModel().getColumn(2).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(3).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(4).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(6).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(7).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(8).setPreferredWidth(35);
+            tbl_drugList.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        //
+            
+            
+            
 
     }//GEN-LAST:event_tbl_patientInQueueMouseClicked
 
@@ -8018,7 +8371,32 @@ jScrollPane17.setViewportView(tbl_drugOList);
         if (txt_mdcCode.getText().equals("")) {
             //popup windows search drug first
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter product to add!");
-        } else {
+        } else if(txt_expdate.getDate() == null) 
+        { 
+            JOptionPane.showMessageDialog(btn_addmdc, "Please select expired date!");
+        }else if(txt_drugNameMDC.getText().equals("")){  //20151006 Lim Kai Li -- Add validation
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter trade name to add!");
+        }else if(txt_ingredientCode.getText().equals("")){  //20151006 Lim Kai Li -- Add validation
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter generic name to add!");
+        }else if(txt_drugRoute.getText().equals("")){
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter drug route to add!");
+        }else if(txt_drugStrength.getText().equals("")){
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter drug strength to add!");
+        }
+        /*else if(txt_costPrice.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter purchase price to add!");
+        }
+        else if(txt_sellprice.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter sell price to add!");
+        } */
+        else if(txt_Lqty.getText().equals("")){
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter dosage to add!");
+        }else if(txt_cautionary.getText().equals("")){
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter cautionary to add!");
+        }   // 20151006 Lim Kai Li -- Add validation END
+        else {
 
             //get input from textfield
             dmdc = txt_mdcCode.getText();
@@ -8028,7 +8406,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             droute = txt_drugRoute.getText();
             ddosage = (String)cdosage_form.getSelectedItem();
             dstrength = txt_drugStrength.getText();
-            dstockqty = txt_stockQty.getText();//double
+            dstockqty = txt_stockQty.getText().equals("")? "0" : txt_stockQty.getText();//double
             dloccode = txt_locCode.getText();
             
             if (rbt_activeMDC.getSelectedObjects() != null) {
@@ -8036,12 +8414,12 @@ jScrollPane17.setViewportView(tbl_drugOList);
             } else {
                 dstatus = "FALSE";
             }
-            dpackaging = dpack1.getText();
+            dpackaging = dpack1.getText().equals("")? "0" :dpack1.getText();
             dpackagingType = (String)cdpack2.getSelectedItem();
-            dpriceppack = d_priceppack.getText();//double
-            dcostp = txt_costPrice.getText();//double
-            dsellp = txt_sellprice.getText();//double
-            dLqty = txt_Lqty.getText();//double
+            dpriceppack = d_priceppack.getText().equals("") ? "0" : d_priceppack.getText() ;//double
+            dcostp = txt_costPrice.getText().equals("")? "0" : txt_costPrice.getText() ;//double
+            dsellp = txt_sellprice.getText().equals("") ? "0" : txt_sellprice.getText();//double
+            dLqty = txt_Lqty.getText().equals("") ? "0" : txt_Lqty.getText();//double
             dLqtyt = (String)cLqtyT.getSelectedItem();
             dLfreq = (String)cLfrequency.getSelectedItem();
             dLduration = (String)cLduration.getSelectedItem();//numeric
@@ -8101,6 +8479,41 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 ps.setString(23, dpackagingType);
                 ps.setString(24, dpriceppack);
                 
+                //update data
+                ps.execute();
+                
+                try {
+                    String [] arrPS = new String[24];
+                    arrPS[0]=(dmdc);
+                    arrPS[1]=("Utem");
+                    arrPS[2]=(dtraden);
+                    arrPS[3]=(dgnrn);
+                    arrPS[4]=(droute);
+                    arrPS[5]=(ddosage);
+                    arrPS[6]=(dstrength);
+                    arrPS[7]=(dLadvisory);
+                    arrPS[8]=(dstockqty);
+                    arrPS[9]=(dLqty);
+                    arrPS[10]=(dLqtyt);
+                    arrPS[11]=(dLduration);
+                    arrPS[12]=(dLdurationType);
+                    arrPS[13]=(dLfreq);
+                    arrPS[14]=(dLcaution);
+                    arrPS[15]=(dLexpdate);
+                    arrPS[16]=(dLclassification);
+                    arrPS[17]=(dstatus);
+                    arrPS[18]=(dloccode);
+                    arrPS[19]=(dsellp);
+                    arrPS[20]=(dcostp);
+                    arrPS[21]=(dpackaging);
+                    arrPS[22]=(dpackagingType);
+                    arrPS[23]=(dpriceppack);
+                    
+                    Boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Unable to save data to central server. Please save again when online");
+                }
+                
                 String sql1 = "INSERT INTO PIS_PRODUCT_SUPPLIER (Update_Stock_Date, Staff_ID, Supplier_ID, UD_MDC_Code) VALUES (?,?,?,?)";
 
                 //prepare sql query and execute it
@@ -8112,8 +8525,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 ps1.setString(4, dmdc);
 
                 
-                //update data
-                ps.execute();
+                
                 //update data
                 ps1.execute();
 
@@ -8167,7 +8579,8 @@ jScrollPane17.setViewportView(tbl_drugOList);
             cClassification.setSelectedItem("");
                 
             } catch (Exception e) {
-                System.out.println("insert pis mdc2" + e);
+                JOptionPane.showMessageDialog(btn_addmdc, "Duplicate Drugs Code!");
+                System.out.println("insert pis mdc2" + e); 
                 e.printStackTrace();
             }
         }
@@ -8187,6 +8600,14 @@ jScrollPane17.setViewportView(tbl_drugOList);
             ps.execute();
             ps.close();
             
+            try {
+                String [] arr = new String [1];
+                arr[0] = txt_mdcCode.getText();
+                boolean bool = DBConnection.getImpl().setQuery(sql, arr);
+            } catch (Exception e) {
+                
+            }
+            String drugName = txt_drugNameMDC.getText();
             //clear textfield
             txt_mdcCode.setText("");
 //            catc.setSelectedItem("-");
@@ -8215,7 +8636,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             cClassification.setSelectedItem("");
             
             
-            JOptionPane.showMessageDialog(null,"Deleted "+ dmdc); 
+            JOptionPane.showMessageDialog(null,"Deleted "+ drugName); 
         }catch(Exception e){
             
            JOptionPane.showMessageDialog(null,"del from pis mdc2 "+ e); 
@@ -8350,6 +8771,19 @@ public void toExcel(JTable tbl_mdc, File file){
         
         fnCreateXLS(strSql,"Monthly_Dispensed_Drug.xls");
     }//GEN-LAST:event_btnMonthlyActionPerformed
+
+    private void btnCallPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCallPatientActionPerformed
+        // TODO add your handling code here:
+        String name = txt_patientName.getText();
+        String pmiNo = txt_pmiNo.getText();
+        String str_pdi = pmiNo + "|" + name + "|" 
+                + Session.getUser_name() + "|Pharmacy" ;
+        Func.callPatient(str_pdi);
+    }//GEN-LAST:event_btnCallPatientActionPerformed
+
+    private void order_no2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_order_no2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_order_no2ActionPerformed
    
     void fnCreateXLS(String strSQL , String fName)
     {
@@ -8423,6 +8857,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JDialog Spatient;
     private javax.swing.JPanel Spatient_panel;
     private javax.swing.JTextField arrival_date;
+    private javax.swing.JButton btnCallPatient;
     private javax.swing.JButton btnDaily;
     private javax.swing.JButton btnMonthly;
     private static javax.swing.JButton btnStatus;
@@ -8563,6 +8998,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
@@ -8570,12 +9006,14 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
+    private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane20;
     private javax.swing.JScrollPane jScrollPane21;
     private javax.swing.JScrollPane jScrollPane22;
     private javax.swing.JScrollPane jScrollPane23;
+    private javax.swing.JScrollPane jScrollPane24;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -8585,6 +9023,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jT_S3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTatc;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
@@ -8693,7 +9132,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JTextField txt_bodOList;
     private javax.swing.JTextField txt_categoryCode;
     private javax.swing.JTextArea txt_caution;
-    private javax.swing.JTextField txt_cautionary;
+    private javax.swing.JTextArea txt_cautionary;
     private javax.swing.JTextField txt_costPrice;
     private javax.swing.JTextField txt_dadvisory_code;
     private javax.swing.JTextField txt_datc_code;

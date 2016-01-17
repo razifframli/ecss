@@ -6,10 +6,14 @@
 
 package javaapplication1;
 
+import Helper.VoiceOutput;
+import Helper.VoiceOutput2;
 import api.Queue;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -30,11 +34,11 @@ public class CheckNewPatient implements Runnable {
 
         while (active) {
             
-            if (i == 2) {
-                cons.setAlwaysOnTop(true);
-            } else {
-                cons.setAlwaysOnTop(false);
-            }
+//            if (i == 2) {
+//                cons.setAlwaysOnTop(true);
+//            } else {
+//                cons.setAlwaysOnTop(false);
+//            }
             
             // thread activity.
             if (isNewPatient()) {
@@ -44,9 +48,22 @@ public class CheckNewPatient implements Runnable {
                 } else {
                     cons.lbl_new_patient.setVisible(true);
                 }
+                if (i % 20 == 0 && !cons.checkPatient2()) { // x panggil patient
+                    if (i % 200 == 0) {
+                        cons.setAlwaysOnTop(true);
+                    } else {
+                        cons.setAlwaysOnTop(false);
+                    }
+                    cons.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//                    VoiceOutput.getSound("Doctor, you've got new patient");
+                    VoiceOutput2.speak("Doctor, you've got new patient");
+                } else {
+                    cons.setAlwaysOnTop(false);
+                }
                 //cons.setAlwaysOnTop(true);
             } else {
                 i = 0;
+                cons.setAlwaysOnTop(false);
                 cons.lbl_new_patient.setVisible(false);
                 //cons.setAlwaysOnTop(false);
             }
@@ -62,13 +79,20 @@ public class CheckNewPatient implements Runnable {
     private boolean isNewPatient() {
         try {
             Queue que = new Queue();
-            Vector vec = que.getQueueNameList("");
-            if (vec.size() > 0) {
+            Vector<Vector<String>> vec = que.getQueueNameList("", 1);
+            ArrayList<String> data = new ArrayList<String>();
+            for (int i = 0; i < vec.size(); i++) {
+                if (vec.get(i).get(5).toUpperCase().contains("Waiting".toUpperCase())) {
+                    data.add(vec.get(i).get(5));
+                }
+            }
+            if (data.size() > 0) {
                 return true;
             } else {
                 return false;
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
             return false;
         }
     } 

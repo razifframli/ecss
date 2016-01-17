@@ -354,7 +354,7 @@ public class DataManagement extends javax.swing.JFrame {
                     pmino = tbl_transaction.getModel().getValueAt(i, 0).toString();
                     date = data[i][2];
                     txncode = Integer.parseInt(data[i][0]);
-                    if( ehr.insertCentralSync(1, txndata, pmino) ) {
+                    if( ehr.insertCentralSync(1, txndata, pmino, date) ) {
                         ehr.updateJournalSync(txncode, date);
                     } else {
                         break;

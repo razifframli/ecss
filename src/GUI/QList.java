@@ -51,7 +51,7 @@ public final class QList extends javax.swing.JFrame {
 
                 switch(stat) {
                     case 1:
-                        data = queue1.getQueueNameList(ch);
+                        data = queue1.getQueueNameList(ch, 1);
                         break;
                     case 2:
                         data = queue1.getQueueIcList(ch);

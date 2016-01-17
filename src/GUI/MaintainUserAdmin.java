@@ -237,6 +237,8 @@ public class MaintainUserAdmin extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
+        cbx_room_no = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -455,6 +457,10 @@ public class MaintainUserAdmin extends javax.swing.JFrame {
             }
         });
 
+        jLabel26.setText("Room No. :");
+
+        cbx_room_no.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7" }));
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -521,7 +527,8 @@ public class MaintainUserAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel17)
-                            .addComponent(jLabel22))
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel26))
                         .addGap(49, 49, 49)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -535,8 +542,9 @@ public class MaintainUserAdmin extends javax.swing.JFrame {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(309, Short.MAX_VALUE))
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbx_room_no, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -622,11 +630,15 @@ public class MaintainUserAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(dob_end_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel23)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel26)
+                    .addComponent(cbx_room_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
                     .addComponent(jButton6))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton2.setText("Add");
@@ -694,8 +706,8 @@ public class MaintainUserAdmin extends javax.swing.JFrame {
                     .addComponent(jButton4)
                     .addComponent(jButton7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(jPanel4);
@@ -843,7 +855,8 @@ public class MaintainUserAdmin extends javax.swing.JFrame {
             Func.trim(txt_email.getText()),
             Func.trim("Fixed"),
             Func.trim(Func.datetosql(str_dob_start_date)),
-            Func.trim(Func.datetosql(str_dob_end_date))
+            Func.trim(Func.datetosql(str_dob_end_date)),
+            Func.trim(cbx_room_no.getSelectedItem().toString())
         };
         String data2[] = {
             Func.trim(cbx_hfc.getSelectedItem().toString()),
@@ -1100,7 +1113,8 @@ public class MaintainUserAdmin extends javax.swing.JFrame {
             "E_MAIL",
             "ID_CATEGORY_CODE",
             "START_DATE",
-            "END_DATE"
+            "END_DATE",
+            "ROOM_NO"
         };
         String data1[] = {
             Func.trim(txt_user_id.getText()),
@@ -1119,7 +1133,8 @@ public class MaintainUserAdmin extends javax.swing.JFrame {
             Func.trim(txt_email.getText()),
             Func.trim("Fixed"),
             Func.trim(Func.datetosql(str_dob_start_date)),
-            Func.trim(Func.datetosql(str_dob_end_date))
+            Func.trim(Func.datetosql(str_dob_end_date)),
+            Func.trim(cbx_room_no.getSelectedItem().toString())
         };
         String cols2[] = {
             "HEALTH_FACILITY_CODE",
@@ -1246,6 +1261,7 @@ public class MaintainUserAdmin extends javax.swing.JFrame {
     public static javax.swing.JComboBox cbx_hfc;
     public static javax.swing.JComboBox cbx_occupation;
     public static javax.swing.JComboBox cbx_role;
+    protected static javax.swing.JComboBox cbx_room_no;
     public static javax.swing.JComboBox cbx_subdiscipline;
     private javax.swing.JComboBox cmb_modules;
     private javax.swing.JComboBox cmb_roles;
@@ -1278,6 +1294,7 @@ public class MaintainUserAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

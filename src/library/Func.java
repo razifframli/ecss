@@ -1,6 +1,8 @@
 package library;
 
 import Bean.ConnectCSS;
+import Bean.PhysicalExamBean;
+import DBConnection.DBConnection;
 import Helper.J;
 import java.io.File;
 import java.sql.Timestamp;
@@ -20,6 +22,119 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Func {
+    
+    public final static int NUM_LEVEL_PROCEDURE = 3;
+    public final static int NUM_LEVEL_PHYSICAL_EXAMINATION = 7;
+    public final static String SEPARATOR_LINK = ", ";
+    public final static String DATE_FORMAT_1 = "dd/MM/yyyy";
+    public final static String DATE_FORMAT_2 = "yyyy-MM-dd HH:mm:ss";
+    public final static String PEM_SEPARATOR_TO_DB = ",";
+    public final static String PEM_SEPARATOR_FROM_DB = "^";
+    public final static String SPECIAL_CHARACTER = "'\"#&";
+    
+    public static String getCodePemToDB(String code) {
+        String str = "";
+        try {
+            String a[] = code.split("\\"+PEM_SEPARATOR_FROM_DB);
+            for (int i = 0; i < a.length-1; i++) {
+                str += a[i] + PEM_SEPARATOR_TO_DB;
+            }
+            if (a.length > 0) {
+                str += a[a.length-1];
+            }
+        } catch (Exception e) {
+        }
+        return str;
+    }
+    
+    public static String getCodePemFromDB(String code) {
+        String str = "";
+        try {
+            String a[] = code.split(PEM_SEPARATOR_TO_DB);
+            for (int i = 0; i < a.length-1; i++) {
+                str += a[i] + PEM_SEPARATOR_FROM_DB;
+            }
+            if (a.length > 0) {
+                str += a[a.length-1];
+            }
+        } catch (Exception e) {
+        }
+        return str;
+    }
+    
+    public static String getPhysicalExaminationLink(String peName) {
+        String physicalExam = ""; //procedure
+        try {
+            ArrayList<String> listParent = new ArrayList<String>();
+            for (int j = 0; j < NUM_LEVEL_PHYSICAL_EXAMINATION; j++) {
+                PhysicalExamBean pe = new PhysicalExamBean();
+                pe.setPe_name(peName);
+                PhysicalExamBean getPhysicalExam2 = DBConnection.getPhysicalExam2(j + 1, pe);
+                if (getPhysicalExam2.getPe_cd() != null && getPhysicalExam2.getPe_cd().length() > 0) {
+                    int level = j + 1;
+
+                    String parent = getPhysicalExam2.getPe_parent();
+                    String self = getPhysicalExam2.getPe_name();
+
+                    for (int k = level; k >= 1; k--) {
+                        listParent.add(self);
+                        PhysicalExamBean pe2 = new PhysicalExamBean();
+                        pe2.setPe_cd(parent);
+                        PhysicalExamBean getPhysicalExam22 = DBConnection.getPhysicalExam(k - 1, pe2);
+                        parent = (getPhysicalExam22.getPe_cd() != null && getPhysicalExam22.getPe_cd().length() > 0) ? (getPhysicalExam22.getPe_parent()) : ("0");
+                        self = (getPhysicalExam22.getPe_cd() != null && getPhysicalExam22.getPe_cd().length() > 0) ? (getPhysicalExam22.getPe_name()) : ("0");
+                    }
+                }
+            }
+            
+            for (int j = listParent.size() - 1; j >= 1; j--) {
+                physicalExam += listParent.get(j) + SEPARATOR_LINK;
+            }
+            if (listParent.size() > 0) {
+                physicalExam += listParent.get(0);
+            }
+        } catch (Exception e) {
+        }
+        return physicalExam;
+    }
+    
+    /**
+     * Get procedure tree parent.
+     * 
+     * @param procedureName
+     * @return 
+     */
+    public static String getProcedureLink(String procedureName) {
+        String procedure = "";
+        try {
+            ArrayList<String> listParent = new ArrayList<String>();
+            for (int j = 0; j < NUM_LEVEL_PROCEDURE; j++) {
+                ArrayList<String> getProcedureDetail = DBConnection.getProcedureDetail2(j + 1, procedureName);
+                if (getProcedureDetail.size() > 0) {
+                    int level = j + 1;
+
+                    String parent = getProcedureDetail.get(2);
+                    String self = getProcedureDetail.get(1);
+
+                    for (int k = level; k >= 1; k--) {
+                        listParent.add(self);
+                        ArrayList<String> getParent = DBConnection.getProcedureDetail(k - 1, parent);
+                        parent = (getParent.size() > 0) ? (getParent.get(2)) : ("0");
+                        self = (getParent.size() > 0) ? (getParent.get(1)) : ("0");
+                    }
+                }
+            }
+            
+            for (int j = listParent.size() - 1; j >= 1; j--) {
+                procedure += listParent.get(j) + SEPARATOR_LINK;
+            }
+            if (listParent.size() > 0) {
+                procedure += listParent.get(0);
+            }
+        } catch (Exception e) {
+        }
+        return procedure;
+    }
     
     /**
      * Hide password
@@ -143,6 +258,7 @@ public class Func {
                     }
                 }
             } else {
+                System.out.println("Saiz userData tak sama!");
                 stat= false;
             }
         } catch (Exception e) {
@@ -208,6 +324,9 @@ public class Func {
             if (data.contains("Select")) {
                 data = "-";
             }
+            for (int i = 0; i < Func.SPECIAL_CHARACTER.length(); i++) {
+                data = data.replaceAll(String.valueOf(Func.SPECIAL_CHARACTER.charAt(i)), " ");
+            }
         } catch (Exception e) {
             //e.printStackTrace();
             data = "-";
@@ -249,6 +368,7 @@ public class Func {
                 ConnectCSS.online();
             } else {
                 ConnectCSS.offline();
+//                ConnectCSS.offline2();
             }
             data.add(ConnectCSS.getIp().equals("-") ? "" : ConnectCSS.getIp());
             data.add(ConnectCSS.getDb().equals("-") ? "" : ConnectCSS.getDb());
@@ -256,10 +376,12 @@ public class Func {
             data.add(ConnectCSS.getPass().equals("-") ? "" : ConnectCSS.getPass());
             data.add(ConnectCSS.getUrl().equals("-") ? "" : ConnectCSS.getUrl());
             data.add(ConnectCSS.getOn().equals("-") ? "" : ConnectCSS.getOn());
+//            data.add(ConnectCSS.getUrl2().equals("-") ? "" : ConnectCSS.getUrl2());
             
         } catch (Exception ex) {
             //Logger.getLogger(Func.class.getName()).log(Level.SEVERE, null, ex);
             J.o("File Network Problem", ex.getMessage(), 0);
+            ex.printStackTrace();
             System.exit(1);
         }
         return data;
@@ -271,5 +393,39 @@ public class Func {
         Node nValue = (Node) nlList.item(0);
 
         return nValue.getNodeValue();
+    }
+    
+    public static void callPatient(String pdi) {
+        if (ConnectCSS.getStatusCallingSystem().equals("on")) {
+            try {
+//                Registry myRegistry = LocateRegistry.getRegistry(ConnectCSS.getHostCallingSystem(), ConnectCSS.getPortCallingSystem());
+//                Message impl = (Message) myRegistry.lookup("myCalling");
+//
+//                impl.setCall(pdi);
+
+                DBConnection.getImplCalling().setCall(pdi);
+
+            } catch (Exception ex) {
+                J.o("Offline", "Connection to calling system is offline!", 0);
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public static void destroyPatientQueue(String pmino) {
+        if (ConnectCSS.getStatusCallingSystem().equals("on")) {
+            try {
+//                Registry myRegistry = LocateRegistry.getRegistry(ConnectCSS.getHostCallingSystem(), ConnectCSS.getPortCallingSystem());
+//                Message impl = (Message) myRegistry.lookup("myCalling");
+//
+//                impl.destroyCall(pmino);
+
+                DBConnection.getImplCalling().destroyCall(pmino);
+
+            } catch (Exception ex) {
+                J.o("Offline", "Connection to calling system is offline!", 0);
+                //ex.printStackTrace();
+            }
+        }
     }
 }

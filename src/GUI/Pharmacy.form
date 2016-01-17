@@ -847,7 +847,7 @@
                                       </Group>
                                       <Component id="jScrollPane5" min="-2" pref="804" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="1007" max="32767" attributes="0"/>
+                                  <EmptySpace pref="1269" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -862,7 +862,7 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jScrollPane5" min="-2" pref="373" max="-2" attributes="0"/>
-                                  <EmptySpace pref="437" max="32767" attributes="0"/>
+                                  <EmptySpace pref="632" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1010,23 +1010,14 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_patientInfo" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="jPanel20" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jPanel36" alignment="0" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Component id="jPanel37" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
-                                          <Component id="jPanel38" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jPanel20" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jPanel36" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jPanel38" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane10" alignment="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="749" max="32767" attributes="0"/>
+                                  <EmptySpace pref="1011" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1035,14 +1026,14 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lbl_patientInfo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jPanel37" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane10" min="-2" pref="216" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jPanel38" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jPanel36" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jPanel20" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="270" max="32767" attributes="0"/>
+                                  <EmptySpace pref="295" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1090,7 +1081,9 @@
                                               <Component id="jButton5" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="btn_dispense" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="btnCallPatient" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Component id="btn_PrintLabel" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="413" max="-2" attributes="0"/>
                                           </Group>
@@ -1108,6 +1101,7 @@
                                           <Component id="btn_dispense" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="btn_PrintLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnCallPatient" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
@@ -1125,14 +1119,16 @@
                                 <Component class="javax.swing.JTable" name="tbl_drugList">
                                   <Properties>
                                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="100">
+                                      <Table columnCount="9" rowCount="100">
                                         <Column editable="false" title="Drug Code" type="java.lang.String"/>
                                         <Column editable="false" title="Drug Desc" type="java.lang.String"/>
-                                        <Column editable="true" title="Instruction" type="java.lang.String"/>
+                                        <Column editable="false" title="Dosage" type="java.lang.String"/>
+                                        <Column editable="false" title="Frequency" type="java.lang.String"/>
+                                        <Column editable="false" title="Duration" type="java.lang.String"/>
                                         <Column editable="false" title="Qty Order" type="java.lang.String"/>
                                         <Column editable="false" title="Qty Supply" type="java.lang.Integer"/>
                                         <Column editable="true" title="Qty Dispensed" type="java.lang.Integer"/>
-                                        <Column editable="true" title="Status" type="java.lang.String"/>
+                                        <Column editable="false" title="Status" type="java.lang.String"/>
                                       </Table>
                                     </Property>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1229,6 +1225,14 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_PrintLabelActionPerformed"/>
                               </Events>
                             </Component>
+                            <Component class="javax.swing.JButton" name="btnCallPatient">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Call Patient"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCallPatientActionPerformed"/>
+                              </Events>
+                            </Component>
                           </SubComponents>
                         </Container>
                         <Container class="javax.swing.JPanel" name="jPanel36">
@@ -1289,10 +1293,12 @@
                                 <Component class="javax.swing.JTable" name="tbl_drugOrder">
                                   <Properties>
                                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="100">
+                                      <Table columnCount="9" rowCount="100">
                                         <Column editable="false" title="Drug Code" type="java.lang.String"/>
                                         <Column editable="false" title="Drug Desc" type="java.lang.String"/>
-                                        <Column editable="false" title="Instruction" type="java.lang.String"/>
+                                        <Column editable="false" title="Dosage" type="java.lang.String"/>
+                                        <Column editable="false" title="Frequency" type="java.lang.String"/>
+                                        <Column editable="false" title="Duration" type="java.lang.String"/>
                                         <Column editable="false" title="Qty Order" type="java.lang.String"/>
                                         <Column editable="false" title="Qty Supply" type="java.lang.Integer"/>
                                         <Column editable="false" title="Qty Dispensed" type="java.lang.Integer"/>
@@ -1380,218 +1386,6 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JPanel" name="jPanel37">
-                          <Properties>
-                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                <TitledBorder title="Patient Information">
-                                  <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                                    <EtchetBorder/>
-                                  </Border>
-                                  <Font PropertyName="font" name="Tahoma" size="12" style="1"/>
-                                </TitledBorder>
-                              </Border>
-                            </Property>
-                          </Properties>
-
-                          <Layout>
-                            <DimensionLayout dim="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lbl_patientName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbl_pmiNo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txt_pmiNo" max="32767" attributes="1"/>
-                                          <Component id="txt_patientName" alignment="0" min="-2" pref="256" max="-2" attributes="1"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="lbl_icNo" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txt_icNo" min="-2" pref="162" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="1">
-                                              <Component id="lbl_sex" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="txt_sex" min="-2" pref="162" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lbl_birthDate" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbl_race" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txt_race" max="32767" attributes="1"/>
-                                          <Component id="txt_birthDate" alignment="0" min="-2" pref="183" max="-2" attributes="1"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lbl_bloodType" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbl_allergy" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txt_bloodType" pref="193" max="32767" attributes="1"/>
-                                          <Component id="cbAllergy" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                            </DimensionLayout>
-                            <DimensionLayout dim="1">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lbl_patientName" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_patientName" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbl_icNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_icNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbl_birthDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_birthDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbl_bloodType" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_bloodType" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lbl_pmiNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_pmiNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbl_sex" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_sex" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbl_race" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_race" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbl_allergy" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cbAllergy" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace pref="17" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                            </DimensionLayout>
-                          </Layout>
-                          <SubComponents>
-                            <Component class="javax.swing.JLabel" name="lbl_patientName">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Patient Name :"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lbl_pmiNo">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="PMI No :"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="txt_pmiNo">
-                              <Properties>
-                                <Property name="editable" type="boolean" value="false"/>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                                    <EmptyBorder/>
-                                  </Border>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="txt_patientName">
-                              <Properties>
-                                <Property name="editable" type="boolean" value="false"/>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                                    <EmptyBorder/>
-                                  </Border>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lbl_icNo">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="IC No :"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="txt_icNo">
-                              <Properties>
-                                <Property name="editable" type="boolean" value="false"/>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="null"/>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lbl_sex">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Gender :"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="txt_sex">
-                              <Properties>
-                                <Property name="editable" type="boolean" value="false"/>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="null"/>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lbl_race">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Race :"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lbl_birthDate">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Birth Date :"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="txt_birthDate">
-                              <Properties>
-                                <Property name="editable" type="boolean" value="false"/>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="null"/>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="txt_race">
-                              <Properties>
-                                <Property name="editable" type="boolean" value="false"/>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="null"/>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lbl_allergy">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Allergy :"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lbl_bloodType">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Blood Type :"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="txt_bloodType">
-                              <Properties>
-                                <Property name="editable" type="boolean" value="false"/>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="null"/>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JComboBox" name="cbAllergy">
-                              <Properties>
-                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="1">
-                                    <StringItem index="0" value="-- No Allergy --"/>
-                                  </StringArray>
-                                </Property>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                                    <EmptyBorder/>
-                                  </Border>
-                                </Property>
-                              </Properties>
-                            </Component>
-                          </SubComponents>
-                        </Container>
                         <Container class="javax.swing.JPanel" name="jPanel38">
 
                           <Layout>
@@ -1654,6 +1448,9 @@
                                   </Border>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="order_no2ActionPerformed"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel43">
                               <Properties>
@@ -1691,6 +1488,296 @@
                                 </Property>
                               </Properties>
                             </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPane10">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="jPanel37">
+                              <Properties>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                                    <TitledBorder title="Patient Information">
+                                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                                        <EtchetBorder/>
+                                      </Border>
+                                      <Font PropertyName="font" name="Tahoma" size="12" style="1"/>
+                                    </TitledBorder>
+                                  </Border>
+                                </Property>
+                              </Properties>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lbl_patientName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_pmiNo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="txt_pmiNo" max="32767" attributes="1"/>
+                                                      <Component id="txt_patientName" alignment="0" min="-2" pref="256" max="-2" attributes="1"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="lbl_icNo" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                          <Component id="txt_icNo" min="-2" pref="162" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="0" attributes="1">
+                                                          <Component id="lbl_sex" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                          <Component id="txt_sex" min="-2" pref="162" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lbl_birthDate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_race" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="txt_race" max="32767" attributes="1"/>
+                                                      <Component id="txt_birthDate" alignment="0" min="-2" pref="183" max="-2" attributes="1"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lbl_bloodType" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_allergy" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="txt_bloodType" pref="193" max="32767" attributes="1"/>
+                                                      <Component id="cbAllergy" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Component id="jScrollPane18" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="lbl_patientName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_patientName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_icNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_icNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_birthDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_birthDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_bloodType" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_bloodType" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="lbl_pmiNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_pmiNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_sex" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_sex" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_race" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_race" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_allergy" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cbAllergy" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane18" min="-2" pref="98" max="-2" attributes="0"/>
+                                          <EmptySpace pref="350" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="lbl_patientName">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Patient Name :"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="lbl_pmiNo">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="PMI No :"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JTextField" name="txt_pmiNo">
+                                  <Properties>
+                                    <Property name="editable" type="boolean" value="false"/>
+                                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                        <EmptyBorder/>
+                                      </Border>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JTextField" name="txt_patientName">
+                                  <Properties>
+                                    <Property name="editable" type="boolean" value="false"/>
+                                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                        <EmptyBorder/>
+                                      </Border>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="lbl_icNo">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="IC No :"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JTextField" name="txt_icNo">
+                                  <Properties>
+                                    <Property name="editable" type="boolean" value="false"/>
+                                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                      <Border info="null"/>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="lbl_sex">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Gender :"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JTextField" name="txt_sex">
+                                  <Properties>
+                                    <Property name="editable" type="boolean" value="false"/>
+                                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                      <Border info="null"/>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="lbl_race">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Race :"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="lbl_birthDate">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Birth Date :"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JTextField" name="txt_birthDate">
+                                  <Properties>
+                                    <Property name="editable" type="boolean" value="false"/>
+                                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                      <Border info="null"/>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JTextField" name="txt_race">
+                                  <Properties>
+                                    <Property name="editable" type="boolean" value="false"/>
+                                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                      <Border info="null"/>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="lbl_allergy">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Allergy :"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="lbl_bloodType">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Blood Type :"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JTextField" name="txt_bloodType">
+                                  <Properties>
+                                    <Property name="editable" type="boolean" value="false"/>
+                                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                      <Border info="null"/>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JComboBox" name="cbAllergy">
+                                  <Properties>
+                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                      <StringArray count="1">
+                                        <StringItem index="0" value="-- No Allergy --"/>
+                                      </StringArray>
+                                    </Property>
+                                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                        <EmptyBorder/>
+                                      </Border>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                                <Container class="javax.swing.JScrollPane" name="jScrollPane18">
+                                  <AuxValues>
+                                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                                  </AuxValues>
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                  <SubComponents>
+                                    <Component class="javax.swing.JTable" name="jTable1">
+                                      <Properties>
+                                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                          <Table columnCount="5" rowCount="4">
+                                            <Column editable="false" title="Episode Date" type="java.lang.Object"/>
+                                            <Column editable="false" title="Onset Date" type="java.lang.Object"/>
+                                            <Column editable="false" title="Diagnosis" type="java.lang.Object"/>
+                                            <Column editable="false" title="Severity" type="java.lang.Object"/>
+                                            <Column editable="false" title="Comment" type="java.lang.Object"/>
+                                          </Table>
+                                        </Property>
+                                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                          <TableColumnModel selectionModel="0">
+                                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                              <Title/>
+                                              <Editor/>
+                                              <Renderer/>
+                                            </Column>
+                                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                              <Title/>
+                                              <Editor/>
+                                              <Renderer/>
+                                            </Column>
+                                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                              <Title/>
+                                              <Editor/>
+                                              <Renderer/>
+                                            </Column>
+                                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                              <Title/>
+                                              <Editor/>
+                                              <Renderer/>
+                                            </Column>
+                                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                              <Title/>
+                                              <Editor/>
+                                              <Renderer/>
+                                            </Column>
+                                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                              <Title/>
+                                              <Editor/>
+                                              <Renderer/>
+                                            </Column>
+                                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                              <Title/>
+                                              <Editor/>
+                                              <Renderer/>
+                                            </Column>
+                                          </TableColumnModel>
+                                        </Property>
+                                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                                        </Property>
+                                      </Properties>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
                           </SubComponents>
                         </Container>
                       </SubComponents>
@@ -1754,7 +1841,7 @@
                                       </Group>
                                       <Component id="lbl_prepareDrugOrderOList" alignment="0" min="-2" pref="1261" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="702" max="32767" attributes="0"/>
+                                  <EmptySpace pref="964" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1784,7 +1871,7 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jPanel21" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="8" max="32767" attributes="0"/>
+                                  <EmptySpace pref="74" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1901,6 +1988,21 @@
                                     </Property>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                                       <TableColumnModel selectionModel="0">
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                           <Title/>
                                           <Editor/>
@@ -2378,9 +2480,6 @@
                                         <Column editable="false" title="" type="java.lang.String"/>
                                       </Table>
                                     </Property>
-                                    <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                    </Property>
                                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                                     </Property>
@@ -2808,7 +2907,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="tpnl_manageDCode" alignment="1" pref="950" max="32767" attributes="0"/>
+                      <Component id="tpnl_manageDCode" alignment="1" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -2835,7 +2934,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_searchDrugATC" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lbl_drugATCDetails" alignment="0" pref="1998" max="32767" attributes="0"/>
+                              <Component id="lbl_drugATCDetails" alignment="0" pref="2260" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
@@ -2849,7 +2948,7 @@
                                           <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="757" max="32767" attributes="0"/>
+                                  <EmptySpace pref="1019" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2866,7 +2965,7 @@
                                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                                       <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="369" max="32767" attributes="0"/>
+                                  <EmptySpace pref="506" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -3267,16 +3366,16 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                                          <Component id="jPanel18" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jPanel18" min="-2" pref="1148" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="777" max="32767" attributes="0"/>
+                                  <EmptySpace pref="1042" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jScrollPane2" min="-2" pref="1301" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="697" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="959" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -3396,6 +3495,7 @@
                             <Component class="javax.swing.JButton" name="jButton10">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="truncate"/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ActionPerformed"/>
@@ -3598,10 +3698,13 @@
                                       <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jPanel16" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jPanel16" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="436" max="-2" attributes="0"/>
+                                          </Group>
                                           <Component id="jPanel6" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="49" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -4155,7 +4258,7 @@
                                 <Component class="javax.swing.JComboBox" name="cdpack2">
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="59">
+                                      <StringArray count="60">
                                         <StringItem index="0" value="-"/>
                                         <StringItem index="1" value="AMP"/>
                                         <StringItem index="2" value="AP"/>
@@ -4215,6 +4318,7 @@
                                         <StringItem index="56" value="VIALPL"/>
                                         <StringItem index="57" value="VIALSD"/>
                                         <StringItem index="58" value="VIALSU"/>
+                                        <StringItem index="59" value="DROPS"/>
                                       </StringArray>
                                     </Property>
                                   </Properties>
@@ -4273,40 +4377,55 @@
                                 <DimensionLayout dim="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel30" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_cautionary" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_instructionOList1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_durationOList1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_frequencyOList1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_quantityOList1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
-                                                  <Component id="cClassification" max="32767" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
                                                   <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Group type="102" attributes="0">
-                                                          <Component id="txt_Lqty" min="-2" pref="84" max="-2" attributes="1"/>
-                                                          <EmptySpace max="32767" attributes="0"/>
-                                                          <Component id="cLqtyT" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" attributes="0">
-                                                          <Component id="cLduration" min="-2" pref="42" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                                                          <Component id="cLdurationType" max="32767" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="cLfrequency" alignment="0" max="32767" attributes="1"/>
-                                                      <Component id="cInstruction" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="txt_expdate" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="txt_cautionary" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel30" alignment="1" min="-2" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="cClassification" alignment="0" max="32767" attributes="0"/>
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <Component id="txt_expdate" max="32767" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="lbl_cautionary" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_instructionOList1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_durationOList1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_frequencyOList1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbl_quantityOList1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" attributes="0">
+                                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="1" attributes="0">
+                                                              <Group type="102" attributes="0">
+                                                                  <Component id="txt_Lqty" min="-2" pref="84" max="-2" attributes="1"/>
+                                                                  <EmptySpace max="32767" attributes="0"/>
+                                                                  <Component id="cLqtyT" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
+                                                              <Group type="102" attributes="0">
+                                                                  <Component id="cLduration" min="-2" pref="42" max="-2" attributes="0"/>
+                                                                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                                                                  <Component id="cLdurationType" max="32767" attributes="0"/>
+                                                              </Group>
+                                                              <Component id="cLfrequency" alignment="0" max="32767" attributes="1"/>
+                                                              <Component id="cInstruction" alignment="0" max="32767" attributes="0"/>
+                                                          </Group>
+                                                          <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                          <Component id="jScrollPane24" max="32767" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -4338,9 +4457,9 @@
                                               <Component id="cInstruction" alignment="2" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="2" attributes="0">
-                                              <Component id="lbl_cautionary" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txt_cautionary" alignment="2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lbl_cautionary" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jScrollPane24" min="-2" pref="80" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="2" attributes="0">
@@ -4352,7 +4471,7 @@
                                               <Component id="jLabel33" alignment="2" min="-2" max="-2" attributes="0"/>
                                               <Component id="cClassification" alignment="2" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace pref="32" max="32767" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                 </DimensionLayout>
@@ -4412,7 +4531,7 @@
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                       <StringArray count="7">
-                                        <StringItem index="0" value="-"/>
+                                        <StringItem index="0" value="0"/>
                                         <StringItem index="1" value="1"/>
                                         <StringItem index="2" value="2"/>
                                         <StringItem index="3" value="3"/>
@@ -4469,8 +4588,45 @@
                                     <Property name="text" type="java.lang.String" value="Cautionary :"/>
                                   </Properties>
                                 </Component>
-                                <Component class="javax.swing.JTextField" name="txt_cautionary">
+                                <Component class="javax.swing.JComboBox" name="cLqtyT">
+                                  <Properties>
+                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                      <StringArray count="6">
+                                        <StringItem index="0" value="-"/>
+                                        <StringItem index="1" value="ml"/>
+                                        <StringItem index="2" value="garg"/>
+                                        <StringItem index="3" value="supp"/>
+                                        <StringItem index="4" value="puff"/>
+                                        <StringItem index="5" value=" "/>
+                                      </StringArray>
+                                    </Property>
+                                  </Properties>
                                 </Component>
+                                <Container class="javax.swing.JScrollPane" name="jScrollPane24">
+                                  <AuxValues>
+                                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                                  </AuxValues>
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                  <SubComponents>
+                                    <Component class="javax.swing.JTextArea" name="txt_cautionary">
+                                      <Properties>
+                                        <Property name="columns" type="int" value="20"/>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Tahoma" size="11" style="0"/>
+                                        </Property>
+                                        <Property name="lineWrap" type="boolean" value="true"/>
+                                        <Property name="rows" type="int" value="5"/>
+                                        <Property name="wrapStyleWord" type="boolean" value="true"/>
+                                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                                            <EtchetBorder/>
+                                          </Border>
+                                        </Property>
+                                      </Properties>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
                                 <Component class="javax.swing.JLabel" name="jLabel30">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Expired Date :"/>
@@ -4480,6 +4636,16 @@
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Classification :"/>
                                   </Properties>
+                                </Component>
+                                <Component class="com.toedter.calendar.JDateChooser" name="txt_expdate">
+                                  <Properties>
+                                    <Property name="dateFormatString" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="&quot;dd/MM/yyyy&quot;" type="code"/>
+                                    </Property>
+                                  </Properties>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txt_expdate.setMaxSelectableDate(new java.util.Date(253370739713000L));&#xa;txt_expdate.setMinSelectableDate(new java.util.Date(-62135794687000L));"/>
+                                  </AuxValues>
                                 </Component>
                                 <Component class="javax.swing.JComboBox" name="cClassification">
                                   <Properties>
@@ -4528,30 +4694,6 @@
                                     </Property>
                                   </Properties>
                                 </Component>
-                                <Component class="com.toedter.calendar.JDateChooser" name="txt_expdate">
-                                  <Properties>
-                                    <Property name="dateFormatString" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                                      <Connection code="&quot;dd/MM/yyyy&quot;" type="code"/>
-                                    </Property>
-                                  </Properties>
-                                  <AuxValues>
-                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txt_expdate.setMaxSelectableDate(new java.util.Date(253370739713000L));&#xa;txt_expdate.setMinSelectableDate(new java.util.Date(-62135794687000L));"/>
-                                  </AuxValues>
-                                </Component>
-                                <Component class="javax.swing.JComboBox" name="cLqtyT">
-                                  <Properties>
-                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="6">
-                                        <StringItem index="0" value="-"/>
-                                        <StringItem index="1" value="ml"/>
-                                        <StringItem index="2" value="garg"/>
-                                        <StringItem index="3" value="supp"/>
-                                        <StringItem index="4" value="puff"/>
-                                        <StringItem index="5" value=" "/>
-                                      </StringArray>
-                                    </Property>
-                                  </Properties>
-                                </Component>
                               </SubComponents>
                             </Container>
                           </SubComponents>
@@ -4578,7 +4720,7 @@
                                       <Component id="jPanel25" min="-2" max="-2" attributes="0"/>
                                       <Component id="jPanel28" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="1407" max="32767" attributes="0"/>
+                                  <EmptySpace pref="1669" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -4592,7 +4734,7 @@
                                   <Component id="lbl_browseFileConvert1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                   <Component id="jPanel28" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace pref="579" max="32767" attributes="0"/>
+                                  <EmptySpace pref="754" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -4778,13 +4920,13 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_userInfoUpdateStock2" alignment="0" pref="1998" max="32767" attributes="0"/>
+                              <Component id="lbl_userInfoUpdateStock2" alignment="0" pref="2260" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                   <Component id="jPanel26" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="968" max="32767" attributes="0"/>
+                                  <EmptySpace pref="1242" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -4797,7 +4939,7 @@
                                       <Component id="jPanel26" max="32767" attributes="0"/>
                                       <Component id="jPanel3" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="617" max="32767" attributes="0"/>
+                                  <EmptySpace pref="804" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -5039,7 +5181,7 @@
                                   <Component id="btnMonthly" min="-2" pref="123" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="330" max="-2" attributes="0"/>
                                   <Component id="btnYearly" min="-2" pref="139" max="-2" attributes="0"/>
-                                  <EmptySpace pref="1141" max="32767" attributes="0"/>
+                                  <EmptySpace pref="1215" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -5052,7 +5194,7 @@
                                       <Component id="btnMonthly" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                                       <Component id="btnYearly" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="921" max="32767" attributes="0"/>
+                                  <EmptySpace pref="1000" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>

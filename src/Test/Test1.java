@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import library.Func;
 import library.NetworkStatus;
 import library.Q;
 
@@ -19,7 +20,29 @@ import library.Q;
  * @author End User
  */
 public class Test1 {
-    public static void main(String [] args) {
+    
+    public static void main(String[] args) {
+        String v = Func.SPECIAL_CHARACTER;
+        for (int i = 0; i < v.length(); i++) {
+            System.out.println("|"+v.charAt(i)+"|");
+        }
+    }
+    
+    public static void main2(String[] args) {
+        long time1 = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            int a = 1;
+            int b = 2;
+            int c = (a + b) * i;
+            System.out.println(c);
+        }
+        long time2 = System.currentTimeMillis();
+        long diff = time2 - time1;
+        double second = diff * 1.0 / 1000;
+        System.out.println("Time taken: "+second+" seconds");
+    }
+    
+    public static void main1(String [] args) {
         Session.startUp();
         if (Session.getNum_open_db() == 1) {
             Session.setPrev_stat(NetworkStatus.DoPing(Config.getIpServer(), 2000));

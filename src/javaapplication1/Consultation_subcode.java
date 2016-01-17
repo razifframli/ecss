@@ -6,17 +6,22 @@
 
 package javaapplication1;
 
+import Bean.PhysicalExamBean;
+import DBConnection.DBConnection;
 import Helper.J;
 import Helper.S;
 import Helper.Session;
 import api.Queue;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import static javaapplication1.Consultation.max_row;
 import static javaapplication1.Consultation.note_array;
 import static javaapplication1.Consultation.ps;
 import static javaapplication1.Consultation.row_count;
 import javax.swing.JOptionPane;
+import library.Func;
 
 /**
  *
@@ -32,10 +37,16 @@ public class Consultation_subcode {
         if (reply != JOptionPane.YES_OPTION) {
             return;
         }
+        cons.vph.setVisible(false);
+        cons.que.setVisible(false);
         try {
-            Timestamp timestamp = new Timestamp(new java.util.Date().getTime());
+//            Timestamp timestamp = new Timestamp(new java.util.Date().getTime());
             DriversLocation driverLocation = new DriversLocation();
-            Timestamp date = timestamp;
+//            Timestamp date = timestamp;
+            
+            Date date1 = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String date = sdf.format(date1) + " " + Consultation.EpisodeTime;
 
             String PMI = cons.txt_pPmiNo.getText();
             String name = cons.txt_pName.getText();
@@ -46,15 +57,38 @@ public class Consultation_subcode {
             String blood = cons.txt_pBloodSex.getText();
             String pstatus = cons.txt_pStatus.getText();
 
-            String header = "MSH|^~|CIS^T12109|" + "<cr>" + "\n";
+            String header = "MSH|^~|CIS|"
+                    +Session.getHfc_code()+"^"
+                    +Session.getDiscipline()+"^"
+                    +Session.getSubdiscipline()+"|"
+                    +"CIS|"
+                    +Session.getHfc_code()+"^"
+                    +Session.getDiscipline()+"^"
+                    +Session.getSubdiscipline()+"|"
+                    +date+"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    +"|"
+                    + "<cr>" + "\n";
             String patientInfo = "PDI|" + PMI + "|" + name + "^" + IC + "^" + race + "^" + sex + "^" + DOB + "^" + blood + "^" + pstatus + "^" + "|" + "<cr>" + "\n";
             String msgs[] = new String[200];
             for (int zz = 0; zz < 200; zz++) {
                 msgs[zz] = "";
             }
+            
+            String orc = "";
 
             try {
-                cons.destroyPatientQueue(PMI);
+                Func.destroyPatientQueue(PMI);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -294,40 +328,44 @@ public class Consultation_subcode {
                         String sys2 = note_array[zz++].split(": ")[1].split(" ")[0];
                         String dis2 = note_array[zz++].split(": ")[1].split(" ")[0];
                         String pul2 = note_array[zz++].split(": ")[1].split(" ")[0];
+                        
+                        String blood_glucose = note_array[zz++].split(": ")[1].split(" ")[0];
+                        
                         String data[] = {
-                            tem,
-                            sys,
-                            dis,
-                            sys2,
-                            dis2,
-                            sys1,
-                            dis1,
-                            wei,
-                            hei,
-                            hea,
-                            "",
-                            "",
-                            pul,
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            date.toString(),
-                            Session.getHfc_code(),
-                            Session.getUser_id(),
-                            Session.getUser_name(),
+                            tem, //1
+                            sys, //2
+                            dis, //3
+                            sys2, //4
+                            dis2, //5
+                            sys1, //6
+                            dis1, //7
+                            wei, //8
+                            hei, //9
+                            hea, //10
+                            respiratory_rate, //11
+                            "", //12
+                            pul+","+pul1+","+pul2, //13
+                            "", //14
+                            "", //15
+                            "", //16
+                            "", //17
+                            "", //18
+                            "", //19
+                            "", //20
+                            "", //21
+                            date.toString(), //22
+                            Session.getHfc_code(), //23
+                            Session.getUser_id(), //24
+                            Session.getUser_name(), //25 doctor name
                             
-                            gcs_points,
-                            gcs_result,
-                            pgcs_points,
-                            pgcs_result,
-                            respiratory_rate,
-                            oxygen_saturation,
-                            pain_scale
+                            gcs_points, //26
+                            gcs_result, //27
+                            pgcs_points, //28
+                            pgcs_result, //29
+                            oxygen_saturation, //30
+                            pain_scale, //31
+                            
+                            blood_glucose //32
                         };
                         msgs[ii] = "VTS|" + date + "|";
                         for (int jj = 0; jj < data.length; jj++) {
@@ -344,7 +382,8 @@ public class Consultation_subcode {
                         String data[] = {
                             Blood,
                             Rhesus,
-                            G6PD
+                            G6PD,
+                            Comment
                         };
                         msgs[ii] = "BLD|" + date + "|";
                         for (int jj = 0; jj < data.length; jj++) {
@@ -550,6 +589,7 @@ public class Consultation_subcode {
                         String Instruction = note_array[zz++].split(": ")[1];
                         String UD_MDC_Code = "";
                         String Cautionary = note_array[zz++].split(": ")[1];
+                        String packType = note_array[zz++].split(": ")[1];
                         try {
                             //                            tempQuery = "SELECT UD_MDC_CODE "
                             //                                    + "FROM PIS_MDC "
@@ -557,8 +597,8 @@ public class Consultation_subcode {
                             //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
                             cons.tempQuery = "SELECT UD_MDC_CODE "
                                     + "FROM PIS_MDC2 "
-                                    + "WHERE UCASE(D_GNR_NAME) = UCASE(?) "
-                                    + "AND UCASE(D_TRADE_NAME) = UCASE(?) ";
+                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
+                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
                             ps = Session.getCon_x(1000).prepareStatement(cons.tempQuery);
                             ps.setString(1, "%" + ActiveIngredient + "%");
                             ps.setString(2, "%" + ProductName + "%");
@@ -569,9 +609,15 @@ public class Consultation_subcode {
                         } catch (Exception ex) {
                             System.out.println(ex.toString());
                         }
+                        
+                        String qty_drug = Quantity;
+                        if (packType.equals("CAP") || packType.equals("TAB")) {
+                            qty_drug = cons.getDrugQuantity(cons.getFrequencyCode(Frequency), Quantity, cons.getDayDrugCode(Duration));
+                        }
+                        
                         String data[] = {
-                            ProblemCode + "^" + ProblemDesc + "^" + ProblemCode,
-                            UD_MDC_Code + "^" + ActiveIngredient + "^" + UD_MDC_Code,
+                            ProblemCode + "^" + ProblemDesc + "^ICD10",
+                            UD_MDC_Code + "^" + ProductName + "-"+ActiveIngredient + "^" + UD_MDC_Code, //changed from MDC to UD_MDC_Code - hadi
                             "" + "^" + DrugForm + "^" + "",
                             "" + "^" + "" + "^" + "",
                             "" + "^" + Frequency + "^" + "",
@@ -580,10 +626,11 @@ public class Consultation_subcode {
                             Dose,
                             "" + "^" + "" + "^" + Dose,
                             cons.getDayDrugCode(Duration),
-                            cons.getDrugQuantity(cons.getFrequencyCode(Frequency), Quantity, cons.getDayDrugCode(Duration)),
+                            qty_drug,
                             "" + "^" + "" + "^" + "",
                             Instruction,
-                            "" + "^" + Session.getHfc_code() + "^"
+                            "" + "^" + Session.getHfc_code()  + "^"
+                            + "" + "^" + Session.getUser_id() + "^"   //20141218 Hariz --> if data inserted at wrong column, might need to put at last 
                             + "" + "^" + Session.getDiscipline() + "^"
                             + "" + "^" + Session.getDiscipline(),
                             Cautionary
@@ -598,8 +645,19 @@ public class Consultation_subcode {
 
                     } else if (note_array[zz].equals("Physical Examination")) {
                         zz++;
-                        String pe_code = note_array[zz++].split(": ")[1];
-                        String pe_exam = note_array[zz++].split(": ")[1];
+                        String pe_exam_line = note_array[zz++].split(": ")[1];
+                        String pe_comments = note_array[zz++].split(": ")[1];
+                        String pe_exam = pe_exam_line.split(Func.SEPARATOR_LINK)[pe_exam_line.split(Func.SEPARATOR_LINK).length-1];
+                        String pe_cd = "";
+                        for (int level = 1; level <= Func.NUM_LEVEL_PHYSICAL_EXAMINATION; level++) {
+                            PhysicalExamBean pe = new PhysicalExamBean();
+                            pe.setPe_name(pe_exam);
+                            PhysicalExamBean getPhysicalExam2 = DBConnection.getPhysicalExam2(level, pe);
+//                            ArrayList<String> procedure_detail = DBConnection.getProcedureDetail2(level, procedure_desc);
+                            if (getPhysicalExam2.getPe_cd() != null && getPhysicalExam2.getPe_cd().length() > 0) {
+                                pe_cd = getPhysicalExam2.getPe_cd();
+                            }
+                        }
 //                        String tekak = note_array[zz++].split(": ")[1];
 //                        String jantung = note_array[zz++].split(": ")[1];
 //                        String peparuKanan = note_array[zz++].split(": ")[1];
@@ -613,13 +671,13 @@ public class Consultation_subcode {
                         String data[] = {
                             "",
                             "",
-                            "",
-                            "",
+                            Func.getCodePemToDB(pe_cd),
+                            pe_exam,
 //                            tekak + "^" + jantung + "^" + peparuKanan + "^" + bahuKanan + "^"
 //                            + bahuKiri + "^" + perut + "^" + kepala + "^"
 //                            + hidung + "^" + mulut + "^" + telingaKanan,
-                            pe_code + "^" + pe_exam,
                             "",
+                            pe_comments,
                             "",
                             "",
                             date.toString(),
@@ -701,12 +759,17 @@ public class Consultation_subcode {
                         zz++;
                         String diagnosisCode = note_array[zz++].split(": ")[1];
                         String diagnosisDesc = note_array[zz++].split(": ")[1];
-                        String procedure[] = note_array[zz++].split(": ")[1].split(" ");
-                        String procedure_cd = procedure[0];
-                        String procedure_desc = "";
-                        for (int i = 1; i < procedure.length; i++) {
-                            procedure_desc += procedure[i];
-                        }
+                        String procedure_cd = note_array[zz++].split(": ")[1];
+                        String procedure_desc_line = note_array[zz++].split(": ")[1];
+                        
+                        String procedure_desc = procedure_desc_line.split(Func.SEPARATOR_LINK)[procedure_desc_line.split(Func.SEPARATOR_LINK).length-1];
+//                        String procedure_cd = "";
+//                        for (int level = 1; level <= Func.NUM_LEVEL_PROCEDURE; level++) {
+//                            ArrayList<String> procedure_detail = DBConnection.getProcedureDetail2(level, procedure_desc);
+//                            if (procedure_detail.size() > 0) {
+//                                procedure_cd = procedure_detail.get(0);
+//                            }
+//                        }
                         String data[] = {
                             diagnosisCode+"^"+diagnosisDesc+"^"+diagnosisCode,
                             procedure_cd+"^"+procedure_desc+"^"+procedure_cd,
@@ -780,7 +843,7 @@ public class Consultation_subcode {
                         //saveEhr.insertJournal(header, patientInfo, (String) enumTab1.nextElement(), (String) enumTab2.nextElement(), (String) enumTab3.nextElement(), (String) enumTab4.nextElement(), (String) enumTab5.nextElement(), (String) enumTab6.nextElement(), (String) enumTab7.nextElement(), (String) enumTab8.nextElement(), PMI);
                         cons.ehr.insertJournal(1, header, patientInfo,
                                 msgs,
-                                PMI);
+                                PMI, date);
                         driverLocation.insertToDrive(1, header, patientInfo,
                                 msgs);
 
@@ -807,7 +870,7 @@ public class Consultation_subcode {
 
                 if (msgs.length > 0) {
                     cons.ehr.insertJournal(1, header, patientInfo,
-                            msgs, PMI);
+                            msgs, PMI, date);
                     //Friza
                     //saveEhr.insertJournal(header, patientInfo, (String) enumTab1.nextElement(), (String) enumTab2.nextElement(), (String) enumTab3.nextElement(), (String) enumTab4.nextElement(), (String) enumTab5.nextElement(), (String) enumTab6.nextElement(), (String) enumTab7.nextElement(), (String) enumTab8.nextElement(), PMI);
 
@@ -828,7 +891,7 @@ public class Consultation_subcode {
                 //Friza - insert CIS to server-MySql
                 //umar - cek setiap enumTab.nextElement tu tngok ada data atau x..
                 cons.ehr.insertCentral(1, header, patientInfo,
-                        msgs, PMI);
+                        msgs, PMI, date);
 
                 //ehr.formatMsg(header, patientInfo, (String) enumTab1.nextElement(), (String) enumTab2.nextElement(), (String) enumTab3.nextElement(), (String) enumTab4.nextElement(), (String) enumTab5.nextElement(), (String) enumTab6.nextElement(), (String) enumTab7.nextElement(), (String) enumTab8.nextElement(), (String) enumTab9.nextElement(), (String) enumTab12.nextElement());
             }
@@ -908,11 +971,12 @@ public class Consultation_subcode {
             cons.setBtnOn();
 
             Queue updatequeue = new Queue();
-            updatequeue.updateStatusEpisode(cons.txt_pPmiNo.getText(), cons.EpisodeTime, "Discharge");
+            updatequeue.updateStatusEpisode(cons.txt_pPmiNo.getText(), cons.EpisodeTime, "Discharge", "");
 
         //            Session.setPrev_stat(false);
             //            Session.setCurr_stat(false);
             //Session.setCon_x();
+            CheckNewPatient.active = false;
             new Consultation().setVisible(true);
             cons.dispose();
 

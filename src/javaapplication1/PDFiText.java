@@ -41,13 +41,13 @@ import org.joda.time.Period;
 public class PDFiText {
 
     private static String FILE = "FirstPdf.pdf";
-    private static Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
+    private static Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 11,
             Font.BOLD);
-    private static Font subtitleFont = new Font(Font.FontFamily.TIMES_ROMAN, 15,
+    private static Font subtitleFont = new Font(Font.FontFamily.TIMES_ROMAN, 10,
             Font.BOLD);
-    private static Font contentFont = new Font(Font.FontFamily.TIMES_ROMAN, 10,
+    private static Font contentFont = new Font(Font.FontFamily.TIMES_ROMAN, 9,
             Font.NORMAL);
-    private static Font footerFont = new Font(Font.FontFamily.TIMES_ROMAN, 11,
+    private static Font footerFont = new Font(Font.FontFamily.TIMES_ROMAN, 9,
             Font.BOLD);
     
     private static Font labelFont = new Font(Font.FontFamily.TIMES_ROMAN,9);
@@ -390,7 +390,7 @@ public class PDFiText {
         Image image1 = null;
         try {
             image1 = Image.getInstance("assets/logoUTeMPNG.png");
-            image1.scaleAbsolute(image1.getWidth() * 0.05f, image1.getHeight() * 0.05f);
+            image1.scaleAbsolute(image1.getWidth() * 0.03f, image1.getHeight() * 0.03f);
         } catch (BadElementException ex) {
             Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
@@ -630,8 +630,8 @@ public class PDFiText {
         
         Paragraph preface = new Paragraph();
         
-        addEmptyLine(preface, 1);
-        addEmptyLine(preface, 1);
+        //addEmptyLine(preface, 1);
+        //addEmptyLine(preface, 1);
         
         String clinic = "-";
         
@@ -652,15 +652,15 @@ public class PDFiText {
         subtitle.setAlignment(Element.ALIGN_RIGHT);
         preface.add(subtitle);
 
-        addEmptyLine(preface, 1);
+        //addEmptyLine(preface, 1);
         
         document.add(preface);
 
-        document.add(new Paragraph(" "));
+        //document.add(new Paragraph(" "));
         
         document.add(table);
         
-        document.add(new Paragraph(" "));
+        //document.add(new Paragraph(" "));
     }
     
     private static void addFooterICD10(Document document) throws DocumentException {
@@ -680,8 +680,8 @@ public class PDFiText {
         
         Paragraph preface = new Paragraph();
         
-        addEmptyLine(preface, 1);
-        addEmptyLine(preface, 1);
+        //addEmptyLine(preface, 1);
+        //addEmptyLine(preface, 1);
         
         String clinic = Session.getHfc_code();
         
@@ -694,15 +694,15 @@ public class PDFiText {
         subtitle.setAlignment(Element.ALIGN_RIGHT);
         preface.add(subtitle);
 
-        addEmptyLine(preface, 1);
+        //addEmptyLine(preface, 1);
         
         document.add(preface);
 
-        document.add(new Paragraph(" "));
+        //document.add(new Paragraph(" "));
         
         document.add(table);
         
-        document.add(new Paragraph(" "));
+        //document.add(new Paragraph(" "));
     }
     
     private static String getDate(String date, int period) {
@@ -769,7 +769,7 @@ public class PDFiText {
 
     public static void createPrescription(String title, String data_temp) {
         try {
-            Document document = new Document(PageSize.A4.rotate());
+            Document document = new Document(PageSize.A5.rotate());
             PdfWriter.getInstance(document, new FileOutputStream(title));
             document.open();
             addMetaData(document);
@@ -788,7 +788,7 @@ public class PDFiText {
     
     public static void createMC(String title, String data_temp, ArrayList<String> masa) {
         try {
-            Document document = new Document(PageSize.A4.rotate());
+            Document document = new Document(PageSize.A5.rotate());
             PdfWriter.getInstance(document, new FileOutputStream(title));
             document.open();
             addMetaDataMC(document);
@@ -813,7 +813,7 @@ public class PDFiText {
                    + " where order_date < CURDATE()";
         }catch (Exception ex)
         {
-            
+             ex.printStackTrace();
         }
     }
     //Fn to create rpt of dispensed drug -- Hariz 20141122 END
@@ -833,7 +833,8 @@ public class PDFiText {
         try{
             sqlGetDrugPresc = "Select * from pis_order_detail where order_no = '"+ orderNo +"'";  
             
-            ArrayList<ArrayList<String>> fromRmi = DBConnection.getImpl().getQuery(sqlGetDrugPresc,17);           
+            String a[] = {};
+            ArrayList<ArrayList<String>> fromRmi = DBConnection.getImpl().getQuery(sqlGetDrugPresc, 17, a);           
             for(int i = 0 ; i < fromRmi.size() ; i++)
             {
                 Paragraph mainContent = new Paragraph();
@@ -927,13 +928,14 @@ public class PDFiText {
             }
         }
         document.close();
+        PrintTest2.print3(headerTitle);
     }
     
     //    Fn to print out medicine label --Hariz 20141014 END
     
     public static void createReportICD10(String title, String date) {
         try {
-            Document document = new Document(PageSize.A4.rotate());
+            Document document = new Document(PageSize.A5.rotate());
             PdfWriter.getInstance(document, new FileOutputStream(title));
             document.open();
             addMetaDataICD10(document);
@@ -951,7 +953,7 @@ public class PDFiText {
     
     public static void createTimeSlip(String title, String data_temp, ArrayList<String> masa) {
         try {
-            Document document = new Document(PageSize.A4.rotate());
+            Document document = new Document(PageSize.A5.rotate());
             PdfWriter.getInstance(document, new FileOutputStream(title));
             document.open();
             addMetaDataTimeSlip(document);
@@ -1169,6 +1171,7 @@ public class PDFiText {
         masa.add("05/03/2014");
         Session.setUser_name("Umar Mukhtar");
 //        PDFiText.createReportICD10("TimeSlip_.pdf", "2014-04-24 16:33:15");
-        //PDFiText.createTimeSlip("timeslip_.pdf", data_temp, masa);
+//        PDFiText.createTimeSlip("timeslip_.pdf", data_temp, masa);
+        PDFiText.createMC("mcSlip_.pdf", data_temp, masa);
     }
 }

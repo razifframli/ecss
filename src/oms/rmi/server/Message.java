@@ -12,10 +12,26 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
 public interface Message extends Remote {
+    
+    // registration
+    boolean isAlreadyRegistered(String pmino) throws RemoteException;
+    
+    // CIS order drug
+    ResultSet getDrugCIS(String search) throws RemoteException;
+    
+    // procedure
+    String insertPOS(String PMI, String dataPOS) throws RemoteException;
+    ArrayList<ArrayList<String>> getProcedures() throws RemoteException;
+    ArrayList<ArrayList<String>> getProceduresBasedOnPmiNo(String pmiNo) throws RemoteException;
+    ArrayList<ArrayList<String>> getProcedureDetail(String orderNo) throws RemoteException;
+    boolean updateProcedures(ArrayList<ArrayList<String>> prod) throws RemoteException;
+    
+    // fast rmi query
+    ArrayList<ArrayList<String>> getQuery(String query, int col, String data[]) throws RemoteException;
+    boolean setQuery(String query, String data[]) throws RemoteException;
     
     // update pms
     boolean isUpdatePatientBiodata(String[] Biodata) throws RemoteException;
@@ -25,6 +41,9 @@ public interface Message extends Remote {
     
     // change password
     boolean changePassword(String userid, String pwd) throws RemoteException;
+    
+    // change room no
+    boolean changeRoomNo(String userid, String roomNo) throws RemoteException;
     
     // update pms_patient_biodata
     boolean updatePmsPatientBiodata(String pmino, ArrayList<String> column, ArrayList<String> data) throws RemoteException;
@@ -42,7 +61,7 @@ public interface Message extends Remote {
     
     //consultation queue
     boolean isConsult(String pmino) throws RemoteException;
-    String[] simplifyCheckBiodata(String pmiNo) throws RemoteException;
+    String[] simplifyCheckBiodata(String pmiNo, String time, String doctor) throws RemoteException;
     
     //Pharmacy order drug
     void addAUTOGENERATE_ONO(String oNo) throws RemoteException;
@@ -75,8 +94,6 @@ public interface Message extends Remote {
     boolean updateStaff(String user_id, String cols1[], String data1[], String cols2[], String data2[]) throws RemoteException;
     ArrayList<String> getStaffLogin(String user_id, String password) throws RemoteException;
     
-    ArrayList<ArrayList<String>> getQuery(String strSQL, int col) throws RemoteException;
-    
     //get new pmi no
     String getPMI(String ic) throws RemoteException;
     
@@ -95,22 +112,23 @@ public interface Message extends Remote {
     void insertD(String [] dispense) throws RemoteException;
     void insertOrder(String [] order)throws RemoteException;
     
-    void updateStatEpisode(String PMINumber, String TimeEpisode, String status, String doctor) 
+    void updateStatEpisode(String PMINumber, String TimeEpisode, String status, String doctor, String referer) 
             throws RemoteException;
     void updateStatEpisode2(String PMINumber, String TimeEpisode, String now) 
             throws RemoteException;
     
-    Vector getQueueNameList(String name, String hfcCode) throws RemoteException;
+    Vector getQueueNameList(String name, String hfcCode, int tanda) throws RemoteException;
     
     String [] getAutoGen(int stat) throws RemoteException;
     
     String [] getBio(int stat, String ic, String type, int num_col) throws RemoteException;
     
-    ArrayList<String> getEHRRecords(String pmiNo) throws RemoteException;
+    ArrayList<ArrayList<String>> getEHRLatestEpisode(String pmiNo, int limit) throws RemoteException;
+    ArrayList<String> getEHRRecords(String pmiNo, int type) throws RemoteException;
 
     void sayHello(String name) throws RemoteException;
     
-    String insertEHRCentral(int status, String pmi, String data) throws RemoteException;
+    String insertEHRCentral(int status, String pmi, String data, String episodeDate) throws RemoteException;
     
     List getEHRLatest7(String pmi)  throws RemoteException;
     
@@ -126,7 +144,7 @@ public interface Message extends Remote {
 
     String insertDTO(String PMI, String dataDTO) throws RemoteException;
     
-    ArrayList<ArrayList<String>> getOrderMasterAll(int stat, String pmi_no, String order_no) throws RemoteException;
+    ArrayList<ArrayList<String>> getOrderMasterAll(int stat, String pmi_no, String order_no, String hfc_code) throws RemoteException;
     
     void insertPatientBiodata(String [] biodata) throws RemoteException;
     

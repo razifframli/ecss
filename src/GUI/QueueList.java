@@ -51,7 +51,7 @@ public final class QueueList extends javax.swing.JFrame {
 
                 switch(stat) {
                     case 1:
-                        data = queue1.getQueueNameList(ch);
+                        data = queue1.getQueueNameList(ch, 1);
                         break;
                     case 2:
                         data = queue1.getQueueIcList(ch);
@@ -159,7 +159,6 @@ public final class QueueList extends javax.swing.JFrame {
         btn_pHistoryOk1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setAlwaysOnTop(true);
         setResizable(false);
 
         label1.setBackground(new java.awt.Color(204, 204, 204));
@@ -278,7 +277,7 @@ public final class QueueList extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_pHistoryOk1)
-                .addGap(57, 57, 57))
+                .addGap(55, 55, 55))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -291,7 +290,7 @@ public final class QueueList extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(1052, 622));
