@@ -363,7 +363,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     tbl_patientInQueue.getModel().setValueAt(om.get(i).get(3), i, 4);//arrival date
                     tbl_patientInQueue.getModel().setValueAt(om.get(i).get(6), i, 5);//doc's name
                 }
-                System.err.println("get order master error :"+e);
+                System.err.println("get order master error :"+e.getMessage());
                 e.printStackTrace();
             }
 //        } else {
@@ -4731,6 +4731,7 @@ public class Pharmacy extends javax.swing.JFrame{
             Logger.getLogger(Pharmacy.class.getName()).log(Level.SEVERE, null, ex);
         }
         order_no.setText(AutogeneratePIS[0]);
+        System.out.println("Apa ni?:"+AutogeneratePIS[0]);
     }
         
     
