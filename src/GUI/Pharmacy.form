@@ -1119,14 +1119,16 @@
                                 <Component class="javax.swing.JTable" name="tbl_drugList">
                                   <Properties>
                                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="100">
+                                      <Table columnCount="9" rowCount="100">
                                         <Column editable="false" title="Drug Code" type="java.lang.String"/>
                                         <Column editable="false" title="Drug Desc" type="java.lang.String"/>
-                                        <Column editable="true" title="Instruction" type="java.lang.String"/>
+                                        <Column editable="false" title="Dosage" type="java.lang.String"/>
+                                        <Column editable="false" title="Frequency" type="java.lang.String"/>
+                                        <Column editable="false" title="Duration" type="java.lang.String"/>
                                         <Column editable="false" title="Qty Order" type="java.lang.String"/>
                                         <Column editable="false" title="Qty Supply" type="java.lang.Integer"/>
                                         <Column editable="true" title="Qty Dispensed" type="java.lang.Integer"/>
-                                        <Column editable="true" title="Status" type="java.lang.String"/>
+                                        <Column editable="false" title="Status" type="java.lang.String"/>
                                       </Table>
                                     </Property>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1291,10 +1293,12 @@
                                 <Component class="javax.swing.JTable" name="tbl_drugOrder">
                                   <Properties>
                                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="100">
+                                      <Table columnCount="9" rowCount="100">
                                         <Column editable="false" title="Drug Code" type="java.lang.String"/>
                                         <Column editable="false" title="Drug Desc" type="java.lang.String"/>
-                                        <Column editable="false" title="Instruction" type="java.lang.String"/>
+                                        <Column editable="false" title="Dosage" type="java.lang.String"/>
+                                        <Column editable="false" title="Frequency" type="java.lang.String"/>
+                                        <Column editable="false" title="Duration" type="java.lang.String"/>
                                         <Column editable="false" title="Qty Order" type="java.lang.String"/>
                                         <Column editable="false" title="Qty Supply" type="java.lang.Integer"/>
                                         <Column editable="false" title="Qty Dispensed" type="java.lang.Integer"/>
@@ -1718,13 +1722,11 @@
                                     <Component class="javax.swing.JTable" name="jTable1">
                                       <Properties>
                                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                          <Table columnCount="7" rowCount="4">
+                                          <Table columnCount="5" rowCount="4">
                                             <Column editable="false" title="Episode Date" type="java.lang.Object"/>
-                                            <Column editable="false" title="Type" type="java.lang.Object"/>
-                                            <Column editable="false" title="Date" type="java.lang.Object"/>
+                                            <Column editable="false" title="Onset Date" type="java.lang.Object"/>
                                             <Column editable="false" title="Diagnosis" type="java.lang.Object"/>
                                             <Column editable="false" title="Severity" type="java.lang.Object"/>
-                                            <Column editable="false" title="Laterality" type="java.lang.Object"/>
                                             <Column editable="false" title="Comment" type="java.lang.Object"/>
                                           </Table>
                                         </Property>
@@ -5257,7 +5259,7 @@
                   <Component id="jToolBar3" min="-2" pref="176" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jToolBar2" min="-2" pref="108" max="-2" attributes="0"/>
-                  <EmptySpace pref="409" max="32767" attributes="0"/>
+                  <EmptySpace pref="413" max="32767" attributes="0"/>
                   <Component id="lblStatus" min="-2" pref="53" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnStatus" min="-2" pref="31" max="-2" attributes="0"/>
@@ -5268,7 +5270,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="btnStatus" alignment="1" min="-2" pref="25" max="-2" attributes="1"/>

@@ -617,7 +617,7 @@ public class Consultation_subcode {
                         
                         String data[] = {
                             ProblemCode + "^" + ProblemDesc + "^ICD10",
-                            UD_MDC_Code + "^" + ProductName + "-"+ActiveIngredient + "^MDC",
+                            UD_MDC_Code + "^" + ProductName + "-"+ActiveIngredient + "^" + UD_MDC_Code, //changed from MDC to UD_MDC_Code - hadi
                             "" + "^" + DrugForm + "^" + "",
                             "" + "^" + "" + "^" + "",
                             "" + "^" + Frequency + "^" + "",

@@ -72,6 +72,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
 import javaapplication1.PDFiText;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import jxl.CellType;
@@ -207,7 +208,7 @@ public class Pharmacy extends javax.swing.JFrame{
 //    ArrayList data2;
     
     private static int max_row_drug = 100;
-    private static int max_col_drug = 7;
+    private static int max_col_drug = 9;
     
     /**
      * NEW VAR DRUG 
@@ -363,7 +364,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     tbl_patientInQueue.getModel().setValueAt(om.get(i).get(3), i, 4);//arrival date
                     tbl_patientInQueue.getModel().setValueAt(om.get(i).get(6), i, 5);//doc's name
                 }
-                System.err.println("get order master error :"+e.getMessage());
+                System.err.println("get order master error :"+e);
                 e.printStackTrace();
             }
 //        } else {
@@ -1415,116 +1416,116 @@ public class Pharmacy extends javax.swing.JFrame{
         //int rowIndex = tbl_drugList.getSelectedRow();
         tbl_drugList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Drug Code", "Drug Desc", "Instruction", "Qty Order", "Qty Supply", "Qty Dispensed", "Status"
+                "Drug Code", "Drug Desc", "Dosage", "Frequency", "Duration", "Qty Order", "Qty Supply", "Qty Dispensed", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, true, true
+                false, false, false, false, false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1611,116 +1612,116 @@ public class Pharmacy extends javax.swing.JFrame{
         int rowIndex = tbl_drugOrder.getSelectedRow();
         tbl_drugOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Drug Code", "Drug Desc", "Instruction", "Qty Order", "Qty Supply", "Qty Dispensed", "Status"
+                "Drug Code", "Drug Desc", "Dosage", "Frequency", "Duration", "Qty Order", "Qty Supply", "Qty Dispensed", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1875,17 +1876,17 @@ public class Pharmacy extends javax.swing.JFrame{
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Episode Date", "Type", "Date", "Diagnosis", "Severity", "Laterality", "Comment"
+                "Episode Date", "Onset Date", "Diagnosis", "Severity", "Comment"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -4079,7 +4080,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 403, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 413, Short.MAX_VALUE)
                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4088,7 +4089,7 @@ public class Pharmacy extends javax.swing.JFrame{
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4444,7 +4445,7 @@ public class Pharmacy extends javax.swing.JFrame{
                         int d_qty = 0;
                         
                         try {
-                            d_qty = Integer.parseInt(tbl_drugList.getValueAt(i, 5).toString());
+                            d_qty = Integer.parseInt(tbl_drugList.getValueAt(i, 7).toString()); // change from 5 to 7 - hadi
                             instruction = String.valueOf(tbl_drugList.getValueAt(i, 2).toString());
                         } catch (Exception eex) {
                             d_qty = 0;
@@ -4497,7 +4498,7 @@ public class Pharmacy extends javax.swing.JFrame{
 
                         try {
 
-                            d_qty = Integer.parseInt(tbl_drugList.getValueAt(i, 5).toString());
+                            d_qty = Integer.parseInt(tbl_drugList.getValueAt(i, 7).toString()); //change from 5 to 7 - hadi
                             instruction = String.valueOf(tbl_drugList.getValueAt(i, 2).toString());
                         } catch (Exception eex) {
                             d_qty = 0;
@@ -4530,6 +4531,14 @@ public class Pharmacy extends javax.swing.JFrame{
         clearQueue();
         tab_drugOrder.setSelectedIndex(0);
         getQueue();
+
+        //clear data from jTable1 - hadi
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j >= 6; j++) {
+                jTable1.getModel().setValueAt("", i, j);
+                }
+        }
+        //
     }//GEN-LAST:event_btn_dispenseActionPerformed
 
     private void btn_browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browseActionPerformed
@@ -4731,7 +4740,6 @@ public class Pharmacy extends javax.swing.JFrame{
             Logger.getLogger(Pharmacy.class.getName()).log(Level.SEVERE, null, ex);
         }
         order_no.setText(AutogeneratePIS[0]);
-        System.out.println("Apa ni?:"+AutogeneratePIS[0]);
     }
         
     
@@ -5900,6 +5908,7 @@ public class Pharmacy extends javax.swing.JFrame{
     }//GEN-LAST:event_tbl_drugOrderMouseClicked
 
     private void tbl_drugListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_drugListMouseClicked
+
         //get the clicked row
         int r = tbl_drugList.getSelectedRow();
         int c = tbl_drugList.getSelectedColumn();
@@ -5925,6 +5934,7 @@ public class Pharmacy extends javax.swing.JFrame{
             }
         } catch (Exception e) {
         }
+        
     }//GEN-LAST:event_tbl_drugListMouseClicked
 public void setSelectedAppointment(String selectedAppointment, String selectedTime) {
         
@@ -6202,6 +6212,7 @@ public void setSelectedAppointment(String selectedAppointment, String selectedTi
 
     }
 public void resetTable(){
+
     //reset tbl order
     tbl_drugOList.setModel(new javax.swing.table.DefaultTableModel(
     new Object [][] {
@@ -6240,7 +6251,7 @@ txt_doctor.setText("");
 jScrollPane17.setViewportView(tbl_drugOList);
     
     for(int i = 0; i < 100; i++) {
-        for(int j = 0; j < 7; j++) {
+        for(int j = 0; j < 9; j++) {
             tbl_drugOrder.getModel().setValueAt("", i, j);
             tbl_drugList.getModel().setValueAt("", i, j);
         }
@@ -7715,6 +7726,15 @@ jScrollPane17.setViewportView(tbl_drugOList);
     
     private void tbl_patientInQueueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_patientInQueueMouseClicked
 
+        //to edit tbl_drugList with single click - hadi
+        ((DefaultCellEditor) tbl_drugList.getDefaultEditor(Object.class)).setClickCountToStart(1);
+
+        for (int i = 0; i < tbl_drugList.getColumnModel().getColumnCount(); i++) {
+            final DefaultCellEditor defaultEditor = (DefaultCellEditor) tbl_drugList.getDefaultEditor(tbl_drugList.getColumnClass(i));
+            defaultEditor.setClickCountToStart(1);
+        }
+        //
+        
         resetTable();
         
         int index_row = tbl_patientInQueue.getSelectedRow();
@@ -7794,6 +7814,39 @@ jScrollPane17.setViewportView(tbl_drugOList);
                     order_date2.setText(pisom.get(2));
                     loc_code.setText(pisom.get(3));
                 }
+                
+                //add data to jTable1. Add & edit by hadi                
+                ArrayList<String> C_TXNDATE_data = DBConnection.getImpl().getEHRRecords(pmiNo, 1);
+
+                System.out.println(C_TXNDATE_data.get(2));
+
+                MainRetrieval mr = new MainRetrieval();
+                String txndata1 = C_TXNDATE_data.get(2);
+                mr.startProcess(txndata1);
+
+                String[][] dataDGS = mr.getData("DGS");
+                int rowsDGS = mr.getRowNums();
+
+                int patient_dgs_row = 0;
+                if (rowsDGS > 0) {
+                  for (int dgs_n = 0; dgs_n < rowsDGS; dgs_n++)
+                  {
+                    System.out.println("orderDate " + orderDate);
+                    System.out.println("Episode date " + dataDGS[dgs_n][0]);
+                    if (orderDate.compareTo(dataDGS[dgs_n][0]) == 0)
+                    {
+
+                      this.jTable1.getModel().setValueAt(dataDGS[dgs_n][0], patient_dgs_row, 0);
+                      this.jTable1.getModel().setValueAt(dataDGS[dgs_n][20], patient_dgs_row, 1);
+                      this.jTable1.getModel().setValueAt(dataDGS[dgs_n][8], patient_dgs_row, 2);
+                      this.jTable1.getModel().setValueAt(dataDGS[dgs_n][10], patient_dgs_row, 3);
+                      this.jTable1.getModel().setValueAt(dataDGS[dgs_n][19], patient_dgs_row, 4);
+                      patient_dgs_row++;
+                      System.out.println("patient_dgs_row " + patient_dgs_row);
+                      System.out.println("dgs_n " + dgs_n);
+                    }
+                  }
+                }                
 
                 ArrayList<ArrayList<String>> od = DBConnection.getImpl().getDrugOrderDetail(order_no2.getText());
 
@@ -7802,15 +7855,18 @@ jScrollPane17.setViewportView(tbl_drugOList);
 
                 //put od data into drug order
                 for (int i = 0; i < od.size(); i++) {
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(0), row1, 0); //0
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(1), row1, 1); //1
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(7), row1, 2); //7
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(10), row1, 3); //9
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(13), row1, 4); //13
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(9), row1, 5); //11
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(12), row1, 6); //12
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(0), row1, 0);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(1), row1, 1);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(6), row1, 2);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(2), row1, 3);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(8), row1, 4);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(10), row1, 5);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(13), row1, 6);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(9), row1, 7);
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(12), row1, 8);
                     row1++;
                 }
+                //
 
                 System.out.println(".....Message Sent....");
             } catch (Exception e) {
@@ -7846,22 +7902,6 @@ jScrollPane17.setViewportView(tbl_drugOList);
                     loc_code.setText(pisom.get(3));
                 }
 
-                ArrayList<ArrayList<String>> od = DBConnection.getDrugOrderDetail(order_no2.getText());
-
-                row1 = 0;
-                row2 = 0;
-
-                //put od data into drug order
-                for (int i = 0; i < od.size(); i++) {
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(0), row1, 0);
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(1), row1, 1);
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(7), row1, 2);
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(10), row1, 3);//9
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(13), row1, 4);
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(11), row1, 5);//11
-                    tbl_drugOrder.getModel().setValueAt(od.get(i).get(12), row1, 6);
-                    row1++;
-                }
 
                 pnl_patientDrugOrder = new javax.swing.JPanel();
                 pnl_patientDrugOrder.setVisible(true);
@@ -7875,6 +7915,31 @@ jScrollPane17.setViewportView(tbl_drugOList);
 //        }
 //        Session.setPrev_stat(false);
 //        Session.setCurr_stat(false);
+            
+        //expand column width - hadi    
+            tbl_drugOrder.getColumnModel().getColumn(0).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(1).setPreferredWidth(300);
+            tbl_drugOrder.getColumnModel().getColumn(2).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(3).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(4).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(6).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(7).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(8).setPreferredWidth(35);
+            tbl_drugOrder.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+           
+            tbl_drugList.getColumnModel().getColumn(0).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(1).setPreferredWidth(300);
+            tbl_drugList.getColumnModel().getColumn(2).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(3).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(4).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(6).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(7).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(8).setPreferredWidth(35);
+            tbl_drugList.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        //
+            
+            
+            
 
     }//GEN-LAST:event_tbl_patientInQueueMouseClicked
 
