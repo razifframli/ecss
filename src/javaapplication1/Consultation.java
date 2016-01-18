@@ -431,24 +431,20 @@ public class Consultation extends javax.swing.JFrame {
     
     public void loadDrug() {
         try {
-            
-            // get all from server db
-            int num_rows = 24;
+            int num_cols = 25;
             String sql = "SELECT * "
                     + "FROM PIS_MDC2 ";
             String params[] = {};
-            ArrayList<ArrayList<String>> data1 = DBConnection.getImpl().getQuery(sql, num_rows, params);
-            
-            // delete all from local db
-            String sql1 = "TRUNCATE TABLE PIS_MDC2 ";
-            PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
-            ps1.execute();
-            
-            // load all drug from server into local db
+            ArrayList<ArrayList<String>> data1 = DBConnection.getImpl().getQuery(sql, num_cols, params);
+
+            String sql_delete = "DELETE FROM PIS_MDC2 ";
+            PreparedStatement ps_delete = Session.getCon_x(1000).prepareStatement(sql_delete);
+            ps_delete.execute();
+
             for (int j = 0; j < data1.size(); j++) {
                 //System.out.println("DRUG "+j+": "+data1.get(i)+"\n");
                 String UD_MDC_CODE = data1.get(j).get(0);
-                int num_rows1 = data1.get(j).size();
+                int num_cols1 = data1.get(j).size();
 //                String sql1 = "SELECT * "
 //                        + "FROM PIS_MDC2 "
 //                        + "WHERE UD_MDC_CODE = ? ";
@@ -456,16 +452,15 @@ public class Consultation extends javax.swing.JFrame {
 //                ps1.setString(1, UD_MDC_CODE);
 //                ResultSet rs1 = ps1.executeQuery();
 //                if (!rs1.next()) {
-                    S.oln("Drug code "+UD_MDC_CODE+" not in the local list.. Adding it..");
-                    String params1 = "";
-                    for (int k = 0; k < num_rows1-1; k++) {
-                        params1 += "'"+data1.get(j).get(k).replace('\'', ' ')+"',";
-                    }
-                    params1 += "'"+data1.get(j).get(num_rows1-1).replace('\'', ' ')+"'";
-                    String sql2 = "INSERT INTO PIS_MDC2 VALUES("+params1+")";
-                    System.out.println("\n\nsqlDrug:"+sql2);
-                    PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
-                    ps2.execute();
+                S.oln("Drug code " + UD_MDC_CODE + " not in the local list.. Adding it..");
+                String params1 = "";
+                for (int k = 0; k < num_cols1 - 1; k++) {
+                    params1 += "'" + data1.get(j).get(k) + "',";
+                }
+                params1 += "'" + data1.get(j).get(num_cols1 - 1) + "'";
+                String sql2 = "INSERT INTO PIS_MDC2 VALUES(" + params1 + ")";
+                PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
+                ps2.execute();
 //                }
             }
             S.oln("Done sync drug.. Alhamdulillah..");
@@ -10427,25 +10422,32 @@ public class Consultation extends javax.swing.JFrame {
         // TODO add your handling code here:
         int index = tbl_productname.getSelectedRow();
         String st = tbl_productname.getModel().getValueAt(index, 0).toString();
-        try {
-            ResultSet results = DBConnection.getImpl().getDrugCIS(st);
-            
-            clearDrugFields();
-            
-            if (results.next()) {
-                getDetailProductName(results);
-            } 
-//            else {
-//                getDetailProductName("");
-//            }
-        } catch (Exception e) {
+        String ud_mdc_code = arr_tbl_productname.get(index);
+        currentIndex_tbl_productname = index;
+        System.out.println("|"+ud_mdc_code+"|umaq");
+//        try {
+//            ResultSet results = DBConnection.getImpl().getDrugCIS(st);
+//            
+//            clearDrugFields();
+//            
+//            if (results.next()) {
+//                getDetailProductName(results);
+//            } 
+////            else {
+////                getDetailProductName("");
+////            }
+//        } catch (Exception e) {
             try {
+//                String sql = "SELECT * "
+//                        + "FROM PIS_MDC2 "
+//                        + "WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
                 String sql = "SELECT * "
                         + "FROM PIS_MDC2 "
-                        + "WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
+                        + "WHERE UCASE(UD_MDC_CODE) = UCASE(?)";
                 //            String sql = "SELECT * FROM PIS_MDC WHERE DRUG_PRODUCT_NAME = ?";
                 PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
-                ps.setString(1, st);
+//                ps.setString(1, st);
+                ps.setString(1, ud_mdc_code);
                 ResultSet results = ps.executeQuery();
                 
                 clearDrugFields();
@@ -10459,7 +10461,7 @@ public class Consultation extends javax.swing.JFrame {
             } catch (Exception ex) {
                 S.oln("MDC 12" + ex.getMessage());
             }
-        }
+//        }
     }//GEN-LAST:event_tbl_productnameMouseClicked
 
     private void txt_drugNameOListSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_drugNameOListSearchKeyReleased
@@ -10476,30 +10478,30 @@ public class Consultation extends javax.swing.JFrame {
             }
         } else {
             //tbl_productname
-            try {
-                
-                for (int i = 0; i < 50; i++) {
-                    tbl_productname.getModel().setValueAt("", i, 0);
-                }
-                
-//                String sql = "SELECT D_TRADE_NAME "
-//                            + "FROM PIS_MDC2 "
-//                            + "WHERE UCASE(D_TRADE_NAME) LIKE UCASE(?) "
-//                            + "OR UCASE(D_GNR_NAME) LIKE UCASE(?)";
-//                String params[] = {"%"+dtraden+"%", "%"+dtraden+"%"};
+//            try {
 //                
-//                ArrayList<ArrayList<String>> results = DBConnection.getImpl().getQuery(sql, 1, params);
-//                for (int i = 0; i < results.size(); i++) {
-//                    tbl_productname.getModel().setValueAt(results.get(i).get(0), i, 0);
+//                for (int i = 0; i < 50; i++) {
+//                    tbl_productname.getModel().setValueAt("", i, 0);
 //                }
-                
-                ResultSet results = DBConnection.getImpl().getDrugCIS(dtraden);
-                for (int i = 0; results.next() && i < 50; i++) {
-                    tbl_productname.getModel().setValueAt(results.getString("D_TRADE_NAME"), i, 0);
-                }
-                
-            } catch (Exception e) {
-                e.printStackTrace();
+//                
+////                String sql = "SELECT D_TRADE_NAME "
+////                            + "FROM PIS_MDC2 "
+////                            + "WHERE UCASE(D_TRADE_NAME) LIKE UCASE(?) "
+////                            + "OR UCASE(D_GNR_NAME) LIKE UCASE(?)";
+////                String params[] = {"%"+dtraden+"%", "%"+dtraden+"%"};
+////                
+////                ArrayList<ArrayList<String>> results = DBConnection.getImpl().getQuery(sql, 1, params);
+////                for (int i = 0; i < results.size(); i++) {
+////                    tbl_productname.getModel().setValueAt(results.get(i).get(0), i, 0);
+////                }
+//                
+//                ResultSet results = DBConnection.getImpl().getDrugCIS(dtraden);
+//                for (int i = 0; results.next() && i < 50; i++) {
+//                    tbl_productname.getModel().setValueAt(results.getString("D_TRADE_NAME"), i, 0);
+//                }
+//                
+//            } catch (Exception e) {
+//                e.printStackTrace();
                 try {
                     for (int i = 0; i < 50; i++) {
                         tbl_productname.getModel().setValueAt("", i, 0);
@@ -10514,18 +10516,23 @@ public class Consultation extends javax.swing.JFrame {
                     //                    ps.setString(2, dgnrn.toUpperCase() + "%");
                     ps.setString(2, "%" + dtraden + "%");
                     ResultSet results = ps.executeQuery();
+                    arr_tbl_productname.removeAll(arr_tbl_productname);
                     for (int i = 0; results.next() && i < 50; i++) {
                         tbl_productname.getModel().setValueAt(results.getString("D_TRADE_NAME"), i, 0);
+                        arr_tbl_productname.add(results.getString("UD_MDC_CODE"));
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
-            }
+//            }
         }
         
         endingTime("SEARCH DRUG");
     }//GEN-LAST:event_txt_drugNameOListSearchKeyReleased
 
+    ArrayList<String> arr_tbl_productname = new ArrayList<String>();
+    int currentIndex_tbl_productname = -1;
+    
     private void PN_accptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PN_accptBtnActionPerformed
         // TODO add your handling code here:
 
@@ -13367,14 +13374,19 @@ public class Consultation extends javax.swing.JFrame {
         String m = (String) txt_quantityOList.getText();
 
         String dr = txt_drugNameOListSearch.getText();
+        String ud_mdc_code = arr_tbl_productname.get(currentIndex_tbl_productname);
 
         try {
             String product_name_x = txt_productNameOList.getText();
+//            String ayat = "SELECT D_GNR_NAME "
+//                    + "FROM PIS_MDC2 "
+//                    + "WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
             String ayat = "SELECT D_GNR_NAME "
                     + "FROM PIS_MDC2 "
-                    + "WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
+                    + "WHERE UCASE(UD_MDC_CODE) = UCASE(?)";
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(ayat);
-            ps.setString(1, product_name_x);
+//            ps.setString(1, product_name_x);
+            ps.setString(1, ud_mdc_code);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 dr = rs.getString("D_GNR_NAME");
@@ -13443,7 +13455,8 @@ public class Consultation extends javax.swing.JFrame {
                     "Frequency: " + Func.trim(freq),
                     "Instruction: " + Func.trim(inst),
                     "Cautionary: " + Func.trim(cautionary),
-                    "Pack Type: " + Func.trim(pack_type)
+                    "Pack Type: " + Func.trim(pack_type),
+                    "UD MDC Code: " + Func.trim(ud_mdc_code)
                 };
                 setData(data, 13); //1 for c.complaint
 

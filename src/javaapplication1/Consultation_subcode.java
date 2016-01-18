@@ -587,28 +587,28 @@ public class Consultation_subcode {
                         String Duration = note_array[zz++].split(": ")[1];
                         String Frequency = note_array[zz++].split(": ")[1];
                         String Instruction = note_array[zz++].split(": ")[1];
-                        String UD_MDC_Code = "";
                         String Cautionary = note_array[zz++].split(": ")[1];
                         String packType = note_array[zz++].split(": ")[1];
-                        try {
-                            //                            tempQuery = "SELECT UD_MDC_CODE "
-                            //                                    + "FROM PIS_MDC "
-                            //                                    + "WHERE ACTIVE_INGREDIENT_CODE LIKE ? "
-                            //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
-                            cons.tempQuery = "SELECT UD_MDC_CODE "
-                                    + "FROM PIS_MDC2 "
-                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
-                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
-                            ps = Session.getCon_x(1000).prepareStatement(cons.tempQuery);
-                            ps.setString(1, "%" + ActiveIngredient + "%");
-                            ps.setString(2, "%" + ProductName + "%");
-                            cons.rs = ps.executeQuery();
-                            while (cons.rs.next()) {
-                                UD_MDC_Code = cons.rs.getString("UD_MDC_CODE");
-                            }
-                        } catch (Exception ex) {
-                            System.out.println(ex.toString());
-                        }
+                        String UD_MDC_Code = note_array[zz++].split(": ")[1];
+//                        try {
+//                            //                            tempQuery = "SELECT UD_MDC_CODE "
+//                            //                                    + "FROM PIS_MDC "
+//                            //                                    + "WHERE ACTIVE_INGREDIENT_CODE LIKE ? "
+//                            //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
+//                            cons.tempQuery = "SELECT UD_MDC_CODE "
+//                                    + "FROM PIS_MDC2 "
+//                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
+//                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
+//                            ps = Session.getCon_x(1000).prepareStatement(cons.tempQuery);
+//                            ps.setString(1, "%" + ActiveIngredient + "%");
+//                            ps.setString(2, "%" + ProductName + "%");
+//                            cons.rs = ps.executeQuery();
+//                            while (cons.rs.next()) {
+//                                UD_MDC_Code = cons.rs.getString("UD_MDC_CODE");
+//                            }
+//                        } catch (Exception ex) {
+//                            System.out.println(ex.toString());
+//                        }
                         
                         String qty_drug = Quantity;
                         if (packType.equals("CAP") || packType.equals("TAB")) {
