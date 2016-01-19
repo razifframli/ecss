@@ -103,7 +103,7 @@
                           <Component id="btn_CodeMaintenance1" min="-2" pref="128" max="-2" attributes="1"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="10" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
