@@ -4404,6 +4404,7 @@ public class Pharmacy extends javax.swing.JFrame{
         // TODO add your handling code here:
         
         if (txt_pmiNo.getText().equals("")) {
+            
             //popup windows search drug first
             JOptionPane.showMessageDialog(pnl_patientDrugOrder, "Please select a patient to dispense!"); //set pnl_patientDrugOrder to display dialog box in the center of pnl_patientDrugOrder
         } else {
@@ -4450,8 +4451,10 @@ public class Pharmacy extends javax.swing.JFrame{
                         } catch (Exception eex) {
                             d_qty = 0;
                         }
+
                         DBConnection.getImpl().insertDispenseDetail(ddData1, d_qty, true);
                         DBConnection.getImpl().updateOrderDetail(d_qty, oNo, drugCode);
+
                     }
                     //check status all order detail
                     boolean odStatus = DBConnection.getImpl().isOrderDetail(oNo);
@@ -4532,13 +4535,6 @@ public class Pharmacy extends javax.swing.JFrame{
         tab_drugOrder.setSelectedIndex(0);
         getQueue();
 
-        //clear data from jTable1 - hadi
-        for (int i = 0; i < 30; i++) {
-            for (int j = 0; j >= 6; j++) {
-                jTable1.getModel().setValueAt("", i, j);
-                }
-        }
-        //
     }//GEN-LAST:event_btn_dispenseActionPerformed
 
     private void btn_browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browseActionPerformed
@@ -6249,6 +6245,14 @@ arrival_date.setText("");
 txt_doctor.setText("");
 
 jScrollPane17.setViewportView(tbl_drugOList);
+
+    //clear data from jTable1 - hadi
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 5; j++) {
+             jTable1.getModel().setValueAt("", i, j);
+        }
+    }
+    //
     
     for(int i = 0; i < 100; i++) {
         for(int j = 0; j < 9; j++) {
@@ -9023,7 +9027,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jT_S3;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable jTable1;
     private javax.swing.JTable jTatc;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
