@@ -1,120 +1,26 @@
-public static ArrayList<ArrayList<String>> getDrugOrderDetail(String orderNo) {
-        ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+boolean status = false;
         try {
-            try {
-                String sql = "SELECT * FROM PIS_ORDER_DETAIL WHERE ORDER_NO = ? "
-                        + "AND STATUS = 0 ";
-
-                //prepare the sql query and execute it
-                PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
-                ps.setString(1, orderNo);
-                ResultSet result = ps.executeQuery();
-
-                while (result.next()) {
-                    //read data get from database to all fields
-                    
-                    ArrayList<String> d = new ArrayList<String>();
-                    
-                    oNo = result.getString("ORDER_NO");
-                    productCode = result.getString("DRUG_ITEM_CODE");
-                    productName = result.getString("DRUG_ITEM_DESC");
-                    frequency = result.getString("DRUG_FREQUENCY");
-                    route = result.getString("DRUG_ROUTE");
-                    dosageForm = result.getString("DRUG_FORM");
-                    strength = result.getString("DRUG_STRENGTH");
-                    dosage = result.getString("DRUG_DOSAGE");
-                    instruction = result.getString("ORDER_OUM");
-
-                    duration = result.getString("Duration");
-                    //Double duration1 = Double.parseDouble(duration);
-                    int duration1 = Integer.parseInt(duration);
-
-                    int qtyPerTime1 = result.getInt("QTY_ORDERED");
-                    qtyPerTime = Integer.toString(qtyPerTime1);
-
-                    totalQty = result.getInt("QTY_SUPPLIED");
-                    //totalQty1 = Integer.toString(totalQty);
-
-                    qtydispensed = result.getString("QTY_DISPENSED");
-                    //int qtydispensed1= Integer.parseInt(qtydispensed);
-
-                    oSD = result.getString("STATUS");//true false
-                    orderStatus = result.getString("ORDER_STATUS");//new partial full
-
-//                    //identify frequency
-//                    if ((frequency.equals("In the morning")) || (frequency.equals("At night")) || (frequency.equals("Daily"))) {
-//                        frequency1 = 1;
-//                    } else if (frequency.equals("Twice a day")) {
-//                        frequency1 = 2;
-//                    } else if ((frequency.equals("3 times a day")) || (frequency.equals("8 hourly"))) {
-//                        frequency1 = 3;
-//                    } else if ((frequency.equals("4 times a day")) || (frequency.equals("6 hourly"))) {
-//                        frequency1 = 4;
-//                    } else {
-//                        frequency1 = 6;
-//                    }
-//
-//                    //calculate total quantity
-//                    totalQty = frequency1 * qtyPerTime1 * duration1;
-                    totalQty1 = Double.toString(totalQty);
-                    
-                    try {
-//                        String sql1 = "SELECT Drug_Product_Name, Def_Route_Code "
-//                                + "FROM PIS_MDC "
-//                                + "WHERE UD_MDC_Code = ?";
-                        String sql1 = "SELECT D_TRADE_NAME, D_ROUTE_CODE "
-                                + "FROM PIS_MDC2 "
-                                + "WHERE UD_MDC_CODE = ? ";
-
-                        //prepare the sql query and execute it
-                        PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
-                        ps1.setString(1, mdcCode);
-                        ResultSet result1 = ps1.executeQuery();
-
-                        while (result1.next()) {
-                            //read data get from database to all fields
-                            productName = result1.getString("Drug_Product_Name");
-                            route = result1.getString("Def_Route_Code");
-                            stockQty1 = result1.getInt("STOCK_QTY");
-
-                            if (stockQty1 != 0) {
-                                stockQty = "Available";
-                            } else {
-                                stockQty = "Pending";
-                                //stockQty = "Not Available";
-                            }
-                        }
-                    } catch (Exception ex) {
-                        System.out.println("dbc 1 " + ex.getMessage());
-                    }
-                    
-                    d.add(productCode); //0
-                    d.add(productName); //1
-                    d.add(frequency); //2
-                    d.add(route); //3
-                    d.add(dosageForm); //4
-                    d.add(strength); //5
-                    d.add(dosage); //6
-                    d.add(instruction); //7
-                    d.add(duration); //8
-                    d.add(qtyPerTime); //9
-                    d.add(totalQty1); //10
-                    d.add(qtydispensed); //11
-                    d.add(orderStatus); //12
-                    d.add(stockQty1+""); //13
-                    d.add(stockQty+""); //14
-                    
-                    data.add(d);
-                }
-                //clean the results and data
-                ps.close();
-                result.close();
-
-            } catch (Exception ex) {
-                System.out.println("S po_master" + ex.getMessage());
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String sql = "SELECT * "
+                    + "FROM PMS_EPISODE "
+                    + "WHERE PMI_NO = ? "
+                    + "AND (STATUS LIKE '%Consult%' "
+                    + "OR STATUS LIKE '%Waiting%' "
+                    + "OR STATUS LIKE '%Hold%' "
+                    + "OR STATUS LIKE '%Second Opinion%') "
+                    + "AND EPISODE_DATE = ? ";
+            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+            ps.setString(1, pmino);
+            ps.setString(2, sdf.format(date));
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                status = true;
+            } else {
+                status = false;
             }
         } catch (Exception e) {
+            status = false;
             e.printStackTrace();
         }
-        return data;
-    }
+        return status;

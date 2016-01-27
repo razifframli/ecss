@@ -113,7 +113,7 @@ public class MainPage extends javax.swing.JFrame {
                 btn_pms.setEnabled(true);
                 btn_pharmacy.setEnabled(true);
                 btn_datamanagement.setEnabled(true);
-                btn_datamanagement.setEnabled(true);
+                btn_report.setEnabled(true);
             } else if (role.equals("NORMAL USER")) {
             } else if (role.equals("MANAGER")) {
             } else if (role.equals("SUPERVISOR")) {

@@ -260,32 +260,37 @@ public class Pharmacy extends javax.swing.JFrame{
     
     public void loadDrug() {
         try {
-            int num_rows = 24;
+            int num_cols = 25;
             String sql = "SELECT * "
                     + "FROM PIS_MDC2 ";
             String params[] = {};
-            ArrayList<ArrayList<String>> data1 = DBConnection.getImpl().getQuery(sql, num_rows, params);
+            ArrayList<ArrayList<String>> data1 = DBConnection.getImpl().getQuery(sql, num_cols, params);
+            
+            String sql_delete = "DELETE FROM PIS_MDC2 ";
+            PreparedStatement ps_delete = Session.getCon_x(1000).prepareStatement(sql_delete);
+            ps_delete.execute();
+            
             for (int j = 0; j < data1.size(); j++) {
                 //System.out.println("DRUG "+j+": "+data1.get(i)+"\n");
                 String UD_MDC_CODE = data1.get(j).get(0);
-                int num_rows1 = data1.get(j).size();
-                String sql1 = "SELECT * "
-                        + "FROM PIS_MDC2 "
-                        + "WHERE UD_MDC_CODE = ? ";
-                PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
-                ps1.setString(1, UD_MDC_CODE);
-                ResultSet rs1 = ps1.executeQuery();
-                if (!rs1.next()) {
+                int num_cols1 = data1.get(j).size();
+//                String sql1 = "SELECT * "
+//                        + "FROM PIS_MDC2 "
+//                        + "WHERE UD_MDC_CODE = ? ";
+//                PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
+//                ps1.setString(1, UD_MDC_CODE);
+//                ResultSet rs1 = ps1.executeQuery();
+//                if (!rs1.next()) {
                     S.oln("Drug code "+UD_MDC_CODE+" not in the local list.. Adding it..");
                     String params1 = "";
-                    for (int k = 0; k < num_rows1-1; k++) {
+                    for (int k = 0; k < num_cols1-1; k++) {
                         params1 += "'"+data1.get(j).get(k)+"',";
                     }
-                    params1 += "'"+data1.get(j).get(num_rows1-1)+"'";
+                    params1 += "'"+data1.get(j).get(num_cols1-1)+"'";
                     String sql2 = "INSERT INTO PIS_MDC2 VALUES("+params1+")";
                     PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
                     ps2.execute();
-                }
+//                }
             }
             S.oln("Done sync drug.. Alhamdulillah..");
         } catch (Exception e) {
@@ -4282,10 +4287,12 @@ public class Pharmacy extends javax.swing.JFrame{
                     arrPS[24]=(dmdc);
                     
                     Boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
+                    
+                    loadDrug();
                     String ggr = "";
                 } catch (Exception e) {
                     System.out.println("got error.."+e.getMessage());
-                    JOptionPane.showMessageDialog(null, "Unable to save at central Server. Please try again soon");
+                    JOptionPane.showMessageDialog(null, "Unable to update at central Server. Please try again soon");
                 }
                 
                 //popup windows update success
@@ -4404,7 +4411,6 @@ public class Pharmacy extends javax.swing.JFrame{
         // TODO add your handling code here:
         
         if (txt_pmiNo.getText().equals("")) {
-            
             //popup windows search drug first
             JOptionPane.showMessageDialog(pnl_patientDrugOrder, "Please select a patient to dispense!"); //set pnl_patientDrugOrder to display dialog box in the center of pnl_patientDrugOrder
         } else {
@@ -4451,10 +4457,8 @@ public class Pharmacy extends javax.swing.JFrame{
                         } catch (Exception eex) {
                             d_qty = 0;
                         }
-
                         DBConnection.getImpl().insertDispenseDetail(ddData1, d_qty, true);
                         DBConnection.getImpl().updateOrderDetail(d_qty, oNo, drugCode);
-
                     }
                     //check status all order detail
                     boolean odStatus = DBConnection.getImpl().isOrderDetail(oNo);
@@ -4535,6 +4539,13 @@ public class Pharmacy extends javax.swing.JFrame{
         tab_drugOrder.setSelectedIndex(0);
         getQueue();
 
+        //clear data from jTable1 - hadi
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j >= 6; j++) {
+                jTable1.getModel().setValueAt("", i, j);
+                }
+        }
+        //
     }//GEN-LAST:event_btn_dispenseActionPerformed
 
     private void btn_browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browseActionPerformed
@@ -6245,14 +6256,6 @@ arrival_date.setText("");
 txt_doctor.setText("");
 
 jScrollPane17.setViewportView(tbl_drugOList);
-
-    //clear data from jTable1 - hadi
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 5; j++) {
-             jTable1.getModel().setValueAt("", i, j);
-        }
-    }
-    //
     
     for(int i = 0; i < 100; i++) {
         for(int j = 0; j < 9; j++) {
@@ -7023,6 +7026,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
     }
     public void getDetailProductName(String productName) {
         product = productName;
+        String ud_mdc_code = productName;
         /*
          * CLEAR ALL FIELD
          */
@@ -7057,12 +7061,16 @@ jScrollPane17.setViewportView(tbl_drugOList);
          */
         //call data from PIS_MDC
         try {
+//            String sql = "SELECT * "
+//                    + "FROM PIS_MDC2 "
+//                    + "WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
             String sql = "SELECT * "
                     + "FROM PIS_MDC2 "
-                    + "WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
+                    + "WHERE UCASE(UD_MDC_CODE) = UCASE(?)";
 //            String sql = "SELECT * FROM PIS_MDC where DRUG_PRODUCT_NAME = ?";
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
-            ps.setString(1, product);
+//            ps.setString(1, product);
+            ps.setString(1, ud_mdc_code);
             ResultSet results = ps.executeQuery();
             if (results.next()) {
                 //rs 1
@@ -7148,36 +7156,36 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 txt_costPrice.setText(dcostp);
                 txt_sellprice.setText(dsellp);
 
-                if (stock_qty1 <= 0) {
-                    JOptionPane.showMessageDialog(null, "Drug stock quantity is low " + stock_qty1);
-
-                    //clear all text field 1
-                    txt_productNameOList.setText("");
-                    txt_drugstrength.setText("");
-                    cb_frequencyOList.setSelectedItem("-");
-                    cb_durationOList.setSelectedItem("-");
-                    cb_durationTypeOList.setSelectedItem("-");
-                    txt_quantityOList.setText("");
-                    cb_instructionOList.setSelectedItem("-");
-                    stock_qty.setText("");
-                    
-                    //clear all text field 2
-                    
-                    cb_supplierUStock.setSelectedItem("-");
-                    
-                    //reset all text field 3
-                    txt_drugNameMDC.setText("");
-                    txt_mdcCode.setText("");
-                    txt_ingredientCode.setText("");
-                    txt_cautionary.setText("");
-                    cdosage_form.setSelectedItem("-");
-                    txt_drugRoute.setText("");
-                    //txt_atcCodeMDC.setText("");
-//                    catc.setSelectedItem("-");
-                    rbt_activeMDC.setSelected(false);
-                    rbt_inactiveMDC.setSelected(false);
-                    txt_drugStrength.setText("");
-                }
+//                if (stock_qty1 <= 0) {
+//                    JOptionPane.showMessageDialog(null, "Drug stock quantity is low " + stock_qty1);
+//
+//                    //clear all text field 1
+//                    txt_productNameOList.setText("");
+//                    txt_drugstrength.setText("");
+//                    cb_frequencyOList.setSelectedItem("-");
+//                    cb_durationOList.setSelectedItem("-");
+//                    cb_durationTypeOList.setSelectedItem("-");
+//                    txt_quantityOList.setText("");
+//                    cb_instructionOList.setSelectedItem("-");
+//                    stock_qty.setText("");
+//                    
+//                    //clear all text field 2
+//                    
+//                    cb_supplierUStock.setSelectedItem("-");
+//                    
+//                    //reset all text field 3
+//                    txt_drugNameMDC.setText("");
+//                    txt_mdcCode.setText("");
+//                    txt_ingredientCode.setText("");
+//                    txt_cautionary.setText("");
+//                    cdosage_form.setSelectedItem("-");
+//                    txt_drugRoute.setText("");
+//                    //txt_atcCodeMDC.setText("");
+////                    catc.setSelectedItem("-");
+//                    rbt_activeMDC.setSelected(false);
+//                    rbt_inactiveMDC.setSelected(false);
+//                    txt_drugStrength.setText("");
+//                }
             }
             //clean the results and data
             results.close();
@@ -8090,13 +8098,17 @@ jScrollPane17.setViewportView(tbl_drugOList);
 //                    String sql = "SELECT * FROM PIS_MDC2 WHERE D_TRADE_NAME LIKE ? OR D_GNR_NAME LIKE ?";
                 String sql = "SELECT * "
                         + "FROM PIS_MDC2 "
-                        + "WHERE UCASE(D_TRADE_NAME) LIKE UCASE(?)";
+                        + "WHERE UCASE(D_TRADE_NAME) LIKE UCASE(?) "
+                        + "OR UCASE(D_GNR_NAME) LIKE UCASE(?) ";
                 PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
-                ps.setString(1, dtraden.toUpperCase() + "%");
+                ps.setString(1, "%" + dtraden.toUpperCase() + "%");
+                ps.setString(2, "%" + dtraden.toUpperCase() + "%");
                 //ps.setString(2, dgnrn.toUpperCase() + "%");
                 ResultSet results = ps.executeQuery();
+                arr_jT_S3.removeAll(arr_jT_S3);
                 for (int i = 0; results.next() && i < 50; i++) {
                     jT_S3.getModel().setValueAt(results.getString("D_TRADE_NAME"), i, 0);
+                    arr_jT_S3.add(results.getString("UD_MDC_CODE"));
                     //System.out.println("test umar mukhtar");
                 }
 
@@ -8107,18 +8119,26 @@ jScrollPane17.setViewportView(tbl_drugOList);
         }
     }//GEN-LAST:event_jtdrugS2KeyReleased
 
+    ArrayList<String> arr_jT_S3 = new ArrayList<String>();
+    int currentIndex_jT_S3 = -1;
+    
     private void jT_S3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_S3MouseClicked
         // TODO add your handling code here:
         int index = jT_S3.getSelectedRow();
         String st = jT_S3.getModel().getValueAt(index, 0).toString();
+        String ud_mdc_code = arr_jT_S3.get(index);
+        currentIndex_jT_S3 = index;
         try {
 //            String sql = "SELECT * FROM PIS_MDC WHERE DRUG_PRODUCT_NAME = ?";
-            String sql = "SELECT * FROM PIS_MDC2 WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
+//            String sql = "SELECT * FROM PIS_MDC2 WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
+            String sql = "SELECT * FROM PIS_MDC2 WHERE UCASE(UD_MDC_CODE) = UCASE(?) ";
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
-            ps.setString(1, st);
+//            ps.setString(1, st);
+            ps.setString(1, ud_mdc_code);
             ResultSet results = ps.executeQuery();
             if (results.next()) {
-                getDetailProductName(results.getString("D_TRADE_NAME"));
+//                getDetailProductName(results.getString("D_TRADE_NAME"));
+                getDetailProductName(ud_mdc_code);
             } else {
                 getDetailProductName("");
             }
@@ -8166,6 +8186,8 @@ jScrollPane17.setViewportView(tbl_drugOList);
         txt_cautionary.setText("");
         txt_expdate.setDate(null);
         cClassification.setSelectedIndex(0);
+        
+        loadDrug();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -8514,6 +8536,8 @@ jScrollPane17.setViewportView(tbl_drugOList);
                     arrPS[23]=(dpriceppack);
                     
                     Boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
+                    
+                    loadDrug();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Unable to save data to central server. Please save again when online");
                 }
@@ -8608,8 +8632,10 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 String [] arr = new String [1];
                 arr[0] = txt_mdcCode.getText();
                 boolean bool = DBConnection.getImpl().setQuery(sql, arr);
-            } catch (Exception e) {
                 
+                loadDrug();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Unable to update at central Server. Please try again soon");
             }
             String drugName = txt_drugNameMDC.getText();
             //clear textfield
@@ -8649,27 +8675,31 @@ jScrollPane17.setViewportView(tbl_drugOList);
         
         UpdateTbl();
     }//GEN-LAST:event_btn_delActionPerformed
-public void toExcel(JTable tbl_mdc, File file){
-		try{
-			TableModel model = tbl_mdc.getModel();
-			FileWriter excel = new FileWriter(file);
+    
+    public void toExcel(JTable tbl_mdc, File file) {
+        try {
+            TableModel model = tbl_mdc.getModel();
+            FileWriter excel = new FileWriter(file);
 
-			for(int i = 0; i < model.getColumnCount(); i++){
-				excel.write(model.getColumnName(i) + "\t");
-			}
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                excel.write(model.getColumnName(i) + "\t");
+            }
 
-			excel.write("\n");
+            excel.write("\n");
 
-			for(int i=0; i< model.getRowCount(); i++) {
-				for(int j=0; j < model.getColumnCount(); j++) {
-					excel.write(model.getValueAt(i,j).toString()+"\t");
-				}
-				excel.write("\n");
-			}
+            for (int i = 0; i < model.getRowCount(); i++) {
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    excel.write(model.getValueAt(i, j).toString() + "\t");
+                }
+                excel.write("\n");
+            }
 
-			excel.close();
-		}catch(IOException e){ System.out.println(e); }
-	}
+            excel.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
@@ -9027,7 +9057,7 @@ public void toExcel(JTable tbl_mdc, File file){
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jT_S3;
-    public static javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTatc;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;

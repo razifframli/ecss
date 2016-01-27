@@ -4,6 +4,9 @@
  */
 package GUI;
 
+import GUI.report_ICD10.GUI_ReportICD10;
+import javaapplication3.ReportModule;
+
 /**
  *
  * @author End User
@@ -129,9 +132,11 @@ public class ReportMenu extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        ReportICD10 reportICD10 = new ReportICD10();
-        reportICD10.setVisible(true);
-        dispose();
+//        ReportICD10 reportICD10 = new ReportICD10();
+//        reportICD10.setVisible(true);
+//        dispose();
+        
+        new GUI_ReportICD10().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
