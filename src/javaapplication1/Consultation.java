@@ -9697,28 +9697,28 @@ public class Consultation extends javax.swing.JFrame {
                         String Duration = note_array[zz++].split(": ")[1];
                         String Frequency = note_array[zz++].split(": ")[1];
                         String Instruction = note_array[zz++].split(": ")[1];
-                        String UD_MDC_Code = "";
                         String Cautionary = note_array[zz++].split(": ")[1];
                         String packType = note_array[zz++].split(": ")[1];
-                        try {
-                            //                            tempQuery = "SELECT UD_MDC_CODE "
-                            //                                    + "FROM PIS_MDC "
-                            //                                    + "WHERE ACTIVE_INGREDIENT_CODE LIKE ? "
-                            //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
-                            tempQuery = "SELECT UD_MDC_CODE "
-                                    + "FROM PIS_MDC2 "
-                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
-                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
-                            ps = Session.getCon_x(1000).prepareStatement(tempQuery);
-                            ps.setString(1, "%" + ActiveIngredient + "%");
-                            ps.setString(2, "%" + ProductName + "%");
-                            rs = ps.executeQuery();
-                            while (rs.next()) {
-                                UD_MDC_Code = rs.getString("UD_MDC_CODE");
-                            }
-                        } catch (Exception ex) {
-                            System.out.println(ex.toString());
-                        }
+                        String UD_MDC_Code = note_array[zz++].split(": ")[1];
+//                        try {
+//                            //                            tempQuery = "SELECT UD_MDC_CODE "
+//                            //                                    + "FROM PIS_MDC "
+//                            //                                    + "WHERE ACTIVE_INGREDIENT_CODE LIKE ? "
+//                            //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
+//                            tempQuery = "SELECT UD_MDC_CODE "
+//                                    + "FROM PIS_MDC2 "
+//                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
+//                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
+//                            ps = Session.getCon_x(1000).prepareStatement(tempQuery);
+//                            ps.setString(1, "" + ActiveIngredient + "");
+//                            ps.setString(2, "" + ProductName + "");
+//                            rs = ps.executeQuery();
+//                            if (rs.next()) {
+//                                UD_MDC_Code = rs.getString("UD_MDC_CODE");
+//                            }
+//                        } catch (Exception ex) {
+//                            System.out.println(ex.toString());
+//                        }
                         
                         String qty_drug = Quantity;
                         if (packType.equals("CAP") || packType.equals("TAB")) {
@@ -9768,7 +9768,7 @@ public class Consultation extends javax.swing.JFrame {
             }
 
             if(stat_dto) {
-                PDFiText.createPrescription("assets/Presription_.pdf", data_temp);
+                PDFiText.createPrescription(par+"assets/Presription_.pdf", data_temp);
             } else {
                 J.o("No Drug Order", "No drug had been ordered!\nPlease order drug first.", 1);
             }
@@ -12974,28 +12974,28 @@ public class Consultation extends javax.swing.JFrame {
                         String Duration = note_array[zz++].split(": ")[1];
                         String Frequency = note_array[zz++].split(": ")[1];
                         String Instruction = note_array[zz++].split(": ")[1];
-                        String UD_MDC_Code = "";
                         String Cautionary = note_array[zz++].split(": ")[1];
                         String packType = note_array[zz++].split(": ")[1];
-                        try {
-                            //                            tempQuery = "SELECT UD_MDC_CODE "
-                            //                                    + "FROM PIS_MDC "
-                            //                                    + "WHERE ACTIVE_INGREDIENT_CODE LIKE ? "
-                            //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
-                            tempQuery = "SELECT UD_MDC_CODE "
-                                    + "FROM PIS_MDC2 "
-                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
-                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
-                            ps = Session.getCon_x(1000).prepareStatement(tempQuery);
-                            ps.setString(1, "%" + ActiveIngredient + "%");
-                            ps.setString(2, "%" + ProductName + "%");
-                            rs = ps.executeQuery();
-                            while (rs.next()) {
-                                UD_MDC_Code = rs.getString("UD_MDC_CODE");
-                            }
-                        } catch (Exception ex) {
-                            System.out.println(ex.toString());
-                        }
+                        String UD_MDC_Code = note_array[zz++].split(": ")[1];
+//                        try {
+//                            //                            tempQuery = "SELECT UD_MDC_CODE "
+//                            //                                    + "FROM PIS_MDC "
+//                            //                                    + "WHERE ACTIVE_INGREDIENT_CODE LIKE ? "
+//                            //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
+//                            tempQuery = "SELECT UD_MDC_CODE "
+//                                    + "FROM PIS_MDC2 "
+//                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
+//                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
+//                            ps = Session.getCon_x(1000).prepareStatement(tempQuery);
+//                            ps.setString(1, "%" + ActiveIngredient + "%");
+//                            ps.setString(2, "%" + ProductName + "%");
+//                            rs = ps.executeQuery();
+//                            while (rs.next()) {
+//                                UD_MDC_Code = rs.getString("UD_MDC_CODE");
+//                            }
+//                        } catch (Exception ex) {
+//                            System.out.println(ex.toString());
+//                        }
                         
                         String qty_drug = Quantity;
                         if (packType.equals("CAP") || packType.equals("TAB")) {
