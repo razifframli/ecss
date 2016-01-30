@@ -8,6 +8,7 @@ package GUI.report_ICD10.symptom;
 
 
 import DBConnection.DBConnection;
+import GUI.Login;
 import com.itextpdf.text.BaseColor;
 import java.io.*;
 import com.itextpdf.text.Document;
@@ -51,7 +52,10 @@ public class new_GUI extends javax.swing.JFrame {
  * @author arif
  * @version 1.0 29 DEC 2015
  */   
-    String fileNameSymptom = "Report_Symptom.pdf";
+    static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+    static String par = fi.getParent()+"/";
+//    static String par = "";
+    String fileNameSymptom = par+"Report_Symptom.pdf";
     
 String Faculty = null;
 String[] tarikh;

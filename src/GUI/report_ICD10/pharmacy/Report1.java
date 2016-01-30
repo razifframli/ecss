@@ -8,6 +8,7 @@ package GUI.report_ICD10.pharmacy;
 
 
 import DBConnection.DBConnection;
+import GUI.Login;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
@@ -60,7 +61,10 @@ public class Report1 extends javax.swing.JFrame {
     private BaseFont bf;
     private int pageNumber;
     
-    private String fileName = "Report_Pharmacy.pdf";
+    static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+    static String par = fi.getParent()+"/";
+//    static String par = "";
+    private String fileName = par+"Report_Pharmacy.pdf";
 
     /**
      * Creates new form Report1
