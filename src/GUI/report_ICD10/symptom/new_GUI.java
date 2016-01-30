@@ -57,6 +57,7 @@ public class new_GUI extends javax.swing.JFrame {
 //    static String par = "";
     String fileNameSymptom = par+"Report_Symptom.pdf";
     String dateFormatAll = "yyyy/MM/dd";
+    String logoUTeM = par+"logoUTeM/logo.png";
     
 String Faculty = null;
 String[] tarikh;
@@ -382,7 +383,7 @@ String Patient = null;
                 PdfPTable header = new PdfPTable(2);
                 float[] columnWidths = {2f, 1.19f};
                 header.setWidths(columnWidths);
-                Image logo = Image.getInstance("logo.png");
+                Image logo = Image.getInstance(logoUTeM);
                 logo.scalePercent(8);
                 PdfPCell cell1 = new PdfPCell(logo);
                 // logo.setAlignment(Element.ALIGN_CENTER);

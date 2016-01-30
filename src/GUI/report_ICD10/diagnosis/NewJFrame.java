@@ -51,6 +51,12 @@ import main.RMIConnector;
  */
 public class NewJFrame extends javax.swing.JFrame {
     String faculty = null; //public var
+    
+    static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+    static String par = fi.getParent()+"/";
+//    static String par = "";
+    String logoUTeM = par+"logoUTeM/logoUTeMPNG.png";
+    
     /**
      * Creates new form NewJFrame
      */
@@ -396,9 +402,6 @@ public class NewJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-    static String par = fi.getParent()+"/";
-//    static String par = "";
     String fileName = par+"ECSS_RPT_001.pdf";
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -644,7 +647,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     header_table1.setWidths(columnWidths);
 
                     // 1 columns.
-                    Image logo = Image.getInstance("logoUTeMPNG.png");
+                    Image logo = Image.getInstance(logoUTeM);
                     logo.scaleAbsolute(121, 56);
                     //logo.setAbsolutePosition(260,700);
                     //logo.scalePercent(8);
