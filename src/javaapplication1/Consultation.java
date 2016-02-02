@@ -10413,6 +10413,10 @@ public class Consultation extends javax.swing.JFrame {
         for (int i = 0; i < 50; i++) {
             tbl_productname.getModel().setValueAt("", i, 0);
         }
+        
+        online_flagdrugsearch = false;
+        offline_flagdrugsearch = true;
+        arr_tbl_productname.removeAll(arr_tbl_productname);
         //lst_productNameOList.setModel(listModel);
         //tfield_productname.setText("");
     }//GEN-LAST:event_btn_drugClearActionPerformed
@@ -10426,52 +10430,66 @@ public class Consultation extends javax.swing.JFrame {
             return;
         }
         accept_btn_dto();
+        
+        online_flagdrugsearch = false;
+        offline_flagdrugsearch = true;
+        arr_tbl_productname.removeAll(arr_tbl_productname);
     }//GEN-LAST:event_btn_drugAcceptActionPerformed
 
     private void tbl_productnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_productnameMouseClicked
         // TODO add your handling code here:
         int index = tbl_productname.getSelectedRow();
         String st = tbl_productname.getModel().getValueAt(index, 0).toString();
-        String ud_mdc_code = arr_tbl_productname.get(index);
+        String ud_mdc_code = arr_tbl_productname.get(index).get(0);
         currentIndex_tbl_productname = index;
         System.out.println("|"+ud_mdc_code+"|umaq");
-//        try {
-//            ResultSet results = DBConnection.getImpl().getDrugCIS(st);
-//            
-//            clearDrugFields();
-//            
-//            if (results.next()) {
-//                getDetailProductName(results);
-//            } 
-////            else {
-////                getDetailProductName("");
-////            }
-//        } catch (Exception e) {
-            try {
-//                String sql = "SELECT * "
-//                        + "FROM PIS_MDC2 "
-//                        + "WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
-                String sql = "SELECT * "
-                        + "FROM PIS_MDC2 "
-                        + "WHERE UCASE(UD_MDC_CODE) = UCASE(?)";
-                //            String sql = "SELECT * FROM PIS_MDC WHERE DRUG_PRODUCT_NAME = ?";
-                PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
-//                ps.setString(1, st);
-                ps.setString(1, ud_mdc_code);
-                ResultSet results = ps.executeQuery();
-                
-                clearDrugFields();
-                
-                if (results.next()) {
-                    getDetailProductName(results);
-                } 
-//                else {
-//                    getDetailProductName("");
-//                }
-            } catch (Exception ex) {
-                S.oln("MDC 12" + ex.getMessage());
-            }
-//        }
+        
+        if (online_flagdrugsearch) {
+            
+            clearDrugFields();
+            
+            getDetailProductNameOnline(index);
+            
+        } else {
+        
+    //        try {
+    //            ResultSet results = DBConnection.getImpl().getDrugCIS(st);
+    //            
+    //            clearDrugFields();
+    //            
+    //            if (results.next()) {
+    //                getDetailProductName(results);
+    //            } 
+    ////            else {
+    ////                getDetailProductName("");
+    ////            }
+    //        } catch (Exception e) {
+                try {
+    //                String sql = "SELECT * "
+    //                        + "FROM PIS_MDC2 "
+    //                        + "WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
+                    String sql = "SELECT * "
+                            + "FROM PIS_MDC2 "
+                            + "WHERE UCASE(UD_MDC_CODE) = UCASE(?)";
+                    //            String sql = "SELECT * FROM PIS_MDC WHERE DRUG_PRODUCT_NAME = ?";
+                    PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+    //                ps.setString(1, st);
+                    ps.setString(1, ud_mdc_code);
+                    ResultSet results = ps.executeQuery();
+
+                    clearDrugFields();
+
+                    if (results.next()) {
+                        getDetailProductName(results);
+                    } 
+    //                else {
+    //                    getDetailProductName("");
+    //                }
+                } catch (Exception ex) {
+                    S.oln("MDC 12" + ex.getMessage());
+                }
+    //        }
+        }
     }//GEN-LAST:event_tbl_productnameMouseClicked
 
     private void txt_drugNameOListSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_drugNameOListSearchKeyReleased
@@ -10487,6 +10505,10 @@ public class Consultation extends javax.swing.JFrame {
                 tbl_productname.getModel().setValueAt("", i, 0);
             }
         } else {
+            
+            online_flagdrugsearch = false;
+            offline_flagdrugsearch = true;
+            
             //tbl_productname
 //            try {
 //                
@@ -10529,7 +10551,14 @@ public class Consultation extends javax.swing.JFrame {
                     arr_tbl_productname.removeAll(arr_tbl_productname);
                     for (int i = 0; results.next() && i < 50; i++) {
                         tbl_productname.getModel().setValueAt(results.getString("D_TRADE_NAME"), i, 0);
-                        arr_tbl_productname.add(results.getString("UD_MDC_CODE"));
+                        ArrayList<String> child_arr = new ArrayList<String>();
+                        try {
+                            for (int j = 0; ; j++) {
+                                child_arr.add(results.getString(j+1));
+                            }
+                        } catch (Exception e) {
+                        }
+                        arr_tbl_productname.add(child_arr);
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -10540,8 +10569,8 @@ public class Consultation extends javax.swing.JFrame {
         endingTime("SEARCH DRUG");
     }//GEN-LAST:event_txt_drugNameOListSearchKeyReleased
 
-    ArrayList<String> arr_tbl_productname = new ArrayList<String>();
-    int currentIndex_tbl_productname = -1;
+    private static ArrayList<ArrayList<String>> arr_tbl_productname = new ArrayList<ArrayList<String>>();
+    private static int currentIndex_tbl_productname = -1;
     
     private void PN_accptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PN_accptBtnActionPerformed
         // TODO add your handling code here:
@@ -12033,16 +12062,24 @@ public class Consultation extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_substract_dgsActionPerformed
 
+    private static boolean online_flagdrugsearch = false; 
+    private static boolean offline_flagdrugsearch = true; 
+    
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         J.o("Info Search Online", "Be advised, this search might be slow.", 1);
         loadDrug();
         String dtraden = txt_drugNameOListSearch.getText();
         try {
+            if (dtraden.length() < 3) {
+                J.o("Minimum Length to Search Online", "Please type equal or more than 3 "
+                        + "letters to proceed with online direct seach", 1);
+                return;
+            }
             for (int i = 0; i < 50; i++) {
                 tbl_productname.getModel().setValueAt("", i, 0);
             }
-            String sql = "SELECT D_TRADE_NAME, UD_MDC_CODE "
+            String sql = "SELECT * "
                     + "FROM PIS_MDC2 "
                     + "WHERE UCASE(D_TRADE_NAME) LIKE UCASE(?) "
                     + "OR UCASE(D_GNR_NAME) LIKE UCASE(?)";
@@ -12052,8 +12089,17 @@ public class Consultation extends javax.swing.JFrame {
             arr_tbl_productname.removeAll(arr_tbl_productname);
             for (int i = 0; i < d1.size() && i < 50; i++) {
                 tbl_productname.getModel().setValueAt(d1.get(i).get(0), i, 0);
-                arr_tbl_productname.add(d1.get(i).get(1));
+                ArrayList<String> child_arr = new ArrayList<String>();
+                try {
+                    for (int j = 0; ; j++) {
+                        child_arr.add(d1.get(i).get(j));
+                    }
+                } catch (Exception e) {
+                }
+                arr_tbl_productname.add(child_arr);
             }
+            online_flagdrugsearch = true;
+            offline_flagdrugsearch = false;
             showOnline();
         } catch (Exception ex) {
             J.o("Network Down!", "Can't reach the server at this time! Try later. ...", 0);
@@ -13412,7 +13458,7 @@ public class Consultation extends javax.swing.JFrame {
         String m = (String) txt_quantityOList.getText();
 
         String dr = txt_drugNameOListSearch.getText();
-        String ud_mdc_code = arr_tbl_productname.get(currentIndex_tbl_productname);
+        String ud_mdc_code = arr_tbl_productname.get(currentIndex_tbl_productname).get(0);
 
         try {
             String product_name_x = txt_productNameOList.getText();
@@ -13645,6 +13691,83 @@ public class Consultation extends javax.swing.JFrame {
         txt_packagetype.setText("");
 
         stock_qty.setText("");
+    }
+    
+    public static void getDetailProductNameOnline(int index) {
+        product = arr_tbl_productname.get(index).get(2);
+
+        /*
+         * search data base on the drug product choosed
+         */
+        //call data from PIS_MDC
+        try {
+//            String sql = "SELECT * FROM PIS_MDC where DRUG_PRODUCT_NAME = ?";
+//            String sql = "SELECT * "
+//                    + "FROM PIS_MDC2 "
+//                    + "WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
+//            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+//            ps.setString(1, product);
+//            ResultSet results = ps.executeQuery();
+//            if (results.next()) {
+            String dtraden = arr_tbl_productname.get(index).get(2); //results.getString("D_TRADE_NAME");//
+            int stock_qty1 = Integer.parseInt(arr_tbl_productname.get(index).get(8)); //results.getDouble("D_STOCK_QTY");//Stock_Qty
+            String dstockqty = arr_tbl_productname.get(index).get(8);//Double.toString(stock_qty1);
+            String dstrength = arr_tbl_productname.get(index).get(6);//results.getString("D_STRENGTH");
+            String ddosage = arr_tbl_productname.get(index).get(5);//results.getString("D_FORM_CODE");
+//            int dLqty1 = arr_tbl_productname.get(index).get(9);//results.getInt("D_QTY");
+            String dLqty = arr_tbl_productname.get(index).get(9);//Integer.toString(dLqty1);
+            String dLqtyt = arr_tbl_productname.get(index).get(10); //results.getString("D_QTYT");
+            String dLfreq = arr_tbl_productname.get(index).get(13);//results.getString("D_FREQUENCY");
+            String dLduration = arr_tbl_productname.get(index).get(11);//results.getString("D_DURATION");
+            String dLdurationType = arr_tbl_productname.get(index).get(12);//results.getString("D_DURATIONT");
+            String dLadvisory = arr_tbl_productname.get(index).get(7);//results.getString("D_ADVISORY_CODE");
+            String dLcaution = arr_tbl_productname.get(index).get(14);//results.getString("D_CAUTION_CODE");
+            String dLexpdate = arr_tbl_productname.get(index).get(15);//results.getString("D_EXP_DATE");
+            String dLclassification = arr_tbl_productname.get(index).get(16);//results.getString("D_CLASSIFICATION");
+
+            String dPackageType = arr_tbl_productname.get(index).get(22);//results.getString("D_PACKAGINGT");
+
+            txt_productNameOList.setText(dtraden);
+            stock_qty.setText(dstockqty);
+            txt_drugstrength.setText(dstrength);
+            txt_dosageFormOList.setText(ddosage);
+            txt_quantityOList.setText(dLqty);
+            cb_frequencyOList.setSelectedItem(dLfreq);
+            cb_durationOList.setSelectedItem(dLduration);
+            cb_durationTypeOList.setSelectedItem(dLdurationType);
+            cb_instructionOList.setSelectedItem(dLadvisory);
+
+            txt_packagetype.setText(dPackageType);
+
+            txt_caution.setText(dLcaution);
+
+            if (stock_qty1 <= 0) {
+                JOptionPane.showMessageDialog(null, "Drug stock quantity is low " + stock_qty1
+                        + "\nPlease choose another product name");
+
+                txt_productNameOList.setText("");
+                stock_qty.setText("");
+                txt_drugstrength.setText("");
+                txt_dosageFormOList.setText("");
+                txt_quantityOList.setText("");
+                cb_frequencyOList.setSelectedItem("");
+                cb_durationOList.setSelectedItem("");
+                cb_durationTypeOList.setSelectedItem("");
+                cb_instructionOList.setSelectedItem("");
+
+                txt_packagetype.setText("");
+
+                txt_caution.setText("");
+            }
+
+//            }
+            //clean the results and data
+//            results.close();
+//            ps.close();
+        } catch (Exception e1) {
+            S.oln("Error: "+e1.getMessage());
+//            e1.printStackTrace();
+        }
     }
     
     public static void getDetailProductName(ResultSet results) {
