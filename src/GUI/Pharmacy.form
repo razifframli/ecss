@@ -3713,14 +3713,15 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jPanel8" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jPanel16" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -3742,9 +3743,10 @@
                               <Layout>
                                 <DimensionLayout dim="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="jLabelMinimumStockLevel" min="-2" max="-2" attributes="0"/>
                                               <Component id="lbl_statusMDC" alignment="1" min="-2" max="-2" attributes="0"/>
                                               <Component id="lbl_supplierUStock1" alignment="1" min="-2" max="-2" attributes="0"/>
                                               <Component id="lbl_locationCodeUStock1" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -3759,13 +3761,22 @@
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="txt_drugRoute" alignment="0" max="32767" attributes="1"/>
+                                                      <Component id="jScrollPane8" alignment="0" pref="298" max="32767" attributes="0"/>
+                                                      <Component id="txt_drugNameMDC" alignment="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="jTextFieldMinimumStockLevel" max="32767" attributes="0"/>
                                                       <Component id="cb_supplierUStock" alignment="0" max="32767" attributes="1"/>
                                                       <Component id="txt_locCode" alignment="0" max="32767" attributes="1"/>
                                                       <Component id="txt_stockQty" alignment="0" max="32767" attributes="1"/>
                                                       <Component id="txt_drugStrength" alignment="0" max="32767" attributes="1"/>
                                                       <Component id="cdosage_form" alignment="0" pref="0" max="32767" attributes="0"/>
-                                                      <Group type="102" attributes="0">
+                                                      <Group type="102" alignment="0" attributes="0">
                                                           <Group type="103" groupAlignment="0" attributes="0">
                                                               <Group type="102" alignment="0" attributes="0">
                                                                   <Component id="rbt_activeMDC" min="-2" max="-2" attributes="0"/>
@@ -3777,15 +3788,7 @@
                                                           <EmptySpace min="0" pref="72" max="32767" attributes="0"/>
                                                       </Group>
                                                   </Group>
-                                                  <EmptySpace pref="83" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                      <Component id="txt_drugRoute" alignment="0" max="32767" attributes="1"/>
-                                                      <Component id="jScrollPane8" alignment="0" pref="298" max="32767" attributes="0"/>
-                                                      <Component id="txt_drugNameMDC" alignment="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace max="32767" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -3844,6 +3847,11 @@
                                               <Component id="lbl_statusMDC" alignment="2" min="-2" max="-2" attributes="0"/>
                                               <Component id="rbt_activeMDC" alignment="2" min="-2" max="-2" attributes="0"/>
                                               <Component id="rbt_inactiveMDC" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jLabelMinimumStockLevel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jTextFieldMinimumStockLevel" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
                                       </Group>
@@ -3946,160 +3954,159 @@
                                 <Component class="javax.swing.JComboBox" name="cdosage_form">
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="153">
-                                        <StringItem index="0" value="-"/>
-                                        <StringItem index="1" value="AEROSOL"/>
-                                        <StringItem index="2" value="AEROSOL, FOAM"/>
-                                        <StringItem index="3" value="AEROSOL, METERED"/>
-                                        <StringItem index="4" value="AEROSOL, POWDER"/>
-                                        <StringItem index="5" value="AEROSOL, SPRAY"/>
-                                        <StringItem index="6" value="BAR, CHEWABLE"/>
-                                        <StringItem index="7" value="BEAD"/>
-                                        <StringItem index="8" value="CAPSULE"/>
-                                        <StringItem index="9" value="CAPSULE, COATED"/>
-                                        <StringItem index="10" value="CAPSULE, COATED PELLETS"/>
-                                        <StringItem index="11" value="CAPSULE, COATED, EXTENDED RELEASE"/>
-                                        <StringItem index="12" value="CAPSULE, DELAYED RELEASE"/>
-                                        <StringItem index="13" value="CAPSULE, DELAYED RELEASE PELLETS"/>
-                                        <StringItem index="14" value="CAPSULE, EXTENDED RELEASE"/>
-                                        <StringItem index="15" value="CAPSULE, FILM COATED, EXTENDED RELEASE"/>
-                                        <StringItem index="16" value="CAPSULE, GELATIN COATED"/>
-                                        <StringItem index="17" value="CAPSULE, LIQUID FILLED"/>
-                                        <StringItem index="18" value="CELLULAR SHEET"/>
-                                        <StringItem index="19" value="CLOTH"/>
-                                        <StringItem index="20" value="CONCENTRATE"/>
-                                        <StringItem index="21" value="CREAM"/>
-                                        <StringItem index="22" value="CREAM, AUGMENTED"/>
-                                        <StringItem index="23" value="CRYSTAL"/>
-                                        <StringItem index="24" value="DISC"/>
-                                        <StringItem index="25" value="DOUCHE"/>
-                                        <StringItem index="26" value="DRESSING"/>
-                                        <StringItem index="27" value="DRUG DELIVERY SYSTEM"/>
-                                        <StringItem index="28" value="ELIXIR"/>
-                                        <StringItem index="29" value="EMULSION"/>
-                                        <StringItem index="30" value="ENEMA"/>
-                                        <StringItem index="31" value="EXTRACT"/>
-                                        <StringItem index="32" value="FIBER, EXTENDED RELEASE"/>
-                                        <StringItem index="33" value="FILM"/>
-                                        <StringItem index="34" value="FILM, EXTENDED RELEASE"/>
-                                        <StringItem index="35" value="FILM, SOLUBLE"/>
-                                        <StringItem index="36" value="FOR SOLUTION"/>
-                                        <StringItem index="37" value="FOR SUSPENSION"/>
-                                        <StringItem index="38" value="FOR SUSPENSION, EXTENDED RELEASE"/>
-                                        <StringItem index="39" value="GAS"/>
-                                        <StringItem index="40" value="GEL"/>
-                                        <StringItem index="41" value="GEL, DENTIFRICE"/>
-                                        <StringItem index="42" value="GEL, METERED"/>
-                                        <StringItem index="43" value="GLOBULE"/>
-                                        <StringItem index="44" value="GRANULE"/>
-                                        <StringItem index="45" value="GRANULE, DELAYED RELEASE"/>
-                                        <StringItem index="46" value="GRANULE, EFFERVESCENT"/>
-                                        <StringItem index="47" value="GRANULE, FOR SOLUTION"/>
-                                        <StringItem index="48" value="GRANULE, FOR SUSPENSION"/>
-                                        <StringItem index="49" value="GRANULE, FOR SUSPENSION, EXTENDED RELEASE"/>
-                                        <StringItem index="50" value="GUM, CHEWING"/>
-                                        <StringItem index="51" value="IMPLANT"/>
-                                        <StringItem index="52" value="INHALANT"/>
-                                        <StringItem index="53" value="INJECTABLE, LIPOSOMAL"/>
-                                        <StringItem index="54" value="INJECTION"/>
-                                        <StringItem index="55" value="INJECTION, EMULSION"/>
-                                        <StringItem index="56" value="INJECTION, LIPID COMPLEX"/>
-                                        <StringItem index="57" value="INJECTION, POWDER, FOR SOLUTION"/>
-                                        <StringItem index="58" value="INJECTION, POWDER, FOR SUSPENSION"/>
-                                        <StringItem index="59" value="INJECTION, POWDER, FOR SUSPENSION, EXTENDED RELEASE"/>
-                                        <StringItem index="60" value="INJECTION, POWDER, LYOPHILIZED, FOR LIPOSOMAL SUSPENSION"/>
-                                        <StringItem index="61" value="INJECTION, POWDER, LYOPHILIZED, FOR SOLUTION"/>
-                                        <StringItem index="62" value="INJECTION, POWDER, LYOPHILIZED, FOR SUSPENSION"/>
-                                        <StringItem index="63" value="INJECTION, POWDER, LYOPHILIZED, FOR SUSPENSION, EXTENDED RELEASE"/>
-                                        <StringItem index="64" value="INJECTION, SOLUTION"/>
-                                        <StringItem index="65" value="INJECTION, SOLUTION, CONCENTRATE"/>
-                                        <StringItem index="66" value="INJECTION, SUSPENSION"/>
-                                        <StringItem index="67" value="INJECTION, SUSPENSION, EXTENDED RELEASE"/>
-                                        <StringItem index="68" value="INJECTION, SUSPENSION, LIPOSOMAL"/>
-                                        <StringItem index="69" value="INJECTION, SUSPENSION, SONICATED"/>
-                                        <StringItem index="70" value="INSERT"/>
-                                        <StringItem index="71" value="INSERT, EXTENDED RELEASE"/>
-                                        <StringItem index="72" value="INTRAUTERINE DEVICE"/>
-                                        <StringItem index="73" value="IRRIGANT"/>
-                                        <StringItem index="74" value="JELLY"/>
-                                        <StringItem index="75" value="KIT"/>
-                                        <StringItem index="76" value="LINIMENT"/>
-                                        <StringItem index="77" value="LIPSTICK"/>
-                                        <StringItem index="78" value="LIQUID"/>
-                                        <StringItem index="79" value="LIQUID, EXTENDED RELEASE"/>
-                                        <StringItem index="80" value="LOTION"/>
-                                        <StringItem index="81" value="LOTION, AUGMENTED"/>
-                                        <StringItem index="82" value="LOTION/SHAMPOO"/>
-                                        <StringItem index="83" value="LOZENGE"/>
-                                        <StringItem index="84" value="MOUTHWASH"/>
-                                        <StringItem index="85" value="OIL"/>
-                                        <StringItem index="86" value="OINTMENT"/>
-                                        <StringItem index="87" value="OINTMENT, AUGMENTED"/>
-                                        <StringItem index="88" value="PASTE"/>
-                                        <StringItem index="89" value="PASTE, DENTIFRICE"/>
-                                        <StringItem index="90" value="PASTILLE"/>
-                                        <StringItem index="91" value="PATCH"/>
-                                        <StringItem index="92" value="PATCH, EXTENDED RELEASE"/>
-                                        <StringItem index="93" value="PATCH, EXTENDED RELEASE, ELECTRICALLY CONTROLLED"/>
-                                        <StringItem index="94" value="PELLET"/>
-                                        <StringItem index="95" value="PELLET, IMPLANTABLE"/>
-                                        <StringItem index="96" value="PELLETS, COATED, EXTENDED RELEASE"/>
-                                        <StringItem index="97" value="PILL"/>
-                                        <StringItem index="98" value="PLASTER"/>
-                                        <StringItem index="99" value="POULTICE"/>
-                                        <StringItem index="100" value="POWDER"/>
-                                        <StringItem index="101" value="POWDER, DENTIFRICE"/>
-                                        <StringItem index="102" value="POWDER, FOR SOLUTION"/>
-                                        <StringItem index="103" value="POWDER, FOR SUSPENSION"/>
-                                        <StringItem index="104" value="POWDER, METERED"/>
-                                        <StringItem index="105" value="RING"/>
-                                        <StringItem index="106" value="RINSE"/>
-                                        <StringItem index="107" value="SALVE"/>
-                                        <StringItem index="108" value="SHAMPOO"/>
-                                        <StringItem index="109" value="SHAMPOO, SUSPENSION"/>
-                                        <StringItem index="110" value="SOAP"/>
-                                        <StringItem index="111" value="SOLUTION"/>
-                                        <StringItem index="112" value="SOLUTION, CONCENTRATE"/>
-                                        <StringItem index="113" value="SOLUTION, FOR SLUSH"/>
-                                        <StringItem index="114" value="SOLUTION, GEL FORMING / DROPS"/>
-                                        <StringItem index="115" value="SOLUTION, GEL FORMING, EXTENDED RELEASE"/>
-                                        <StringItem index="116" value="SOLUTION/ DROPS"/>
-                                        <StringItem index="117" value="SPONGE"/>
-                                        <StringItem index="118" value="SPRAY"/>
-                                        <StringItem index="119" value="SPRAY, METERED"/>
-                                        <StringItem index="120" value="SPRAY, SUSPENSION"/>
-                                        <StringItem index="121" value="STICK"/>
-                                        <StringItem index="122" value="STRIP"/>
-                                        <StringItem index="123" value="SUPPOSITORY"/>
-                                        <StringItem index="124" value="SUPPOSITORY, EXTENDED RELEASE"/>
-                                        <StringItem index="125" value="SUSPENSION"/>
-                                        <StringItem index="126" value="SUSPENSION, EXTENDED RELEASE"/>
-                                        <StringItem index="127" value="SUSPENSION/ DROPS"/>
-                                        <StringItem index="128" value="SWAB"/>
-                                        <StringItem index="129" value="SYRUP"/>
-                                        <StringItem index="130" value="TABLET"/>
-                                        <StringItem index="131" value="TABLET, CHEWABLE"/>
-                                        <StringItem index="132" value="TABLET, COATED"/>
-                                        <StringItem index="133" value="TABLET, COATED PARTICLES"/>
-                                        <StringItem index="134" value="TABLET, DELAYED RELEASE"/>
-                                        <StringItem index="135" value="TABLET, DELAYED RELEASE PARTICLES"/>
-                                        <StringItem index="136" value="TABLET, EFFERVESCENT"/>
-                                        <StringItem index="137" value="TABLET, EXTENDED RELEASE"/>
-                                        <StringItem index="138" value="TABLET, FILM COATED"/>
-                                        <StringItem index="139" value="TABLET, FILM COATED, EXTENDED RELEASE"/>
-                                        <StringItem index="140" value="TABLET, FOR SOLUTION"/>
-                                        <StringItem index="141" value="TABLET, FOR SUSPENSION"/>
-                                        <StringItem index="142" value="TABLET, MULTILAYER"/>
-                                        <StringItem index="143" value="TABLET, MULTILAYER, EXTENDED RELEASE"/>
-                                        <StringItem index="144" value="TABLET, ORALLY DISINTEGRATING"/>
-                                        <StringItem index="145" value="TABLET, ORALLY DISINTEGRATING, DELAYED RELEASE"/>
-                                        <StringItem index="146" value="TABLET, SOLUBLE"/>
-                                        <StringItem index="147" value="TABLET, SUGAR COATED"/>
-                                        <StringItem index="148" value="TAMPON"/>
-                                        <StringItem index="149" value="TAPE"/>
-                                        <StringItem index="150" value="TINCTURE"/>
-                                        <StringItem index="151" value="TROCHE"/>
-                                        <StringItem index="152" value="WAFER"/>
+                                      <StringArray count="152">
+                                        <StringItem index="0" value="AEROSOL"/>
+                                        <StringItem index="1" value="AEROSOL, FOAM"/>
+                                        <StringItem index="2" value="AEROSOL, METERED"/>
+                                        <StringItem index="3" value="AEROSOL, POWDER"/>
+                                        <StringItem index="4" value="AEROSOL, SPRAY"/>
+                                        <StringItem index="5" value="BAR, CHEWABLE"/>
+                                        <StringItem index="6" value="BEAD"/>
+                                        <StringItem index="7" value="CAPSULE"/>
+                                        <StringItem index="8" value="CAPSULE, COATED"/>
+                                        <StringItem index="9" value="CAPSULE, COATED PELLETS"/>
+                                        <StringItem index="10" value="CAPSULE, COATED, EXTENDED RELEASE"/>
+                                        <StringItem index="11" value="CAPSULE, DELAYED RELEASE"/>
+                                        <StringItem index="12" value="CAPSULE, DELAYED RELEASE PELLETS"/>
+                                        <StringItem index="13" value="CAPSULE, EXTENDED RELEASE"/>
+                                        <StringItem index="14" value="CAPSULE, FILM COATED, EXTENDED RELEASE"/>
+                                        <StringItem index="15" value="CAPSULE, GELATIN COATED"/>
+                                        <StringItem index="16" value="CAPSULE, LIQUID FILLED"/>
+                                        <StringItem index="17" value="CELLULAR SHEET"/>
+                                        <StringItem index="18" value="CLOTH"/>
+                                        <StringItem index="19" value="CONCENTRATE"/>
+                                        <StringItem index="20" value="CREAM"/>
+                                        <StringItem index="21" value="CREAM, AUGMENTED"/>
+                                        <StringItem index="22" value="CRYSTAL"/>
+                                        <StringItem index="23" value="DISC"/>
+                                        <StringItem index="24" value="DOUCHE"/>
+                                        <StringItem index="25" value="DRESSING"/>
+                                        <StringItem index="26" value="DRUG DELIVERY SYSTEM"/>
+                                        <StringItem index="27" value="ELIXIR"/>
+                                        <StringItem index="28" value="EMULSION"/>
+                                        <StringItem index="29" value="ENEMA"/>
+                                        <StringItem index="30" value="EXTRACT"/>
+                                        <StringItem index="31" value="FIBER, EXTENDED RELEASE"/>
+                                        <StringItem index="32" value="FILM"/>
+                                        <StringItem index="33" value="FILM, EXTENDED RELEASE"/>
+                                        <StringItem index="34" value="FILM, SOLUBLE"/>
+                                        <StringItem index="35" value="FOR SOLUTION"/>
+                                        <StringItem index="36" value="FOR SUSPENSION"/>
+                                        <StringItem index="37" value="FOR SUSPENSION, EXTENDED RELEASE"/>
+                                        <StringItem index="38" value="GAS"/>
+                                        <StringItem index="39" value="GEL"/>
+                                        <StringItem index="40" value="GEL, DENTIFRICE"/>
+                                        <StringItem index="41" value="GEL, METERED"/>
+                                        <StringItem index="42" value="GLOBULE"/>
+                                        <StringItem index="43" value="GRANULE"/>
+                                        <StringItem index="44" value="GRANULE, DELAYED RELEASE"/>
+                                        <StringItem index="45" value="GRANULE, EFFERVESCENT"/>
+                                        <StringItem index="46" value="GRANULE, FOR SOLUTION"/>
+                                        <StringItem index="47" value="GRANULE, FOR SUSPENSION"/>
+                                        <StringItem index="48" value="GRANULE, FOR SUSPENSION, EXTENDED RELEASE"/>
+                                        <StringItem index="49" value="GUM, CHEWING"/>
+                                        <StringItem index="50" value="IMPLANT"/>
+                                        <StringItem index="51" value="INHALANT"/>
+                                        <StringItem index="52" value="INJECTABLE, LIPOSOMAL"/>
+                                        <StringItem index="53" value="INJECTION"/>
+                                        <StringItem index="54" value="INJECTION, EMULSION"/>
+                                        <StringItem index="55" value="INJECTION, LIPID COMPLEX"/>
+                                        <StringItem index="56" value="INJECTION, POWDER, FOR SOLUTION"/>
+                                        <StringItem index="57" value="INJECTION, POWDER, FOR SUSPENSION"/>
+                                        <StringItem index="58" value="INJECTION, POWDER, FOR SUSPENSION, EXTENDED RELEASE"/>
+                                        <StringItem index="59" value="INJECTION, POWDER, LYOPHILIZED, FOR LIPOSOMAL SUSPENSION"/>
+                                        <StringItem index="60" value="INJECTION, POWDER, LYOPHILIZED, FOR SOLUTION"/>
+                                        <StringItem index="61" value="INJECTION, POWDER, LYOPHILIZED, FOR SUSPENSION"/>
+                                        <StringItem index="62" value="INJECTION, POWDER, LYOPHILIZED, FOR SUSPENSION, EXTENDED RELEASE"/>
+                                        <StringItem index="63" value="INJECTION, SOLUTION"/>
+                                        <StringItem index="64" value="INJECTION, SOLUTION, CONCENTRATE"/>
+                                        <StringItem index="65" value="INJECTION, SUSPENSION"/>
+                                        <StringItem index="66" value="INJECTION, SUSPENSION, EXTENDED RELEASE"/>
+                                        <StringItem index="67" value="INJECTION, SUSPENSION, LIPOSOMAL"/>
+                                        <StringItem index="68" value="INJECTION, SUSPENSION, SONICATED"/>
+                                        <StringItem index="69" value="INSERT"/>
+                                        <StringItem index="70" value="INSERT, EXTENDED RELEASE"/>
+                                        <StringItem index="71" value="INTRAUTERINE DEVICE"/>
+                                        <StringItem index="72" value="IRRIGANT"/>
+                                        <StringItem index="73" value="JELLY"/>
+                                        <StringItem index="74" value="KIT"/>
+                                        <StringItem index="75" value="LINIMENT"/>
+                                        <StringItem index="76" value="LIPSTICK"/>
+                                        <StringItem index="77" value="LIQUID"/>
+                                        <StringItem index="78" value="LIQUID, EXTENDED RELEASE"/>
+                                        <StringItem index="79" value="LOTION"/>
+                                        <StringItem index="80" value="LOTION, AUGMENTED"/>
+                                        <StringItem index="81" value="LOTION/SHAMPOO"/>
+                                        <StringItem index="82" value="LOZENGE"/>
+                                        <StringItem index="83" value="MOUTHWASH"/>
+                                        <StringItem index="84" value="OIL"/>
+                                        <StringItem index="85" value="OINTMENT"/>
+                                        <StringItem index="86" value="OINTMENT, AUGMENTED"/>
+                                        <StringItem index="87" value="PASTE"/>
+                                        <StringItem index="88" value="PASTE, DENTIFRICE"/>
+                                        <StringItem index="89" value="PASTILLE"/>
+                                        <StringItem index="90" value="PATCH"/>
+                                        <StringItem index="91" value="PATCH, EXTENDED RELEASE"/>
+                                        <StringItem index="92" value="PATCH, EXTENDED RELEASE, ELECTRICALLY CONTROLLED"/>
+                                        <StringItem index="93" value="PELLET"/>
+                                        <StringItem index="94" value="PELLET, IMPLANTABLE"/>
+                                        <StringItem index="95" value="PELLETS, COATED, EXTENDED RELEASE"/>
+                                        <StringItem index="96" value="PILL"/>
+                                        <StringItem index="97" value="PLASTER"/>
+                                        <StringItem index="98" value="POULTICE"/>
+                                        <StringItem index="99" value="POWDER"/>
+                                        <StringItem index="100" value="POWDER, DENTIFRICE"/>
+                                        <StringItem index="101" value="POWDER, FOR SOLUTION"/>
+                                        <StringItem index="102" value="POWDER, FOR SUSPENSION"/>
+                                        <StringItem index="103" value="POWDER, METERED"/>
+                                        <StringItem index="104" value="RING"/>
+                                        <StringItem index="105" value="RINSE"/>
+                                        <StringItem index="106" value="SALVE"/>
+                                        <StringItem index="107" value="SHAMPOO"/>
+                                        <StringItem index="108" value="SHAMPOO, SUSPENSION"/>
+                                        <StringItem index="109" value="SOAP"/>
+                                        <StringItem index="110" value="SOLUTION"/>
+                                        <StringItem index="111" value="SOLUTION, CONCENTRATE"/>
+                                        <StringItem index="112" value="SOLUTION, FOR SLUSH"/>
+                                        <StringItem index="113" value="SOLUTION, GEL FORMING / DROPS"/>
+                                        <StringItem index="114" value="SOLUTION, GEL FORMING, EXTENDED RELEASE"/>
+                                        <StringItem index="115" value="SOLUTION/ DROPS"/>
+                                        <StringItem index="116" value="SPONGE"/>
+                                        <StringItem index="117" value="SPRAY"/>
+                                        <StringItem index="118" value="SPRAY, METERED"/>
+                                        <StringItem index="119" value="SPRAY, SUSPENSION"/>
+                                        <StringItem index="120" value="STICK"/>
+                                        <StringItem index="121" value="STRIP"/>
+                                        <StringItem index="122" value="SUPPOSITORY"/>
+                                        <StringItem index="123" value="SUPPOSITORY, EXTENDED RELEASE"/>
+                                        <StringItem index="124" value="SUSPENSION"/>
+                                        <StringItem index="125" value="SUSPENSION, EXTENDED RELEASE"/>
+                                        <StringItem index="126" value="SUSPENSION/ DROPS"/>
+                                        <StringItem index="127" value="SWAB"/>
+                                        <StringItem index="128" value="SYRUP"/>
+                                        <StringItem index="129" value="TABLET"/>
+                                        <StringItem index="130" value="TABLET, CHEWABLE"/>
+                                        <StringItem index="131" value="TABLET, COATED"/>
+                                        <StringItem index="132" value="TABLET, COATED PARTICLES"/>
+                                        <StringItem index="133" value="TABLET, DELAYED RELEASE"/>
+                                        <StringItem index="134" value="TABLET, DELAYED RELEASE PARTICLES"/>
+                                        <StringItem index="135" value="TABLET, EFFERVESCENT"/>
+                                        <StringItem index="136" value="TABLET, EXTENDED RELEASE"/>
+                                        <StringItem index="137" value="TABLET, FILM COATED"/>
+                                        <StringItem index="138" value="TABLET, FILM COATED, EXTENDED RELEASE"/>
+                                        <StringItem index="139" value="TABLET, FOR SOLUTION"/>
+                                        <StringItem index="140" value="TABLET, FOR SUSPENSION"/>
+                                        <StringItem index="141" value="TABLET, MULTILAYER"/>
+                                        <StringItem index="142" value="TABLET, MULTILAYER, EXTENDED RELEASE"/>
+                                        <StringItem index="143" value="TABLET, ORALLY DISINTEGRATING"/>
+                                        <StringItem index="144" value="TABLET, ORALLY DISINTEGRATING, DELAYED RELEASE"/>
+                                        <StringItem index="145" value="TABLET, SOLUBLE"/>
+                                        <StringItem index="146" value="TABLET, SUGAR COATED"/>
+                                        <StringItem index="147" value="TAMPON"/>
+                                        <StringItem index="148" value="TAPE"/>
+                                        <StringItem index="149" value="TINCTURE"/>
+                                        <StringItem index="150" value="TROCHE"/>
+                                        <StringItem index="151" value="WAFER"/>
                                       </StringArray>
                                     </Property>
                                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -4176,6 +4183,16 @@
                                       <ComponentRef name="buttonGroup3"/>
                                     </Property>
                                     <Property name="text" type="java.lang.String" value="Inactive"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="jLabelMinimumStockLevel">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Minimum Stock Level"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JTextField" name="jTextFieldMinimumStockLevel">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="100"/>
                                   </Properties>
                                 </Component>
                               </SubComponents>
@@ -4411,8 +4428,8 @@
                                                                   <Component id="cLqtyT" min="-2" max="-2" attributes="0"/>
                                                               </Group>
                                                               <Group type="102" attributes="0">
-                                                                  <Component id="cLduration" min="-2" pref="42" max="-2" attributes="0"/>
-                                                                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                                                                  <Component id="jSpinnerDuration" min="-2" pref="37" max="-2" attributes="0"/>
+                                                                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                                                                   <Component id="cLdurationType" max="32767" attributes="0"/>
                                                               </Group>
                                                               <Component id="cLfrequency" alignment="0" max="32767" attributes="1"/>
@@ -4448,8 +4465,8 @@
                                           <EmptySpace min="-2" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="2" attributes="0">
                                               <Component id="lbl_durationOList1" alignment="2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="cLduration" alignment="2" min="-2" max="-2" attributes="0"/>
                                               <Component id="cLdurationType" alignment="2" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jSpinnerDuration" alignment="2" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="2" attributes="0">
@@ -4500,7 +4517,7 @@
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                       <StringArray count="13">
-                                        <StringItem index="0" value="-"/>
+                                        <StringItem index="0" value="Once"/>
                                         <StringItem index="1" value="In the morning"/>
                                         <StringItem index="2" value="At night"/>
                                         <StringItem index="3" value="Daily"/>
@@ -4527,29 +4544,13 @@
                                     <Property name="text" type="java.lang.String" value="Duration :"/>
                                   </Properties>
                                 </Component>
-                                <Component class="javax.swing.JComboBox" name="cLduration">
-                                  <Properties>
-                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="7">
-                                        <StringItem index="0" value="0"/>
-                                        <StringItem index="1" value="1"/>
-                                        <StringItem index="2" value="2"/>
-                                        <StringItem index="3" value="3"/>
-                                        <StringItem index="4" value="4"/>
-                                        <StringItem index="5" value="5"/>
-                                        <StringItem index="6" value="6"/>
-                                      </StringArray>
-                                    </Property>
-                                  </Properties>
-                                </Component>
                                 <Component class="javax.swing.JComboBox" name="cLdurationType">
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="4">
-                                        <StringItem index="0" value="-"/>
-                                        <StringItem index="1" value="Day"/>
-                                        <StringItem index="2" value="Week"/>
-                                        <StringItem index="3" value="Month"/>
+                                      <StringArray count="3">
+                                        <StringItem index="0" value="Day"/>
+                                        <StringItem index="1" value="Week"/>
+                                        <StringItem index="2" value="Month"/>
                                       </StringArray>
                                     </Property>
                                   </Properties>
@@ -4558,7 +4559,7 @@
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                       <StringArray count="16">
-                                        <StringItem index="0" value="-"/>
+                                        <StringItem index="0" value="If required"/>
                                         <StringItem index="1" value="After meals"/>
                                         <StringItem index="2" value="As directed"/>
                                         <StringItem index="3" value="Before meals"/>
@@ -4591,13 +4592,12 @@
                                 <Component class="javax.swing.JComboBox" name="cLqtyT">
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="6">
-                                        <StringItem index="0" value="-"/>
-                                        <StringItem index="1" value="ml"/>
-                                        <StringItem index="2" value="garg"/>
-                                        <StringItem index="3" value="supp"/>
-                                        <StringItem index="4" value="puff"/>
-                                        <StringItem index="5" value=" "/>
+                                      <StringArray count="5">
+                                        <StringItem index="0" value="ml"/>
+                                        <StringItem index="1" value="garg"/>
+                                        <StringItem index="2" value="supp"/>
+                                        <StringItem index="3" value="puff"/>
+                                        <StringItem index="4" value=" "/>
                                       </StringArray>
                                     </Property>
                                   </Properties>
@@ -4650,47 +4650,53 @@
                                 <Component class="javax.swing.JComboBox" name="cClassification">
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="34">
-                                        <StringItem index="0" value="-"/>
-                                        <StringItem index="1" value="Antacid/ Anti Spasmodic"/>
-                                        <StringItem index="2" value="Anti Diarrheal"/>
-                                        <StringItem index="3" value="Anti Dyspepsia"/>
-                                        <StringItem index="4" value="Anti- Gout Agents"/>
-                                        <StringItem index="5" value="Anti- Obesity"/>
-                                        <StringItem index="6" value="Anti-Ashmatic &amp; Bronchodilator"/>
-                                        <StringItem index="7" value="Antibiotic"/>
-                                        <StringItem index="8" value="Antiemetic / Anti Vertigo"/>
-                                        <StringItem index="9" value="Anti-fungal"/>
-                                        <StringItem index="10" value="Antihelmintic"/>
-                                        <StringItem index="11" value="Anti-Histamine"/>
-                                        <StringItem index="12" value="Antiseptic"/>
-                                        <StringItem index="13" value="Anti-viral"/>
-                                        <StringItem index="14" value="Cough &amp; Cold Preparations"/>
-                                        <StringItem index="15" value="Creams &amp; Ointment"/>
-                                        <StringItem index="16" value="Drugs Used in Substance  Dependence "/>
-                                        <StringItem index="17" value="Eye/Ear Drop"/>
-                                        <StringItem index="18" value="Haermorrhoids"/>
-                                        <StringItem index="19" value="Injection"/>
-                                        <StringItem index="20" value="IV Drips"/>
-                                        <StringItem index="21" value="Laxatives"/>
-                                        <StringItem index="22" value="Lozenges"/>
-                                        <StringItem index="23" value="Mucolytics Agents"/>
-                                        <StringItem index="24" value="Nebulizer"/>
-                                        <StringItem index="25" value="Nose prep"/>
-                                        <StringItem index="26" value="NSAIDs"/>
-                                        <StringItem index="27" value="Oral prep"/>
-                                        <StringItem index="28" value="Oral Steroids"/>
-                                        <StringItem index="29" value="Others"/>
-                                        <StringItem index="30" value="Peripheral vasodilators/  migraine drug"/>
-                                        <StringItem index="31" value="Shampoo"/>
-                                        <StringItem index="32" value="Urinary Preparation"/>
-                                        <StringItem index="33" value="Vitamin &amp; supplements"/>
+                                      <StringArray count="33">
+                                        <StringItem index="0" value="Antacid/ Anti Spasmodic"/>
+                                        <StringItem index="1" value="Anti Diarrheal"/>
+                                        <StringItem index="2" value="Anti Dyspepsia"/>
+                                        <StringItem index="3" value="Anti- Gout Agents"/>
+                                        <StringItem index="4" value="Anti- Obesity"/>
+                                        <StringItem index="5" value="Anti-Ashmatic &amp; Bronchodilator"/>
+                                        <StringItem index="6" value="Antibiotic"/>
+                                        <StringItem index="7" value="Antiemetic / Anti Vertigo"/>
+                                        <StringItem index="8" value="Anti-fungal"/>
+                                        <StringItem index="9" value="Antihelmintic"/>
+                                        <StringItem index="10" value="Anti-Histamine"/>
+                                        <StringItem index="11" value="Antiseptic"/>
+                                        <StringItem index="12" value="Anti-viral"/>
+                                        <StringItem index="13" value="Cough &amp; Cold Preparations"/>
+                                        <StringItem index="14" value="Creams &amp; Ointment"/>
+                                        <StringItem index="15" value="Drugs Used in Substance  Dependence"/>
+                                        <StringItem index="16" value="Eye/Ear Drop"/>
+                                        <StringItem index="17" value="Haermorrhoids"/>
+                                        <StringItem index="18" value="Injection"/>
+                                        <StringItem index="19" value="IV Drips"/>
+                                        <StringItem index="20" value="Laxatives"/>
+                                        <StringItem index="21" value="Lozenges"/>
+                                        <StringItem index="22" value="Mucolytics Agents"/>
+                                        <StringItem index="23" value="Nebulizer"/>
+                                        <StringItem index="24" value="Nose prep"/>
+                                        <StringItem index="25" value="NSAIDs"/>
+                                        <StringItem index="26" value="Oral prep"/>
+                                        <StringItem index="27" value="Oral Steroids"/>
+                                        <StringItem index="28" value="Others"/>
+                                        <StringItem index="29" value="Peripheral vasodilators/  migraine drug"/>
+                                        <StringItem index="30" value="Shampoo"/>
+                                        <StringItem index="31" value="Urinary Preparation"/>
+                                        <StringItem index="32" value="Vitamin &amp; supplements"/>
                                       </StringArray>
                                     </Property>
                                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                                         <EtchetBorder/>
                                       </Border>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JSpinner" name="jSpinnerDuration">
+                                  <Properties>
+                                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                                      <SpinnerModel initial="1" maximum="30" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
                                     </Property>
                                   </Properties>
                                 </Component>
@@ -5259,7 +5265,7 @@
                   <Component id="jToolBar3" min="-2" pref="176" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jToolBar2" min="-2" pref="108" max="-2" attributes="0"/>
-                  <EmptySpace pref="409" max="32767" attributes="0"/>
+                  <EmptySpace pref="413" max="32767" attributes="0"/>
                   <Component id="lblStatus" min="-2" pref="53" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnStatus" min="-2" pref="31" max="-2" attributes="0"/>
@@ -5270,7 +5276,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="btnStatus" alignment="1" min="-2" pref="25" max="-2" attributes="1"/>

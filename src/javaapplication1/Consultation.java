@@ -452,14 +452,17 @@ public class Consultation extends javax.swing.JFrame {
 //                ps1.setString(1, UD_MDC_CODE);
 //                ResultSet rs1 = ps1.executeQuery();
 //                if (!rs1.next()) {
-                S.oln("Drug code " + UD_MDC_CODE + " not in the local list.. Adding it..");
+//                S.oln("Drug code " + UD_MDC_CODE + " not in the local list.. Adding it..");
                 String params1 = "";
                 for (int k = 0; k < num_cols1 - 1; k++) {
                     params1 += "'" + Func.trim(data1.get(j).get(k)) + "',";
                 }
                 params1 += "'" + Func.trim(data1.get(j).get(num_cols1 - 1)) + "'";
+                
+                System.out.println(params1);
+                
                 String sql2 = "INSERT INTO PIS_MDC2 VALUES(" + params1 + ")";
-                System.out.println("\n\nsql2:\n"+sql2+"\n\n");
+//                System.out.println("\n\nsql2:\n"+sql2+"\n\n");
                 PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
                 ps2.execute();
 //                }
@@ -1069,7 +1072,6 @@ public class Consultation extends javax.swing.JFrame {
         lbl_frequencyOList = new javax.swing.JLabel();
         cb_frequencyOList = new javax.swing.JComboBox();
         lbl_durationOList = new javax.swing.JLabel();
-        cb_durationOList = new javax.swing.JComboBox();
         cb_durationTypeOList = new javax.swing.JComboBox();
         cb_instructionOList = new javax.swing.JComboBox();
         lbl_instructionOList = new javax.swing.JLabel();
@@ -1077,11 +1079,13 @@ public class Consultation extends javax.swing.JFrame {
         txt_dosageFormOList = new javax.swing.JTextField();
         jScrollPane53 = new javax.swing.JScrollPane();
         txt_caution = new javax.swing.JTextArea();
+        jSpinner1 = new javax.swing.JSpinner();
         btn_drugAccept = new javax.swing.JButton();
         btn_drugClear = new javax.swing.JButton();
         jLabel61 = new javax.swing.JLabel();
         txt_packagetype = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane29 = new javax.swing.JScrollPane();
         tbl_drug = new javax.swing.JTable();
@@ -1721,7 +1725,7 @@ public class Consultation extends javax.swing.JFrame {
                                     .addComponent(btnSrcComplaint, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel47Layout.createSequentialGroup()
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.PREFERRED_SIZE, 142, Short.MAX_VALUE)
+                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                                             .addComponent(rbtn_gen_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -5223,15 +5227,13 @@ public class Consultation extends javax.swing.JFrame {
 
         lbl_frequencyOList.setText("Frequency :");
 
-        cb_frequencyOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "In the morning", "At night", "Daily", "Twice a day", "3 times a day", "4 times a day", "2 hourly", "4 hourly", "6 hourly", "8 hourly", "Immedietly", "As needed" }));
+        cb_frequencyOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Once", "In the morning", "At night", "Daily", "Twice a day", "3 times a day", "4 times a day", "2 hourly", "4 hourly", "6 hourly", "8 hourly", "Immedietly", "As needed" }));
 
         lbl_durationOList.setText("Duration :");
 
-        cb_durationOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "1", "2", "3", "4", "5", "6" }));
+        cb_durationTypeOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Day", "Week", "Month" }));
 
-        cb_durationTypeOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Day", "Week", "Month" }));
-
-        cb_instructionOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "If required", "As directed", "Before meals", "After meals", "Every second day", "Left side", "Right side", "To both sides", "Other" }));
+        cb_instructionOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "If required", "As directed", "Before meals", "After meals", "Every second day", "Left side", "Right side", "To both sides", "Other" }));
 
         lbl_instructionOList.setText("Instruction :");
 
@@ -5243,6 +5245,8 @@ public class Consultation extends javax.swing.JFrame {
         txt_caution.setRows(5);
         txt_caution.setWrapStyleWord(true);
         jScrollPane53.setViewportView(txt_caution);
+
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 30, 1));
 
         javax.swing.GroupLayout jPanel74Layout = new javax.swing.GroupLayout(jPanel74);
         jPanel74.setLayout(jPanel74Layout);
@@ -5260,7 +5264,7 @@ public class Consultation extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel74Layout.createSequentialGroup()
-                        .addComponent(cb_durationOList, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cb_durationTypeOList, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8))
@@ -5296,8 +5300,8 @@ public class Consultation extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_durationOList)
-                    .addComponent(cb_durationOList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_durationTypeOList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_durationTypeOList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_instructionOList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -5337,6 +5341,13 @@ public class Consultation extends javax.swing.JFrame {
             }
         });
 
+        jButton6.setText("Search Online");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel45Layout = new javax.swing.GroupLayout(jPanel45);
         jPanel45.setLayout(jPanel45Layout);
         jPanel45Layout.setHorizontalGroup(
@@ -5363,11 +5374,11 @@ public class Consultation extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_packagetype, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btn_drugAccept, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_drugClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5)
+                    .addComponent(btn_drugAccept, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_drugClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel45Layout.setVerticalGroup(
@@ -5376,7 +5387,8 @@ public class Consultation extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_drugNameOListSearch)
-                    .addComponent(txt_drugNameOListSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_drugNameOListSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -5475,7 +5487,7 @@ public class Consultation extends javax.swing.JFrame {
                 .addComponent(jPanel45, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jScrollPane12.setViewportView(jPanel7);
@@ -6974,7 +6986,7 @@ public class Consultation extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -6987,7 +6999,7 @@ public class Consultation extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel54)
-                .addGap(11, 11, 11)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
@@ -7868,7 +7880,7 @@ public class Consultation extends javax.swing.JFrame {
                     txt_drugNameOListSearch.setText(drgsub[group1][0]);
 //                    txt_dosageOList.setText(drgsub[group1][1]);
                     txt_quantityOList.setText(drgsub[group1][2]);
-                    cb_durationOList.setSelectedItem(drgsub[group1][3]);
+                    jSpinner1.setValue(drgsub[group1][3]);
                     cb_frequencyOList.setSelectedIndex(drgsub1[group1][0]);
                     cb_instructionOList.setSelectedIndex(drgsub1[group1][1]);
                     //lbx_productNameUStockSearch.setSelectedIndex(drgsub1[group1][2]);
@@ -8100,7 +8112,7 @@ public class Consultation extends javax.swing.JFrame {
     
     protected static String getFrequencyCode(String frequency) {
         String str = "0";
-        if ((frequency.equals("In the morning")) || (frequency.equals("At night")) || (frequency.equals("Daily"))) {
+        if ((frequency.equals("In the morning")) || (frequency.equals("At night")) || (frequency.equals("Daily")) || (frequency.equals("once"))) { //added 'once' - hadi
             str = "1";
         } else if (frequency.equals("Twice a day")) {
             str = "2";
@@ -9688,28 +9700,28 @@ public class Consultation extends javax.swing.JFrame {
                         String Duration = note_array[zz++].split(": ")[1];
                         String Frequency = note_array[zz++].split(": ")[1];
                         String Instruction = note_array[zz++].split(": ")[1];
-                        String UD_MDC_Code = "";
                         String Cautionary = note_array[zz++].split(": ")[1];
                         String packType = note_array[zz++].split(": ")[1];
-                        try {
-                            //                            tempQuery = "SELECT UD_MDC_CODE "
-                            //                                    + "FROM PIS_MDC "
-                            //                                    + "WHERE ACTIVE_INGREDIENT_CODE LIKE ? "
-                            //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
-                            tempQuery = "SELECT UD_MDC_CODE "
-                                    + "FROM PIS_MDC2 "
-                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
-                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
-                            ps = Session.getCon_x(1000).prepareStatement(tempQuery);
-                            ps.setString(1, "%" + ActiveIngredient + "%");
-                            ps.setString(2, "%" + ProductName + "%");
-                            rs = ps.executeQuery();
-                            while (rs.next()) {
-                                UD_MDC_Code = rs.getString("UD_MDC_CODE");
-                            }
-                        } catch (Exception ex) {
-                            System.out.println(ex.toString());
-                        }
+                        String UD_MDC_Code = note_array[zz++].split(": ")[1];
+//                        try {
+//                            //                            tempQuery = "SELECT UD_MDC_CODE "
+//                            //                                    + "FROM PIS_MDC "
+//                            //                                    + "WHERE ACTIVE_INGREDIENT_CODE LIKE ? "
+//                            //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
+//                            tempQuery = "SELECT UD_MDC_CODE "
+//                                    + "FROM PIS_MDC2 "
+//                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
+//                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
+//                            ps = Session.getCon_x(1000).prepareStatement(tempQuery);
+//                            ps.setString(1, "" + ActiveIngredient + "");
+//                            ps.setString(2, "" + ProductName + "");
+//                            rs = ps.executeQuery();
+//                            if (rs.next()) {
+//                                UD_MDC_Code = rs.getString("UD_MDC_CODE");
+//                            }
+//                        } catch (Exception ex) {
+//                            System.out.println(ex.toString());
+//                        }
                         
                         String qty_drug = Quantity;
                         if (packType.equals("CAP") || packType.equals("TAB")) {
@@ -9759,7 +9771,7 @@ public class Consultation extends javax.swing.JFrame {
             }
 
             if(stat_dto) {
-                PDFiText.createPrescription("assets/Presription_.pdf", data_temp);
+                PDFiText.createPrescription(par+"assets/Presription_.pdf", data_temp);
             } else {
                 J.o("No Drug Order", "No drug had been ordered!\nPlease order drug first.", 1);
             }
@@ -10155,7 +10167,7 @@ public class Consultation extends javax.swing.JFrame {
                         txt_caution.setText(tbl_note_1.getValueAt(index_temp--, 1).toString());
                         cb_instructionOList.setSelectedItem(tbl_note_1.getValueAt(index_temp--, 1).toString());
                         cb_frequencyOList.setSelectedItem(tbl_note_1.getValueAt(index_temp--, 1).toString());
-                        cb_durationOList.setSelectedItem(tbl_note_1.getValueAt(index_temp, 1).toString().split(" ")[0]);
+                        jSpinner1.setValue(tbl_note_1.getValueAt(index_temp, 1).toString().split(" ")[0]);
                         cb_durationTypeOList.setSelectedItem(tbl_note_1.getValueAt(index_temp--, 1).toString().split(" ")[1]);
                         txt_dosageFormOList.setText(tbl_note_1.getValueAt(index_temp--, 1).toString());
                         txt_quantityOList.setText(tbl_note_1.getValueAt(index_temp--, 1).toString());
@@ -10371,14 +10383,14 @@ public class Consultation extends javax.swing.JFrame {
 
             if(dur % 30 == 0) {
                 dur /= 30;
-                cb_durationOList.setSelectedItem("" + dur);
+                jSpinner1.setValue("" + dur);
                 cb_durationTypeOList.setSelectedItem("Month");
             } else if(dur % 7 == 0) {
                 dur /= 7;
-                cb_durationOList.setSelectedItem("" + dur);
+                jSpinner1.setValue("" + dur);
                 cb_durationTypeOList.setSelectedItem("Week");
             } else {
-                cb_durationOList.setSelectedItem("" + dur);
+                jSpinner1.setValue("" + dur);
                 cb_durationTypeOList.setSelectedItem("Day");
             }
 
@@ -10393,7 +10405,7 @@ public class Consultation extends javax.swing.JFrame {
         txt_drugstrength.setText("");
         txt_quantityOList.setText("");
         txt_dosageFormOList.setText("");
-        cb_durationOList.setSelectedIndex(0);
+        jSpinner1.setValue("");
         cb_durationTypeOList.setSelectedIndex(0);
         cb_frequencyOList.setSelectedIndex(0);
         cb_instructionOList.setSelectedIndex(0);
@@ -10404,6 +10416,10 @@ public class Consultation extends javax.swing.JFrame {
         for (int i = 0; i < 50; i++) {
             tbl_productname.getModel().setValueAt("", i, 0);
         }
+        
+        online_flagdrugsearch = false;
+        offline_flagdrugsearch = true;
+        arr_tbl_productname.removeAll(arr_tbl_productname);
         //lst_productNameOList.setModel(listModel);
         //tfield_productname.setText("");
     }//GEN-LAST:event_btn_drugClearActionPerformed
@@ -10417,52 +10433,66 @@ public class Consultation extends javax.swing.JFrame {
             return;
         }
         accept_btn_dto();
+        
+        online_flagdrugsearch = false;
+        offline_flagdrugsearch = true;
+        arr_tbl_productname.removeAll(arr_tbl_productname);
     }//GEN-LAST:event_btn_drugAcceptActionPerformed
 
     private void tbl_productnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_productnameMouseClicked
         // TODO add your handling code here:
         int index = tbl_productname.getSelectedRow();
         String st = tbl_productname.getModel().getValueAt(index, 0).toString();
-        String ud_mdc_code = arr_tbl_productname.get(index);
+        String ud_mdc_code = arr_tbl_productname.get(index).get(0);
         currentIndex_tbl_productname = index;
         System.out.println("|"+ud_mdc_code+"|umaq");
-//        try {
-//            ResultSet results = DBConnection.getImpl().getDrugCIS(st);
-//            
-//            clearDrugFields();
-//            
-//            if (results.next()) {
-//                getDetailProductName(results);
-//            } 
-////            else {
-////                getDetailProductName("");
-////            }
-//        } catch (Exception e) {
-            try {
-//                String sql = "SELECT * "
-//                        + "FROM PIS_MDC2 "
-//                        + "WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
-                String sql = "SELECT * "
-                        + "FROM PIS_MDC2 "
-                        + "WHERE UCASE(UD_MDC_CODE) = UCASE(?)";
-                //            String sql = "SELECT * FROM PIS_MDC WHERE DRUG_PRODUCT_NAME = ?";
-                PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
-//                ps.setString(1, st);
-                ps.setString(1, ud_mdc_code);
-                ResultSet results = ps.executeQuery();
-                
-                clearDrugFields();
-                
-                if (results.next()) {
-                    getDetailProductName(results);
-                } 
-//                else {
-//                    getDetailProductName("");
-//                }
-            } catch (Exception ex) {
-                S.oln("MDC 12" + ex.getMessage());
-            }
-//        }
+        
+        if (online_flagdrugsearch) {
+            
+            clearDrugFields();
+            
+            getDetailProductNameOnline(index);
+            
+        } else {
+        
+    //        try {
+    //            ResultSet results = DBConnection.getImpl().getDrugCIS(st);
+    //            
+    //            clearDrugFields();
+    //            
+    //            if (results.next()) {
+    //                getDetailProductName(results);
+    //            } 
+    ////            else {
+    ////                getDetailProductName("");
+    ////            }
+    //        } catch (Exception e) {
+                try {
+    //                String sql = "SELECT * "
+    //                        + "FROM PIS_MDC2 "
+    //                        + "WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
+                    String sql = "SELECT * "
+                            + "FROM PIS_MDC2 "
+                            + "WHERE UCASE(UD_MDC_CODE) = UCASE(?)";
+                    //            String sql = "SELECT * FROM PIS_MDC WHERE DRUG_PRODUCT_NAME = ?";
+                    PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+    //                ps.setString(1, st);
+                    ps.setString(1, ud_mdc_code);
+                    ResultSet results = ps.executeQuery();
+
+                    clearDrugFields();
+
+                    if (results.next()) {
+                        getDetailProductName(results);
+                    } 
+    //                else {
+    //                    getDetailProductName("");
+    //                }
+                } catch (Exception ex) {
+                    S.oln("MDC 12" + ex.getMessage());
+                }
+    //        }
+        }
     }//GEN-LAST:event_tbl_productnameMouseClicked
 
     private void txt_drugNameOListSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_drugNameOListSearchKeyReleased
@@ -10478,6 +10508,10 @@ public class Consultation extends javax.swing.JFrame {
                 tbl_productname.getModel().setValueAt("", i, 0);
             }
         } else {
+            
+            online_flagdrugsearch = false;
+            offline_flagdrugsearch = true;
+            
             //tbl_productname
 //            try {
 //                
@@ -10520,7 +10554,14 @@ public class Consultation extends javax.swing.JFrame {
                     arr_tbl_productname.removeAll(arr_tbl_productname);
                     for (int i = 0; results.next() && i < 50; i++) {
                         tbl_productname.getModel().setValueAt(results.getString("D_TRADE_NAME"), i, 0);
-                        arr_tbl_productname.add(results.getString("UD_MDC_CODE"));
+                        ArrayList<String> child_arr = new ArrayList<String>();
+                        try {
+                            for (int j = 0; ; j++) {
+                                child_arr.add(results.getString(j+1));
+                            }
+                        } catch (Exception e) {
+                        }
+                        arr_tbl_productname.add(child_arr);
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -10531,8 +10572,8 @@ public class Consultation extends javax.swing.JFrame {
         endingTime("SEARCH DRUG");
     }//GEN-LAST:event_txt_drugNameOListSearchKeyReleased
 
-    ArrayList<String> arr_tbl_productname = new ArrayList<String>();
-    int currentIndex_tbl_productname = -1;
+    private static ArrayList<ArrayList<String>> arr_tbl_productname = new ArrayList<ArrayList<String>>();
+    private static int currentIndex_tbl_productname = -1;
     
     private void PN_accptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PN_accptBtnActionPerformed
         // TODO add your handling code here:
@@ -12024,6 +12065,57 @@ public class Consultation extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_substract_dgsActionPerformed
 
+    private static boolean online_flagdrugsearch = false; 
+    private static boolean offline_flagdrugsearch = true; 
+    
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        J.o("Info Search Online", "Be advised, this search might be slow.", 1);
+        loadDrug();
+        String dtraden = txt_drugNameOListSearch.getText();
+        try {
+            if (dtraden.length() < 3) {
+                J.o("Minimum Length to Search Online", "Please type equal or more than 3 "
+                        + "letters to proceed with online direct seach", 1);
+                return;
+            }
+            for (int i = 0; i < 50; i++) {
+                tbl_productname.getModel().setValueAt("", i, 0);
+            }
+            String sql = "SELECT * "
+                    + "FROM PIS_MDC2 "
+                    + "WHERE UCASE(D_TRADE_NAME) LIKE UCASE(?) "
+                    + "OR UCASE(D_GNR_NAME) LIKE UCASE(?)";
+            String params[] = { "%"+dtraden+"%", "%"+dtraden+"%" };
+            ArrayList<ArrayList<String>> d1 = DBConnection.getImpl().getQuery(sql, 25, params);  // changed from 2 to 25 - hadi
+            System.out.println("d1:\n\n"+d1);
+            arr_tbl_productname.removeAll(arr_tbl_productname);
+
+            if (d1.isEmpty()){ // if array empty then print - hadi
+                tbl_productname.getModel().setValueAt("No search result.", i, 0);
+            }else{
+
+                for (int i = 0; i < d1.size() && i < 50; i++) {
+                    tbl_productname.getModel().setValueAt(d1.get(i).get(2), i, 0); // changed from get(0) to get(2) - hadi
+                    ArrayList<String> child_arr = new ArrayList<String>();
+                    try {
+                        for (int j = 0; ;j++) {
+                            child_arr.add(d1.get(i).get(j));
+                        }
+                    } catch (Exception e) {
+                    }
+                    arr_tbl_productname.add(child_arr);
+                }
+            }
+            online_flagdrugsearch = true;
+            offline_flagdrugsearch = false;
+            showOnline();
+        } catch (Exception ex) {
+            J.o("Network Down!", "Can't reach the server at this time! Try later. ...", 0);
+            showOffline();
+       }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     public boolean checkPatient() {
         String pmiNo = txt_pName.getText();
         if (pmiNo.length() == 0) {
@@ -12937,28 +13029,28 @@ public class Consultation extends javax.swing.JFrame {
                         String Duration = note_array[zz++].split(": ")[1];
                         String Frequency = note_array[zz++].split(": ")[1];
                         String Instruction = note_array[zz++].split(": ")[1];
-                        String UD_MDC_Code = "";
                         String Cautionary = note_array[zz++].split(": ")[1];
                         String packType = note_array[zz++].split(": ")[1];
-                        try {
-                            //                            tempQuery = "SELECT UD_MDC_CODE "
-                            //                                    + "FROM PIS_MDC "
-                            //                                    + "WHERE ACTIVE_INGREDIENT_CODE LIKE ? "
-                            //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
-                            tempQuery = "SELECT UD_MDC_CODE "
-                                    + "FROM PIS_MDC2 "
-                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
-                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
-                            ps = Session.getCon_x(1000).prepareStatement(tempQuery);
-                            ps.setString(1, "%" + ActiveIngredient + "%");
-                            ps.setString(2, "%" + ProductName + "%");
-                            rs = ps.executeQuery();
-                            while (rs.next()) {
-                                UD_MDC_Code = rs.getString("UD_MDC_CODE");
-                            }
-                        } catch (Exception ex) {
-                            System.out.println(ex.toString());
-                        }
+                        String UD_MDC_Code = note_array[zz++].split(": ")[1];
+//                        try {
+//                            //                            tempQuery = "SELECT UD_MDC_CODE "
+//                            //                                    + "FROM PIS_MDC "
+//                            //                                    + "WHERE ACTIVE_INGREDIENT_CODE LIKE ? "
+//                            //                                    + "AND DRUG_PRODUCT_NAME LIKE ? ";
+//                            tempQuery = "SELECT UD_MDC_CODE "
+//                                    + "FROM PIS_MDC2 "
+//                                    + "WHERE UCASE(D_GNR_NAME) LIKE UCASE(?) "
+//                                    + "OR UCASE(D_TRADE_NAME) LIKE UCASE(?) ";
+//                            ps = Session.getCon_x(1000).prepareStatement(tempQuery);
+//                            ps.setString(1, "%" + ActiveIngredient + "%");
+//                            ps.setString(2, "%" + ProductName + "%");
+//                            rs = ps.executeQuery();
+//                            while (rs.next()) {
+//                                UD_MDC_Code = rs.getString("UD_MDC_CODE");
+//                            }
+//                        } catch (Exception ex) {
+//                            System.out.println(ex.toString());
+//                        }
                         
                         String qty_drug = Quantity;
                         if (packType.equals("CAP") || packType.equals("TAB")) {
@@ -13375,7 +13467,7 @@ public class Consultation extends javax.swing.JFrame {
         String m = (String) txt_quantityOList.getText();
 
         String dr = txt_drugNameOListSearch.getText();
-        String ud_mdc_code = arr_tbl_productname.get(currentIndex_tbl_productname);
+        String ud_mdc_code = arr_tbl_productname.get(currentIndex_tbl_productname).get(0);
 
         try {
             String product_name_x = txt_productNameOList.getText();
@@ -13400,8 +13492,8 @@ public class Consultation extends javax.swing.JFrame {
         }
 
         String cautionary = txt_caution.getText();
-        
-        String doseT = (String) cb_durationOList.getSelectedItem();
+
+        String doseT = (String) jSpinner1.getValue();
         String freq = (String) cb_frequencyOList.getSelectedItem();
         String inst = (String) cb_instructionOList.getSelectedItem();
         int freq1 = cb_frequencyOList.getSelectedIndex();
@@ -13553,7 +13645,7 @@ public class Consultation extends javax.swing.JFrame {
         txt_drugstrength.setText("");
         txt_quantityOList.setText("");
         txt_drugNameOListSearch.setText("");
-        cb_durationOList.setSelectedItem("-");
+        jSpinner1.setValue("");
 
         txt_dosageFormOList.setText("");
         cb_durationTypeOList.setSelectedItem("-");
@@ -13601,13 +13693,90 @@ public class Consultation extends javax.swing.JFrame {
         txt_dosageFormOList.setText("");
         cb_frequencyOList.setSelectedItem("-");
         txt_quantityOList.setText("");
-        cb_durationOList.setSelectedItem("-");
+        jSpinner1.setValue("");
         cb_durationTypeOList.setSelectedItem("-");
         cb_instructionOList.setSelectedItem("-");
 
         txt_packagetype.setText("");
 
         stock_qty.setText("");
+    }
+    
+    public static void getDetailProductNameOnline(int index) {
+        product = arr_tbl_productname.get(index).get(2);
+
+        /*
+         * search data base on the drug product choosed
+         */
+        //call data from PIS_MDC
+        try {
+//            String sql = "SELECT * FROM PIS_MDC where DRUG_PRODUCT_NAME = ?";
+//            String sql = "SELECT * "
+//                    + "FROM PIS_MDC2 "
+//                    + "WHERE UCASE(D_TRADE_NAME) = UCASE(?)";
+//            PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+//            ps.setString(1, product);
+//            ResultSet results = ps.executeQuery();
+//            if (results.next()) {
+            String dtraden = arr_tbl_productname.get(index).get(2); //results.getString("D_TRADE_NAME");//
+            int stock_qty1 = Integer.parseInt(arr_tbl_productname.get(index).get(8)); //results.getDouble("D_STOCK_QTY");//Stock_Qty
+            String dstockqty = arr_tbl_productname.get(index).get(8);//Double.toString(stock_qty1);
+            String dstrength = arr_tbl_productname.get(index).get(6);//results.getString("D_STRENGTH");
+            String ddosage = arr_tbl_productname.get(index).get(5);//results.getString("D_FORM_CODE");
+//            int dLqty1 = arr_tbl_productname.get(index).get(9);//results.getInt("D_QTY");
+            String dLqty = arr_tbl_productname.get(index).get(9);//Integer.toString(dLqty1);
+            String dLqtyt = arr_tbl_productname.get(index).get(10); //results.getString("D_QTYT");
+            String dLfreq = arr_tbl_productname.get(index).get(13);//results.getString("D_FREQUENCY");
+            String dLduration = arr_tbl_productname.get(index).get(11);//results.getString("D_DURATION");
+            String dLdurationType = arr_tbl_productname.get(index).get(12);//results.getString("D_DURATIONT");
+            String dLadvisory = arr_tbl_productname.get(index).get(7);//results.getString("D_ADVISORY_CODE");
+            String dLcaution = arr_tbl_productname.get(index).get(14);//results.getString("D_CAUTION_CODE");
+            String dLexpdate = arr_tbl_productname.get(index).get(15);//results.getString("D_EXP_DATE");
+            String dLclassification = arr_tbl_productname.get(index).get(16);//results.getString("D_CLASSIFICATION");
+
+            String dPackageType = arr_tbl_productname.get(index).get(22);//results.getString("D_PACKAGINGT");
+
+            txt_productNameOList.setText(dtraden);
+            stock_qty.setText(dstockqty);
+            txt_drugstrength.setText(dstrength);
+            txt_dosageFormOList.setText(ddosage);
+            txt_quantityOList.setText(dLqty);
+            cb_frequencyOList.setSelectedItem(dLfreq);
+            jSpinner1.setValue(dLduration);
+            cb_durationTypeOList.setSelectedItem(dLdurationType);
+            cb_instructionOList.setSelectedItem(dLadvisory);
+
+            txt_packagetype.setText(dPackageType);
+
+            txt_caution.setText(dLcaution);
+
+            if (stock_qty1 <= 0) {
+                JOptionPane.showMessageDialog(null, "Drug stock quantity is low " + stock_qty1
+                        + "\nPlease choose another product name");
+
+                txt_productNameOList.setText("");
+                stock_qty.setText("");
+                txt_drugstrength.setText("");
+                txt_dosageFormOList.setText("");
+                txt_quantityOList.setText("");
+                cb_frequencyOList.setSelectedItem("");
+                jSpinner1.setValue("");
+                cb_durationTypeOList.setSelectedItem("");
+                cb_instructionOList.setSelectedItem("");
+
+                txt_packagetype.setText("");
+
+                txt_caution.setText("");
+            }
+
+//            }
+            //clean the results and data
+//            results.close();
+//            ps.close();
+        } catch (Exception e1) {
+            S.oln("Error: "+e1.getMessage());
+//            e1.printStackTrace();
+        }
     }
     
     public static void getDetailProductName(ResultSet results) {
@@ -13652,7 +13821,7 @@ public class Consultation extends javax.swing.JFrame {
                 txt_dosageFormOList.setText(ddosage);
                 txt_quantityOList.setText(dLqty);
                 cb_frequencyOList.setSelectedItem(dLfreq);
-                cb_durationOList.setSelectedItem(dLduration);
+                jSpinner1.setValue(dLduration);
                 cb_durationTypeOList.setSelectedItem(dLdurationType);
                 cb_instructionOList.setSelectedItem(dLadvisory);
                 
@@ -13670,7 +13839,7 @@ public class Consultation extends javax.swing.JFrame {
                     txt_dosageFormOList.setText("");
                     txt_quantityOList.setText("");
                     cb_frequencyOList.setSelectedItem("");
-                    cb_durationOList.setSelectedItem("");
+                    jSpinner1.setValue("");
                     cb_durationTypeOList.setSelectedItem("");
                     cb_instructionOList.setSelectedItem("");
                     
@@ -14838,7 +15007,7 @@ public class Consultation extends javax.swing.JFrame {
                     try {
                         txt_drugNameOListSearch.setText(msg2[10][i][5]);
                         cb_frequencyOList.setSelectedItem(msg2[10][i][14]);
-                        cb_durationOList.setSelectedItem(msg2[10][i][22].split(" ")[0]);
+                        jSpinner1.setValue(msg2[10][i][22].split(" ")[0]);
                         cb_durationTypeOList.setSelectedItem(msg2[10][i][22].split(" ")[1]);
                         txt_quantityOList.setText(msg2[10][i][23]);
                         cb_instructionOList.setSelectedItem(msg2[10][i][34]);
@@ -15064,7 +15233,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.ButtonGroup buttonGroup5;
-    protected static javax.swing.JComboBox cb_durationOList;
     protected static javax.swing.JComboBox cb_durationTypeOList;
     protected static javax.swing.JComboBox cb_frequencyOList;
     protected static javax.swing.JComboBox cb_instructionOList;
@@ -15091,6 +15259,7 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox10;
@@ -15340,6 +15509,7 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JSlider jSlider2;
     private javax.swing.JSlider jSlider3;
     private javax.swing.JSlider jSlider4;
+    protected static javax.swing.JSpinner jSpinner1;
     protected static javax.swing.JTabbedPane jTabbedPane2;
     protected static javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;

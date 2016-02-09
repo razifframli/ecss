@@ -73,6 +73,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 import javaapplication1.PDFiText;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import jxl.CellType;
@@ -225,6 +226,7 @@ public class Pharmacy extends javax.swing.JFrame{
     String dstockqty;
     String dloccode;
     String dstatus;
+    String minimum_stock_level;
     String dpackaging;
     String dpackagingType;
     String dpriceppack;
@@ -265,11 +267,11 @@ public class Pharmacy extends javax.swing.JFrame{
                     + "FROM PIS_MDC2 ";
             String params[] = {};
             ArrayList<ArrayList<String>> data1 = DBConnection.getImpl().getQuery(sql, num_cols, params);
-            
+
             String sql_delete = "DELETE FROM PIS_MDC2 ";
             PreparedStatement ps_delete = Session.getCon_x(1000).prepareStatement(sql_delete);
             ps_delete.execute();
-            
+
             for (int j = 0; j < data1.size(); j++) {
                 //System.out.println("DRUG "+j+": "+data1.get(i)+"\n");
                 String UD_MDC_CODE = data1.get(j).get(0);
@@ -281,15 +283,16 @@ public class Pharmacy extends javax.swing.JFrame{
 //                ps1.setString(1, UD_MDC_CODE);
 //                ResultSet rs1 = ps1.executeQuery();
 //                if (!rs1.next()) {
-                    S.oln("Drug code "+UD_MDC_CODE+" not in the local list.. Adding it..");
-                    String params1 = "";
-                    for (int k = 0; k < num_cols1-1; k++) {
-                        params1 += "'"+data1.get(j).get(k)+"',";
-                    }
-                    params1 += "'"+data1.get(j).get(num_cols1-1)+"'";
-                    String sql2 = "INSERT INTO PIS_MDC2 VALUES("+params1+")";
-                    PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
-                    ps2.execute();
+//                S.oln("Drug code " + UD_MDC_CODE + " not in the local list.. Adding it..");
+                String params1 = "";
+                for (int k = 0; k < num_cols1 - 1; k++) {
+                    params1 += "'" + Func.trim(data1.get(j).get(k)) + "',";
+                }
+                params1 += "'" + Func.trim(data1.get(j).get(num_cols1 - 1)) + "'";
+                String sql2 = "INSERT INTO PIS_MDC2 VALUES(" + params1 + ")";
+//                System.out.println("\n\nsql2:\n"+sql2+"\n\n");
+                PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
+                ps2.execute();
 //                }
             }
             S.oln("Done sync drug.. Alhamdulillah..");
@@ -747,6 +750,8 @@ public class Pharmacy extends javax.swing.JFrame{
         lbl_statusMDC = new javax.swing.JLabel();
         rbt_activeMDC = new javax.swing.JRadioButton();
         rbt_inactiveMDC = new javax.swing.JRadioButton();
+        jLabelMinimumStockLevel = new javax.swing.JLabel();
+        jTextFieldMinimumStockLevel = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         dpack1 = new javax.swing.JTextField();
@@ -763,7 +768,6 @@ public class Pharmacy extends javax.swing.JFrame{
         lbl_frequencyOList1 = new javax.swing.JLabel();
         cLfrequency = new javax.swing.JComboBox();
         lbl_durationOList1 = new javax.swing.JLabel();
-        cLduration = new javax.swing.JComboBox();
         cLdurationType = new javax.swing.JComboBox();
         cInstruction = new javax.swing.JComboBox();
         lbl_instructionOList1 = new javax.swing.JLabel();
@@ -775,6 +779,7 @@ public class Pharmacy extends javax.swing.JFrame{
         jLabel33 = new javax.swing.JLabel();
         txt_expdate = new com.toedter.calendar.JDateChooser();
         cClassification = new javax.swing.JComboBox();
+        jSpinnerDuration = new javax.swing.JSpinner();
         pnl_import = new javax.swing.JPanel();
         lbl_browseFileConvert = new java.awt.Label();
         jPanel25 = new javax.swing.JPanel();
@@ -3313,7 +3318,7 @@ public class Pharmacy extends javax.swing.JFrame{
         txt_drugStrength.setToolTipText("Drug Strength : how much of active ingredient is present in EACH dosage");
         txt_drugStrength.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        cdosage_form.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "AEROSOL", "AEROSOL, FOAM", "AEROSOL, METERED", "AEROSOL, POWDER", "AEROSOL, SPRAY", "BAR, CHEWABLE", "BEAD", "CAPSULE", "CAPSULE, COATED", "CAPSULE, COATED PELLETS", "CAPSULE, COATED, EXTENDED RELEASE", "CAPSULE, DELAYED RELEASE", "CAPSULE, DELAYED RELEASE PELLETS", "CAPSULE, EXTENDED RELEASE", "CAPSULE, FILM COATED, EXTENDED RELEASE", "CAPSULE, GELATIN COATED", "CAPSULE, LIQUID FILLED", "CELLULAR SHEET", "CLOTH", "CONCENTRATE", "CREAM", "CREAM, AUGMENTED", "CRYSTAL", "DISC", "DOUCHE", "DRESSING", "DRUG DELIVERY SYSTEM", "ELIXIR", "EMULSION", "ENEMA", "EXTRACT", "FIBER, EXTENDED RELEASE", "FILM", "FILM, EXTENDED RELEASE", "FILM, SOLUBLE", "FOR SOLUTION", "FOR SUSPENSION", "FOR SUSPENSION, EXTENDED RELEASE", "GAS", "GEL", "GEL, DENTIFRICE", "GEL, METERED", "GLOBULE", "GRANULE", "GRANULE, DELAYED RELEASE", "GRANULE, EFFERVESCENT", "GRANULE, FOR SOLUTION", "GRANULE, FOR SUSPENSION", "GRANULE, FOR SUSPENSION, EXTENDED RELEASE", "GUM, CHEWING", "IMPLANT", "INHALANT", "INJECTABLE, LIPOSOMAL", "INJECTION", "INJECTION, EMULSION", "INJECTION, LIPID COMPLEX", "INJECTION, POWDER, FOR SOLUTION", "INJECTION, POWDER, FOR SUSPENSION", "INJECTION, POWDER, FOR SUSPENSION, EXTENDED RELEASE", "INJECTION, POWDER, LYOPHILIZED, FOR LIPOSOMAL SUSPENSION", "INJECTION, POWDER, LYOPHILIZED, FOR SOLUTION", "INJECTION, POWDER, LYOPHILIZED, FOR SUSPENSION", "INJECTION, POWDER, LYOPHILIZED, FOR SUSPENSION, EXTENDED RELEASE", "INJECTION, SOLUTION", "INJECTION, SOLUTION, CONCENTRATE", "INJECTION, SUSPENSION", "INJECTION, SUSPENSION, EXTENDED RELEASE", "INJECTION, SUSPENSION, LIPOSOMAL", "INJECTION, SUSPENSION, SONICATED", "INSERT", "INSERT, EXTENDED RELEASE", "INTRAUTERINE DEVICE", "IRRIGANT", "JELLY", "KIT", "LINIMENT", "LIPSTICK", "LIQUID", "LIQUID, EXTENDED RELEASE", "LOTION", "LOTION, AUGMENTED", "LOTION/SHAMPOO", "LOZENGE", "MOUTHWASH", "OIL", "OINTMENT", "OINTMENT, AUGMENTED", "PASTE", "PASTE, DENTIFRICE", "PASTILLE", "PATCH", "PATCH, EXTENDED RELEASE", "PATCH, EXTENDED RELEASE, ELECTRICALLY CONTROLLED", "PELLET", "PELLET, IMPLANTABLE", "PELLETS, COATED, EXTENDED RELEASE", "PILL", "PLASTER", "POULTICE", "POWDER", "POWDER, DENTIFRICE", "POWDER, FOR SOLUTION", "POWDER, FOR SUSPENSION", "POWDER, METERED", "RING", "RINSE", "SALVE", "SHAMPOO", "SHAMPOO, SUSPENSION", "SOAP", "SOLUTION", "SOLUTION, CONCENTRATE", "SOLUTION, FOR SLUSH", "SOLUTION, GEL FORMING / DROPS", "SOLUTION, GEL FORMING, EXTENDED RELEASE", "SOLUTION/ DROPS", "SPONGE", "SPRAY", "SPRAY, METERED", "SPRAY, SUSPENSION", "STICK", "STRIP", "SUPPOSITORY", "SUPPOSITORY, EXTENDED RELEASE", "SUSPENSION", "SUSPENSION, EXTENDED RELEASE", "SUSPENSION/ DROPS", "SWAB", "SYRUP", "TABLET", "TABLET, CHEWABLE", "TABLET, COATED", "TABLET, COATED PARTICLES", "TABLET, DELAYED RELEASE", "TABLET, DELAYED RELEASE PARTICLES", "TABLET, EFFERVESCENT", "TABLET, EXTENDED RELEASE", "TABLET, FILM COATED", "TABLET, FILM COATED, EXTENDED RELEASE", "TABLET, FOR SOLUTION", "TABLET, FOR SUSPENSION", "TABLET, MULTILAYER", "TABLET, MULTILAYER, EXTENDED RELEASE", "TABLET, ORALLY DISINTEGRATING", "TABLET, ORALLY DISINTEGRATING, DELAYED RELEASE", "TABLET, SOLUBLE", "TABLET, SUGAR COATED", "TAMPON", "TAPE", "TINCTURE", "TROCHE", "WAFER" }));
+        cdosage_form.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AEROSOL", "AEROSOL, FOAM", "AEROSOL, METERED", "AEROSOL, POWDER", "AEROSOL, SPRAY", "BAR, CHEWABLE", "BEAD", "CAPSULE", "CAPSULE, COATED", "CAPSULE, COATED PELLETS", "CAPSULE, COATED, EXTENDED RELEASE", "CAPSULE, DELAYED RELEASE", "CAPSULE, DELAYED RELEASE PELLETS", "CAPSULE, EXTENDED RELEASE", "CAPSULE, FILM COATED, EXTENDED RELEASE", "CAPSULE, GELATIN COATED", "CAPSULE, LIQUID FILLED", "CELLULAR SHEET", "CLOTH", "CONCENTRATE", "CREAM", "CREAM, AUGMENTED", "CRYSTAL", "DISC", "DOUCHE", "DRESSING", "DRUG DELIVERY SYSTEM", "ELIXIR", "EMULSION", "ENEMA", "EXTRACT", "FIBER, EXTENDED RELEASE", "FILM", "FILM, EXTENDED RELEASE", "FILM, SOLUBLE", "FOR SOLUTION", "FOR SUSPENSION", "FOR SUSPENSION, EXTENDED RELEASE", "GAS", "GEL", "GEL, DENTIFRICE", "GEL, METERED", "GLOBULE", "GRANULE", "GRANULE, DELAYED RELEASE", "GRANULE, EFFERVESCENT", "GRANULE, FOR SOLUTION", "GRANULE, FOR SUSPENSION", "GRANULE, FOR SUSPENSION, EXTENDED RELEASE", "GUM, CHEWING", "IMPLANT", "INHALANT", "INJECTABLE, LIPOSOMAL", "INJECTION", "INJECTION, EMULSION", "INJECTION, LIPID COMPLEX", "INJECTION, POWDER, FOR SOLUTION", "INJECTION, POWDER, FOR SUSPENSION", "INJECTION, POWDER, FOR SUSPENSION, EXTENDED RELEASE", "INJECTION, POWDER, LYOPHILIZED, FOR LIPOSOMAL SUSPENSION", "INJECTION, POWDER, LYOPHILIZED, FOR SOLUTION", "INJECTION, POWDER, LYOPHILIZED, FOR SUSPENSION", "INJECTION, POWDER, LYOPHILIZED, FOR SUSPENSION, EXTENDED RELEASE", "INJECTION, SOLUTION", "INJECTION, SOLUTION, CONCENTRATE", "INJECTION, SUSPENSION", "INJECTION, SUSPENSION, EXTENDED RELEASE", "INJECTION, SUSPENSION, LIPOSOMAL", "INJECTION, SUSPENSION, SONICATED", "INSERT", "INSERT, EXTENDED RELEASE", "INTRAUTERINE DEVICE", "IRRIGANT", "JELLY", "KIT", "LINIMENT", "LIPSTICK", "LIQUID", "LIQUID, EXTENDED RELEASE", "LOTION", "LOTION, AUGMENTED", "LOTION/SHAMPOO", "LOZENGE", "MOUTHWASH", "OIL", "OINTMENT", "OINTMENT, AUGMENTED", "PASTE", "PASTE, DENTIFRICE", "PASTILLE", "PATCH", "PATCH, EXTENDED RELEASE", "PATCH, EXTENDED RELEASE, ELECTRICALLY CONTROLLED", "PELLET", "PELLET, IMPLANTABLE", "PELLETS, COATED, EXTENDED RELEASE", "PILL", "PLASTER", "POULTICE", "POWDER", "POWDER, DENTIFRICE", "POWDER, FOR SOLUTION", "POWDER, FOR SUSPENSION", "POWDER, METERED", "RING", "RINSE", "SALVE", "SHAMPOO", "SHAMPOO, SUSPENSION", "SOAP", "SOLUTION", "SOLUTION, CONCENTRATE", "SOLUTION, FOR SLUSH", "SOLUTION, GEL FORMING / DROPS", "SOLUTION, GEL FORMING, EXTENDED RELEASE", "SOLUTION/ DROPS", "SPONGE", "SPRAY", "SPRAY, METERED", "SPRAY, SUSPENSION", "STICK", "STRIP", "SUPPOSITORY", "SUPPOSITORY, EXTENDED RELEASE", "SUSPENSION", "SUSPENSION, EXTENDED RELEASE", "SUSPENSION/ DROPS", "SWAB", "SYRUP", "TABLET", "TABLET, CHEWABLE", "TABLET, COATED", "TABLET, COATED PARTICLES", "TABLET, DELAYED RELEASE", "TABLET, DELAYED RELEASE PARTICLES", "TABLET, EFFERVESCENT", "TABLET, EXTENDED RELEASE", "TABLET, FILM COATED", "TABLET, FILM COATED, EXTENDED RELEASE", "TABLET, FOR SOLUTION", "TABLET, FOR SUSPENSION", "TABLET, MULTILAYER", "TABLET, MULTILAYER, EXTENDED RELEASE", "TABLET, ORALLY DISINTEGRATING", "TABLET, ORALLY DISINTEGRATING, DELAYED RELEASE", "TABLET, SOLUBLE", "TABLET, SUGAR COATED", "TAMPON", "TAPE", "TINCTURE", "TROCHE", "WAFER" }));
         cdosage_form.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lbl_stockQtyUStock1.setText("Stock Quantity :");
@@ -3338,33 +3343,45 @@ public class Pharmacy extends javax.swing.JFrame{
         buttonGroup3.add(rbt_inactiveMDC);
         rbt_inactiveMDC.setText("Inactive");
 
+        jLabelMinimumStockLevel.setText("Minimum Stock Level");
+
+        jTextFieldMinimumStockLevel.setText("100");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_statusMDC, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_supplierUStock1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_locationCodeUStock1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_stockQtyUStock1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_drugStrength, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_dosageForm, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_drugRoute, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_ingredientCode, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_drugNameMDC, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_mdcCode, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelMinimumStockLevel)
+                    .addComponent(lbl_statusMDC)
+                    .addComponent(lbl_supplierUStock1)
+                    .addComponent(lbl_locationCodeUStock1)
+                    .addComponent(lbl_stockQtyUStock1)
+                    .addComponent(lbl_drugStrength)
+                    .addComponent(lbl_dosageForm)
+                    .addComponent(lbl_drugRoute)
+                    .addComponent(lbl_ingredientCode)
+                    .addComponent(lbl_drugNameMDC)
+                    .addComponent(lbl_mdcCode))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cb_supplierUStock, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_locCode)
-                            .addComponent(txt_stockQty)
-                            .addComponent(txt_drugStrength)
-                            .addComponent(cdosage_form, 0, 1, Short.MAX_VALUE)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txt_drugRoute, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                            .addComponent(txt_drugNameMDC, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldMinimumStockLevel)
+                            .addComponent(cb_supplierUStock, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_locCode, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_stockQty, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_drugStrength, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cdosage_form, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel8Layout.createSequentialGroup()
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel8Layout.createSequentialGroup()
                                         .addComponent(rbt_activeMDC)
@@ -3372,13 +3389,7 @@ public class Pharmacy extends javax.swing.JFrame{
                                         .addComponent(rbt_inactiveMDC))
                                     .addComponent(txt_mdcCode, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 72, Short.MAX_VALUE)))
-                        .addContainerGap(83, Short.MAX_VALUE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txt_drugRoute, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                            .addComponent(txt_drugNameMDC, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(83, 83, 83))))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3424,6 +3435,10 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(lbl_statusMDC)
                     .addComponent(rbt_activeMDC)
                     .addComponent(rbt_inactiveMDC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelMinimumStockLevel)
+                    .addComponent(jTextFieldMinimumStockLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -3495,22 +3510,20 @@ public class Pharmacy extends javax.swing.JFrame{
 
         lbl_frequencyOList1.setText("Frequency :");
 
-        cLfrequency.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "In the morning", "At night", "Daily", "Twice a day", "3 times a day", "4 times a day", "2 hourly", "4 hourly", "6 hourly", "8 hourly", "Immedietly", "As needed" }));
+        cLfrequency.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Once", "In the morning", "At night", "Daily", "Twice a day", "3 times a day", "4 times a day", "2 hourly", "4 hourly", "6 hourly", "8 hourly", "Immedietly", "As needed" }));
         cLfrequency.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lbl_durationOList1.setText("Duration :");
 
-        cLduration.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6" }));
+        cLdurationType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Day", "Week", "Month" }));
 
-        cLdurationType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Day", "Week", "Month" }));
-
-        cInstruction.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "After meals", "As directed", "Before meals", "Both eye", "Every second day", "Gargle", "If required", "Immediately", "Left eye", "Left side", "Other", "Puff", "Right eye", "Right side", "To both sides" }));
+        cInstruction.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "If required", "After meals", "As directed", "Before meals", "Both eye", "Every second day", "Gargle", "If required", "Immediately", "Left eye", "Left side", "Other", "Puff", "Right eye", "Right side", "To both sides" }));
 
         lbl_instructionOList1.setText("Instruction :");
 
         lbl_cautionary.setText("Cautionary :");
 
-        cLqtyT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "ml", "garg", "supp", "puff", " " }));
+        cLqtyT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ml", "garg", "supp", "puff", " " }));
 
         txt_cautionary.setColumns(20);
         txt_cautionary.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -3528,8 +3541,10 @@ public class Pharmacy extends javax.swing.JFrame{
         txt_expdate.setMaxSelectableDate(new java.util.Date(253370739713000L));
         txt_expdate.setMinSelectableDate(new java.util.Date(-62135794687000L));
 
-        cClassification.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Antacid/ Anti Spasmodic", "Anti Diarrheal", "Anti Dyspepsia", "Anti- Gout Agents", "Anti- Obesity", "Anti-Ashmatic & Bronchodilator", "Antibiotic", "Antiemetic / Anti Vertigo", "Anti-fungal", "Antihelmintic", "Anti-Histamine", "Antiseptic", "Anti-viral", "Cough & Cold Preparations", "Creams & Ointment", "Drugs Used in Substance  Dependence ", "Eye/Ear Drop", "Haermorrhoids", "Injection", "IV Drips", "Laxatives", "Lozenges", "Mucolytics Agents", "Nebulizer", "Nose prep", "NSAIDs", "Oral prep", "Oral Steroids", "Others", "Peripheral vasodilators/  migraine drug", "Shampoo", "Urinary Preparation", "Vitamin & supplements" }));
+        cClassification.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Antacid/ Anti Spasmodic", "Anti Diarrheal", "Anti Dyspepsia", "Anti- Gout Agents", "Anti- Obesity", "Anti-Ashmatic & Bronchodilator", "Antibiotic", "Antiemetic / Anti Vertigo", "Anti-fungal", "Antihelmintic", "Anti-Histamine", "Antiseptic", "Anti-viral", "Cough & Cold Preparations", "Creams & Ointment", "Drugs Used in Substance  Dependence", "Eye/Ear Drop", "Haermorrhoids", "Injection", "IV Drips", "Laxatives", "Lozenges", "Mucolytics Agents", "Nebulizer", "Nose prep", "NSAIDs", "Oral prep", "Oral Steroids", "Others", "Peripheral vasodilators/  migraine drug", "Shampoo", "Urinary Preparation", "Vitamin & supplements" }));
         cClassification.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jSpinnerDuration.setModel(new javax.swing.SpinnerNumberModel(1, 1, 30, 1));
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -3564,8 +3579,8 @@ public class Pharmacy extends javax.swing.JFrame{
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(cLqtyT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel16Layout.createSequentialGroup()
-                                        .addComponent(cLduration, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(62, 62, 62)
+                                        .addComponent(jSpinnerDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(67, 67, 67)
                                         .addComponent(cLdurationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(cLfrequency, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cInstruction, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -3590,8 +3605,8 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lbl_durationOList1)
-                    .addComponent(cLduration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cLdurationType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cLdurationType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lbl_instructionOList1)
@@ -3631,12 +3646,13 @@ public class Pharmacy extends javax.swing.JFrame{
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnl_mdcLayout = new javax.swing.GroupLayout(pnl_mdc);
@@ -4155,6 +4171,7 @@ public class Pharmacy extends javax.swing.JFrame{
         txt_locCode.setText("");
         rbt_inactiveMDC.setSelected(false);
         rbt_activeMDC.setSelected(false);
+        jTextFieldMinimumStockLevel.setText("");
         dpack1.setText("");
         cdpack2.setSelectedItem("-");
         d_priceppack.setText("");
@@ -4163,7 +4180,7 @@ public class Pharmacy extends javax.swing.JFrame{
         txt_Lqty.setText("");
         cLqtyT.setSelectedItem("-");
         cLfrequency.setSelectedItem("-");
-        cLduration.setSelectedItem("-");
+        jSpinnerDuration.setValue("");
         cLdurationType.setSelectedItem("-");
         cInstruction.setSelectedItem("-");
         txt_cautionary.setText("");
@@ -4194,6 +4211,8 @@ public class Pharmacy extends javax.swing.JFrame{
             else {
                 dstatus = "FALSE";
             }
+
+            minimum_stock_level = jTextFieldMinimumStockLevel.getText();
             dpackaging = dpack1.getText();
             dpackagingType = (String) cdpack2.getSelectedItem();
             dpriceppack = d_priceppack.getText();//double
@@ -4202,7 +4221,7 @@ public class Pharmacy extends javax.swing.JFrame{
             dLqty = txt_Lqty.getText();//double
             dLqtyt = (String)cLqtyT.getSelectedItem();
             dLfreq = (String) cLfrequency.getSelectedItem();
-            dLduration = (String) cLduration.getSelectedItem();//numeric
+            dLduration = (String) jSpinnerDuration.getValue();
             dLdurationType = (String) cLdurationType.getSelectedItem();
             dLadvisory = (String) cInstruction.getSelectedItem();
             dLcaution = txt_cautionary.getText();
@@ -4225,7 +4244,7 @@ public class Pharmacy extends javax.swing.JFrame{
                         + "D_ROUTE_CODE = ?,D_FORM_CODE = ?,D_STRENGTH = ?,D_ADVISORY_CODE = ?,D_STOCK_QTY = ?," 
                         + "D_QTY = ?,D_QTYT = ?, D_DURATION = ?,D_DURATIONT = ?,D_FREQUENCY = ?,D_CAUTION_CODE = ?,"
                         + "D_EXP_DATE = ?, D_CLASSIFICATION = ?,STATUS= ?, D_LOCATION_CODE = ?," 
-                        + "D_SELL_PRICE = ?, D_COST_PRICE = ?,D_PACKAGING = ?,D_PACKAGINGT = ?,D_PRICE_PPACK = ? "
+                        + "D_SELL_PRICE = ?, D_COST_PRICE = ?,D_PACKAGING = ?,D_PACKAGINGT = ?,D_PRICE_PPACK = ?, MINIMUM_STOCK_LEVEL = ?"
                         + "WHERE UD_MDC_CODE = ?";
 
                 //prepare sql query and execute it
@@ -4255,6 +4274,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 ps.setString(23, dpackagingType);
                 ps.setDouble(24, Double.parseDouble(dpriceppack));
                 ps.setString(25, dmdc);
+                ps.setString(26, minimum_stock_level);
                 //update data
                 ps.executeUpdate();
                 
@@ -4285,6 +4305,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     arrPS[22]=(dpackagingType);
                     arrPS[23]=(dpriceppack);
                     arrPS[24]=(dmdc);
+                    arrPS[25]=(minimum_stock_level);
                     
                     Boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
                     
@@ -4324,6 +4345,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 txt_locCode.setText("");
                 rbt_inactiveMDC.setSelected(false);
                 rbt_activeMDC.setSelected(false);
+                jTextFieldMinimumStockLevel.setText("");
                 dpack1.setText("");
                 cdpack2.setSelectedItem("-");
                 d_priceppack.setText("");
@@ -4332,8 +4354,8 @@ public class Pharmacy extends javax.swing.JFrame{
                 txt_Lqty.setText("");
                 cLqtyT.setSelectedItem("-");
                 cLfrequency.setSelectedItem("-");
-                cLduration.setSelectedItem("-");
-                cLdurationType.setSelectedItem("-");
+                jSpinnerDuration.setValue("");
+                jSpinnerDuration.setValue("");
                 cInstruction.setSelectedItem("-");
                 txt_cautionary.setText("");
                 txt_expdate.setDate(null);
@@ -7094,6 +7116,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 dgnrn = results.getString("D_GNR_NAME");
                 dstrength = results.getString("D_STRENGTH");
                 dloccode = results.getString("D_LOCATION_CODE");
+                minimum_stock_level = results.getString("MINIMUM_STOCK_LEVEL");
 
                 //rs 3
                 //mdcDesc = results.getString("UD_MDC_Desc");
@@ -7145,7 +7168,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 txt_Lqty.setText(dLqty);
                 cLfrequency.setSelectedItem(dLfreq);
                 cInstruction.setSelectedItem(dLadvisory);
-                cLduration.setSelectedItem(dLduration);
+                jSpinnerDuration.setValue(dLduration);
                 cLdurationType.setSelectedItem(dLdurationType);
                 txt_expdate.setDateFormatString(dLexpdate);
                 cClassification.setSelectedItem(dLclassification);
@@ -7367,6 +7390,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             Cell cell22 = sheet.getCell(21, j);
             Cell cell23 = sheet.getCell(22, j);
             Cell cell24 = sheet.getCell(23, j);
+            Cell cell25 = sheet.getCell(24, j);
             
             String result1 = cell1.getContents();
             String result2 = cell2.getContents();
@@ -7392,6 +7416,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             String result22 = cell22.getContents();
             String result23 = cell23.getContents();
             String result24 = cell24.getContents();
+            String result25 = cell25.getContents();            
 
             String dmdc1 = result1;
             String datc1 = result2;
@@ -7412,6 +7437,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             String dLclassification1 = result17;
             String dstatus1 = result18;
             String dloccode1 = result19;
+            String minimum_stock_level = result25;
             String dsellp1 = result20;
             String dcostp1 = result21;
             String dpackaging1 = result22;
@@ -7447,7 +7473,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             //insert new data
             try {
                 String sql="INSERT INTO PIS_MDC2 "
-                        + "(UD_MDC_CODE,UD_ATC_CODE, D_TRADE_NAME,D_GNR_NAME,D_ROUTE_CODE,D_FORM_CODE,D_STRENGTH,D_ADVISORY_CODE,D_STOCK_QTY,D_QTY,D_QTYT,D_DURATION,D_DURATIONT,D_FREQUENCY,D_CAUTION_CODE, D_EXP_DATE, D_CLASSIFICATION, STATUS, D_LOCATION_CODE, D_SELL_PRICE, D_COST_PRICE,D_PACKAGING,D_PACKAGINGT,D_PRICE_PPACK) "
+                        + "(UD_MDC_CODE,UD_ATC_CODE, D_TRADE_NAME,D_GNR_NAME,D_ROUTE_CODE,D_FORM_CODE,D_STRENGTH,D_ADVISORY_CODE,D_STOCK_QTY,D_QTY,D_QTYT,D_DURATION,D_DURATIONT,D_FREQUENCY,D_CAUTION_CODE, D_EXP_DATE, D_CLASSIFICATION, STATUS, D_LOCATION_CODE, D_SELL_PRICE, D_COST_PRICE,D_PACKAGING,D_PACKAGINGT,D_PRICE_PPACK, MINIMUM_STOCK_LEVEL) "
                         + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                 //prepare sql query and execute it
@@ -7476,6 +7502,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 ps.setInt(22, Integer.parseInt(dpackaging1));
                 ps.setString(23, dpackagingType1);
                 ps.setDouble(24, Double.parseDouble(dpriceppack1));
+                ps.setDouble(25, Double.parseDouble(minimum_stock_level));                
 
                 //update data
                 ps.executeUpdate();
@@ -8171,6 +8198,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
         cdosage_form.setSelectedIndex(0);
         txt_stockQty.setText("");
         txt_locCode.setText("");
+        jTextFieldMinimumStockLevel.setText("");
         cb_supplierUStock.setSelectedIndex(0);
         dpack1.setText("");
         cdpack2.setSelectedIndex(0);
@@ -8180,7 +8208,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
         txt_Lqty.setText("");
         cLqtyT.setSelectedIndex(0);
         cLfrequency.setSelectedIndex(0);
-        cLduration.setSelectedIndex(0);
+        jSpinnerDuration.setValue("");
         cLdurationType.setSelectedIndex(0);
         cInstruction.setSelectedIndex(0);
         txt_cautionary.setText("");
@@ -8350,6 +8378,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 txt_drugStrength.setText(results.getString("D_STRENGTH"));
                 txt_stockQty.setText(results.getString("D_STOCK_QTY"));
                 txt_locCode.setText(results.getString("D_LOCATION_CODE"));
+                jTextFieldMinimumStockLevel.setText(results.getString("MINIMUM_STOCK_LEVEL"));
                 dpack1.setText(results.getString("D_PACKAGING"));
                 cdpack2.setSelectedItem(results.getString("D_PACKAGINGT"));
                 d_priceppack.setText(results.getString("D_PRICE_PPACK"));
@@ -8357,7 +8386,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 txt_sellprice.setText(results.getString("D_SELL_PRICE"));
                 txt_Lqty.setText(results.getString("D_QTY"));
                 cLfrequency.setSelectedItem(results.getString("D_FREQUENCY"));
-                cLduration.setSelectedItem(results.getString("D_DURATION"));
+                jSpinnerDuration.setValue(results.getString("D_DURATION"));
                 cLdurationType.setSelectedItem(results.getString("D_DURATIONT"));
                 cInstruction.setSelectedItem(results.getString("D_ADVISORY_CODE"));
                 txt_cautionary.setText(results.getString("D_CAUTION_CODE"));
@@ -8440,6 +8469,8 @@ jScrollPane17.setViewportView(tbl_drugOList);
             } else {
                 dstatus = "FALSE";
             }
+
+            minimum_stock_level = jTextFieldMinimumStockLevel.getText();
             dpackaging = dpack1.getText().equals("")? "0" :dpack1.getText();
             dpackagingType = (String)cdpack2.getSelectedItem();
             dpriceppack = d_priceppack.getText().equals("") ? "0" : d_priceppack.getText() ;//double
@@ -8448,7 +8479,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             dLqty = txt_Lqty.getText().equals("") ? "0" : txt_Lqty.getText();//double
             dLqtyt = (String)cLqtyT.getSelectedItem();
             dLfreq = (String)cLfrequency.getSelectedItem();
-            dLduration = (String)cLduration.getSelectedItem();//numeric
+            dLduration = (String)jSpinnerDuration.getValue();
             dLdurationType = (String)cLdurationType.getSelectedItem();
             dLadvisory= (String)cInstruction.getSelectedItem();
             dLcaution = txt_cautionary.getText();
@@ -8504,6 +8535,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 ps.setString(22, dpackaging);
                 ps.setString(23, dpackagingType);
                 ps.setString(24, dpriceppack);
+                ps.setString(25, minimum_stock_level);
                 
                 //update data
                 ps.execute();
@@ -8534,6 +8566,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                     arrPS[21]=(dpackaging);
                     arrPS[22]=(dpackagingType);
                     arrPS[23]=(dpriceppack);
+                    arrPS[24]=(minimum_stock_level);                    
                     
                     Boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
                     
@@ -8574,6 +8607,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 System.out.println(dLcaution);
                 System.out.println(dLexpdate);
                 System.out.println(dLclassification);
+                System.out.println(minimum_stock_level);
 
 
                 //popup windows update success
@@ -8592,6 +8626,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             txt_locCode.setText("");
             rbt_inactiveMDC.setSelected(false);
             rbt_activeMDC.setSelected(false);
+            jTextFieldMinimumStockLevel.setText("");
             dpack1.setText("");
             cdpack2.setSelectedItem("-");
             d_priceppack.setText("");
@@ -8599,7 +8634,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             txt_sellprice.setText("");
             txt_Lqty.setText("");
             cLfrequency.setSelectedItem("-");
-            cLduration.setSelectedItem("-");
+            jSpinnerDuration.setValue("");
             cLdurationType.setSelectedItem("-");
             cInstruction.setSelectedItem("-");
             txt_cautionary.setText("");
@@ -8650,6 +8685,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             txt_locCode.setText("");
             rbt_inactiveMDC.setSelected(false);
             rbt_activeMDC.setSelected(false);
+            jTextFieldMinimumStockLevel.setText("");
             dpack1.setText("");
             cdpack2.setSelectedItem("-");
             d_priceppack.setText("");
@@ -8658,7 +8694,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             txt_Lqty.setText("");
             cLqtyT.setSelectedItem("-");
             cLfrequency.setSelectedItem("-");
-            cLduration.setSelectedItem("-");
+            jSpinnerDuration.setValue("");
             cLdurationType.setSelectedItem("-");
             cInstruction.setSelectedItem("-");
             txt_cautionary.setText("");
@@ -8933,7 +8969,6 @@ jScrollPane17.setViewportView(tbl_drugOList);
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.JComboBox cClassification;
     private javax.swing.JComboBox cInstruction;
-    private javax.swing.JComboBox cLduration;
     private javax.swing.JComboBox cLdurationType;
     private javax.swing.JComboBox cLfrequency;
     private javax.swing.JComboBox cLqtyT;
@@ -8997,6 +9032,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelMinimumStockLevel;
     private javax.swing.JLabel jLblIC;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -9056,10 +9092,12 @@ jScrollPane17.setViewportView(tbl_drugOList);
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSpinner jSpinnerDuration;
     private javax.swing.JTable jT_S3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTatc;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldMinimumStockLevel;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JToolBar jToolBar3;

@@ -8,6 +8,7 @@ package GUI.report_ICD10.pharmacy;
 
 
 import DBConnection.DBConnection;
+import GUI.Login;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
@@ -45,6 +46,11 @@ import main.RMIConnector;
  */
 public class Report1 extends javax.swing.JFrame {
 
+    static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+    static String par = fi.getParent()+"/";
+//    static String par = "";
+    String logoUTeM = par+"logoUTeM/LogoUTeM2.gif";
+    
     String Sub, Sub2, Sub3 = null;
     String sql, sql3 = null;
     String sqlWhere, sqlWhere2, sqlWhere3 = null;
@@ -60,7 +66,7 @@ public class Report1 extends javax.swing.JFrame {
     private BaseFont bf;
     private int pageNumber;
     
-    private String fileName = "Report_Pharmacy.pdf";
+    private String fileName = par+"Report_Pharmacy.pdf";
 
     /**
      * Creates new form Report1
@@ -762,7 +768,7 @@ public class Report1 extends javax.swing.JFrame {
             createHeadings(cb, 522, 633, "Total Amount");
 
             //add the images
-            Image Logo = Image.getInstance("LogoUTeM2.gif");
+            Image Logo = Image.getInstance(logoUTeM);
             Logo.setAbsolutePosition(260, 700);
             Logo.scalePercent(8);
             doc.add(Logo);

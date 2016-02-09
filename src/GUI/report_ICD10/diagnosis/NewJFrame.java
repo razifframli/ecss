@@ -5,6 +5,7 @@
  */
 package GUI.report_ICD10.diagnosis;
 import DBConnection.DBConnection;
+import GUI.Login;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,6 +51,12 @@ import main.RMIConnector;
  */
 public class NewJFrame extends javax.swing.JFrame {
     String faculty = null; //public var
+    
+    static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+    static String par = fi.getParent()+"/";
+//    static String par = "";
+    String logoUTeM = par+"logoUTeM/logoUTeMPNG.png";
+    
     /**
      * Creates new form NewJFrame
      */
@@ -395,6 +402,8 @@ public class NewJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    String fileName = par+"ECSS_RPT_001.pdf";
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         // open pdf file platform independent
@@ -451,7 +460,7 @@ public class NewJFrame extends javax.swing.JFrame {
             try {
                 long startTime = System.nanoTime();
 
-                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("ECSS_RPT_001.pdf"));
+                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(this.fileName));
                 TableHeader event = new TableHeader();
                 writer.setPageEvent(event);
                 document.open();
@@ -638,7 +647,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     header_table1.setWidths(columnWidths);
 
                     // 1 columns.
-                    Image logo = Image.getInstance("logoUTeMPNG.png");
+                    Image logo = Image.getInstance(logoUTeM);
                     logo.scaleAbsolute(121, 56);
                     //logo.setAbsolutePosition(260,700);
                     //logo.scalePercent(8);
@@ -1283,7 +1292,7 @@ public class NewJFrame extends javax.swing.JFrame {
 //                // open pdf file platform independent
                 if (Desktop.isDesktopSupported()) {
                     try {
-                        File myFile = new File("ECSS_RPT_001.pdf");
+                        File myFile = new File(this.fileName);
                         Desktop.getDesktop().open(myFile);
                     } catch (IOException ex) {
                         // no application registered for PDFs

@@ -8,6 +8,7 @@ package GUI.report_ICD10.symptom;
 
 
 import DBConnection.DBConnection;
+import GUI.Login;
 import com.itextpdf.text.BaseColor;
 import java.io.*;
 import com.itextpdf.text.Document;
@@ -51,7 +52,12 @@ public class new_GUI extends javax.swing.JFrame {
  * @author arif
  * @version 1.0 29 DEC 2015
  */   
-    String fileNameSymptom = "Report_Symptom.pdf";
+    static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+    static String par = fi.getParent()+"/";
+//    static String par = "";
+    String fileNameSymptom = par+"Report_Symptom.pdf";
+    String dateFormatAll = "yyyy/MM/dd";
+    String logoUTeM = par+"logoUTeM/logo.png";
     
 String Faculty = null;
 String[] tarikh;
@@ -196,7 +202,7 @@ String Patient = null;
             }
         });
 
-        jDateChooser1.setDateFormatString("yyyy-MM-dd");
+        jDateChooser1.setDateFormatString("yyyy/MM/dd");
 
         jDateChooser2.setDateFormatString("yyyy-MM-dd");
 
@@ -281,7 +287,7 @@ String Patient = null;
         JDateChooser tarikh1 = (JDateChooser) evt.getSource();
         if ("date".equals(evt.getPropertyName())) {
             tarikh1.getDate();
-            DateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
+            DateFormat fmt = new SimpleDateFormat(dateFormatAll);
             String date = fmt.format(tarikh1.getDate()); //jdatechooser
             JTextFieldDateEditor editor = (JTextFieldDateEditor) tarikh1.getDateEditor();
             editor.setEditable(false);
@@ -295,7 +301,7 @@ String Patient = null;
         JDateChooser tarikh2 = (JDateChooser) evt.getSource();
         if ("date".equals(evt.getPropertyName())) {
             tarikh2.getDate();
-            DateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
+            DateFormat fmt = new SimpleDateFormat(dateFormatAll);
             String date = fmt.format(tarikh2.getDate()); //jdatechooser
             JTextFieldDateEditor editor = (JTextFieldDateEditor) tarikh2.getDateEditor();
             editor.setEditable(false);
@@ -359,7 +365,7 @@ String Patient = null;
         if (d1 == null || d2 == null) {
             JOptionPane.showMessageDialog(null, "Date is required!");
         } else {
-            DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+            DateFormat fmt = new SimpleDateFormat(dateFormatAll);
             date1 = fmt.format(d1); //jdatechooser
             date2 = fmt.format(d2); //jdatechooser
         }
@@ -369,7 +375,7 @@ String Patient = null;
             try {
                 Document reportpdf = new Document(PageSize.A4);
                 TableHeader event = new TableHeader();
-                String timeStamp1 = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
+                String timeStamp1 = new SimpleDateFormat(dateFormatAll).format(Calendar.getInstance().getTime());
 //                PdfWriter writer = PdfWriter.getInstance(reportpdf, new FileOutputStream("Report '" + Faculty + "' - " + timeStamp1 + "  .pdf"));
                 PdfWriter writer = PdfWriter.getInstance(reportpdf, new FileOutputStream(fileNameSymptom));
                 writer.setPageEvent(event);
@@ -377,7 +383,7 @@ String Patient = null;
                 PdfPTable header = new PdfPTable(2);
                 float[] columnWidths = {2f, 1.19f};
                 header.setWidths(columnWidths);
-                Image logo = Image.getInstance("logo.png");
+                Image logo = Image.getInstance(logoUTeM);
                 logo.scalePercent(8);
                 PdfPCell cell1 = new PdfPCell(logo);
                 // logo.setAlignment(Element.ALIGN_CENTER);
@@ -413,7 +419,7 @@ String Patient = null;
                 PdfPCell cell5 = new PdfPCell(new Paragraph("Faculty :  " + Faculty + " \n\n", teks1));
                 cell5.setBorder(Rectangle.NO_BORDER);
                 header.addCell(cell5);
-                String timeStamp = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
+                String timeStamp = new SimpleDateFormat(dateFormatAll).format(Calendar.getInstance().getTime());
                 PdfPCell cell6 = new PdfPCell(new Paragraph("Date : " + timeStamp + " \n\n", teks1));
                 cell6.setBorder(Rectangle.NO_BORDER);
                 header.addCell(cell6);

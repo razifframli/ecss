@@ -615,6 +615,13 @@ public class Consultation_subcode {
                             qty_drug = cons.getDrugQuantity(cons.getFrequencyCode(Frequency), Quantity, cons.getDayDrugCode(Duration));
                         }
                         
+                        // Get the total drug qty. Frequency * Duration * Qty Order = Qty Dispensed - hadi 
+                        String Total_Drug_Qty = null;
+                        Integer Total_Drug_Int = 0;
+                        Total_Drug_Int = Integer.parseInt(cons.getFrequencyCode(Frequency)) * Integer.parseInt(cons.getDayDrugCode(Duration)) * Integer.parseInt(Quantity);  // Sum drug qty - hadi
+                        Total_Drug_Qty = Integer.toString(Total_Drug_Int);
+                        //                        
+                        
                         String data[] = {
                             ProblemCode + "^" + ProblemDesc + "^ICD10",
                             UD_MDC_Code + "^" + ProductName + "-"+ActiveIngredient + "^" + UD_MDC_Code, //changed from MDC to UD_MDC_Code - hadi
@@ -626,7 +633,7 @@ public class Consultation_subcode {
                             Dose,
                             "" + "^" + "" + "^" + Dose,
                             cons.getDayDrugCode(Duration),
-                            qty_drug,
+                            Total_Drug_Qty,  // changed from qty_drug to Total_Drug_Qty - hadi
                             "" + "^" + "" + "^" + "",
                             Instruction,
                             "" + "^" + Session.getHfc_code()  + "^"
