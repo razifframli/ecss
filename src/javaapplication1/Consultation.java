@@ -458,6 +458,9 @@ public class Consultation extends javax.swing.JFrame {
                     params1 += "'" + Func.trim(data1.get(j).get(k)) + "',";
                 }
                 params1 += "'" + Func.trim(data1.get(j).get(num_cols1 - 1)) + "'";
+                
+                System.out.println(params1);
+                
                 String sql2 = "INSERT INTO PIS_MDC2 VALUES(" + params1 + ")";
 //                System.out.println("\n\nsql2:\n"+sql2+"\n\n");
                 PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql2);
@@ -1069,7 +1072,6 @@ public class Consultation extends javax.swing.JFrame {
         lbl_frequencyOList = new javax.swing.JLabel();
         cb_frequencyOList = new javax.swing.JComboBox();
         lbl_durationOList = new javax.swing.JLabel();
-        cb_durationOList = new javax.swing.JComboBox();
         cb_durationTypeOList = new javax.swing.JComboBox();
         cb_instructionOList = new javax.swing.JComboBox();
         lbl_instructionOList = new javax.swing.JLabel();
@@ -1077,6 +1079,7 @@ public class Consultation extends javax.swing.JFrame {
         txt_dosageFormOList = new javax.swing.JTextField();
         jScrollPane53 = new javax.swing.JScrollPane();
         txt_caution = new javax.swing.JTextArea();
+        jSpinner1 = new javax.swing.JSpinner();
         btn_drugAccept = new javax.swing.JButton();
         btn_drugClear = new javax.swing.JButton();
         jLabel61 = new javax.swing.JLabel();
@@ -1722,7 +1725,7 @@ public class Consultation extends javax.swing.JFrame {
                                     .addComponent(btnSrcComplaint, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel47Layout.createSequentialGroup()
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.PREFERRED_SIZE, 142, Short.MAX_VALUE)
+                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                                             .addComponent(rbtn_gen_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -5224,15 +5227,13 @@ public class Consultation extends javax.swing.JFrame {
 
         lbl_frequencyOList.setText("Frequency :");
 
-        cb_frequencyOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "In the morning", "At night", "Daily", "Twice a day", "3 times a day", "4 times a day", "2 hourly", "4 hourly", "6 hourly", "8 hourly", "Immedietly", "As needed" }));
+        cb_frequencyOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Once", "In the morning", "At night", "Daily", "Twice a day", "3 times a day", "4 times a day", "2 hourly", "4 hourly", "6 hourly", "8 hourly", "Immedietly", "As needed" }));
 
         lbl_durationOList.setText("Duration :");
 
-        cb_durationOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "1", "2", "3", "4", "5", "6" }));
+        cb_durationTypeOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Day", "Week", "Month" }));
 
-        cb_durationTypeOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Day", "Week", "Month" }));
-
-        cb_instructionOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "If required", "As directed", "Before meals", "After meals", "Every second day", "Left side", "Right side", "To both sides", "Other" }));
+        cb_instructionOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "If required", "As directed", "Before meals", "After meals", "Every second day", "Left side", "Right side", "To both sides", "Other" }));
 
         lbl_instructionOList.setText("Instruction :");
 
@@ -5244,6 +5245,8 @@ public class Consultation extends javax.swing.JFrame {
         txt_caution.setRows(5);
         txt_caution.setWrapStyleWord(true);
         jScrollPane53.setViewportView(txt_caution);
+
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 30, 1));
 
         javax.swing.GroupLayout jPanel74Layout = new javax.swing.GroupLayout(jPanel74);
         jPanel74.setLayout(jPanel74Layout);
@@ -5261,7 +5264,7 @@ public class Consultation extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel74Layout.createSequentialGroup()
-                        .addComponent(cb_durationOList, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cb_durationTypeOList, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8))
@@ -5297,8 +5300,8 @@ public class Consultation extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_durationOList)
-                    .addComponent(cb_durationOList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_durationTypeOList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_durationTypeOList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_instructionOList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -6983,7 +6986,7 @@ public class Consultation extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -7877,7 +7880,7 @@ public class Consultation extends javax.swing.JFrame {
                     txt_drugNameOListSearch.setText(drgsub[group1][0]);
 //                    txt_dosageOList.setText(drgsub[group1][1]);
                     txt_quantityOList.setText(drgsub[group1][2]);
-                    cb_durationOList.setSelectedItem(drgsub[group1][3]);
+                    jSpinner1.setValue(drgsub[group1][3]);
                     cb_frequencyOList.setSelectedIndex(drgsub1[group1][0]);
                     cb_instructionOList.setSelectedIndex(drgsub1[group1][1]);
                     //lbx_productNameUStockSearch.setSelectedIndex(drgsub1[group1][2]);
@@ -8109,7 +8112,7 @@ public class Consultation extends javax.swing.JFrame {
     
     protected static String getFrequencyCode(String frequency) {
         String str = "0";
-        if ((frequency.equals("In the morning")) || (frequency.equals("At night")) || (frequency.equals("Daily"))) {
+        if ((frequency.equals("In the morning")) || (frequency.equals("At night")) || (frequency.equals("Daily")) || (frequency.equals("once"))) { //added 'once' - hadi
             str = "1";
         } else if (frequency.equals("Twice a day")) {
             str = "2";
@@ -10164,7 +10167,7 @@ public class Consultation extends javax.swing.JFrame {
                         txt_caution.setText(tbl_note_1.getValueAt(index_temp--, 1).toString());
                         cb_instructionOList.setSelectedItem(tbl_note_1.getValueAt(index_temp--, 1).toString());
                         cb_frequencyOList.setSelectedItem(tbl_note_1.getValueAt(index_temp--, 1).toString());
-                        cb_durationOList.setSelectedItem(tbl_note_1.getValueAt(index_temp, 1).toString().split(" ")[0]);
+                        jSpinner1.setValue(tbl_note_1.getValueAt(index_temp, 1).toString().split(" ")[0]);
                         cb_durationTypeOList.setSelectedItem(tbl_note_1.getValueAt(index_temp--, 1).toString().split(" ")[1]);
                         txt_dosageFormOList.setText(tbl_note_1.getValueAt(index_temp--, 1).toString());
                         txt_quantityOList.setText(tbl_note_1.getValueAt(index_temp--, 1).toString());
@@ -10380,14 +10383,14 @@ public class Consultation extends javax.swing.JFrame {
 
             if(dur % 30 == 0) {
                 dur /= 30;
-                cb_durationOList.setSelectedItem("" + dur);
+                jSpinner1.setValue("" + dur);
                 cb_durationTypeOList.setSelectedItem("Month");
             } else if(dur % 7 == 0) {
                 dur /= 7;
-                cb_durationOList.setSelectedItem("" + dur);
+                jSpinner1.setValue("" + dur);
                 cb_durationTypeOList.setSelectedItem("Week");
             } else {
-                cb_durationOList.setSelectedItem("" + dur);
+                jSpinner1.setValue("" + dur);
                 cb_durationTypeOList.setSelectedItem("Day");
             }
 
@@ -10402,7 +10405,7 @@ public class Consultation extends javax.swing.JFrame {
         txt_drugstrength.setText("");
         txt_quantityOList.setText("");
         txt_dosageFormOList.setText("");
-        cb_durationOList.setSelectedIndex(0);
+        jSpinner1.setValue("");
         cb_durationTypeOList.setSelectedIndex(0);
         cb_frequencyOList.setSelectedIndex(0);
         cb_instructionOList.setSelectedIndex(0);
@@ -12084,19 +12087,25 @@ public class Consultation extends javax.swing.JFrame {
                     + "WHERE UCASE(D_TRADE_NAME) LIKE UCASE(?) "
                     + "OR UCASE(D_GNR_NAME) LIKE UCASE(?)";
             String params[] = { "%"+dtraden+"%", "%"+dtraden+"%" };
-            ArrayList<ArrayList<String>> d1 = DBConnection.getImpl().getQuery(sql, 2, params);
+            ArrayList<ArrayList<String>> d1 = DBConnection.getImpl().getQuery(sql, 25, params);  // changed from 2 to 25 - hadi
             System.out.println("d1:\n\n"+d1);
             arr_tbl_productname.removeAll(arr_tbl_productname);
-            for (int i = 0; i < d1.size() && i < 50; i++) {
-                tbl_productname.getModel().setValueAt(d1.get(i).get(0), i, 0);
-                ArrayList<String> child_arr = new ArrayList<String>();
-                try {
-                    for (int j = 0; ; j++) {
-                        child_arr.add(d1.get(i).get(j));
+
+            if (d1.isEmpty()){ // if array empty then print - hadi
+                tbl_productname.getModel().setValueAt("No search result.", i, 0);
+            }else{
+
+                for (int i = 0; i < d1.size() && i < 50; i++) {
+                    tbl_productname.getModel().setValueAt(d1.get(i).get(2), i, 0); // changed from get(0) to get(2) - hadi
+                    ArrayList<String> child_arr = new ArrayList<String>();
+                    try {
+                        for (int j = 0; ;j++) {
+                            child_arr.add(d1.get(i).get(j));
+                        }
+                    } catch (Exception e) {
                     }
-                } catch (Exception e) {
+                    arr_tbl_productname.add(child_arr);
                 }
-                arr_tbl_productname.add(child_arr);
             }
             online_flagdrugsearch = true;
             offline_flagdrugsearch = false;
@@ -13483,8 +13492,8 @@ public class Consultation extends javax.swing.JFrame {
         }
 
         String cautionary = txt_caution.getText();
-        
-        String doseT = (String) cb_durationOList.getSelectedItem();
+
+        String doseT = (String) jSpinner1.getValue();
         String freq = (String) cb_frequencyOList.getSelectedItem();
         String inst = (String) cb_instructionOList.getSelectedItem();
         int freq1 = cb_frequencyOList.getSelectedIndex();
@@ -13636,7 +13645,7 @@ public class Consultation extends javax.swing.JFrame {
         txt_drugstrength.setText("");
         txt_quantityOList.setText("");
         txt_drugNameOListSearch.setText("");
-        cb_durationOList.setSelectedItem("-");
+        jSpinner1.setValue("");
 
         txt_dosageFormOList.setText("");
         cb_durationTypeOList.setSelectedItem("-");
@@ -13684,7 +13693,7 @@ public class Consultation extends javax.swing.JFrame {
         txt_dosageFormOList.setText("");
         cb_frequencyOList.setSelectedItem("-");
         txt_quantityOList.setText("");
-        cb_durationOList.setSelectedItem("-");
+        jSpinner1.setValue("");
         cb_durationTypeOList.setSelectedItem("-");
         cb_instructionOList.setSelectedItem("-");
 
@@ -13733,7 +13742,7 @@ public class Consultation extends javax.swing.JFrame {
             txt_dosageFormOList.setText(ddosage);
             txt_quantityOList.setText(dLqty);
             cb_frequencyOList.setSelectedItem(dLfreq);
-            cb_durationOList.setSelectedItem(dLduration);
+            jSpinner1.setValue(dLduration);
             cb_durationTypeOList.setSelectedItem(dLdurationType);
             cb_instructionOList.setSelectedItem(dLadvisory);
 
@@ -13751,7 +13760,7 @@ public class Consultation extends javax.swing.JFrame {
                 txt_dosageFormOList.setText("");
                 txt_quantityOList.setText("");
                 cb_frequencyOList.setSelectedItem("");
-                cb_durationOList.setSelectedItem("");
+                jSpinner1.setValue("");
                 cb_durationTypeOList.setSelectedItem("");
                 cb_instructionOList.setSelectedItem("");
 
@@ -13812,7 +13821,7 @@ public class Consultation extends javax.swing.JFrame {
                 txt_dosageFormOList.setText(ddosage);
                 txt_quantityOList.setText(dLqty);
                 cb_frequencyOList.setSelectedItem(dLfreq);
-                cb_durationOList.setSelectedItem(dLduration);
+                jSpinner1.setValue(dLduration);
                 cb_durationTypeOList.setSelectedItem(dLdurationType);
                 cb_instructionOList.setSelectedItem(dLadvisory);
                 
@@ -13830,7 +13839,7 @@ public class Consultation extends javax.swing.JFrame {
                     txt_dosageFormOList.setText("");
                     txt_quantityOList.setText("");
                     cb_frequencyOList.setSelectedItem("");
-                    cb_durationOList.setSelectedItem("");
+                    jSpinner1.setValue("");
                     cb_durationTypeOList.setSelectedItem("");
                     cb_instructionOList.setSelectedItem("");
                     
@@ -14998,7 +15007,7 @@ public class Consultation extends javax.swing.JFrame {
                     try {
                         txt_drugNameOListSearch.setText(msg2[10][i][5]);
                         cb_frequencyOList.setSelectedItem(msg2[10][i][14]);
-                        cb_durationOList.setSelectedItem(msg2[10][i][22].split(" ")[0]);
+                        jSpinner1.setValue(msg2[10][i][22].split(" ")[0]);
                         cb_durationTypeOList.setSelectedItem(msg2[10][i][22].split(" ")[1]);
                         txt_quantityOList.setText(msg2[10][i][23]);
                         cb_instructionOList.setSelectedItem(msg2[10][i][34]);
@@ -15224,7 +15233,6 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.ButtonGroup buttonGroup5;
-    protected static javax.swing.JComboBox cb_durationOList;
     protected static javax.swing.JComboBox cb_durationTypeOList;
     protected static javax.swing.JComboBox cb_frequencyOList;
     protected static javax.swing.JComboBox cb_instructionOList;
@@ -15501,6 +15509,7 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JSlider jSlider2;
     private javax.swing.JSlider jSlider3;
     private javax.swing.JSlider jSlider4;
+    protected static javax.swing.JSpinner jSpinner1;
     protected static javax.swing.JTabbedPane jTabbedPane2;
     protected static javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
