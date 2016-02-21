@@ -581,8 +581,8 @@ public class Consultation_subcode {
                         String ProblemDesc = note_array[zz++].split(": ")[1];
                         String ActiveIngredient = note_array[zz++].split(": ")[1];
                         String ProductName = note_array[zz++].split(": ")[1];
-                        String Dose = note_array[zz++].split(": ")[1];
-                        String Quantity = note_array[zz++].split(": ")[1];
+                        String Dose = note_array[zz++].split(": ")[1]; // dose is actually drug strength - refer consultation notes
+                        String Quantity = note_array[zz++].split(": ")[1]; // quantity is actually drug strength - refer consultation notes
                         String DrugForm = note_array[zz++].split(": ")[1];
                         String Duration = note_array[zz++].split(": ")[1];
                         String Frequency = note_array[zz++].split(": ")[1];
@@ -619,8 +619,10 @@ public class Consultation_subcode {
                         String Total_Drug_Qty = null;
                         Integer Total_Drug_Int = 0;
                         Total_Drug_Int = Integer.parseInt(cons.getFrequencyCode(Frequency)) * Integer.parseInt(cons.getDayDrugCode(Duration)) * Integer.parseInt(Quantity);  // Sum drug qty - hadi
+                        System.out.println(Total_Drug_Int);
                         Total_Drug_Qty = Integer.toString(Total_Drug_Int);
-                        //                        
+                        System.out.println(Total_Drug_Qty);
+                        //
                         
                         String data[] = {
                             ProblemCode + "^" + ProblemDesc + "^ICD10",

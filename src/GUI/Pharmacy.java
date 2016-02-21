@@ -64,9 +64,12 @@ import com.itextpdf.text.log.SysoLogger;
 import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import javaapplication1.DriversLocation;
 import java.text.Format;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -209,7 +212,9 @@ public class Pharmacy extends javax.swing.JFrame{
 //    ArrayList data2;
     
     private static int max_row_drug = 100;
-    private static int max_col_drug = 9;
+    private static int max_col_drug = 10;
+    
+    DecimalFormat format_cash = new DecimalFormat("######0.00"); // use 0 to add trailing zero for double number - hadi
     
     /**
      * NEW VAR DRUG 
@@ -579,6 +584,9 @@ public class Pharmacy extends javax.swing.JFrame{
         jButton5 = new javax.swing.JButton();
         btn_PrintLabel = new javax.swing.JButton();
         btnCallPatient = new javax.swing.JButton();
+        jPanel_Total = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel_Total = new javax.swing.JLabel();
         jPanel36 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbl_drugOrder = new javax.swing.JTable();
@@ -737,7 +745,6 @@ public class Pharmacy extends javax.swing.JFrame{
         jScrollPane8 = new javax.swing.JScrollPane();
         txt_ingredientCode = new javax.swing.JTextArea();
         lbl_drugRoute = new javax.swing.JLabel();
-        txt_drugRoute = new javax.swing.JTextField();
         lbl_drugStrength = new javax.swing.JLabel();
         txt_drugStrength = new javax.swing.JTextField();
         cdosage_form = new javax.swing.JComboBox();
@@ -751,11 +758,11 @@ public class Pharmacy extends javax.swing.JFrame{
         rbt_activeMDC = new javax.swing.JRadioButton();
         rbt_inactiveMDC = new javax.swing.JRadioButton();
         jLabelMinimumStockLevel = new javax.swing.JLabel();
-        jTextFieldMinimumStockLevel = new javax.swing.JTextField();
+        jTextField_MinimumStockLevel = new javax.swing.JTextField();
+        jComboBox_drugRoute = new javax.swing.JComboBox();
         jPanel6 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         dpack1 = new javax.swing.JTextField();
-        cdpack2 = new javax.swing.JComboBox();
         jLabel31 = new javax.swing.JLabel();
         txt_costPrice = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
@@ -777,9 +784,9 @@ public class Pharmacy extends javax.swing.JFrame{
         txt_cautionary = new javax.swing.JTextArea();
         jLabel30 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        txt_expdate = new com.toedter.calendar.JDateChooser();
         cClassification = new javax.swing.JComboBox();
         jSpinnerDuration = new javax.swing.JSpinner();
+        jDateChooser_ExpDate = new com.toedter.calendar.JDateChooser();
         pnl_import = new javax.swing.JPanel();
         lbl_browseFileConvert = new java.awt.Label();
         jPanel25 = new javax.swing.JPanel();
@@ -1426,116 +1433,116 @@ public class Pharmacy extends javax.swing.JFrame{
         //int rowIndex = tbl_drugList.getSelectedRow();
         tbl_drugList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Drug Code", "Drug Desc", "Dosage", "Frequency", "Duration", "Qty Order", "Qty Supply", "Qty Dispensed", "Status"
+                "Drug Code", "Drug Desc", "Drug Strength", "Frequency", "Duration", "Dose", "Stock Qty", "Dispense Qty", "Price", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, true, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1583,6 +1590,31 @@ public class Pharmacy extends javax.swing.JFrame{
             }
         });
 
+        jLabel1.setText("TOTAL :");
+
+        jLabel_Total.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel_TotalLayout = new javax.swing.GroupLayout(jPanel_Total);
+        jPanel_Total.setLayout(jPanel_TotalLayout);
+        jPanel_TotalLayout.setHorizontalGroup(
+            jPanel_TotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_TotalLayout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel_TotalLayout.setVerticalGroup(
+            jPanel_TotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_TotalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_TotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel_Total))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
@@ -1601,20 +1633,25 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addComponent(btnCallPatient)
                         .addGap(18, 18, 18)
                         .addComponent(btn_PrintLabel)
-                        .addGap(413, 413, 413))))
+                        .addGap(411, 411, 411))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                        .addComponent(jPanel_Total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(98, 98, 98))))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel_Total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_dispense)
                     .addComponent(jButton5)
                     .addComponent(btn_PrintLabel)
                     .addComponent(btnCallPatient))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jPanel36.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "List Drug Order", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -1622,116 +1659,116 @@ public class Pharmacy extends javax.swing.JFrame{
         int rowIndex = tbl_drugOrder.getSelectedRow();
         tbl_drugOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Drug Code", "Drug Desc", "Dosage", "Frequency", "Duration", "Qty Order", "Qty Supply", "Qty Dispensed", "Status"
+                "Drug Code", "Drug Desc", "Drug Strength", "Frequency", "Duration", "Dose", "Stock Qty", "Dispense Qty", "Price", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1992,7 +2029,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(jPanel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(1011, Short.MAX_VALUE))
+                .addContainerGap(1131, Short.MAX_VALUE))
         );
         pnl_patientDrugOrderLayout.setVerticalGroup(
             pnl_patientDrugOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2006,7 +2043,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addContainerGap(299, Short.MAX_VALUE))
         );
 
         tab_drugOrder.addTab("Patient Drug Dispense", pnl_patientDrugOrder);
@@ -3156,6 +3193,11 @@ public class Pharmacy extends javax.swing.JFrame{
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Search Drug"));
 
         jtdrugS2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jtdrugS2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtdrugS2ActionPerformed(evt);
+            }
+        });
         jtdrugS2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtdrugS2KeyReleased(evt);
@@ -3289,7 +3331,7 @@ public class Pharmacy extends javax.swing.JFrame{
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Drug Information"));
 
-        lbl_drugNameMDC.setText("Trade Name :");
+        lbl_drugNameMDC.setText("Product Name :");
 
         txt_drugNameMDC.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -3311,8 +3353,6 @@ public class Pharmacy extends javax.swing.JFrame{
 
         lbl_drugRoute.setText("Drug Route :");
 
-        txt_drugRoute.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
         lbl_drugStrength.setText("Drug Strength :");
 
         txt_drugStrength.setToolTipText("Drug Strength : how much of active ingredient is present in EACH dosage");
@@ -3331,7 +3371,6 @@ public class Pharmacy extends javax.swing.JFrame{
 
         lbl_supplierUStock1.setText("Supplier :");
 
-        cb_supplierUStock.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default Supplier" }));
         cb_supplierUStock.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lbl_statusMDC.setText("Status :");
@@ -3345,7 +3384,9 @@ public class Pharmacy extends javax.swing.JFrame{
 
         jLabelMinimumStockLevel.setText("Minimum Stock Level");
 
-        jTextFieldMinimumStockLevel.setText("100");
+        jTextField_MinimumStockLevel.setText("0");
+
+        jComboBox_drugRoute.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Oral", "Sublingual", "Rectal", "Injections", "Inhalation", "Hypospray or jet injections", "Enepidermic", "Epidermic", "Insufflations", "Instillation ", "Irrigation/Douching", "Painting/Swabbing" }));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -3368,14 +3409,8 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txt_drugRoute, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                            .addComponent(txt_drugNameMDC, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldMinimumStockLevel)
+                            .addComponent(jTextField_MinimumStockLevel)
                             .addComponent(cb_supplierUStock, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_locCode, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_stockQty, javax.swing.GroupLayout.Alignment.LEADING)
@@ -3389,7 +3424,14 @@ public class Pharmacy extends javax.swing.JFrame{
                                         .addComponent(rbt_inactiveMDC))
                                     .addComponent(txt_mdcCode, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 72, Short.MAX_VALUE)))
-                        .addGap(83, 83, 83))))
+                        .addGap(83, 83, 83))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                                .addComponent(txt_drugNameMDC, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jComboBox_drugRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3408,8 +3450,8 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(lbl_ingredientCode))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_drugRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_drugRoute))
+                    .addComponent(lbl_drugRoute)
+                    .addComponent(jComboBox_drugRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_dosageForm)
@@ -3438,15 +3480,13 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelMinimumStockLevel)
-                    .addComponent(jTextFieldMinimumStockLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_MinimumStockLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Purchase"));
 
         jLabel34.setText("Packaging :");
-
-        cdpack2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "AMP", "AP", "BAG", "BLPK", "BOT", "BOTAP", "BOTDIS", "BOTDR", "BOTGL", "BOTPL", "BOTPU", "BOTSPR", "BOTUD", "BOX", "BOXUD", "CAN", "CSTR", "CRTN", "CTG", "CASE", "CELLO", "CTR", "CUP", "CUPUD", "CYL", "DEW", "DLPK", "DSPK", "DRUM", "INHL", "INHLRE", "JAR", "JUG", "KIT", "NS", "PKG", "PKGCOM", "PKT", "POU", "SUPSACK", "SYR", "SYRGL", "SYRPL", "TABMIND", "TANK", "TRAY", "TUBE", "TUBEAP", "VIAL", "VIALDIS", "VIALGL", "VIALMD", "VIALPAT", "VIALPHR", "VIALPIG", "VIALPL", "VIALSD", "VIALSU", "DROPS" }));
 
         jLabel31.setText("Purchase Price :");
 
@@ -3473,8 +3513,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(dpack1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cdpack2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(txt_costPrice)
                     .addComponent(txt_sellprice)
                     .addComponent(d_priceppack))
@@ -3485,8 +3524,7 @@ public class Pharmacy extends javax.swing.JFrame{
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel34)
-                    .addComponent(dpack1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cdpack2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dpack1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(d_priceppack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3504,7 +3542,7 @@ public class Pharmacy extends javax.swing.JFrame{
 
         jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Label Information"));
 
-        lbl_quantityOList1.setText("Dosage :");
+        lbl_quantityOList1.setText("Dose :");
 
         txt_Lqty.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -3523,7 +3561,7 @@ public class Pharmacy extends javax.swing.JFrame{
 
         lbl_cautionary.setText("Cautionary :");
 
-        cLqtyT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ml", "garg", "supp", "puff", " " }));
+        cLqtyT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "mg", "ml", "garg", "supp", "puff", "mg/hour", "mg/kg/hour", "mg/kg/min", "mcg/kg/min" }));
 
         txt_cautionary.setColumns(20);
         txt_cautionary.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -3537,14 +3575,12 @@ public class Pharmacy extends javax.swing.JFrame{
 
         jLabel33.setText("Classification :");
 
-        txt_expdate.setDateFormatString("dd/MM/yyyy");
-        txt_expdate.setMaxSelectableDate(new java.util.Date(253370739713000L));
-        txt_expdate.setMinSelectableDate(new java.util.Date(-62135794687000L));
-
         cClassification.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Antacid/ Anti Spasmodic", "Anti Diarrheal", "Anti Dyspepsia", "Anti- Gout Agents", "Anti- Obesity", "Anti-Ashmatic & Bronchodilator", "Antibiotic", "Antiemetic / Anti Vertigo", "Anti-fungal", "Antihelmintic", "Anti-Histamine", "Antiseptic", "Anti-viral", "Cough & Cold Preparations", "Creams & Ointment", "Drugs Used in Substance  Dependence", "Eye/Ear Drop", "Haermorrhoids", "Injection", "IV Drips", "Laxatives", "Lozenges", "Mucolytics Agents", "Nebulizer", "Nose prep", "NSAIDs", "Oral prep", "Oral Steroids", "Others", "Peripheral vasodilators/  migraine drug", "Shampoo", "Urinary Preparation", "Vitamin & supplements" }));
         cClassification.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jSpinnerDuration.setModel(new javax.swing.SpinnerNumberModel(1, 1, 30, 1));
+
+        jDateChooser_ExpDate.setDateFormatString("dd/MM/yyyy");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -3560,9 +3596,9 @@ public class Pharmacy extends javax.swing.JFrame{
                         .addGap(18, 18, 18)
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cClassification, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                                .addComponent(txt_expdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(77, 77, 77))))
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addComponent(jDateChooser_ExpDate, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_cautionary)
@@ -3579,8 +3615,8 @@ public class Pharmacy extends javax.swing.JFrame{
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(cLqtyT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel16Layout.createSequentialGroup()
-                                        .addComponent(jSpinnerDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(67, 67, 67)
+                                        .addComponent(jSpinnerDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(57, 57, 57)
                                         .addComponent(cLdurationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(cLfrequency, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cInstruction, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -3616,9 +3652,9 @@ public class Pharmacy extends javax.swing.JFrame{
                     .addComponent(lbl_cautionary)
                     .addComponent(jScrollPane24, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel30)
-                    .addComponent(txt_expdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser_ExpDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel33)
@@ -3637,7 +3673,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(436, 436, 436))
+                        .addGap(369, 369, 369))
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -4164,27 +4200,27 @@ public class Pharmacy extends javax.swing.JFrame{
         //catc.setSelectedItem("-");
         txt_drugNameMDC.setText("");
         txt_ingredientCode.setText("");
-        txt_drugRoute.setText("");
+        jComboBox_drugRoute.setSelectedItem("");
         cdosage_form.setSelectedItem("-");
         txt_drugStrength.setText("");
         txt_stockQty.setText("");
         txt_locCode.setText("");
         rbt_inactiveMDC.setSelected(false);
         rbt_activeMDC.setSelected(false);
-        jTextFieldMinimumStockLevel.setText("");
+        jTextField_MinimumStockLevel.setText("");
         dpack1.setText("");
-        cdpack2.setSelectedItem("-");
+        //cdpack2.setSelectedItem("-");   //by functionality not use
         d_priceppack.setText("");
         txt_costPrice.setText("");
         txt_sellprice.setText("");
         txt_Lqty.setText("");
         cLqtyT.setSelectedItem("-");
         cLfrequency.setSelectedItem("-");
-        jSpinnerDuration.setValue("");
+        jSpinnerDuration.setValue(1);
         cLdurationType.setSelectedItem("-");
         cInstruction.setSelectedItem("-");
         txt_cautionary.setText("");
-        txt_expdate.setDate(null);
+        jDateChooser_ExpDate.setDate(null);
         cClassification.setSelectedItem("");
 }//GEN-LAST:event_btn_cancelMDCActionPerformed
 
@@ -4193,16 +4229,49 @@ public class Pharmacy extends javax.swing.JFrame{
         if(txt_mdcCode.getText().equals("")) {
             //popup windows search drug first
             JOptionPane.showMessageDialog(btn_updateMDC, "Please search for a drug MDC information to update!");
-        } else {
+        } 
+        
+        if (txt_mdcCode.getText().equals("")) {
+            //popup windows search drug first
+            JOptionPane.showMessageDialog(null, "Please enter Drug Code!");
+        }else if(jDateChooser_ExpDate.getDate() == null) 
+        {
+            JOptionPane.showMessageDialog(null, "Please enter expiry date!");
+        }else if(txt_drugNameMDC.getText().equals("")){  //20151006 Lim Kai Li -- Add validation
+            JOptionPane.showMessageDialog(null, "Please enter product name!");
+        }else if(txt_ingredientCode.getText().equals("")){  //20151006 Lim Kai Li -- Add validation
+            JOptionPane.showMessageDialog(null, "Please enter generic name!");
+        }else if(jComboBox_drugRoute.getSelectedItem().equals("")){
+            JOptionPane.showMessageDialog(null, "Please enter drug route!");
+        }else if(txt_drugStrength.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please enter drug strength!");
+        }
+        /*else if(txt_costPrice.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter purchase price to add!");
+        }
+        else if(txt_sellprice.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter sell price to add!");
+        } */
+        else if(txt_Lqty.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please enter dose!");
+        }else if(txt_cautionary.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please enter cautionary information!");
+        }   // 20151006 Lim Kai Li -- Add validation END
+      
+
+        else {
             //get input from textfield
             dmdc = txt_mdcCode.getText();
             datc = "UTeM";
             dtraden = txt_drugNameMDC.getText();
             dgnrn = txt_ingredientCode.getText();
-            droute = txt_drugRoute.getText();
+            droute = (String) jComboBox_drugRoute.getSelectedItem();
             ddosage = (String) cdosage_form.getSelectedItem();
             dstrength = txt_drugStrength.getText();
-            dstockqty = txt_stockQty.getText();//double
+            dstockqty = txt_stockQty.getText();//comma in string
+            dstockqty = dstockqty.replaceAll("[,]", ""); // replace comma with empty space remove - hadi
             dloccode = txt_locCode.getText();
 
             if (rbt_activeMDC.getSelectedObjects() != null) {
@@ -4212,35 +4281,56 @@ public class Pharmacy extends javax.swing.JFrame{
                 dstatus = "FALSE";
             }
 
-            minimum_stock_level = jTextFieldMinimumStockLevel.getText();
+            minimum_stock_level = jTextField_MinimumStockLevel.getText();
             dpackaging = dpack1.getText();
-            dpackagingType = (String) cdpack2.getSelectedItem();
+            //dpackagingType = (String) cdpack2.getSelectedItem();   //by functionality not use
             dpriceppack = d_priceppack.getText();//double
             dcostp = txt_costPrice.getText();//double
             dsellp = txt_sellprice.getText();//double
             dLqty = txt_Lqty.getText();//double
             dLqtyt = (String)cLqtyT.getSelectedItem();
             dLfreq = (String) cLfrequency.getSelectedItem();
-            dLduration = (String) jSpinnerDuration.getValue();
+            Integer Duration = (Integer) jSpinnerDuration.getValue();
+            dLduration = String.valueOf(Duration);
             dLdurationType = (String) cLdurationType.getSelectedItem();
             dLadvisory = (String) cInstruction.getSelectedItem();
             dLcaution = txt_cautionary.getText();
-            if(txt_expdate.getDate() != null && !txt_expdate.getDate().equals(""))
+
+            if(jDateChooser_ExpDate.getDate() != null && !jDateChooser_ExpDate.getDate().equals(""))
             {
                 Format formatter2 = new SimpleDateFormat("dd/MM/yyyy");
-                dLexpdate = formatter2.format(txt_expdate.getDate());//date
+                dLexpdate = formatter2.format(jDateChooser_ExpDate.getDate());//date
             }
             else
             {
                 dLexpdate = "";
             }
+            System.out.println("dLexpdate " + dLexpdate);
+            System.out.println("jDateChooser_ExpDate.getDate() " + jDateChooser_ExpDate.getDate());
+
             dLclassification = (String) cClassification.getSelectedItem();
             supname = (String) cb_supplierUStock.getSelectedItem();
+            
+            System.out.println("supllier name " + supname);
 
-            //call data from PIS_MDC
+            System.out.println(dmdc);
+            
+            // start - This line to search MDC to ensure the record is ting
+        try {
+
+            String sql_select_mdc = "SELECT * FROM PIS_MDC2 WHERE UCASE(UD_MDC_CODE) = UCASE(?) LIMIT 1";
+            PreparedStatement ps_select_mdc = Session.getCon_x(1000).prepareStatement(sql_select_mdc);
+
+            ps_select_mdc.setString(1, dmdc);
+            ResultSet results = ps_select_mdc.executeQuery();
+
+            if (results.next()) {
+                String mdc_code = results.getString("UD_MDC_CODE");//
+                //The update process for mdc start here...
+
             try {
                 String sql="UPDATE PIS_MDC2 SET "
-                        + "UD_MDC_CODE = ?,UD_ATC_CODE = ?, D_TRADE_NAME = ?,D_GNR_NAME = ?,"
+                        + "UD_ATC_CODE = ?, D_TRADE_NAME = ?,D_GNR_NAME = ?,"
                         + "D_ROUTE_CODE = ?,D_FORM_CODE = ?,D_STRENGTH = ?,D_ADVISORY_CODE = ?,D_STOCK_QTY = ?," 
                         + "D_QTY = ?,D_QTYT = ?, D_DURATION = ?,D_DURATIONT = ?,D_FREQUENCY = ?,D_CAUTION_CODE = ?,"
                         + "D_EXP_DATE = ?, D_CLASSIFICATION = ?,STATUS= ?, D_LOCATION_CODE = ?," 
@@ -4249,120 +4339,183 @@ public class Pharmacy extends javax.swing.JFrame{
 
                 //prepare sql query and execute it
                 PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
-                ps.setString(1, dmdc);
-                ps.setString(2, datc);
-                ps.setString(3, dtraden);
-                ps.setString(4, dgnrn);
-                ps.setString(5, droute);
-                ps.setString(6, ddosage);
-                ps.setString(7, dstrength);
-                ps.setString(8, dLadvisory);
-                ps.setDouble(9, Double.parseDouble(dstockqty));
-                ps.setDouble(10, Double.parseDouble(dLqty));//d
-                ps.setString(11, dLqtyt);
-                ps.setInt(12, Integer.parseInt(dLduration));//n
-                ps.setString(13, dLdurationType );
-                ps.setString(14, dLfreq );
-                ps.setString(15, dLcaution );
-                ps.setString(16, dLexpdate );//date
-                ps.setString(17, dLclassification );
-                ps.setString(18, dstatus);
-                ps.setString(19, dloccode);
-                ps.setDouble(20, Double.parseDouble(dsellp));//d
-                ps.setDouble(21, Double.parseDouble(dcostp));//d
-                ps.setInt(22, Integer.parseInt(dpackaging));
-                ps.setString(23, dpackagingType);
-                ps.setDouble(24, Double.parseDouble(dpriceppack));
+                //ps.setString(1, dmdc); removed due to primary key.
+                ps.setString(1, datc);
+                ps.setString(2, dtraden);
+                ps.setString(3, dgnrn);
+                ps.setString(4, droute);
+                ps.setString(5, ddosage);
+                ps.setString(6, dstrength);
+                ps.setString(7, dLadvisory);
+                ps.setDouble(8, Double.parseDouble(dstockqty));
+                ps.setDouble(9, Double.parseDouble(dLqty));//d
+                ps.setString(10, dLqtyt);
+                ps.setInt(11, Integer.parseInt(dLduration));//n
+                ps.setString(12, dLdurationType );
+                ps.setString(13, dLfreq );
+                ps.setString(14, dLcaution );
+                ps.setString(15, dLexpdate );//date
+                ps.setString(16, dLclassification );
+                ps.setString(17, dstatus);
+                ps.setString(18, dloccode);
+                ps.setDouble(19, Double.parseDouble(dsellp));//d
+                ps.setDouble(20, Double.parseDouble(dcostp));//d
+                ps.setInt(21, Integer.parseInt(dpackaging));
+                ps.setString(22, dpackagingType);  // this variable not use due to disfunctionality
+                ps.setDouble(23, Double.parseDouble(dpriceppack));
+                //ps.setString(25, dmdc);
+                ps.setString(24, minimum_stock_level);
                 ps.setString(25, dmdc);
-                ps.setString(26, minimum_stock_level);
                 //update data
                 ps.executeUpdate();
-                
+
                 try {
                     String [] arrPS = new String[25];
-                    arrPS[0]=(dmdc);
-                    arrPS[1]=("Utem");
-                    arrPS[2]=(dtraden);
-                    arrPS[3]=(dgnrn);
-                    arrPS[4]=(droute);
-                    arrPS[5]=(ddosage);
-                    arrPS[6]=(dstrength);
-                    arrPS[7]=(dLadvisory);
-                    arrPS[8]=(dstockqty);
-                    arrPS[9]=(dLqty);
-                    arrPS[10]=(dLqtyt);
-                    arrPS[11]=(dLduration);
-                    arrPS[12]=(dLdurationType);
-                    arrPS[13]=(dLfreq);
-                    arrPS[14]=(dLcaution);
-                    arrPS[15]=(dLexpdate);
-                    arrPS[16]=(dLclassification);
-                    arrPS[17]=(dstatus);
-                    arrPS[18]=(dloccode);
-                    arrPS[19]=(dsellp);
-                    arrPS[20]=(dcostp);
-                    arrPS[21]=(dpackaging);
-                    arrPS[22]=(dpackagingType);
-                    arrPS[23]=(dpriceppack);
+                    arrPS[0]=("Utem");
+                    arrPS[1]=(dtraden);
+                    arrPS[2]=(dgnrn);
+                    arrPS[3]=(droute);
+                    arrPS[4]=(ddosage);
+                    arrPS[5]=(dstrength);
+                    arrPS[6]=(dLadvisory);
+                    arrPS[7]=(dstockqty);
+                    arrPS[8]=(dLqty);
+                    arrPS[9]=(dLqtyt);
+                    arrPS[10]=(dLduration);
+                    arrPS[11]=(dLdurationType);
+                    arrPS[12]=(dLfreq);
+                    arrPS[13]=(dLcaution);
+                    arrPS[14]=(dLexpdate);
+                    arrPS[15]=(dLclassification);
+                    arrPS[16]=(dstatus);
+                    arrPS[17]=(dloccode);
+                    arrPS[18]=(dsellp);
+                    arrPS[19]=(dcostp);
+                    arrPS[20]=(dpackaging);
+                    arrPS[21]=(dpackagingType);  // this variable not use due to disfunctionality
+                    arrPS[22]=(dpriceppack);
+                    //arrPS[24]=(dmdc);
+                    arrPS[23]=(minimum_stock_level);
                     arrPS[24]=(dmdc);
-                    arrPS[25]=(minimum_stock_level);
                     
                     Boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
-                    
-                    loadDrug();
+                    System.out.println(arrPS);
+                    System.out.println(bool);
                     String ggr = "";
+             
                 } catch (Exception e) {
                     System.out.println("got error.."+e.getMessage());
-                    JOptionPane.showMessageDialog(null, "Unable to update at central Server. Please try again soon");
+                    JOptionPane.showMessageDialog(null, "Unable to update MDC information at central Server. Please try again soon");
                 }
                 
                 //popup windows update success
-                JOptionPane.showMessageDialog(btn_updateMDC, "Update success!");
+                //JOptionPane.showMessageDialog(btn_updateMDC, "Update success!");
+                JOptionPane.showMessageDialog(null, "The MDC information success to be updated.");
                 
-                String sql1 = "INSERT INTO PIS_PRODUCT_SUPPLIER (Update_Stock_Date, Staff_ID, Supplier_ID, UD_MDC_Code) VALUES (?,?,?,?)";
+                // start of exclude  19/2/2016 1:09 PM
+                /* This add function need to be excluded due to missunderstanding of function.
+                   The rule to assign drug (MDC) to specific supplier is through add function (not through update function).
+                   In order to assign drug (MDC) to specific supplier - user have to use add function by selecting drug code and supplier.
 
-                //prepare sql query and execute it
-                PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
-                java.sql.Timestamp sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
-                ps1.setTimestamp(1, sqlDate);
-                ps1.setString(2, id);
-                ps1.setString(3, supid);
-                ps1.setString(4, dmdc);
+                // The rule to update the table is through adding the new code into PIS_PRODUC_SUPPLIER. This is because 0f Supplier_ID, UD_MDC_CODE, and Staff_ID is primary key.
+                String sup_id = supname.substring(0, 7);
+                
 
                 
-                //update data
-                ps1.execute();
+                try {
+                    
+
+
+                                        
+                    System.out.println("id " + id);
+                    System.out.println("sup_id " + sup_id);
+                    System.out.println("dmdc " + dmdc);    
+                    
+
+                    String sql_PIS_PRODUCT_SUPPLIER = "INSERT INTO PIS_PRODUCT_SUPPLIER (Update_Stock_Date, Staff_ID, Supplier_ID, UD_MDC_Code) VALUES (?,?,?,?)";
+
+                    //prepare sql query and execute it
+                    PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql_PIS_PRODUCT_SUPPLIER);
+                    java.sql.Timestamp sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
+                    
+                    System.out.println("sqlDate " + sqlDate);
+                
+                    
+                    ps1.setTimestamp(1, sqlDate);
+                    ps1.setString(2, id);
+                    ps1.setString(3, sup_id);
+                    ps1.setString(4, dmdc);
+
+                    //add data supplier local db
+                    ps1.executeUpdate();     
+
+                    
+                }catch (Exception e){
+                    JOptionPane.showMessageDialog(null, "Unable to add MDC to supplier (local db). Please try again");
+                }
+
+                try {
+                    
+                    String sql_PIS_PRODUCT_SUPPLIER = "INSERT INTO PIS_PRODUCT_SUPPLIER (Update_Stock_Date, Staff_ID, Supplier_ID, UD_MDC_Code) VALUES (?,?,?,?)";
+
+                    String sup_id = supname.substring(0, 7);
+                    
+                    String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
+                    //prepare sql query and execute it
+                    String [] arrPIS_PRODUCT_SUPPLIER = new String[4];
+                    arrPIS_PRODUCT_SUPPLIER[0]=(timeStamp);
+                    arrPIS_PRODUCT_SUPPLIER[1]=(id);
+                    arrPIS_PRODUCT_SUPPLIER[2]=(sup_id);
+                    arrPIS_PRODUCT_SUPPLIER[3]=(dmdc);
+
+                    Boolean bool = DBConnection.getImpl().setQuery(sql_PIS_PRODUCT_SUPPLIER, arrPIS_PRODUCT_SUPPLIER);                    
+                    
+                }catch (Exception e){
+                    JOptionPane.showMessageDialog(null, "Unable to add MDC to supplier (central db). Please try again");
+                }
+                // end of exclude. 19/2/2016 1:09 PM
+                */ 
 
                 //clear textfield
                 txt_mdcCode.setText("");
                 //catc.setSelectedItem("-");
                 txt_drugNameMDC.setText("");
                 txt_ingredientCode.setText("");
-                txt_drugRoute.setText("");
+                jComboBox_drugRoute.setSelectedItem("");
                 cdosage_form.setSelectedItem("-");
                 txt_drugStrength.setText("");
                 txt_stockQty.setText("");
                 txt_locCode.setText("");
                 rbt_inactiveMDC.setSelected(false);
                 rbt_activeMDC.setSelected(false);
-                jTextFieldMinimumStockLevel.setText("");
+                jTextField_MinimumStockLevel.setText("");
                 dpack1.setText("");
-                cdpack2.setSelectedItem("-");
+                //cdpack2.setSelectedItem("-");   //by functionality not use
                 d_priceppack.setText("");
                 txt_costPrice.setText("");
                 txt_sellprice.setText("");
                 txt_Lqty.setText("");
                 cLqtyT.setSelectedItem("-");
                 cLfrequency.setSelectedItem("-");
-                jSpinnerDuration.setValue("");
-                jSpinnerDuration.setValue("");
+                jSpinnerDuration.setValue(1);
                 cInstruction.setSelectedItem("-");
                 txt_cautionary.setText("");
-                txt_expdate.setDate(null);
+                jDateChooser_ExpDate.setDate(null);
                 cClassification.setSelectedItem("");
             } catch(Exception e) {
                 System.out.println("update pis mdc"+e);
             }
+                // the update process for mdc end here...
+                
+            }else {
+                System.out.println("something else");
+                JOptionPane.showMessageDialog(null, "The MDC does not exist and the updating is declined.");
+            }
+        } catch (Exception ex) {
+            S.oln("MDC 12" + ex.getMessage());
+            ex.printStackTrace();
+        }
+            
         }
         UpdateTbl();
 }//GEN-LAST:event_btn_updateMDCActionPerformed
@@ -4479,8 +4632,15 @@ public class Pharmacy extends javax.swing.JFrame{
                         } catch (Exception eex) {
                             d_qty = 0;
                         }
+                        System.out.println("jumlah " + d_qty);
+                        System.out.println("oNo " + oNo);
+                        System.out.println("drugCode " + drugCode);
                         DBConnection.getImpl().insertDispenseDetail(ddData1, d_qty, true);
                         DBConnection.getImpl().updateOrderDetail(d_qty, oNo, drugCode);
+                        
+                        // update local
+                        DBConnection.insertDispenseDetail(ddData1, d_qty, true);
+                        DBConnection.updateOrderDetail(d_qty, oNo, drugCode);
                     }
                     //check status all order detail
                     boolean odStatus = DBConnection.getImpl().isOrderDetail(oNo);
@@ -4489,6 +4649,10 @@ public class Pharmacy extends javax.swing.JFrame{
                         //update order master status AND dispense master status
                         DBConnection.getImpl().updateOrderMaster(oNo, 1);
                         DBConnection.getImpl().updateDispensedMaster(oNo, 1);
+                        
+                        // update local
+                        DBConnection.updateOrderMaster(oNo, true);
+                        DBConnection.updateDispensedMaster(oNo, true);
                     }
 
                     System.out.println(".....Dispense Sent....");
@@ -5629,10 +5793,10 @@ public class Pharmacy extends javax.swing.JFrame{
             ResultSet results = ps.executeQuery();
             
             while(results.next()){
+                supid = results.getString("SUPPLIER_ID");
                 supname = results.getString("SUPPLIER_NAME");
                 combox_supname.addItem(supname);
-                cb_supplierUStock.addItem(supname);
-                supid = results.getString("SUPPLIER_ID");
+                cb_supplierUStock.addItem(supid + " - " + supname);
                 supcontact = results.getString("CONTACT_NO");
                
             }
@@ -6280,7 +6444,7 @@ txt_doctor.setText("");
 jScrollPane17.setViewportView(tbl_drugOList);
     
     for(int i = 0; i < 100; i++) {
-        for(int j = 0; j < 9; j++) {
+        for(int j = 0; j < 10; j++) {
             tbl_drugOrder.getModel().setValueAt("", i, j);
             tbl_drugList.getModel().setValueAt("", i, j);
         }
@@ -7063,6 +7227,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
         txt_caution.setText("");
         stock_qty.setText("");
         txt_productNameOList.setText("");
+        jTextField_MinimumStockLevel.setText("");
 
         
         //reset all text field 3
@@ -7071,12 +7236,21 @@ jScrollPane17.setViewportView(tbl_drugOList);
         txt_ingredientCode.setText("");
         txt_cautionary.setText("");
         cdosage_form.setSelectedItem("-");
-        txt_drugRoute.setText("");
+        jComboBox_drugRoute.setSelectedItem("");
 //        txt_atcCodeMDC.setText("");//
 //        catc.setSelectedItem("-");
         rbt_activeMDC.setSelected(false);
         rbt_inactiveMDC.setSelected(false);
         txt_drugStrength.setText("");
+        jDateChooser_ExpDate.setDate(null);
+        
+        // clear Purchase section - hadi
+        dpack1.setText("0");
+        d_priceppack.setText("0.00");
+        txt_costPrice.setText("0.00");
+        txt_sellprice.setText("0.00");
+        // end
+        
 
         /*
          * search data base on the drug product choosed
@@ -7097,8 +7271,8 @@ jScrollPane17.setViewportView(tbl_drugOList);
             if (results.next()) {
                 //rs 1
                 dtraden = results.getString("D_TRADE_NAME");//
-                Double stock_qty1 = results.getDouble("D_STOCK_QTY");//Stock_Qty
-                dstockqty = Double.toString(stock_qty1);
+                Integer stock_qty1 = results.getInt("D_STOCK_QTY");//Stock_Qty
+                dstockqty = Integer.toString(stock_qty1);
                 dstrength = results.getString("D_STRENGTH");
                 ddosage = results.getString("D_FORM_CODE");
                 int dLqty1 = results.getInt("D_QTY");
@@ -7127,13 +7301,20 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 dstatus = results.getString("STATUS");
                 dpackaging = results.getString("D_PACKAGING");
                 dpackagingType = results.getString("D_PACKAGINGT");
-                dpriceppack = String.valueOf(results.getDouble("D_PRICE_PPACK"));
-                dcostp = String.valueOf(results.getDouble("D_COST_PRICE"));
-                dsellp = String.valueOf(results.getDouble("D_SELL_PRICE"));
+                //dpriceppack = String.valueOf(results.getDouble("D_PRICE_PPACK"));
+
+                Double dpriceppack_double = results.getDouble("D_PRICE_PPACK");
+                Double dcostp_double = results.getDouble("D_COST_PRICE");
+                Double dsellp_double = results.getDouble("D_SELL_PRICE");
                 
                 //set value into rs 1
                 txt_productNameOList.setText(dtraden);
-                stock_qty.setText(dstockqty);
+                //stock_qty.setText(dstockqty);
+               // String number = "1000500000.574";
+                double format_number = Double.parseDouble(dstockqty);
+                DecimalFormat formatter = new DecimalFormat("#,###,###");
+
+                txt_stockQty.setText(formatter.format(format_number));
                 txt_drugstrength.setText(dstrength);
                 txt_dosageFormOList.setText(ddosage);
                 txt_quantityOList.setText(dLqty);
@@ -7152,32 +7333,45 @@ jScrollPane17.setViewportView(tbl_drugOList);
                     rbt_inactiveMDC.setSelected(true);
                     //mdcStatus = "Inactive";
                 }
+                double minimum_stock_level_double = Double.parseDouble(minimum_stock_level); // change string to double - hadi
+                DecimalFormat formatter_minimum_stock_level = new DecimalFormat("########0");
+                jTextField_MinimumStockLevel.setText(formatter_minimum_stock_level.format(minimum_stock_level_double));
 
 
                 //set value rs 3
-                txt_drugNameMDC.setText(productName);
+                txt_drugNameMDC.setText(dtraden);
                 txt_mdcCode.setText(dmdc);
                 txt_ingredientCode.setText(dgnrn);
                 txt_cautionary.setText(dLcaution);
                 cdosage_form.setSelectedItem(ddosage);
-                txt_drugRoute.setText(droute);
+                jComboBox_drugRoute.setSelectedItem(droute);
                 //txt_atcCodeMDC.setText(atcCode);
-                txt_stockQty.setText(dstockqty);
 //                catc.setSelectedItem(datc);
                 txt_drugStrength.setText(dstrength);
                 txt_Lqty.setText(dLqty);
                 cLfrequency.setSelectedItem(dLfreq);
                 cInstruction.setSelectedItem(dLadvisory);
-                jSpinnerDuration.setValue(dLduration);
+                jSpinnerDuration.setValue(Integer.parseInt(dLduration));
                 cLdurationType.setSelectedItem(dLdurationType);
-                txt_expdate.setDateFormatString(dLexpdate);
+ 
+                if(dLexpdate != null && !dLexpdate.isEmpty()) {
+                    java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dLexpdate); // Change string to date object - hadi
+                    jDateChooser_ExpDate.setDate(date);
+                }
+                else if(dLexpdate.equals("-")) { // clear field if var contain dash - hadi
+                    jDateChooser_ExpDate.setDate(null);
+                }
+
                 cClassification.setSelectedItem(dLclassification);
                 
                 dpack1.setText(dpackaging);
-                cdpack2.setSelectedItem(dpackagingType);
-                d_priceppack.setText(dpriceppack); 
-                txt_costPrice.setText(dcostp);
-                txt_sellprice.setText(dsellp);
+                //cdpack2.setSelectedItem(dpackagingType);   //by functionality not use
+
+                d_priceppack.setText(format_cash.format(dpriceppack_double));
+                txt_costPrice.setText(format_cash.format(dcostp_double));
+                txt_sellprice.setText(format_cash.format(dsellp_double));
+
+                //txt_sellprice.setText(dsellp);
 
 //                if (stock_qty1 <= 0) {
 //                    JOptionPane.showMessageDialog(null, "Drug stock quantity is low " + stock_qty1);
@@ -7885,26 +8079,56 @@ jScrollPane17.setViewportView(tbl_drugOList);
                       System.out.println("dgs_n " + dgs_n);
                     }
                   }
-                }                
+                }
 
                 ArrayList<ArrayList<String>> od = DBConnection.getImpl().getDrugOrderDetail(order_no2.getText());
 
                 row1 = 0;
                 row2 = 0;
+                System.out.println(od);
+                
+                BigDecimal price_bd = BigDecimal.ZERO; // use bigdecimal to reduce double & floating point inaccuracies - hadi
+                BigDecimal unit_price_bd;
+                BigDecimal dispense_bd;   
+                BigDecimal total_bd = BigDecimal.ZERO;           
 
                 //put od data into drug order
                 for (int i = 0; i < od.size(); i++) {
-                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(0), row1, 0);
-                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(1), row1, 1);
-                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(6), row1, 2);
-                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(2), row1, 3);
-                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(8), row1, 4);
-                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(10), row1, 5);
-                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(13), row1, 6);
-                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(9), row1, 7);
-                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(12), row1, 8);
+
+                    String sql = "SELECT D_SELL_PRICE "
+                            + "FROM PIS_MDC2 "
+                            + "WHERE UCASE(UD_MDC_CODE) = UCASE(?)";
+                    PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
+                    ps.setString(1, od.get(i).get(0));
+                    ResultSet results = ps.executeQuery();
+                    if (results.next()) {
+                        
+                        unit_price_bd = results.getBigDecimal("D_SELL_PRICE");//
+                        dispense_bd = new BigDecimal(od.get(i).get(11)); // convert string to bigdecimal
+                        price_bd = unit_price_bd.multiply(dispense_bd); // dispenseqty * unit price - hadi
+                        total_bd = total_bd.add(price_bd);
+
+                    }        
+
+
+
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(0), row1, 0); //Drug Code
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(1), row1, 1); //Drug DEsc
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(6), row1, 2); //Dosage
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(2), row1, 3); // Frequency
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(8), row1, 4); // Duration
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(9), row1, 5); //Qty Order
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(13), row1, 6); // Qty Supply
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(11), row1, 7); // Qty Dispensed
+                    tbl_drugOrder.getModel().setValueAt(format_cash.format(price_bd), row1, 8); // Price                
+                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(12), row1, 9); // Status
                     row1++;
                 }
+                
+
+                jLabel_Total.setOpaque(true); //set transparent to enable white background - hadi
+                jLabel_Total.setText(format_cash.format(total_bd));
+                
                 //
 
                 System.out.println(".....Message Sent....");
@@ -7964,6 +8188,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             tbl_drugOrder.getColumnModel().getColumn(6).setPreferredWidth(35);
             tbl_drugOrder.getColumnModel().getColumn(7).setPreferredWidth(35);
             tbl_drugOrder.getColumnModel().getColumn(8).setPreferredWidth(35);
+            tbl_drugOrder.getColumnModel().getColumn(9).setPreferredWidth(35);
             tbl_drugOrder.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
            
             tbl_drugList.getColumnModel().getColumn(0).setPreferredWidth(35);
@@ -7974,6 +8199,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             tbl_drugList.getColumnModel().getColumn(6).setPreferredWidth(35);
             tbl_drugList.getColumnModel().getColumn(7).setPreferredWidth(35);
             tbl_drugList.getColumnModel().getColumn(8).setPreferredWidth(35);
+            tbl_drugList.getColumnModel().getColumn(9).setPreferredWidth(35);            
             tbl_drugList.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         //
             
@@ -8189,7 +8415,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
         txt_ingredientCode.setText("");
         txt_cautionary.setText("");
         cdosage_form.setSelectedItem("");
-        txt_drugRoute.setText("");
+        jComboBox_drugRoute.setSelectedItem("");
         //txt_atcCodeMDC.setText("");
         rbt_activeMDC.setSelected(false);
         rbt_inactiveMDC.setSelected(false);
@@ -8198,21 +8424,21 @@ jScrollPane17.setViewportView(tbl_drugOList);
         cdosage_form.setSelectedIndex(0);
         txt_stockQty.setText("");
         txt_locCode.setText("");
-        jTextFieldMinimumStockLevel.setText("");
+        jTextField_MinimumStockLevel.setText("");
         cb_supplierUStock.setSelectedIndex(0);
-        dpack1.setText("");
-        cdpack2.setSelectedIndex(0);
-        d_priceppack.setText("");
-        txt_costPrice.setText("");
-        txt_sellprice.setText("");
+        dpack1.setText("0");
+        // cdpack2.setSelectedIndex(0);   //by functionality not use
+        d_priceppack.setText("0.00");
+        txt_costPrice.setText("0.00");
+        txt_sellprice.setText("0.00");
         txt_Lqty.setText("");
         cLqtyT.setSelectedIndex(0);
         cLfrequency.setSelectedIndex(0);
-        jSpinnerDuration.setValue("");
+        jSpinnerDuration.setValue(1);
         cLdurationType.setSelectedIndex(0);
         cInstruction.setSelectedIndex(0);
         txt_cautionary.setText("");
-        txt_expdate.setDate(null);
+        jDateChooser_ExpDate.setDate(null);
         cClassification.setSelectedIndex(0);
         
         loadDrug();
@@ -8373,14 +8599,14 @@ jScrollPane17.setViewportView(tbl_drugOList);
 //                catc.setSelectedItem(results.getString("UD_ATC_CODE"));
                 txt_drugNameMDC.setText(results.getString("D_TRADE_NAME"));
                 txt_ingredientCode.setText(results.getString("D_GNR_NAME"));
-                txt_drugRoute.setText(results.getString("D_ROUTE_CODE"));
+                jComboBox_drugRoute.setSelectedItem(results.getString("D_ROUTE_CODE"));
                 cdosage_form.setSelectedItem(results.getString("D_FORM_CODE"));
                 txt_drugStrength.setText(results.getString("D_STRENGTH"));
                 txt_stockQty.setText(results.getString("D_STOCK_QTY"));
                 txt_locCode.setText(results.getString("D_LOCATION_CODE"));
-                jTextFieldMinimumStockLevel.setText(results.getString("MINIMUM_STOCK_LEVEL"));
+                jTextField_MinimumStockLevel.setText(results.getString("MINIMUM_STOCK_LEVEL"));
                 dpack1.setText(results.getString("D_PACKAGING"));
-                cdpack2.setSelectedItem(results.getString("D_PACKAGINGT"));
+                // cdpack2.setSelectedItem(results.getString("D_PACKAGINGT"));   //by functionality not use
                 d_priceppack.setText(results.getString("D_PRICE_PPACK"));
                 txt_costPrice.setText(results.getString("D_COST_PRICE"));
                 txt_sellprice.setText(results.getString("D_SELL_PRICE"));
@@ -8390,7 +8616,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 cLdurationType.setSelectedItem(results.getString("D_DURATIONT"));
                 cInstruction.setSelectedItem(results.getString("D_ADVISORY_CODE"));
                 txt_cautionary.setText(results.getString("D_CAUTION_CODE"));
-                //txt_expdate.setText(results.getString("D_EXP_DATE"));
+                //jDateChooser_ExpDate.setText(results.getString("D_EXP_DATE"));
                 
                 DateFormat formatD = new SimpleDateFormat("dd/MM/yyyy");
                 java.util.Date getED = null;
@@ -8399,7 +8625,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 } catch (ParseException ex) {
                     Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                txt_expdate.setDate(getED);
+                jDateChooser_ExpDate.setDate(getED);
                 cClassification.setSelectedItem(results.getString("D_CLASSIFICATION"));//D_CLASSIFICATION
                 
                 dstatus = results.getString("STATUS");
@@ -8425,15 +8651,14 @@ jScrollPane17.setViewportView(tbl_drugOList);
 // TODO add your handling code here:
         if (txt_mdcCode.getText().equals("")) {
             //popup windows search drug first
-            JOptionPane.showMessageDialog(btn_addmdc, "Please enter product to add!");
-        } else if(txt_expdate.getDate() == null) 
-        { 
-            JOptionPane.showMessageDialog(btn_addmdc, "Please select expired date!");
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter drug code to add!");
+        }else if(jDateChooser_ExpDate.getDate() == null){ 
+            JOptionPane.showMessageDialog(btn_addmdc, "Please select expiry date!");
         }else if(txt_drugNameMDC.getText().equals("")){  //20151006 Lim Kai Li -- Add validation
-            JOptionPane.showMessageDialog(btn_addmdc, "Please enter trade name to add!");
+            JOptionPane.showMessageDialog(btn_addmdc, "Please enter product name to add!");
         }else if(txt_ingredientCode.getText().equals("")){  //20151006 Lim Kai Li -- Add validation
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter generic name to add!");
-        }else if(txt_drugRoute.getText().equals("")){
+        }else if(jComboBox_drugRoute.getSelectedItem().equals("")){
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter drug route to add!");
         }else if(txt_drugStrength.getText().equals("")){
             JOptionPane.showMessageDialog(btn_addmdc, "Please enter drug strength to add!");
@@ -8458,7 +8683,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             datc = "UTeM";
             dtraden = txt_drugNameMDC.getText();
             dgnrn = txt_ingredientCode.getText();
-            droute = txt_drugRoute.getText();
+            droute = (String) jComboBox_drugRoute.getSelectedItem();
             ddosage = (String)cdosage_form.getSelectedItem();
             dstrength = txt_drugStrength.getText();
             dstockqty = txt_stockQty.getText().equals("")? "0" : txt_stockQty.getText();//double
@@ -8470,16 +8695,17 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 dstatus = "FALSE";
             }
 
-            minimum_stock_level = jTextFieldMinimumStockLevel.getText();
+            minimum_stock_level = jTextField_MinimumStockLevel.getText();
             dpackaging = dpack1.getText().equals("")? "0" :dpack1.getText();
-            dpackagingType = (String)cdpack2.getSelectedItem();
+            //dpackagingType = (String)cdpack2.getSelectedItem(); //by functionary not use
             dpriceppack = d_priceppack.getText().equals("") ? "0" : d_priceppack.getText() ;//double
             dcostp = txt_costPrice.getText().equals("")? "0" : txt_costPrice.getText() ;//double
             dsellp = txt_sellprice.getText().equals("") ? "0" : txt_sellprice.getText();//double
             dLqty = txt_Lqty.getText().equals("") ? "0" : txt_Lqty.getText();//double
             dLqtyt = (String)cLqtyT.getSelectedItem();
             dLfreq = (String)cLfrequency.getSelectedItem();
-            dLduration = (String)jSpinnerDuration.getValue();
+            Integer Duration = (Integer)jSpinnerDuration.getValue();
+            dLduration = String.valueOf(Duration);
             dLdurationType = (String)cLdurationType.getSelectedItem();
             dLadvisory= (String)cInstruction.getSelectedItem();
             dLcaution = txt_cautionary.getText();
@@ -8487,12 +8713,12 @@ jScrollPane17.setViewportView(tbl_drugOList);
             Format formatter2 = new SimpleDateFormat("dd/MM/yyyy");
 //            String dLexpdate = "-";
 //            try {
-//                dLexpdate = formatter2.format(txt_expdate.getDate());
+//                dLexpdate = formatter2.format(jDateChooser_ExpDate.getDate());
 //            } catch (Exception ex) {
 //                ex.printStackTrace();
 //                dLexpdate = "-";
 //            }
-            dLexpdate = formatter2.format(txt_expdate.getDate());//date
+            dLexpdate = formatter2.format(jDateChooser_ExpDate.getDate());//date
             dLclassification = (String)cClassification.getSelectedItem();
             //insert into product supplier
             supname = (String) cb_supplierUStock.getSelectedItem();
@@ -8504,9 +8730,9 @@ jScrollPane17.setViewportView(tbl_drugOList);
                         + "(UD_MDC_CODE,UD_ATC_CODE, D_TRADE_NAME,D_GNR_NAME,D_ROUTE_CODE,"
                         + "D_FORM_CODE,D_STRENGTH,D_ADVISORY_CODE,D_STOCK_QTY,D_QTY,D_QTYT,"
                         + "D_DURATION,D_DURATIONT,D_FREQUENCY,D_CAUTION_CODE, D_EXP_DATE, D_CLASSIFICATION,"
-                        + "STATUS, D_LOCATION_CODE, D_SELL_PRICE, D_COST_PRICE,D_PACKAGING,D_PACKAGINGT,"
-                        + "D_PRICE_PPACK )"
-                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        + "STATUS, D_LOCATION_CODE, D_SELL_PRICE, D_COST_PRICE,D_PACKAGING, D_PACKAGINGT,"
+                        + "D_PRICE_PPACK, MINIMUM_STOCK_LEVEL )"
+                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 
                 //prepare sql query and execute it
@@ -8533,15 +8759,15 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 ps.setString(20, dsellp);//d
                 ps.setString(21, dcostp);//d
                 ps.setString(22, dpackaging);
-                ps.setString(23, dpackagingType);
+                ps.setString(23, dpackagingType); // this variable not use due to disfunctionality
                 ps.setString(24, dpriceppack);
                 ps.setString(25, minimum_stock_level);
                 
-                //update data
+                //update data local db
                 ps.execute();
                 
                 try {
-                    String [] arrPS = new String[24];
+                    String [] arrPS = new String[25];
                     arrPS[0]=(dmdc);
                     arrPS[1]=("Utem");
                     arrPS[2]=(dtraden);
@@ -8564,7 +8790,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                     arrPS[19]=(dsellp);
                     arrPS[20]=(dcostp);
                     arrPS[21]=(dpackaging);
-                    arrPS[22]=(dpackagingType);
+                    arrPS[22]=(dpackagingType);  // this variable not use due to disfunctionality
                     arrPS[23]=(dpriceppack);
                     arrPS[24]=(minimum_stock_level);                    
                     
@@ -8575,20 +8801,48 @@ jScrollPane17.setViewportView(tbl_drugOList);
                     JOptionPane.showMessageDialog(null, "Unable to save data to central server. Please save again when online");
                 }
                 
-                String sql1 = "INSERT INTO PIS_PRODUCT_SUPPLIER (Update_Stock_Date, Staff_ID, Supplier_ID, UD_MDC_Code) VALUES (?,?,?,?)";
+                String sup_id = supname.substring(0, 7);                
+                try {
 
-                //prepare sql query and execute it
-                PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql1);
-                java.sql.Timestamp sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
-                ps1.setTimestamp(1, sqlDate);
-                ps1.setString(2, id);
-                ps1.setString(3, supid);
-                ps1.setString(4, dmdc);
+                    String sql_PIS_PRODUCT_SUPPLIER = "INSERT INTO PIS_PRODUCT_SUPPLIER (Update_Stock_Date, Staff_ID, Supplier_ID, UD_MDC_Code) VALUES (?,?,?,?)";
 
+                    //prepare sql query and execute it
+                    PreparedStatement ps1 = Session.getCon_x(1000).prepareStatement(sql_PIS_PRODUCT_SUPPLIER);
+                    java.sql.Timestamp sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
+                    ps1.setTimestamp(1, sqlDate);
+                    ps1.setString(2, id);
+                    ps1.setString(3, sup_id);
+                    ps1.setString(4, dmdc);
+
+
+                    //add data supplier local db
+                    ps1.execute();                    
+                    
+                }catch (Exception e){
+                    JOptionPane.showMessageDialog(null, "Unable to save supplier data to local db. Please try again");
+                }
                 
                 
-                //update data
-                ps1.execute();
+                try {
+                    
+                    String sql_PIS_PRODUCT_SUPPLIER = "INSERT INTO PIS_PRODUCT_SUPPLIER (Update_Stock_Date, Staff_ID, Supplier_ID, UD_MDC_Code) VALUES (?,?,?,?)";
+
+                    String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
+                    //prepare sql query and execute it
+                    String [] arrPIS_PRODUCT_SUPPLIER = new String[4];
+                    arrPIS_PRODUCT_SUPPLIER[0]=(timeStamp);
+                    arrPIS_PRODUCT_SUPPLIER[1]=(id);
+                    arrPIS_PRODUCT_SUPPLIER[2]=(sup_id);
+                    arrPIS_PRODUCT_SUPPLIER[3]=(dmdc);
+
+                    Boolean bool = DBConnection.getImpl().setQuery(sql_PIS_PRODUCT_SUPPLIER, arrPIS_PRODUCT_SUPPLIER);                    
+                    
+                }catch (Exception e){
+                    JOptionPane.showMessageDialog(null, "Unable to save supplier data to central db. Please try again");
+                }                
+                
+                
+
 
                 System.out.println(dstrength);
                 System.out.println(dstockqty);
@@ -8610,39 +8864,76 @@ jScrollPane17.setViewportView(tbl_drugOList);
                 System.out.println(minimum_stock_level);
 
 
-                //popup windows update success
-                JOptionPane.showMessageDialog(btn_addmdc, "Insert success!");
+                //popup windows insert success
+                JOptionPane.showMessageDialog(null, "Insert success!");
                 System.out.println("Insert success");
 
+//original
             //clear textfield
             txt_mdcCode.setText("");
 //            catc.setSelectedItem("-");
             txt_drugNameMDC.setText("");
             txt_ingredientCode.setText("");
-            txt_drugRoute.setText("");
+            jComboBox_drugRoute.setSelectedItem("");
             cdosage_form.setSelectedItem("-");
             txt_drugStrength.setText("");
             txt_stockQty.setText("");
             txt_locCode.setText("");
             rbt_inactiveMDC.setSelected(false);
             rbt_activeMDC.setSelected(false);
-            jTextFieldMinimumStockLevel.setText("");
-            dpack1.setText("");
-            cdpack2.setSelectedItem("-");
-            d_priceppack.setText("");
-            txt_costPrice.setText("");
+            jTextField_MinimumStockLevel.setText("");
+            dpack1.setText("0");
+            //cdpack2.setSelectedItem("-");  //by functionality not use
+            d_priceppack.setText("0.00");
+            txt_costPrice.setText("0.00");
             txt_sellprice.setText("");
             txt_Lqty.setText("");
             cLfrequency.setSelectedItem("-");
-            jSpinnerDuration.setValue("");
+            jSpinnerDuration.setValue(1);
             cLdurationType.setSelectedItem("-");
             cInstruction.setSelectedItem("-");
             txt_cautionary.setText("");
-            txt_expdate.setDate(null);
+            jDateChooser_ExpDate.setDate(null);
             cClassification.setSelectedItem("");
+///original            
+            
+////////////
+        /* //clear textfield
+        txt_drugNameMDC.setText("");
+        txt_mdcCode.setText("");
+        txt_ingredientCode.setText("");
+        txt_cautionary.setText("");
+        cdosage_form.setSelectedItem("");
+        jComboBox_drugRoute.setSelectedItem("");
+        //txt_atcCodeMDC.setText("");
+        rbt_activeMDC.setSelected(false);
+        rbt_inactiveMDC.setSelected(false);
+        txt_drugStrength.setText("");
+        
+        cdosage_form.setSelectedIndex(0);
+        txt_stockQty.setText("");
+        txt_locCode.setText("");
+        jTextField_MinimumStockLevel.setText("");
+        cb_supplierUStock.setSelectedIndex(0);
+        dpack1.setText("");
+        //cdpack2.setSelectedIndex(0);   //by functionality not use
+        d_priceppack.setText("");
+        txt_costPrice.setText("");
+        txt_sellprice.setText("");
+        txt_Lqty.setText("");
+        cLqtyT.setSelectedIndex(0);
+        cLfrequency.setSelectedIndex(0);
+        jSpinnerDuration.setValue(1);
+        cLdurationType.setSelectedIndex(0);
+        cInstruction.setSelectedIndex(0);
+        txt_cautionary.setText("");
+        jDateChooser_ExpDate.setDate(null);
+        cClassification.setSelectedIndex(0);
+*/
+////////////
                 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(btn_addmdc, "Duplicate Drugs Code!");
+                JOptionPane.showMessageDialog(null, "You entered duplicate drug code. Please enter different code!");
                 System.out.println("insert pis mdc2" + e); 
                 e.printStackTrace();
             }
@@ -8678,27 +8969,27 @@ jScrollPane17.setViewportView(tbl_drugOList);
 //            catc.setSelectedItem("-");
             txt_drugNameMDC.setText("");
             txt_ingredientCode.setText("");
-            txt_drugRoute.setText("");
+            jComboBox_drugRoute.setSelectedItem("");
             cdosage_form.setSelectedItem("-");
             txt_drugStrength.setText("");
             txt_stockQty.setText("");
             txt_locCode.setText("");
             rbt_inactiveMDC.setSelected(false);
             rbt_activeMDC.setSelected(false);
-            jTextFieldMinimumStockLevel.setText("");
+            jTextField_MinimumStockLevel.setText("");
             dpack1.setText("");
-            cdpack2.setSelectedItem("-");
+            //cdpack2.setSelectedItem("-");   //by functionality not use
             d_priceppack.setText("");
             txt_costPrice.setText("");
             txt_sellprice.setText("");
             txt_Lqty.setText("");
             cLqtyT.setSelectedItem("-");
             cLfrequency.setSelectedItem("-");
-            jSpinnerDuration.setValue("");
+            jSpinnerDuration.setValue(1);
             cLdurationType.setSelectedItem("-");
             cInstruction.setSelectedItem("-");
             txt_cautionary.setText("");
-            txt_expdate.setDate(null);
+            jDateChooser_ExpDate.setDate(null);
             cClassification.setSelectedItem("");
             
             
@@ -8854,6 +9145,10 @@ jScrollPane17.setViewportView(tbl_drugOList);
     private void order_no2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_order_no2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_order_no2ActionPerformed
+
+    private void jtdrugS2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtdrugS2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtdrugS2ActionPerformed
    
     void fnCreateXLS(String strSQL , String fName)
     {
@@ -8980,7 +9275,6 @@ jScrollPane17.setViewportView(tbl_drugOList);
     private javax.swing.JComboBox cb_instructionOList;
     private javax.swing.JComboBox cb_supplierUStock;
     private javax.swing.JComboBox cdosage_form;
-    private javax.swing.JComboBox cdpack2;
     private javax.swing.JComboBox combox_supname;
     private javax.swing.JTextField d_priceppack;
     private javax.swing.JTextField dpack1;
@@ -8995,6 +9289,9 @@ jScrollPane17.setViewportView(tbl_drugOList);
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox jComboBox_drugRoute;
+    private com.toedter.calendar.JDateChooser jDateChooser_ExpDate;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -9033,6 +9330,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelMinimumStockLevel;
+    private javax.swing.JLabel jLabel_Total;
     private javax.swing.JLabel jLblIC;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -9067,6 +9365,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanel_Total;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -9097,7 +9396,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTatc;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextFieldMinimumStockLevel;
+    private javax.swing.JTextField jTextField_MinimumStockLevel;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JToolBar jToolBar3;
@@ -9222,11 +9521,9 @@ jScrollPane17.setViewportView(tbl_drugOList);
     private javax.swing.JTextField txt_droute_code;
     private javax.swing.JTextField txt_drugNameMDC;
     private javax.swing.JTextField txt_drugNameOListSearch;
-    private javax.swing.JTextField txt_drugRoute;
     private javax.swing.JTextField txt_drugStrength;
     private javax.swing.JTextField txt_drugstrength;
     private javax.swing.JTextField txt_dstock_qty;
-    private com.toedter.calendar.JDateChooser txt_expdate;
     private javax.swing.JTextField txt_genderOList;
     private javax.swing.JTextField txt_icNo;
     private javax.swing.JTextField txt_icNoSearch1OList2;
