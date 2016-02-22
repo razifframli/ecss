@@ -672,6 +672,7 @@ public class Consultation extends javax.swing.JFrame {
         txt_allergyDate3 = new com.toedter.calendar.JDateChooser();
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup5 = new javax.swing.ButtonGroup();
+        jLabel70 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -1161,6 +1162,8 @@ public class Consultation extends javax.swing.JFrame {
         lbl_time = new javax.swing.JLabel();
         lbl_date = new javax.swing.JLabel();
         lblStatus = new javax.swing.JLabel();
+        jLabel65 = new javax.swing.JLabel();
+        txt_address = new javax.swing.JLabel();
         lbl_new_patient = new javax.swing.JLabel();
         btn_viewHistory = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -1455,6 +1458,9 @@ public class Consultation extends javax.swing.JFrame {
 
         txt_allergyDate3.setDateFormatString("dd/MM/yyyy");
 
+        jLabel70.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabel70.setText("-");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Clinical Information System");
         setBackground(new java.awt.Color(204, 204, 255));
@@ -1725,7 +1731,7 @@ public class Consultation extends javax.swing.JFrame {
                                     .addComponent(btnSrcComplaint, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel47Layout.createSequentialGroup()
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                            .addComponent(rbtn_per_search, javax.swing.GroupLayout.PREFERRED_SIZE, 142, Short.MAX_VALUE)
                                             .addComponent(rbtn_gen_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -5225,6 +5231,12 @@ public class Consultation extends javax.swing.JFrame {
 
         lbl_quantityOList.setText("Dose :");
 
+        txt_quantityOList.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_quantityOListKeyReleased(evt);
+            }
+        });
+
         lbl_frequencyOList.setText("Frequency :");
 
         cb_frequencyOList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Once", "In the morning", "At night", "Daily", "Twice a day", "3 times a day", "4 times a day", "2 hourly", "4 hourly", "6 hourly", "8 hourly", "Immedietly", "As needed" }));
@@ -6986,7 +6998,7 @@ public class Consultation extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -7136,6 +7148,12 @@ public class Consultation extends javax.swing.JFrame {
         lbl_date.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_date.setText("jLabel53");
 
+        jLabel65.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabel65.setText("Address:");
+
+        txt_address.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        txt_address.setText("-");
+
         javax.swing.GroupLayout jPanel76Layout = new javax.swing.GroupLayout(jPanel76);
         jPanel76.setLayout(jPanel76Layout);
         jPanel76Layout.setHorizontalGroup(
@@ -7177,27 +7195,32 @@ public class Consultation extends javax.swing.JFrame {
                         .addComponent(lbl_pBloodSex)
                         .addGap(18, 18, 18)
                         .addComponent(txt_pBloodSex)))
-                .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel76Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
-                            .addComponent(lbl_pBloodSex1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                            .addComponent(lbl_pBloodSex1)))
+                    .addGroup(jPanel76Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel65)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel76Layout.createSequentialGroup()
+                        .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbx_allergy, 0, 208, Short.MAX_VALUE)
+                            .addComponent(lbl_g6pd, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_address, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbx_allergy, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_g6pd, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                        .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel76Layout.createSequentialGroup()
-                                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_date, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel76Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lbl_time, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(89, 89, 89)
+                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
         jPanel76Layout.setVerticalGroup(
             jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -7248,9 +7271,14 @@ public class Consultation extends javax.swing.JFrame {
                                 .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbl_pBdate)
-                                    .addComponent(jLabel14)
-                                    .addComponent(cbx_allergy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 10, Short.MAX_VALUE))))
+                                    .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel14)
+                                        .addComponent(cbx_allergy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_address)
+                                    .addComponent(jLabel65))))
+                        .addGap(0, 17, Short.MAX_VALUE))))
         );
 
         lbl_new_patient.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -7296,7 +7324,7 @@ public class Consultation extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lbl_new_patient, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -7358,7 +7386,7 @@ public class Consultation extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1313, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -9630,6 +9658,8 @@ public class Consultation extends javax.swing.JFrame {
         String newDob = lblDOB.getText();
         String newSex = txt_pBloodSex.getText();
         String newStatus = txt_pStatus.getText();
+        
+        String newAddress = txt_address.getText();
 
         //create a new form
         Consultation con = new Consultation();
@@ -9643,6 +9673,7 @@ public class Consultation extends javax.swing.JFrame {
         con.lblDOB.setText(newDob);
         con.txt_pBloodSex.setText(newSex);
         con.txt_pStatus.setText(newStatus);
+        con.txt_address.setText(newAddress);
         jFrame2.setVisible(false);
 }//GEN-LAST:event_btn_pHistoryOk2ActionPerformed
 
@@ -9675,9 +9706,11 @@ public class Consultation extends javax.swing.JFrame {
             String DOB = lblDOB.getText();
             String blood = txt_pBloodSex.getText();
             String pstatus = txt_pStatus.getText();
+            
+            String address = txt_address.getText();
 
             String header = "MSH|^~|CIS^T12109|" + "<cr>" + "\n";
-            String patientInfo = "PDI|" + PMI + "|" + name + "^" + IC + "^" + race + "^" + sex + "^" + DOB + "^" + blood + "^" + pstatus + "^" + "|" + "<cr>" + "\n";
+            String patientInfo = "PDI|" + PMI + "|" + name + "^" + IC + "^" + race + "^" + sex + "^" + DOB + "^" + blood + "^" + pstatus + "^" + address + "^" + "|" + "<cr>" + "\n";
             String msgs[] = new String[200];
             for (int zz = 0; zz < 200; zz++) {
                 msgs[zz] = "";
@@ -12114,6 +12147,17 @@ public class Consultation extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void txt_quantityOListKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_quantityOListKeyReleased
+        // TODO add your handling code here:
+        String dose = txt_quantityOList.getText();
+        try {
+            double dose_temp = Double.parseDouble(dose);
+            System.out.println("dose_temp:"+dose_temp);
+        } catch (Exception e) {
+            J.o("Invalid Dose", "Invalid value for dose!\nPlease type a valid dose.", 0);
+        }
+    }//GEN-LAST:event_txt_quantityOListKeyReleased
+
     public boolean checkPatient() {
         String pmiNo = txt_pName.getText();
         if (pmiNo.length() == 0) {
@@ -12498,6 +12542,8 @@ public class Consultation extends javax.swing.JFrame {
             String DOB = lblDOB.getText();
             String blood = txt_pBloodSex.getText();
             String pstatus = txt_pStatus.getText();
+            
+            String address = txt_address.getText();
 
             String header = "MSH|^~|CIS|"
                     +Session.getHfc_code()+"^"
@@ -12521,7 +12567,7 @@ public class Consultation extends javax.swing.JFrame {
                     +"|"
                     +"|"
                     + "<cr>" + "\n";
-            String patientInfo = "PDI|" + PMI + "|" + name + "^" + IC + "^" + race + "^" + sex + "^" + DOB + "^" + blood + "^" + pstatus + "^" + "|" + "<cr>" + "\n";
+            String patientInfo = "PDI|" + PMI + "|" + name + "^" + IC + "^" + race + "^" + sex + "^" + DOB + "^" + blood + "^" + pstatus + "^" + address + "^" + "|" + "<cr>" + "\n";
             String msgs[] = new String[200];
             for (int zz = 0; zz < 200; zz++) {
                 msgs[zz] = "";
@@ -13948,9 +13994,11 @@ public class Consultation extends javax.swing.JFrame {
             String DOB = lblDOB.getText();
             String blood = txt_pBloodSex.getText();
             String pstatus = txt_pStatus.getText();
+            
+            String address = txt_address.getText();
 
             String header = "MSH|^~|CIS^T12109|" + "<cr>" + "\n";
-            String patientInfo = "PDI|" + PMI + "|" + name + "^" + IC + "^" + race + "^" + sex + "^" + DOB + "^" + blood + "^" + pstatus + "^" + "|" + "<cr>" + "\n";
+            String patientInfo = "PDI|" + PMI + "|" + name + "^" + IC + "^" + race + "^" + sex + "^" + DOB + "^" + blood + "^" + pstatus + "^" + address + "^" + "|" + "<cr>" + "\n";
             String msgs[] = new String[200];
             for (int zz = 0; zz < 200; zz++) {
                 msgs[zz] = "";
@@ -14398,6 +14446,14 @@ public class Consultation extends javax.swing.JFrame {
 //        txtBloodType.setText(txt_pBloodSex.getText());
         Func.cmbSelectInput(cmbBloodType, txt_pBloodSex.getText());
         txt_pStatus.setText(AppointmentInfo[12]);
+        
+        /**
+         * Get Address and Staff/Student ID from different table - umaq 22022016
+         */
+        // start
+        // 21, 24, 26
+        txt_address.setText(AppointmentInfo[21]+","+AppointmentInfo[24]+","+AppointmentInfo[26]);
+        // end
 
         System.out.println(".... Extract EHR... ");
 
@@ -15331,9 +15387,11 @@ public class Consultation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
@@ -15632,6 +15690,7 @@ public class Consultation extends javax.swing.JFrame {
     public static javax.swing.JTextField txt_FHSearch;
     public static javax.swing.JTextArea txt_PMHComment;
     public static javax.swing.JTextField txt_PMHSearch;
+    public javax.swing.JLabel txt_address;
     public static javax.swing.JTextArea txt_allergyComments;
     public static com.toedter.calendar.JDateChooser txt_allergyDate2;
     public static com.toedter.calendar.JDateChooser txt_allergyDate3;

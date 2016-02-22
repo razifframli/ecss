@@ -617,10 +617,10 @@ public class Consultation_subcode {
                         
                         // Get the total drug qty. Frequency * Duration * Qty Order = Qty Dispensed - hadi 
                         String Total_Drug_Qty = null;
-                        Integer Total_Drug_Int = 0;
-                        Total_Drug_Int = Integer.parseInt(cons.getFrequencyCode(Frequency)) * Integer.parseInt(cons.getDayDrugCode(Duration)) * Integer.parseInt(Quantity);  // Sum drug qty - hadi
-                        System.out.println(Total_Drug_Int);
-                        Total_Drug_Qty = Integer.toString(Total_Drug_Int);
+                        double Total_Drug_dbl = 0;
+                        Total_Drug_dbl = Integer.parseInt(cons.getFrequencyCode(Frequency)) * Integer.parseInt(cons.getDayDrugCode(Duration)) * Double.parseDouble(Quantity);  // Sum drug qty - hadi
+                        System.out.println(Total_Drug_dbl);
+                        Total_Drug_Qty = Total_Drug_dbl + "";
                         System.out.println(Total_Drug_Qty);
                         //
                         
@@ -649,6 +649,8 @@ public class Consultation_subcode {
                             msgs[ii] += data[jj] + "|";
                         }
                         msgs[ii] += "<cr>" + "\n";
+                        
+                        System.out.println("DTO:"+msgs[ii]);
 
                         stat_dto = true;
 
