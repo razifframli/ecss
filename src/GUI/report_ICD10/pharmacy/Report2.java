@@ -1,58 +1,38 @@
+package GUI.report_ICD10.pharmacy;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.report_ICD10.pharmacy;
 
-//import javaapplication3.ReportModule;
+
 import DBConnection.DBConnection;
 import GUI.Login;
-import Helper.J;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.io.FileOutputStream;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import static java.rmi.Naming.list;
+import java.rmi.RemoteException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import static java.util.Collections.list;
-import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JTextFieldDateEditor;
 import java.text.DateFormat;
-import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JTextFieldDateEditor;
-import java.awt.Desktop;
-import static java.awt.SystemColor.text;
-import java.io.File;
-import java.rmi.RemoteException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import main.RMIConnector;
 //import static org.eclipse.persistence.jpa.jpql.utility.CollectionTools.list;
 
@@ -64,19 +44,13 @@ import main.RMIConnector;
  * @author adam
  * @version 1.1, 22 Dec 2015
  */
-public class Report1 extends javax.swing.JFrame {
+public class Report2 extends javax.swing.JFrame {
 
     static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
     static String par = fi.getParent()+"/";
 //    static String par = "";
     String logoUTeM = par+"logoUTeM/LogoUTeM2.gif";
     
-    Connection conn = null;
-    ResultSet rs = null;
-    PreparedStatement pst = null;
-    Connection conn1 = null;
-    ResultSet rs1 = null;
-    PreparedStatement pst1 = null;
     String Sub, Sub2, Sub3 = null;
     String sql, sql3 = null;
     String sqlWhere, sqlWhere2, sqlWhere3 = null;
@@ -84,7 +58,7 @@ public class Report1 extends javax.swing.JFrame {
     java.util.Date d1, d2 = null;
     String date1, date2, date3, date4, RMTotal2 = null;
     double TotalPrice;
-    int Price, RM2, usage, usage2;
+    int Price, RM2;
     ArrayList<ArrayList<String>> data = null;
     
     //Declare PDF Report function
@@ -92,12 +66,12 @@ public class Report1 extends javax.swing.JFrame {
     private BaseFont bf;
     private int pageNumber;
     
-    private static String fileName = par+"Report_Pharmacy.pdf";
+    private String fileName = par+"Report_Pharmacy.pdf";
 
     /**
      * Creates new form Report1
      */
-    public Report1() {
+    public Report2() {
         initComponents();
 //        fillcombo();
     }
@@ -118,14 +92,12 @@ public class Report1 extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jButton2 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setText("Report Type:");
 
@@ -172,13 +144,9 @@ public class Report1 extends javax.swing.JFrame {
 
         jLabel2.setText("Category:");
 
-        jDateChooser1.setDateFormatString("d MMMM yyyy");
-
         jLabel3.setText("From:");
 
         jLabel4.setText("To:");
-
-        jDateChooser2.setDateFormatString("d MMMM yyyy");
 
         jButton1.setText("Close");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -186,6 +154,10 @@ public class Report1 extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jDateChooser1.setDateFormatString("yyyy-MM-dd");
+
+        jDateChooser2.setDateFormatString("yyyy-MM-dd");
 
         jButton2.setText("GENERATE REPORT");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -206,34 +178,33 @@ public class Report1 extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(144, 144, 144))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel3))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(144, 144, 144))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addContainerGap())))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(68, 68, 68))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel9)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -241,7 +212,7 @@ public class Report1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -250,19 +221,26 @@ public class Report1 extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3))
+                            .addGap(20, 20, 20))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -320,16 +298,16 @@ public class Report1 extends javax.swing.JFrame {
     private void jComboBox2PopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBox2PopupMenuWillBecomeInvisible
         // TODO add your handling code here:
 //        java.sql.Date sqldate = new java.sql.Date(jDateChooser1.getDate().getTime());
-//            String comboB2 = (String) jComboBox2.getSelectedItem();
-//            Sub2 = comboB2;
-//            if (Sub3 == null) {
-//                Sub3 = "ALL";
-//            }
+//        String comboB2 = (String) jComboBox2.getSelectedItem();
+//        Sub2 = comboB2;
+//        if (Sub3 == null) {
+//            Sub3 = "ALL";
+//        }
 //
-//            if (Sub2 == "-Please Select-") {
+//        if (Sub2 == "-Please Select-") {
 //
-//            }else{
-//            String pdfFilename = "Report of "+Sub;
+//        } else {
+//            String pdfFilename = "Report of " + Sub;
 //
 //            try {
 //
@@ -338,22 +316,21 @@ public class Report1 extends javax.swing.JFrame {
 //                Logger.getLogger(Report1.class.getName()).log(Level.SEVERE, null, ex);
 //            }
 //
-//    //        try {
-//    //            //Report file will be open from this folder path
-//    //            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "D:\\Report\\" + pdfFilename + "("+Sub3+"_" + Sub2 + ").pdf");
-//    //        } catch (Exception e) { 
-//    //            JOptionPane.showMessageDialog(null, "Error");
-//    //        } 
-//
-//                if (Desktop.isDesktopSupported()) {
-//                    try {
-//                        File myFile = new File(fileName);
-//                        Desktop.getDesktop().open(myFile);
-//                    } catch (IOException ex) {
-//                        // no application registered for PDFs
-//                        J.o("PDF", "No application registered for PDFs", 0);
-//                    }
+////        try {
+////            //Report file will be open from this folder path
+////            Runtime.getRuntime().exec(fileName);
+////        } catch (Exception e) { 
+////            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+////        } 
+//            // open pdf file platform independent
+//            if (Desktop.isDesktopSupported()) {
+//                try {
+//                    File myFile = new File(fileName);
+//                    Desktop.getDesktop().open(myFile);
+//                } catch (IOException ex) {
+//                    // no application registered for PDFs
 //                }
+//            }
 //        }
         
     }//GEN-LAST:event_jComboBox2PopupMenuWillBecomeInvisible
@@ -417,19 +394,19 @@ public class Report1 extends javax.swing.JFrame {
                 Logger.getLogger(Report1.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-    //        try {
-            //            //Report file will be open from this folder path
-            //            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "D:\\Report\\" + pdfFilename + "("+Sub3+"_" + Sub2 + ").pdf");
-            //        } catch (Exception e) { 
-            //            JOptionPane.showMessageDialog(null, "Error");
-            //        } 
+//        try {
+//            //Report file will be open from this folder path
+//            Runtime.getRuntime().exec(fileName);
+//        } catch (Exception e) { 
+//            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+//        } 
+            // open pdf file platform independent
             if (Desktop.isDesktopSupported()) {
                 try {
                     File myFile = new File(fileName);
                     Desktop.getDesktop().open(myFile);
                 } catch (IOException ex) {
                     // no application registered for PDFs
-                    J.o("PDF", "No application registered for PDFs", 0);
                 }
             }
         }
@@ -438,37 +415,37 @@ public class Report1 extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) throws SQLException, DocumentException, FileNotFoundException {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Report1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Report1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Report1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Report1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Report1().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) throws SQLException, DocumentException, FileNotFoundException {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Report1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Report1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Report1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Report1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Report1().setVisible(true);
+//            }
+//        });
+//    }
 
 
     private void fillcombo() {
@@ -532,15 +509,20 @@ public class Report1 extends javax.swing.JFrame {
 //        String host = "biocore-stag.utem.edu.my";// declaration host
 //        int port = 1099; //declaration port //for now, stick to this port
             
-            sql3 = "select l.centre_code, "
+            sql3 = "select "
+                    
+                    + "l.centre_code, "
                     + "l.drug_cd, "
                     + "l.drug_name, \n"
                     + "Sum(case when PERSON_STATUS='L' then 1 else 0 end) AS Male, \n"
                     + "Sum(case when PERSON_STATUS='P' then 1 else 0 end) AS Female, \n"
-                    + "COUNT(l.drug_cd) as PTotal, COUNT(centre_code) as TTotal, \n"
-                    + "COUNT(DISTINCT(l.drug_cd)) as MTotal, MONTH(Episode_date), \n"
+                    + "COUNT(l.drug_cd) as PTotal, "
+                    + "COUNT(centre_code) as TTotal, \n"
+                    + "COUNT(DISTINCT(l.drug_cd)) as MTotal, "
+                    + "MONTH(Episode_date), \n"
                     + "p.D_SELL_PRICE as RM, \n"
-                    + "COUNT(l.drug_cd*quantity)*p.D_SELL_PRICE as total_RM, sum(quantity) \n"
+                    + "COUNT(l.drug_cd)*p.D_SELL_PRICE as total_RM \n"
+                    
                     + "from servercis.lhr_medication AS l \n"
                     + "inner join servercis.pis_mdc2 AS p \n"
                     + "on l.drug_cd=p.UD_MDC_CODE \n"
@@ -550,11 +532,10 @@ public class Report1 extends javax.swing.JFrame {
                     + ") \n"
                     + "group by l.drug_cd";
 //        ArrayList<ArrayList<String>> data3 = rc.getQuerySQL(host, port, sql3);// execute query
-            String param[] = {};
-            ArrayList<ArrayList<String>> data3 = DBConnection.getImpl().getQuery(sql3, 12, param);// execute query
+            String param3[] = {};
+            ArrayList<ArrayList<String>> data3 = DBConnection.getImpl().getQuery(sql3, 11, param3);
             
-            System.out.println("data3:"+data3);
-            System.out.println("size:"+data3.size());
+            System.out.println("query\n"+sql3);
             
             if (data3.size() <= 0) {
                 String infoMessage = "There is no data in this range of date.\n"
@@ -564,7 +545,7 @@ public class Report1 extends javax.swing.JFrame {
             } else {
                 try {
                     //Report file will be save to this folder path
-                    String path = "D:\\Report\\" + pdfFilename + "("+Sub3+"_" + Sub2 + ").pdf";
+                    String path = pdfFilename + "("+Sub3+"_" + Sub2 + ").pdf";
                     docWriter = PdfWriter.getInstance(doc, new FileOutputStream(fileName));
                     doc.addAuthor("Adam");
                     doc.addCreationDate();
@@ -636,26 +617,20 @@ public class Report1 extends javax.swing.JFrame {
 
         } else if (Sub == "Total Drug Expenses") {
             if (Sub2 != null && Sub2 != "-Please Select-") {
-                    sql = "select "
-                            + "l.centre_code, "
-                            + "l.drug_cd, "
-                            + "l.drug_name, "
-                            + "Sum(case when PERSON_STATUS='L' then 1 else 0 end) AS Male, "
-                            + "Sum(case when PERSON_STATUS='P' then 1 else 0 end) AS Female, "
-                            + "COUNT(l.drug_cd) as PTotal, "
-                            + "COUNT(centre_code) as TTotal, "
-                            + "COUNT(DISTINCT(l.drug_cd)) as MTotal, "
-                            + "MONTH(Episode_date), "
-                            + "p.D_SELL_PRICE as RM, "
-                            + "sum(quantity)*p.D_SELL_PRICE as total_RM, "
-                            + "sum(quantity) "
-                            + "from servercis.lhr_medication AS l "
-                            + "inner join servercis.pis_mdc2 AS p "
-                            + "on l.drug_cd=p.UD_MDC_CODE "
-                            + "where " + sqlWhere3 + " " + sqlWhere+ " "+sqlWhere2+"  l.drug_cd in "
-                            + "( "
-                            + "select UD_MDC_CODE from pis_mdc2 "
-                            + ") "
+                    sql = "select l.centre_code, l.drug_cd, l.drug_name, \n"
+                            + "Sum(case when PERSON_STATUS='L' then 1 else 0 end) AS Male, \n"
+                            + "Sum(case when PERSON_STATUS='P' then 1 else 0 end) AS Female, \n"
+                            + "COUNT(l.drug_cd) as PTotal, COUNT(centre_code) as TTotal, \n"
+                            + "COUNT(DISTINCT(l.drug_cd)) as MTotal, MONTH(Episode_date), \n"
+                            + "p.D_SELL_PRICE as RM, \n"
+                            + "COUNT(l.drug_cd)*p.D_SELL_PRICE as total_RM \n"
+                            + "from servercis.lhr_medication AS l \n"
+                            + "inner join servercis.pis_mdc2 AS p \n"
+                            + "on l.drug_cd=p.UD_MDC_CODE \n"
+                            + "where " + sqlWhere3 + " " + sqlWhere+ " "+sqlWhere2+"  l.drug_cd in \n"
+                            + "( \n"
+                            + "select UD_MDC_CODE from pis_mdc2 \n"
+                            + ") \n"
                             + "group by l.drug_cd";
 
                 report2(doc, cb);
@@ -685,7 +660,7 @@ public class Report1 extends javax.swing.JFrame {
 
 //        data = rc.getQuerySQL(host, port, sql);
             String param[] = {};
-            data = DBConnection.getImpl().getQuery(sql, 12, param);
+            data = DBConnection.getImpl().getQuery(sql, 11, param);
             
             boolean beginPage = true;
             int y = 615;
@@ -695,13 +670,11 @@ public class Report1 extends javax.swing.JFrame {
             Price = 0;
             TotalPrice = 0;
             RM2 = 0;
-            usage = 0;
-            usage2 = 0;
 //            RMTotal2 = null;
             pageNumber = 0;
             
             if (data.size() <= 0) {
-                String infoMessage = "hahahaThere is no data in this range of date.\n"
+                String infoMessage = "There is no data in this range of date.\n"
                         + "Please select other date";
                 JOptionPane.showMessageDialog(null, infoMessage, "Warning", JOptionPane.WARNING_MESSAGE);
                 
@@ -712,7 +685,7 @@ public class Report1 extends javax.swing.JFrame {
                         beginPage = false;
                         generateLayout(doc, cb);//the layout of pdf report
                         generateHeader(doc, cb);//the header of pdf report
-                        y = 600;
+                        y = 615;
                     }
                     ///content table
                     
@@ -726,19 +699,14 @@ public class Report1 extends javax.swing.JFrame {
                         
                         String RM = df.format(Double.parseDouble(data.get(i).get(9)));
                         createContent(cb, 445, y, RM, PdfContentByte.ALIGN_RIGHT);//4th column data
-
-                        createContent(cb, 483, y, data.get(i).get(5), PdfContentByte.ALIGN_RIGHT);//5th column data
+                        
+                        createContent(cb, 515, y, data.get(i).get(5), PdfContentByte.ALIGN_RIGHT);//5th column data
                         RM3 = Double.parseDouble(data.get(i).get(5));
                         RM2 = (int) RM3;
                         Price = Price + RM2;
                         
-                        String quantity = data.get(i).get(11);
-                        createContent(cb, 515, y, quantity, PdfContentByte.ALIGN_RIGHT);//6th column data
-                        usage2 = (int) Double.parseDouble(data.get(i).get(11));
-                        usage = usage + usage2;
-                        
                         String RMTotal = df.format(Double.parseDouble(data.get(i).get(10)));
-                        createContent(cb, 585, y, RMTotal, PdfContentByte.ALIGN_RIGHT);//7th column data
+                        createContent(cb, 585, y, RMTotal, PdfContentByte.ALIGN_RIGHT);//6th column data
                         RM4 = Double.parseDouble(RMTotal);
                         TotalPrice = TotalPrice + RM4;
                         RMTotal2 = df.format(TotalPrice);
@@ -784,8 +752,8 @@ public class Report1 extends javax.swing.JFrame {
             cb.setLineWidth(1f);
 
             cb.rectangle(40, 70, 550, 580);//table line
-            cb.moveTo(40, 615);//horizontal line of table
-            cb.lineTo(590, 615);//horizontal line of table
+            cb.moveTo(40, 630);//horizontal line of table
+            cb.lineTo(590, 630);//horizontal line of table
 
             cb.moveTo(70, 70);//No line
             cb.lineTo(70, 650);
@@ -795,8 +763,6 @@ public class Report1 extends javax.swing.JFrame {
             cb.lineTo(405, 650);
             cb.moveTo(450, 70);//Price line
             cb.lineTo(450, 650);
-            cb.moveTo(487 , 70);//total patient line
-            cb.lineTo(487, 650);
             cb.moveTo(520, 70);//Total Amount line
             cb.lineTo(520, 650);
             cb.stroke();
@@ -806,10 +772,7 @@ public class Report1 extends javax.swing.JFrame {
             createHeadings(cb, 72, 633, "Drug Code");
             createHeadings(cb, 145, 633, "Description");
             createHeadings(cb, 415, 633, "Price");
-            createHeadings(cb, 452, 633, "Total");
-            createHeadings(cb, 452, 623, "Patient");
-            createHeadings(cb, 489, 633, "Total");
-            createHeadings(cb, 489, 623, "Usage");
+            createHeadings(cb, 457, 633, "Total Patient");
             createHeadings(cb, 522, 633, "Total Amount");
 
             //add the images
@@ -876,16 +839,12 @@ public class Report1 extends javax.swing.JFrame {
             cb.lineTo(40, 50);//vertical line of total
             cb.moveTo(450, 70);//vertical line of total
             cb.lineTo(450, 50);//vertical line of total
-            cb.moveTo(487, 70);//vertical line of total
-            cb.lineTo(487, 50);//vertical line of total
             cb.moveTo(520, 70);//vertical line of total
             cb.lineTo(520, 50);//vertical line of total
             cb.moveTo(590, 70);//vertical line of total
             cb.lineTo(590, 50);//vertical line of total
             createContent(cb, 390, 55, "Grand Total", PdfContentByte.ALIGN_LEFT);
-            
-            createContent(cb, 483, 55, ""+Price, PdfContentByte.ALIGN_RIGHT);
-            createContent(cb, 515, 55, ""+usage, PdfContentByte.ALIGN_RIGHT);
+            createContent(cb, 515, 55, ""+Price, PdfContentByte.ALIGN_RIGHT);
             createContent(cb, 585, 55, ""+RMTotal2, PdfContentByte.ALIGN_RIGHT);
 
             cb.stroke();

@@ -4221,7 +4221,7 @@ public class Pharmacy extends javax.swing.JFrame{
             dLqty = txt_Lqty.getText();//double
             dLqtyt = (String)cLqtyT.getSelectedItem();
             dLfreq = (String) cLfrequency.getSelectedItem();
-            dLduration = (String) jSpinnerDuration.getValue();
+            dLduration = jSpinnerDuration.getValue().toString();
             dLdurationType = (String) cLdurationType.getSelectedItem();
             dLadvisory = (String) cInstruction.getSelectedItem();
             dLcaution = txt_cautionary.getText();
@@ -4247,6 +4247,26 @@ public class Pharmacy extends javax.swing.JFrame{
                         + "D_SELL_PRICE = ?, D_COST_PRICE = ?,D_PACKAGING = ?,D_PACKAGINGT = ?,D_PRICE_PPACK = ?, MINIMUM_STOCK_LEVEL = ?"
                         + "WHERE UD_MDC_CODE = ?";
 
+                double dstockqty1 = 0.0;
+                double dLqty1 = 0.0;
+                int dLduration1 = 0;
+                double dsellp1 = 0.0;
+                double dcostp1 = 0.0;
+                int dpackaging1 = 0;
+                double dpriceppack1 = 0.0;
+                
+                try {
+                    dstockqty1 = Double.parseDouble(dLqty);
+                    dLqty1 = Double.parseDouble(dstockqty);
+                    dLduration1 = Integer.parseInt(dLduration);
+                    dsellp1 = Double.parseDouble(dsellp);
+                    dcostp1 = Double.parseDouble(dcostp);
+                    dpackaging1 = Integer.parseInt(dpackaging);
+                    dpriceppack1 = Double.parseDouble(dpriceppack);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
                 //prepare sql query and execute it
                 PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
                 ps.setString(1, dmdc);
@@ -4257,10 +4277,10 @@ public class Pharmacy extends javax.swing.JFrame{
                 ps.setString(6, ddosage);
                 ps.setString(7, dstrength);
                 ps.setString(8, dLadvisory);
-                ps.setDouble(9, Double.parseDouble(dstockqty));
-                ps.setDouble(10, Double.parseDouble(dLqty));//d
+                ps.setDouble(9, dstockqty1);
+                ps.setDouble(10, dLqty1);//d
                 ps.setString(11, dLqtyt);
-                ps.setInt(12, Integer.parseInt(dLduration));//n
+                ps.setInt(12, dLduration1);//n
                 ps.setString(13, dLdurationType );
                 ps.setString(14, dLfreq );
                 ps.setString(15, dLcaution );
@@ -4268,11 +4288,11 @@ public class Pharmacy extends javax.swing.JFrame{
                 ps.setString(17, dLclassification );
                 ps.setString(18, dstatus);
                 ps.setString(19, dloccode);
-                ps.setDouble(20, Double.parseDouble(dsellp));//d
-                ps.setDouble(21, Double.parseDouble(dcostp));//d
-                ps.setInt(22, Integer.parseInt(dpackaging));
+                ps.setDouble(20, dsellp1);//d
+                ps.setDouble(21, dcostp1);//d
+                ps.setInt(22, dpackaging1);
                 ps.setString(23, dpackagingType);
-                ps.setDouble(24, Double.parseDouble(dpriceppack));
+                ps.setDouble(24, dpriceppack1);
                 ps.setString(25, dmdc);
                 ps.setString(26, minimum_stock_level);
                 //update data
@@ -4361,7 +4381,8 @@ public class Pharmacy extends javax.swing.JFrame{
                 txt_expdate.setDate(null);
                 cClassification.setSelectedItem("");
             } catch(Exception e) {
-                System.out.println("update pis mdc"+e);
+                System.out.println("update pis mdc"+e.getMessage());
+                e.printStackTrace();
             }
         }
         UpdateTbl();
