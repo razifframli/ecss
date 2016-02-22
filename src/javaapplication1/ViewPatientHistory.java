@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 import static javaapplication1.Consultation.FH_Comments;
 import static javaapplication1.Consultation.FH_Relationship;
 import static javaapplication1.Consultation.HPI_DetailstxtArea;
-import static javaapplication1.Consultation.jSpinner1;
+import static javaapplication1.Consultation.jSpinner_Duration;
 import static javaapplication1.Consultation.cb_durationTypeOList;
 import static javaapplication1.Consultation.cb_frequencyOList;
 import static javaapplication1.Consultation.cb_instructionOList;
@@ -2467,14 +2467,14 @@ public class ViewPatientHistory extends javax.swing.JFrame {
 
         if (dur % 30 == 0) {
             dur /= 30;
-            jSpinner1.setValue("" + dur);
+            jSpinner_Duration.setValue(dur);
             Func.cmbSelectInput(cb_durationTypeOList, "Month");
         } else if (dur % 7 == 0) {
             dur /= 7;
-            jSpinner1.setValue("" + dur);
+            jSpinner_Duration.setValue(dur);
             Func.cmbSelectInput(cb_durationTypeOList, "Week");
         } else {
-            jSpinner1.setValue("" + dur);
+            jSpinner_Duration.setValue(dur);
             Func.cmbSelectInput(cb_durationTypeOList, "Day");
         }
         

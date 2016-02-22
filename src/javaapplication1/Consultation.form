@@ -6941,8 +6941,8 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                              <JTabbedPaneConstraints tabName="Drug Treatment">
-                                <Property name="tabTitle" type="java.lang.String" value="Drug Treatment"/>
+                              <JTabbedPaneConstraints tabName="Drug Order">
+                                <Property name="tabTitle" type="java.lang.String" value="Drug Order"/>
                               </JTabbedPaneConstraints>
                             </Constraint>
                           </Constraints>
@@ -7162,7 +7162,7 @@
                                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                               <Font name="Tahoma" size="11" style="1"/>
                                             </Property>
-                                            <Property name="text" type="java.lang.String" value="Trade Name :"/>
+                                            <Property name="text" type="java.lang.String" value="Product Name :"/>
                                           </Properties>
                                         </Component>
                                         <Component class="javax.swing.JTextField" name="txt_productNameOList">
@@ -7206,7 +7206,7 @@
                                                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                           <Group type="102" alignment="1" attributes="0">
-                                                              <Component id="jSpinner1" min="-2" pref="37" max="-2" attributes="0"/>
+                                                              <Component id="jSpinner_Duration" min="-2" pref="56" max="-2" attributes="0"/>
                                                               <EmptySpace max="32767" attributes="0"/>
                                                               <Component id="cb_durationTypeOList" min="-2" pref="170" max="-2" attributes="0"/>
                                                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
@@ -7253,7 +7253,7 @@
                                                       <Group type="103" groupAlignment="3" attributes="0">
                                                           <Component id="lbl_durationOList" alignment="3" min="-2" max="-2" attributes="0"/>
                                                           <Component id="cb_durationTypeOList" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jSpinner_Duration" alignment="3" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -7286,7 +7286,7 @@
                                             </Component>
                                             <Component class="javax.swing.JLabel" name="lbl_quantityOList">
                                               <Properties>
-                                                <Property name="text" type="java.lang.String" value="Quantity :"/>
+                                                <Property name="text" type="java.lang.String" value="Dose :"/>
                                               </Properties>
                                             </Component>
                                             <Component class="javax.swing.JTextField" name="txt_quantityOList">
@@ -7400,10 +7400,10 @@
                                                 </Component>
                                               </SubComponents>
                                             </Container>
-                                            <Component class="javax.swing.JSpinner" name="jSpinner1">
+                                            <Component class="javax.swing.JSpinner" name="jSpinner_Duration">
                                               <Properties>
                                                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                                                  <SpinnerModel initial="1" maximum="30" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                                                  <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
                                                 </Property>
                                               </Properties>
                                               <AuxValues>
