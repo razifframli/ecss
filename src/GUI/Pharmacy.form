@@ -1133,7 +1133,7 @@
                                         <Column editable="false" title="Duration" type="java.lang.String"/>
                                         <Column editable="false" title="Dose" type="java.lang.String"/>
                                         <Column editable="false" title="Stock Qty" type="java.lang.String"/>
-                                        <Column editable="true" title="Dispense Qty" type="java.lang.String"/>
+                                        <Column editable="false" title="Dispense Qty" type="java.lang.String"/>
                                         <Column editable="false" title="Price/Unit" type="java.lang.String"/>
                                         <Column editable="false" title="Price" type="java.lang.String"/>
                                         <Column editable="false" title="Status" type="java.lang.String"/>
@@ -1262,7 +1262,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel_Total" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel_Total" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace pref="14" max="32767" attributes="0"/>
                                       </Group>
@@ -1281,6 +1281,9 @@
                                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                                     </Property>
                                   </Properties>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>

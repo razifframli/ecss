@@ -12154,6 +12154,7 @@ public class Consultation extends javax.swing.JFrame {
             double dose_temp = Double.parseDouble(dose);
             System.out.println("dose_temp:"+dose_temp);
         } catch (Exception e) {
+            txt_quantityOList.setText("1");
             J.o("Invalid Dose", "Invalid value for dose!\nPlease type a valid dose.", 0);
         }
     }//GEN-LAST:event_txt_quantityOListKeyReleased

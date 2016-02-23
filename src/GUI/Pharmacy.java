@@ -74,6 +74,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.Properties;
 import javaapplication1.PDFiText;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JSpinner;
@@ -212,9 +213,9 @@ public class Pharmacy extends javax.swing.JFrame{
 //    ArrayList data2;
     
     private static int max_row_drug = 100;
-    private static int max_col_drug = 10;
+    private static int max_col_drug = 11;
     
-    DecimalFormat format_cash = new DecimalFormat("######0.00"); // use 0 to add trailing zero for double number - hadi
+    public static DecimalFormat format_cash = new DecimalFormat("######0.00"); // use 0 to add trailing zero for double number - hadi
     
     /**
      * NEW VAR DRUG 
@@ -1542,7 +1543,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1616,7 +1617,7 @@ public class Pharmacy extends javax.swing.JFrame{
                 .addContainerGap()
                 .addGroup(jPanel_TotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel_Total))
+                    .addComponent(jLabel_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -6092,6 +6093,9 @@ public class Pharmacy extends javax.swing.JFrame{
                     if (i == 9) {
                         grand_total += Double.parseDouble(val_temp);
                     }
+                    if (i == 7) {
+                        val_temp = "<HTML><U>"+val_temp+"</U></HTML>";
+                    }
                     
                     jLabel_Total.setOpaque(true); //set transparent to enable white background - hadi
                     jLabel_Total.setText(format_cash.format(grand_total));
@@ -6150,8 +6154,29 @@ public class Pharmacy extends javax.swing.JFrame{
                     tbl_drugList.setValueAt("", row2, j);
                 }
                 row2--;
+            } else if (c == 7) {
+                try {
+                    
+                    String sto = tbl_drugList.getValueAt(r, 6).toString();
+                    String qty = tbl_drugList.getValueAt(r, 7).toString();
+                    String ppu = tbl_drugList.getValueAt(r, 8).toString();
+                    String pri = tbl_drugList.getValueAt(r, 9).toString();
+                    
+                    Properties prop = new Properties();
+                    prop.setProperty("ind", r+"");
+                    prop.setProperty("sto", sto);
+                    prop.setProperty("qty", qty);
+                    prop.setProperty("ppu", ppu);
+                    prop.setProperty("pri", pri);
+                    
+                    new Pharmacy_dispense1(prop).setVisible(true);
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         
     }//GEN-LAST:event_tbl_drugListMouseClicked
@@ -8138,13 +8163,16 @@ jScrollPane17.setViewportView(tbl_drugOList);
 
 
                     DecimalFormat df = new DecimalFormat("#,###.00");
+                    
+                    System.out.println("ASAL:"+((ArrayList)od.get(i)).get(9));
+                    double qty_dbl = Double.parseDouble(((ArrayList)od.get(i)).get(9).toString());
 
                     tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(0), row1, 0); //Drug Code
                     tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(1), row1, 1); //Drug DEsc
                     tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(6), row1, 2); //Dosage
                     tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(2), row1, 3); // Frequency
                     tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(8), row1, 4); // Duration
-                    tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(9), row1, 5); //Qty Order
+                    tbl_drugOrder.getModel().setValueAt(qty_dbl, row1, 5); //Qty Order
                     tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(13), row1, 6); // Qty Supply
                     tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(11), row1, 7); // Qty Dispensed
                     tbl_drugOrder.getModel().setValueAt(df.format(unit_price_bd), row1, 8); // Price per Unit
@@ -8163,6 +8191,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
             } catch (Exception e) {
                 //offline
                 System.err.println("get order master error :" + e);
+                e.printStackTrace();
                 
                 //offline - 08072013
                 /**
@@ -9178,20 +9207,20 @@ jScrollPane17.setViewportView(tbl_drugOList);
         // TODO add your handling code here:
     }//GEN-LAST:event_jtdrugS2ActionPerformed
 
-    private int rowClicked = 0;
+    private static int rowClicked = 0;
     private void tbl_drugListKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_drugListKeyReleased
         // TODO add your handling code here:
-        double price = 0.0;
-        try {
-            int rc = rowClicked;
-            String qty = tbl_drugList.getValueAt(rc, 7).toString();
-            String ppu = tbl_drugList.getValueAt(rc, 8).toString();
-            price = Double.parseDouble(qty) * Double.parseDouble(ppu);
-            tbl_drugList.setValueAt(price, rc, 9);
-        } catch (Exception e) {
-            price = 0.0;
-            e.printStackTrace();
-        }
+//        double price = 0.0;
+//        try {
+//            int rc = rowClicked;
+//            String qty = tbl_drugList.getValueAt(rc, 7).toString();
+//            String ppu = tbl_drugList.getValueAt(rc, 8).toString();
+//            price = Double.parseDouble(qty) * Double.parseDouble(ppu);
+//            tbl_drugList.setValueAt(price, rc, 9);
+//        } catch (Exception e) {
+//            price = 0.0;
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_tbl_drugListKeyReleased
    
     void fnCreateXLS(String strSQL , String fName)
@@ -9374,7 +9403,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelMinimumStockLevel;
-    private javax.swing.JLabel jLabel_Total;
+    public static javax.swing.JLabel jLabel_Total;
     private javax.swing.JLabel jLblIC;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
