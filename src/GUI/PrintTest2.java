@@ -21,13 +21,17 @@ import javax.swing.JTextPane;
  * @author End User
  */
 public class PrintTest2 {
+    
+    static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+    static String par = fi.getParent()+"/";
+    
     public static void main(String[] args) {
         //print3();
     }
     public static void print3(String title) {
         try {
 
-            File pdfFile = new File(title);
+            File pdfFile = new File(par+title);
             if (pdfFile.exists()) {
 
                 if (Desktop.isDesktopSupported()) {
