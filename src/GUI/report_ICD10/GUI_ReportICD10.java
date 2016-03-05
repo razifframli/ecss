@@ -6,6 +6,7 @@
 package GUI.report_ICD10;
 
 import GUI.report_ICD10.diagnosis.NewJFrame;
+import GUI.report_ICD10.medicationBill.ReportMedicationPrice;
 import GUI.report_ICD10.pharmacy.Report1;
 import GUI.report_ICD10.pharmacy.Report2;
 import GUI.report_ICD10.symptom.new_GUI;
@@ -70,7 +71,7 @@ public class GUI_ReportICD10 extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Drug Cost Report");
+        jButton5.setText("Medication Cost Report");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -141,7 +142,8 @@ public class GUI_ReportICD10 extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        new Report2().setVisible(true);
+//        new Report2().setVisible(true);
+        new ReportMedicationPrice().setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

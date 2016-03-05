@@ -169,8 +169,12 @@ public class EHR_Central {
 
             //String IC = "891031075331"; //for testing purpose
             String ehr_central = DBConnection.getImpl().insertEHRCentral(status, PMI, data, episodeDate); //Insert CIS
+            System.out.println("ehr_central:"+ehr_central);
+            System.out.println("statusLuar:"+status);
             if (status == 1) {
+                System.out.println("statusDalam:"+status);
                 if (isDTO) {
+                    System.out.println("isDTO:"+isDTO);
                     String dto = DBConnection.getImpl().insertDTO(PMI, dataDTO);
                 }
             }

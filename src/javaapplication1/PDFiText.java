@@ -24,6 +24,7 @@ import java.rmi.RemoteException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -76,6 +77,14 @@ public class PDFiText {
         document.addTitle("Report ICD10");
         document.addSubject("Report ICD10");
         document.addKeywords("Report, ICD10, Report ICD10");
+        document.addAuthor("Clinical Support System");
+        document.addCreator("Prof. Madya Dr. Mohd. Khanapi Bin Abd. Ghani");
+    }
+    
+    private static void addMetaDataMedicationCost(Document document) {
+        document.addTitle("Report Medication Cost");
+        document.addSubject("Report Medication Cost");
+        document.addKeywords("Report, Medication Cost");
         document.addAuthor("Clinical Support System");
         document.addCreator("Prof. Madya Dr. Mohd. Khanapi Bin Abd. Ghani");
     }
@@ -205,6 +214,61 @@ public class PDFiText {
                     preface.add(getPara(str2[j], Element.ALIGN_LEFT));
                 }
             }
+            
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+        
+        //System.exit(1);
+        
+        addEmptyLine(preface, 1);
+
+        document.add(preface);
+    }
+    
+    private static void addDataMedicationCost(Document document, String date, 
+            int statusDate, int statusStaffStudent) 
+            throws DocumentException {
+        Paragraph preface = new Paragraph();
+        
+        try {
+            
+            ArrayList<ArrayList<String>> data = ReportDB.getMedicationCost(date, 
+                    statusDate, statusStaffStudent);
+            
+            int num_col = 6;
+            int num_row = data.size();
+
+            PdfPTable table = new PdfPTable(num_col);
+            float[] columnWidths = new float[] {4f, 15f, 25f, 15f, 15f, 10f};
+            table.setWidths(columnWidths);
+            
+            table.addCell(getCell(table, "Bil.", 1, 1, 2));
+            table.addCell(getCell(table, "Tarikh/Masa", 1, 1, 2));
+            table.addCell(getCell(table, "Nama", 1, 1, 2));
+            table.addCell(getCell(table, "No. K/P.", 1, 1, 2));
+            table.addCell(getCell(table, "Matric/Staff No.", 1, 1, 2));
+            table.addCell(getCell(table, "Kos Perubatan", 1, 1, 2));
+            
+            for (int i = 0; i < num_row; i++) {
+                table.addCell(getCell(table, (i+1)+".", 1, 1, 2));
+                table.addCell(getCell(table, data.get(i).get(2), 1, 1, 2));
+                table.addCell(getCell(table, data.get(i).get(0), 1, 1, 2));
+                table.addCell(getCell(table, data.get(i).get(1), 1, 1, 2));
+                table.addCell(getCell(table, data.get(i).get(12), 1, 1, 2));
+                
+                double total_price = 0.00;
+                DecimalFormat df = new DecimalFormat("#,###.00");
+                try {
+                    total_price = Double.parseDouble(data.get(i).get(11));
+                } catch (Exception e) {
+                    total_price = 0.00;
+                }
+                
+                table.addCell(getCell(table, df.format(total_price), 1, 1, 2));
+            }
+            
+            preface.add(table);
             
         } catch (Exception e) {
             //e.printStackTrace();
@@ -383,6 +447,49 @@ public class PDFiText {
         document.add(preface);
     }
     
+    private static void addTitleMedicationCost(Document document)
+            throws DocumentException {
+        Paragraph preface = new Paragraph();
+        
+        Image image1 = null;
+        try {
+            image1 = Image.getInstance("assets/logoUTeMPNG.png");
+            image1.scaleAbsolute(image1.getWidth()*0.05f, image1.getHeight()*0.05f);
+        } catch (BadElementException ex) {
+            Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        image1.setAlignment(Element.ALIGN_CENTER);
+        preface.add(image1);
+        
+        // We add one empty line
+        addEmptyLine(preface, 1);
+        // Lets write a big header
+
+        preface.add(getPara("LAPORAN KOS PERUBATAN", Element.ALIGN_CENTER));
+        
+//        String date1[] = date.split(" ")[0].split("-");
+//        String year = date1[0];
+//        String month = date1[1];
+//        String day = date1[2];
+        
+//        preface.add(getPara("Year: "+year, Element.ALIGN_CENTER));
+//        
+//        if (!month.equals("00")) {
+//            preface.add(getPara("Month: "+month, Element.ALIGN_CENTER));
+//            if (!day.equals("00")) {
+//                preface.add(getPara("Day: "+day, Element.ALIGN_CENTER));
+//            }
+//        }
+        
+        addEmptyLine(preface, 1);
+
+        document.add(preface);
+    }
+    
     private static void addTitleTimeSlip(Document document, String data)
             throws DocumentException {
         Paragraph preface = new Paragraph();
@@ -444,7 +551,7 @@ public class PDFiText {
     }
     
     private static PdfPCell getCell(PdfPTable ptable, String word, 
-            int align_type, int content_type) {
+            int align_type, int content_type, int border_type) {
         PdfPCell pcell;
         switch(content_type) {
             case 1:
@@ -474,7 +581,11 @@ public class PDFiText {
                 pcell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 break;
         }
-        pcell.setBorder(Rectangle.NO_BORDER);
+        switch (border_type) {
+            case 1:
+                pcell.setBorder(Rectangle.NO_BORDER);
+                break;
+        }
         return pcell;
     }
     
@@ -532,7 +643,7 @@ public class PDFiText {
         
         for (int i = 0; i < num_row; i++) {
             for (int j = 0; j < num_col; j++) {
-                table.addCell(getCell(table, cell[i][j], 1, 1));
+                table.addCell(getCell(table, cell[i][j], 1, 1, 1));
             }
         }
 
@@ -571,20 +682,20 @@ public class PDFiText {
         
         //add header column
         for(int i = 0; i < num_col; i++) {
-            table.addCell(getCell(table, header[i], 1, 1));
+            table.addCell(getCell(table, header[i], 1, 1, 1));
         }
         
         //add data row by row
         for(int i = 0; i < num_row; i++) {
-            table.addCell(getCell(table, (i+1)+".", 1, 1));
-            table.addCell(getCell(table, dto[i][5], 1, 1));
-            table.addCell(getCell(table, dto[i][12], 1, 1));
-            table.addCell(getCell(table, dto[i][17], 1, 1));
-            table.addCell(getCell(table, dto[i][14], 1, 1));
-            table.addCell(getCell(table, getDate(dto[i][0], 0), 1, 1));
-            table.addCell(getCell(table, getDate(dto[i][0], getDay(dto[i][22])), 1, 1));
-            table.addCell(getCell(table, dto[i][22] + " day" + getS(dto[i][22]), 1, 1));
-            table.addCell(getCell(table, dto[i][23], 1, 1));
+            table.addCell(getCell(table, (i+1)+".", 1, 1, 1));
+            table.addCell(getCell(table, dto[i][5], 1, 1, 1));
+            table.addCell(getCell(table, dto[i][12], 1, 1, 1));
+            table.addCell(getCell(table, dto[i][17], 1, 1, 1));
+            table.addCell(getCell(table, dto[i][14], 1, 1, 1));
+            table.addCell(getCell(table, getDate(dto[i][0], 0), 1, 1, 1));
+            table.addCell(getCell(table, getDate(dto[i][0], getDay(dto[i][22])), 1, 1, 1));
+            table.addCell(getCell(table, dto[i][22] + " day" + getS(dto[i][22]), 1, 1, 1));
+            table.addCell(getCell(table, dto[i][23], 1, 1, 1));
         }
 
         document.add(table);
@@ -605,8 +716,8 @@ public class PDFiText {
 
         PdfPCell c1;
 
-        table.addCell(getCell(table, header[0], 1, 2));
-        table.addCell(getCell(table, header[1], 3, 2));
+        table.addCell(getCell(table, header[0], 1, 2, 1));
+        table.addCell(getCell(table, header[1], 3, 2, 1));
 
         document.add(table);
 
@@ -625,8 +736,8 @@ public class PDFiText {
 
         PdfPCell c1;
 
-        table.addCell(getCell(table, header[0], 1, 2));
-        table.addCell(getCell(table, header[1], 3, 2));
+        table.addCell(getCell(table, header[0], 1, 2, 1));
+        table.addCell(getCell(table, header[1], 3, 2, 1));
         
         Paragraph preface = new Paragraph();
         
@@ -675,8 +786,8 @@ public class PDFiText {
 
         PdfPCell c1;
 
-        table.addCell(getCell(table, header[0], 1, 2));
-        table.addCell(getCell(table, header[1], 3, 2));
+        table.addCell(getCell(table, header[0], 1, 2, 1));
+        table.addCell(getCell(table, header[1], 3, 2, 1));
         
         Paragraph preface = new Paragraph();
         
@@ -941,6 +1052,26 @@ public class PDFiText {
             addMetaDataICD10(document);
             addTitleICD10(document, date);
             addDataICD10(document, date);
+            addFooterICD10(document);
+            document.close();
+
+            PrintTest2.print3(title);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void createReportMedicationCost(String title, String date, 
+            int statusDate, int statusStaffStudent) {
+        try {
+            Document document = new Document(PageSize.A4);
+            PdfWriter.getInstance(document, new FileOutputStream(title));
+            document.open();
+            //hei
+            addMetaDataMedicationCost(document);
+            addTitleMedicationCost(document);
+            addDataMedicationCost(document, date, statusDate, statusStaffStudent);
             addFooterICD10(document);
             document.close();
 

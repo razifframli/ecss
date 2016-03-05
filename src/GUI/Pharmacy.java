@@ -8164,7 +8164,8 @@ jScrollPane17.setViewportView(tbl_drugOList);
 
                     DecimalFormat df = new DecimalFormat("#,###.00");
                     
-                    System.out.println("ASAL:"+((ArrayList)od.get(i)).get(9));
+                    System.out.println("ORI :"+od.get(i));
+                    System.out.println("ASAL:"+od.get(i).get(9));
                     double qty_dbl = Double.parseDouble(((ArrayList)od.get(i)).get(9).toString());
 
                     tbl_drugOrder.getModel().setValueAt(((ArrayList)od.get(i)).get(0), row1, 0); //Drug Code

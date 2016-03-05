@@ -24,6 +24,72 @@ import oms.rmi.server.Message;
  * @author End User
  */
 public class ReportDB {
+    
+    public static ArrayList<ArrayList<String>> getMedicationCost(String date, 
+            int statusDate, int statusStudentStaff) {
+        ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+        try {
+            String query = "SELECT "
+                    + "ppb.patient_name, " //0
+                    + "ppb.new_ic_no, " //1
+                    + "pdm.order_date, " //2
+                    + "pm.ud_mdc_code, " //3
+                    + "pm.d_trade_name, " //4
+                    + "pm.d_gnr_name, " //5
+                    + "pm.d_sell_price, " //6
+                    + "pm.d_cost_price, " //7
+                    + "pm.d_packaging, " //8
+                    + "pm.d_price_ppack, " //9
+                    + "pdd.dispensed_qty, " //10
+                    + "SUM(pm.d_price_ppack * pdd.dispensed_qty) AS total_price, " //11
+                    + "sii.person_id_no, " //12
+                    + "sii.person_status, " //13
+                    + "sii.person_type, " //14
+                    + "sii.location_code, " //15
+                    + "sii.record_status " //16
+                    + "FROM pis_dispense_detail pdd, pis_dispense_master pdm, "
+                    + "pis_order_detail pod, pis_order_master pom, "
+                    + "pis_mdc2 pm, pms_patient_biodata ppb, "
+                    + "special_integration_information sii "
+                    + "WHERE pdd.order_no = pdm.order_no "
+                    + "AND pdm.order_no = pod.order_no "
+                    + "AND pod.order_no = pom.order_no "
+                    + "AND pom.pmi_no = ppb.pmi_no "
+                    + "AND ppb.new_ic_no = sii.national_id_no "
+                    + "AND pm.ud_mdc_code = pdd.drug_item_code ";
+            switch (statusDate) {
+                case 1:
+                    query += "AND pdm.order_date LIKE '%"+date+"%' ";
+                    break;
+                case 2:
+                    query += "AND MONTH(pdm.order_date) = MONTH('2016-"+date+"-01') ";
+                    break;
+                case 3:
+                    query += "AND YEAR(pdm.order_date) = YEAR('"+date+"-01-01') ";
+                    break;
+            }
+            switch (statusStudentStaff) {
+                case 1:
+                    query += "AND (sii.person_type = '0' "
+                            + "OR sii.person_type = '1') ";
+                    break;
+                case 2:
+                    query += "AND sii.person_type = '0' ";
+                    break;
+                case 3:
+                    query += "AND sii.person_type = '1' ";
+                    break;
+            }
+            query += "GROUP BY pdm.order_date "
+                    + "ORDER BY ppb.patient_name ASC ";
+//            System.out.println("query:"+query);
+            data = DBConnection.getImpl().getQuerySQL(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
     public static String getDataICD10(String date) {
         String dat = "";
         try {

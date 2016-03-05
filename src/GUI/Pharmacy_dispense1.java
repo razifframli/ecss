@@ -253,7 +253,7 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
             lbl_newbalance.setText(newstock+"");
             lbl_price.setText(pricenew+"");
             
-            dispose();
+//            dispose();
         } catch (Exception e) {
             setReset();
             J.o("Invalid Quantity", "Invalid Quantity!\nPlease insert valid new quantity.", 0);
@@ -288,6 +288,8 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
