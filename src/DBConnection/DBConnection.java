@@ -16,6 +16,7 @@ import Bean.PatientBean;
 import Bean.PhysicalExamBean;
 import Bean.StaffBean;
 import GUI.Login;
+import GUI.Pharmacy_dispense1;
 import Helper.J;
 import Helper.S;
 import Helper.Session;
@@ -514,7 +515,7 @@ public class DBConnection {
         return stat;
     }
     
-    public static boolean updateOrderDetail(int qtyDispensed, String orderNo, String drugCode) {
+    public static boolean updateOrderDetail(int qtyDispensed, String orderNo, String drugCode, String statusDrug) {
         boolean stat = false;
         try {
             String sql = "SELECT QTY_ORDERED, QTY_DISPENSED "
@@ -533,10 +534,10 @@ public class DBConnection {
                 old_qty_ordered = rs.getInt("QTY_ORDERED");
                 old_qty_dispensed = rs.getInt("QTY_DISPENSED");
             }
-            old_qty_dispensed += qtyDispensed;
+//            old_qty_dispensed += qtyDispensed;
             
 
-          if(old_qty_dispensed == old_qty_ordered) {
+          if(old_qty_dispensed >= old_qty_ordered) {
 
             //* * * * * * * * * * * * * * * * * * * * * * * * * * * 
                 try {
@@ -575,7 +576,7 @@ public class DBConnection {
          //* * * * * * * * * * * * * * * * * * * * * * * * * * *
                 try{
                     //full
-                    String oS = "Full";
+                    String oS = Pharmacy_dispense1.status_full;
                     sql = "UPDATE PIS_ORDER_DETAIL "
                             + "SET QTY_DISPENSED = ? "
                             + ", STATUS = ?, ORDER_STATUS = ? "
@@ -634,15 +635,22 @@ public class DBConnection {
                     
               //stat false
               try{
-                  String oS = "Partial";
+                  String oS = statusDrug;
+                  
                   sql = "UPDATE PIS_ORDER_DETAIL "
-                          + "SET QTY_DISPENSED = ? , ORDER_STATUS = ?"
+                          + "SET QTY_DISPENSED = ?, ORDER_STATUS = ?, STATUS = ? "
                           + "WHERE ORDER_NO = ? AND DRUG_ITEM_CODE = ? ";
                   PreparedStatement ps2 = Session.getCon_x(1000).prepareStatement(sql);
                   ps2.setInt(1, old_qty_dispensed);
                   ps2.setString(2, oS);
-                  ps2.setString(3, orderNo);
-                  ps2.setString(4, drugCode);
+                  if (statusDrug.equals(Pharmacy_dispense1.status_complete_partial) 
+                          || statusDrug.equals(Pharmacy_dispense1.status_full)) {
+                      ps2.setBoolean(3, true);
+                  } else {
+                      ps2.setBoolean(3, false);
+                  }
+                  ps2.setString(4, orderNo);
+                  ps2.setString(5, drugCode);
                   stat = ps2.execute();
                   
               }catch(Exception nn){

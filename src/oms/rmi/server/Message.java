@@ -120,7 +120,7 @@ public interface Message extends Remote {
     boolean insertDispenseMaster(String [] data1, java.sql.Timestamp data2, boolean data3) throws RemoteException;
     ArrayList<String> getOrderDetail(String orderNo, String drugCode) throws RemoteException;
     boolean insertDispenseDetail(String[] data1, int data2, boolean data3) throws RemoteException;
-    boolean updateOrderDetail(int qtyDispensed, String orderNo, String drugCode) throws RemoteException;
+    boolean updateOrderDetail(int qtyDispensed, String orderNo, String drugCode, String statusDrug) throws RemoteException;
     boolean isOrderDetail(String orderNo) throws RemoteException;
     boolean updateOrderMaster(String orderNo, int status) throws RemoteException;
     boolean updateDispensedMaster(String orderNo, int status) throws RemoteException;

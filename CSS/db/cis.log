@@ -1,0 +1,11 @@
+/*C3*/SET SCHEMA PUBLIC
+INSERT INTO PIS_DISPENSE_DETAIL VALUES('000000001','MTA011004',20,'500mg',TRUE)
+COMMIT
+DELETE FROM PIS_MDC2 WHERE UD_MDC_CODE='MTA011004'
+INSERT INTO PIS_MDC2 VALUES('MTA011004','Utem','Paracetamol  Tab (acetamenophen)','acetamenophane','-','-','500mg','As directed',199946.0E0,2.0E0,'-',3,'Day','4 times a day','Do not take more than 2 at anytime. Do not take more than 8 in 24 hours','-','NSAIDs','TRUE','P',0.1E0,0.042E0,20,'-',2.0E0,0.0E0)
+COMMIT
+INSERT INTO PIS_DISPENSE_DETAIL VALUES('000000001','MTA011004',10,'500mg',TRUE)
+COMMIT
+DELETE FROM PIS_MDC2 WHERE UD_MDC_CODE='MTA011004'
+INSERT INTO PIS_MDC2 VALUES('MTA011004','Utem','Paracetamol  Tab (acetamenophen)','acetamenophane','-','-','500mg','As directed',199946.0E0,2.0E0,'-',3,'Day','4 times a day','Do not take more than 2 at anytime. Do not take more than 8 in 24 hours','-','NSAIDs','TRUE','P',0.1E0,0.042E0,20,'-',2.0E0,0.0E0)
+COMMIT

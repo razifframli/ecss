@@ -4630,10 +4630,17 @@ public class Pharmacy extends javax.swing.JFrame{
                         ArrayList<String> pod = DBConnection.getImpl().getOrderDetail(oNo, drugCode);
                         String ddData1[] = {oNo, drugCode, inst,pod.get(4)};
                         
+                        String qty_temp = tbl_drugList.getValueAt(i, 7).toString(); // change from 5 to 7 - hadi
+                        String qty_split[] = qty_temp.split("<HTML><U>");
+                        String qty_split2[] = qty_split[1].split("</U></HTML>");
+                        String qty2 = qty_split2[0];
+                        
+                        String dispensed_status = tbl_drugList.getValueAt(i, 10).toString();
+                        
                         int d_qty = 0;
                         
                         try {
-                            d_qty = Integer.parseInt(tbl_drugList.getValueAt(i, 7).toString()); // change from 5 to 7 - hadi
+                            d_qty = Integer.parseInt(qty2);
                             instruction = String.valueOf(tbl_drugList.getValueAt(i, 2).toString());
                         } catch (Exception eex) {
                             d_qty = 0;
@@ -4642,11 +4649,11 @@ public class Pharmacy extends javax.swing.JFrame{
                         System.out.println("oNo " + oNo);
                         System.out.println("drugCode " + drugCode);
                         DBConnection.getImpl().insertDispenseDetail(ddData1, d_qty, true);
-                        DBConnection.getImpl().updateOrderDetail(d_qty, oNo, drugCode);
+                        DBConnection.getImpl().updateOrderDetail(d_qty, oNo, drugCode, dispensed_status);
                         
                         // update local
                         DBConnection.insertDispenseDetail(ddData1, d_qty, true);
-                        DBConnection.updateOrderDetail(d_qty, oNo, drugCode);
+                        DBConnection.updateOrderDetail(d_qty, oNo, drugCode, dispensed_status);
                     }
                     //check status all order detail
                     boolean odStatus = DBConnection.getImpl().isOrderDetail(oNo);
@@ -4692,18 +4699,25 @@ public class Pharmacy extends javax.swing.JFrame{
 
                         ArrayList<String> pod = DBConnection.getOrderDetail(oNo, drugCode);
                         String ddData1[] = {oNo, drugCode, inst, pod.get(4)};
+                        
+                        String qty_temp = tbl_drugList.getValueAt(i, 7).toString(); // change from 5 to 7 - hadi
+                        String qty_split[] = qty_temp.split("<HTML><U>");
+                        String qty_split2[] = qty_split[1].split("</U></HTML>");
+                        String qty2 = qty_split2[0];
+                        
+                        String dispensed_status = tbl_drugList.getValueAt(i, 10).toString();
 
                         int d_qty = 0;
 
                         try {
 
-                            d_qty = Integer.parseInt(tbl_drugList.getValueAt(i, 7).toString()); //change from 5 to 7 - hadi
+                            d_qty = Integer.parseInt(qty2); //change from 5 to 7 - hadi
                             instruction = String.valueOf(tbl_drugList.getValueAt(i, 2).toString());
                         } catch (Exception eex) {
                             d_qty = 0;
                         }
                         DBConnection.insertDispenseDetail(ddData1, d_qty, true);
-                        DBConnection.updateOrderDetail(d_qty, oNo, drugCode);
+                        DBConnection.updateOrderDetail(d_qty, oNo, drugCode, dispensed_status);
 
                     }
                     //check status all order detail
@@ -6161,6 +6175,11 @@ public class Pharmacy extends javax.swing.JFrame{
                     String qty = tbl_drugList.getValueAt(r, 7).toString();
                     String ppu = tbl_drugList.getValueAt(r, 8).toString();
                     String pri = tbl_drugList.getValueAt(r, 9).toString();
+                    
+                    System.out.println("sto:"+sto);
+                    System.out.println("qty:"+qty);
+                    System.out.println("ppu:"+ppu);
+                    System.out.println("pri:"+pri);
                     
                     Properties prop = new Properties();
                     prop.setProperty("ind", r+"");

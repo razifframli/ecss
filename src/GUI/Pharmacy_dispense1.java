@@ -28,6 +28,10 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
     public Pharmacy_dispense1(Properties prop) {
         initComponents();
         
+        buttonGroup1.add(rd_partial);
+        buttonGroup1.add(rd_complete_partial);
+        buttonGroup1.add(rd_full);
+        
         try {
             index_row = Integer.parseInt(prop.getProperty("ind"));
             stock = Integer.parseInt(prop.getProperty("sto"));
@@ -75,6 +79,7 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -90,6 +95,9 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         txt_newqty = new javax.swing.JTextField();
+        rd_partial = new javax.swing.JRadioButton();
+        rd_complete_partial = new javax.swing.JRadioButton();
+        rd_full = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dispense Detail");
@@ -137,41 +145,71 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
             }
         });
 
+        rd_partial.setSelected(true);
+        rd_partial.setText("Partial");
+        rd_partial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rd_partialActionPerformed(evt);
+            }
+        });
+
+        rd_complete_partial.setText("Complete Partial");
+        rd_complete_partial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rd_complete_partialActionPerformed(evt);
+            }
+        });
+
+        rd_full.setText("Full");
+        rd_full.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rd_fullActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_newqty, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_stock, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_newqty, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_ppu, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_newbalance, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(50, 50, 50)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbl_stock, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbl_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbl_ppu, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbl_newbalance, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(rd_partial)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rd_complete_partial)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rd_full))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -201,11 +239,16 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(lbl_price))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rd_partial)
+                    .addComponent(rd_complete_partial)
+                    .addComponent(rd_full))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,7 +259,9 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -242,10 +287,12 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
             if (newqty < 0) {
                 setReset();
                 J.o("Invalid Quantity", "Invalid Quantity!\nPlease insert valid new quantity.", 0);
+                return;
             }
             if (newqty > stock) {
                 setReset();
                 J.o("Invalid Quantity", "Invalid Quantity!\nPlease insert valid new quantity.", 0);
+                return;
             }
             int newstock = stock - newqty;
             double priceperunit = Double.parseDouble(lbl_ppu.getText());
@@ -260,6 +307,11 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_newqtyKeyReleased
 
+    public final static String status_new = "New";
+    public final static String status_partial = "Partial";
+    public final static String status_complete_partial = "Complete Partial";
+    public final static String status_full = "Full Complete";
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
@@ -276,8 +328,20 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
         }
         
         Pharmacy.tbl_drugList.setValueAt(lbl_newbalance.getText(), index_row, 6); //sto
-        Pharmacy.tbl_drugList.setValueAt(txt_newqty.getText(), index_row, 7); //qty
+        Pharmacy.tbl_drugList.setValueAt("<HTML><U>"+txt_newqty.getText()+"</U></HTML>", index_row, 7); //qty
         Pharmacy.tbl_drugList.setValueAt(lbl_price.getText(), index_row, 9); //pri
+        
+        String status = Pharmacy.tbl_drugList.getValueAt(index_row, 10).toString();
+        if (rd_partial.isSelected()) {
+            status = status_partial;
+        }
+        if (rd_complete_partial.isSelected()) {
+            status = status_complete_partial;
+        }
+        if (rd_full.isSelected()) {
+            status = status_full;
+        }
+        Pharmacy.tbl_drugList.setValueAt(status, index_row, 10); //pri
         
         String curr_total = Pharmacy.jLabel_Total.getText();
         
@@ -291,6 +355,18 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
         
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void rd_partialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_partialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rd_partialActionPerformed
+
+    private void rd_complete_partialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_complete_partialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rd_complete_partialActionPerformed
+
+    private void rd_fullActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_fullActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rd_fullActionPerformed
 
     /**
      * @param args the command line arguments
@@ -328,6 +404,7 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -342,6 +419,9 @@ public class Pharmacy_dispense1 extends javax.swing.JFrame {
     private static javax.swing.JLabel lbl_price;
     private static javax.swing.JLabel lbl_qty;
     private static javax.swing.JLabel lbl_stock;
+    public static javax.swing.JRadioButton rd_complete_partial;
+    public static javax.swing.JRadioButton rd_full;
+    public static javax.swing.JRadioButton rd_partial;
     private static javax.swing.JTextField txt_newqty;
     // End of variables declaration//GEN-END:variables
 }
