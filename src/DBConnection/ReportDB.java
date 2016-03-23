@@ -25,6 +25,80 @@ import oms.rmi.server.Message;
  */
 public class ReportDB {
     
+    public static ArrayList<ArrayList<String>> getPatientHistoryRecords(String pmi_no, String segment, String cols[][]) {
+        ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+        try {
+            String sql = "SELECT * "
+                    + "FROM ehr_central "
+                    + "WHERE pmi_no = '"+pmi_no+"' ";
+            ArrayList<ArrayList<String>> d = DBConnection.getImpl().getQuerySQL(sql);
+            if (d.size() > 0) {
+                String txndata = "";
+                for (int i = 0; i < d.size(); i++) {
+                    txndata += d.get(i).get(3) + "\n";
+                }
+                MainRetrieval mr = new MainRetrieval();
+                mr.startProcess(txndata);
+                String ret[][] = mr.getData(segment);
+                int ret_row = mr.getRowNums();
+                for (int i = 0; i < ret_row; i++) {
+                    ArrayList<String> d_child = new ArrayList<String>();
+                    for (int j = 0; j < ret[i].length; j++) {
+                        for (int k = 0; k < cols.length; k++) {
+                            if (Integer.parseInt(cols[k][0]) == j) {
+                                d_child.add(ret[i][j]);
+                            }
+                        }
+                    }
+                    data.add(d_child);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
+    public static ArrayList<ArrayList<String>> getPatientHistoryInfo(String search, int status) {
+        ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+        try {
+            String query = "SELECT * "
+                    + "FROM pms_patient_biodata ppb, special_integration_information sii "
+                    + "WHERE ppb.new_ic_no = sii.national_id_no ";
+            /**
+             * 1 - PMI No. 
+             * 2 - IC No. 
+             * 3 - Passport No. 
+             * 4 - Matric No. 
+             * 5 - Staff No.
+             */
+            switch (status) {
+                case 1:
+                    query += "AND ppb.pmi_no = '"+search+"' ";
+                    break;
+                case 2:
+                    query += "AND ppb.new_ic_no = '"+search+"' ";
+                    break;
+                case 3:
+                    query += "AND sii.national_id_no = '"+search+"' ";
+                    break;
+                case 4:
+                    query += "AND sii.person_id_no = '"+search+"' ";
+                    break;
+                case 5:
+                    query += "AND sii.person_id_no = '"+search+"' ";
+                    break;
+                default:
+                    query += "WHERE ppb.pmi_no = '"+search+"' ";
+                    break;
+            }
+            data = DBConnection.getImpl().getQuerySQL(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
     public static ArrayList<ArrayList<String>> getMedicationCost(String date, 
             int statusDate, int statusStudentStaff) {
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();

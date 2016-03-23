@@ -23,7 +23,8 @@ import javax.swing.JTextPane;
 public class PrintTest2 {
     
     static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-    static String par = fi.getParent()+"/";
+//    static String par = fi.getParent()+"/";
+    static String par = "";
     
     public static void main(String[] args) {
         //print3();

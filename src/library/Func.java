@@ -32,6 +32,26 @@ public class Func {
     public final static String PEM_SEPARATOR_FROM_DB = "^";
     public final static String SPECIAL_CHARACTER = "'\"#&";
     
+    public static int getAge(String birthdate) {
+        int age = 0;
+        try {
+            String bd[] = birthdate.split("/");
+            int yearBirth = 1970;
+            try {
+                yearBirth = Integer.parseInt(bd[2]);
+            } catch (Exception e) {
+                yearBirth = 1970;
+            }
+            Calendar now = Calendar.getInstance();   // Gets the current date and time
+            int yearTodayTemp = now.get(Calendar.YEAR);
+            age = yearTodayTemp - yearTodayTemp;
+        } catch (Exception e) {
+            age = 0;
+            e.printStackTrace();
+        }
+        return age;
+    }
+    
     public static String getCodePemToDB(String code) {
         String str = "";
         try {

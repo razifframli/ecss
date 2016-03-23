@@ -89,6 +89,14 @@ public class PDFiText {
         document.addCreator("Prof. Madya Dr. Mohd. Khanapi Bin Abd. Ghani");
     }
     
+    private static void addMetaDataPatientHistory(Document document) {
+        document.addTitle("Report Patient Medical History");
+        document.addSubject("Report Patient Medical History");
+        document.addKeywords("Report, Patient Medical History");
+        document.addAuthor("Clinical Support System");
+        document.addCreator("Prof. Madya Dr. Mohd. Khanapi Bin Abd. Ghani");
+    }
+    
     private static void addMetaDataTimeSlip(Document document) {
         document.addTitle("Time Slip");
         document.addSubject("Time Slip (TS)");
@@ -269,6 +277,80 @@ public class PDFiText {
             }
             
             preface.add(table);
+            
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+        
+        //System.exit(1);
+        
+        addEmptyLine(preface, 1);
+
+        document.add(preface);
+    }
+    
+    private static Paragraph getSegmentHistory(Paragraph preface, String pmi_no, String segment, String cols[][]) {
+        try {
+            ArrayList<ArrayList<String>> data = ReportDB.getPatientHistoryRecords(pmi_no, segment, cols);
+
+            int num_col = cols.length;
+            int num_row = data.size();
+
+            PdfPTable table = new PdfPTable(num_col);
+//            float[] columnWidths = new float[]{4f, 15f, 25f, 15f, 15f, 10f};
+//            table.setWidths(columnWidths);
+
+            for (int i = 0; i < num_col; i++) {
+                table.addCell(getCell(table, cols[i][1], 1, 1, 2));
+            }
+
+            for (int i = 0; i < num_row; i++) {
+                for (int j = 0; j < num_col; j++) {
+                    table.addCell(getCell(table, data.get(i).get(j), 1, 1, 2));
+                }
+            }
+
+            preface.add(table);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return preface;
+    }
+    
+    private static void addDataPatientHistory(Document document, String search, 
+            int status) throws DocumentException {
+        Paragraph preface = new Paragraph();
+        
+        try {
+            
+            ArrayList<ArrayList<String>> patientInfo = ReportDB.getPatientHistoryInfo(search, status);
+            if (patientInfo.size() > 0) {
+                String pmi_no = patientInfo.get(0).get(0);
+                
+                Paragraph subtitle_dgs = new Paragraph("DIAGNOSIS", subtitleFont);
+                subtitle_dgs.setAlignment(Element.ALIGN_CENTER);
+                preface.add(subtitle_dgs);
+                String cols_dgs[][] = {
+                    {"0", "Episode Date"},
+                    {"4", "Diagnosis Date"},
+                    {"5", "Diagnosis Code"},
+                    {"6", "Diagnosis Description"}
+                };
+                preface = getSegmentHistory(preface, pmi_no, "DGS", cols_dgs);
+                
+                addEmptyLine(preface, 1);
+                
+                Paragraph subtitle_dto = new Paragraph("MEDICATION", subtitleFont);
+                subtitle_dto.setAlignment(Element.ALIGN_CENTER);
+                preface.add(subtitle_dto);
+                String cols_dto[][] = {
+                    {"0", "Episode Date"},
+                    {"4", "Drug Code"},
+                    {"5", "Drug Description"},
+                    {"15", "Frequency"}
+                };
+                preface = getSegmentHistory(preface, pmi_no, "DTO", cols_dto);
+            }
             
         } catch (Exception e) {
             //e.printStackTrace();
@@ -490,6 +572,49 @@ public class PDFiText {
         document.add(preface);
     }
     
+    private static void addTitlePatientHistory(Document document)
+            throws DocumentException {
+        Paragraph preface = new Paragraph();
+        
+        Image image1 = null;
+        try {
+            image1 = Image.getInstance("assets/logoUTeMPNG.png");
+            image1.scaleAbsolute(image1.getWidth()*0.05f, image1.getHeight()*0.05f);
+        } catch (BadElementException ex) {
+            Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PDFiText.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        image1.setAlignment(Element.ALIGN_CENTER);
+        preface.add(image1);
+        
+        // We add one empty line
+        addEmptyLine(preface, 1);
+        // Lets write a big header
+
+        preface.add(getPara("LAPORAN SEJARAH MEDIKAL PESAKIT", Element.ALIGN_CENTER));
+        
+//        String date1[] = date.split(" ")[0].split("-");
+//        String year = date1[0];
+//        String month = date1[1];
+//        String day = date1[2];
+        
+//        preface.add(getPara("Year: "+year, Element.ALIGN_CENTER));
+//        
+//        if (!month.equals("00")) {
+//            preface.add(getPara("Month: "+month, Element.ALIGN_CENTER));
+//            if (!day.equals("00")) {
+//                preface.add(getPara("Day: "+day, Element.ALIGN_CENTER));
+//            }
+//        }
+        
+        addEmptyLine(preface, 1);
+
+        document.add(preface);
+    }
+    
     private static void addTitleTimeSlip(Document document, String data)
             throws DocumentException {
         Paragraph preface = new Paragraph();
@@ -638,6 +763,53 @@ public class PDFiText {
             {"Prescription #", ":", presno,
             "", "Order Date", ":", orderdate},
             {"Allergy", ":", allergy,
+            "", "", "", ""}
+        };
+        
+        for (int i = 0; i < num_row; i++) {
+            for (int j = 0; j < num_col; j++) {
+                table.addCell(getCell(table, cell[i][j], 1, 1, 1));
+            }
+        }
+
+        document.add(table);
+        
+        addHorizontalLine(document);
+        document.add(new Paragraph(" "));
+    }
+    
+    private static void addTablePatientInfo(Document document, String search, int status) throws DocumentException {
+        int num_col = 7;
+        int num_row = 3;
+
+        PdfPTable table = new PdfPTable(num_col);
+        
+        String name = "";
+        String pid = "";
+        String age = "";
+        String birthdate = "";
+        String ic = "";
+        String gender = "";
+        
+        // search cni ...
+        ArrayList<ArrayList<String>> patientInfo = ReportDB.getPatientHistoryInfo(search, status);
+        
+        if (patientInfo.size() > 0) {
+            name = patientInfo.get(0).get(2);
+            pid = patientInfo.get(0).get(0);
+            birthdate = patientInfo.get(0).get(10);
+            age = Func.getAge(birthdate) + "";
+            ic = patientInfo.get(0).get(4);
+            gender = patientInfo.get(0).get(11);
+            
+        }
+
+        String cell[][] = {
+            {"Patient Name", ":", name,
+            "", "Patient Id", ":", pid},
+            {"Age", ":", age+"Y",
+            "", "NRIC", ":", ic},
+            {"Gender", ":", gender,
             "", "", "", ""}
         };
         
@@ -1082,6 +1254,26 @@ public class PDFiText {
         }
     }
     
+    public static void createReportHistoryPatient(String title, String search, int status) {
+        try {
+            Document document = new Document(PageSize.A4);
+            PdfWriter.getInstance(document, new FileOutputStream(title));
+            document.open();
+            //hei
+            addMetaDataPatientHistory(document);
+            addTitlePatientHistory(document);
+            addTablePatientInfo(document, search, status);
+            addDataPatientHistory(document, search, status);
+            addFooterICD10(document);
+            document.close();
+
+            PrintTest2.print3(title);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public static void createTimeSlip(String title, String data_temp, ArrayList<String> masa) {
         try {
             Document document = new Document(PageSize.A5.rotate());
@@ -1101,6 +1293,21 @@ public class PDFiText {
     }
     
     public static void main(String[] args) {
+        
+        String title = "Patient_History.pdf";
+        String search = "891031065213";
+        int status = 1;
+        
+        Session.setDiscipline("");
+        Session.setHfc_code("Hospital A");
+        Session.setSubdiscipline("");
+        Session.setUser_id("A001");
+        Session.setUser_name("Umaq");
+        
+        PDFiText.createReportHistoryPatient(title, search, status);
+    }
+    
+    public static void main1(String[] args) {
         String data_temp = "MSH|^~|CIS^T12109|<cr>\n"
                 + "\n"
                 + "PDI|PMS10015|umar umar^891031065213^Malay^Male^31/10/1989^O^Single^|<cr>\n"
