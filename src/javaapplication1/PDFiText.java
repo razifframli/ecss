@@ -340,6 +340,18 @@ public class PDFiText {
                 
                 addEmptyLine(preface, 1);
                 
+                Paragraph subtitle_alg = new Paragraph("ALLERGY", subtitleFont);
+                subtitle_alg.setAlignment(Element.ALIGN_CENTER);
+                preface.add(subtitle_alg);
+                String cols_alg[][] = {
+                    {"0", "Episode Date"},
+                    {"2", "Allergy"},
+                    {"8", "Status"}
+                };
+                preface = getSegmentHistory(preface, pmi_no, "ALG", cols_alg);
+                
+                addEmptyLine(preface, 1);
+                
                 Paragraph subtitle_dto = new Paragraph("MEDICATION", subtitleFont);
                 subtitle_dto.setAlignment(Element.ALIGN_CENTER);
                 preface.add(subtitle_dto);
