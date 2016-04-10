@@ -104,30 +104,35 @@ public class ReportDB {
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         try {
             String query = "SELECT "
-                    + "ppb.patient_name, " //0
-                    + "ppb.new_ic_no, " //1
-                    + "pdm.order_date, " //2
-                    + "pm.ud_mdc_code, " //3
-                    + "pm.d_trade_name, " //4
-                    + "pm.d_gnr_name, " //5
-                    + "pm.d_sell_price, " //6
-                    + "pm.d_cost_price, " //7
-                    + "pm.d_packaging, " //8
-                    + "pm.d_price_ppack, " //9
-                    + "pdd.dispensed_qty, " //10
-                    + "SUM(pm.d_price_ppack * pdd.dispensed_qty) AS total_price, " //11
-                    + "sii.person_id_no, " //12
-                    + "sii.person_status, " //13
-                    + "sii.person_type, " //14
-                    + "sii.location_code, " //15
-                    + "sii.record_status " //16
-                    + "FROM pis_dispense_detail pdd, pis_dispense_master pdm, "
-                    + "pis_order_detail pod, pis_order_master pom, "
-                    + "pis_mdc2 pm, pms_patient_biodata ppb, "
+                    + "ppb.patient_name, "
+                    + "ppb.new_ic_no, "
+                    + "pdm.order_date, "
+                    + "pm.ud_mdc_code, "
+                    + "pm.d_trade_name, "
+                    + "pm.d_gnr_name, "
+                    + "pm.d_sell_price, "
+                    + "pm.d_cost_price, "
+                    + "pm.d_packaging, "
+                    + "pm.d_price_ppack, "
+                    + "pdd.dispensed_qty, "
+                    + "SUM(pm.d_sell_price * pdd.dispensed_qty) AS total_price, "
+                    + "sii.person_id_no, "
+                    + "sii.person_status, "
+                    + "sii.person_type, "
+                    + "sii.location_code, "
+                    + "sii.record_status "
+                    
+                    + "FROM "
+                    + "pis_dispense_detail pdd, "
+                    + "pis_dispense_master pdm, "
+                    + "pis_order_master pom, "
+                    + "pis_mdc2 pm, "
+                    + "pms_patient_biodata ppb, "
                     + "special_integration_information sii "
-                    + "WHERE pdd.order_no = pdm.order_no "
-                    + "AND pdm.order_no = pod.order_no "
-                    + "AND pod.order_no = pom.order_no "
+                    
+                    + "WHERE "
+                    + "pdd.order_no = pdm.order_no "
+                    + "AND pdm.order_no = pom.order_no "
                     + "AND pom.pmi_no = ppb.pmi_no "
                     + "AND ppb.new_ic_no = sii.national_id_no "
                     + "AND pm.ud_mdc_code = pdd.drug_item_code ";

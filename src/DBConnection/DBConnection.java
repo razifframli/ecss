@@ -2673,7 +2673,8 @@ public class DBConnection {
                     + "FROM JOURNAL_FILE "
                     + "WHERE (STATUS = 'T' "
                     + "OR STATUS = 't') "
-                    + "AND STATUS2 = 1 "
+                    + "AND (STATUS2 = 1 "
+                    + "OR STATUS2 = 3) "
                     + "AND PMI_NO = ? ";
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);
             ps.setString(1, pmiNo);
@@ -2706,7 +2707,8 @@ public class DBConnection {
                     + "FROM JOURNAL_FILE "
                     + "WHERE (STATUS = 'T' "
                     + "OR STATUS = 't') "
-                    + "AND STATUS2 = 1 "
+                    + "AND (STATUS2 = 1 "
+                    + "OR STATUS2 = 3) "
                     + "AND PMI_NO = ? "
                     + "AND TXNDATE = ? ";
             PreparedStatement ps = Session.getCon_x(1000).prepareStatement(sql);

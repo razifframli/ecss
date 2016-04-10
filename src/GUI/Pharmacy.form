@@ -4593,16 +4593,21 @@
                                 <Component class="javax.swing.JComboBox" name="cLqtyT">
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="9">
+                                      <StringArray count="14">
                                         <StringItem index="0" value="mg"/>
                                         <StringItem index="1" value="ml"/>
-                                        <StringItem index="2" value="garg"/>
-                                        <StringItem index="3" value="supp"/>
-                                        <StringItem index="4" value="puff"/>
-                                        <StringItem index="5" value="mg/hour"/>
-                                        <StringItem index="6" value="mg/kg/hour"/>
-                                        <StringItem index="7" value="mg/kg/min"/>
-                                        <StringItem index="8" value="mcg/kg/min"/>
+                                        <StringItem index="2" value="tab"/>
+                                        <StringItem index="3" value="pess"/>
+                                        <StringItem index="4" value="sach"/>
+                                        <StringItem index="5" value="cap"/>
+                                        <StringItem index="6" value="drops"/>
+                                        <StringItem index="7" value="garg"/>
+                                        <StringItem index="8" value="supp"/>
+                                        <StringItem index="9" value="puff"/>
+                                        <StringItem index="10" value="mg/hour"/>
+                                        <StringItem index="11" value="mg/kg/hour"/>
+                                        <StringItem index="12" value="mg/kg/min"/>
+                                        <StringItem index="13" value="mcg/kg/min"/>
                                       </StringArray>
                                     </Property>
                                   </Properties>

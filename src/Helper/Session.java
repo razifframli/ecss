@@ -41,6 +41,9 @@ public class Session {
     private static String discipline;
     private static String subdiscipline;
     
+    private static String rmi_hostname;
+    private static int rmi_port;
+    
     private static ArrayList<String> data_user = new ArrayList<String>();
     
     public static void startUp() {
@@ -73,6 +76,8 @@ public class Session {
 //        Config.setPassLocal(ConnectCSS.getPass());
         
         Session.setCurr_stat(true);
+        Session.setRmi_hostname(listOnline.get(0));
+        Session.setRmi_port(1099);
     }
     
     public static String getHfc_code() {
@@ -208,6 +213,22 @@ public class Session {
      */
     public static void setData_user(ArrayList<String> aData_user) {
         data_user = aData_user;
+    }
+
+    public static String getRmi_hostname() {
+        return rmi_hostname;
+    }
+
+    public static void setRmi_hostname(String aRmi_hostname) {
+        rmi_hostname = aRmi_hostname;
+    }
+
+    public static int getRmi_port() {
+        return rmi_port;
+    }
+
+    public static void setRmi_port(int aRmi_port) {
+        rmi_port = aRmi_port;
     }
     
 }

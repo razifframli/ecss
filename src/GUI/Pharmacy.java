@@ -3567,7 +3567,7 @@ public class Pharmacy extends javax.swing.JFrame{
 
         lbl_cautionary.setText("Cautionary :");
 
-        cLqtyT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "mg", "ml", "garg", "supp", "puff", "mg/hour", "mg/kg/hour", "mg/kg/min", "mcg/kg/min" }));
+        cLqtyT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "mg", "ml", "tab", "pess", "sach", "cap", "drops", "garg", "supp", "puff", "mg/hour", "mg/kg/hour", "mg/kg/min", "mcg/kg/min" }));
 
         txt_cautionary.setColumns(20);
         txt_cautionary.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4404,7 +4404,7 @@ public class Pharmacy extends javax.swing.JFrame{
                     arrPS[23]=(minimum_stock_level);
                     arrPS[24]=(dmdc);
                     
-                    Boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
+                    boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
                     System.out.println(arrPS);
                     System.out.println(bool);
                     String ggr = "";
@@ -4752,6 +4752,8 @@ public class Pharmacy extends javax.swing.JFrame{
                 }
         }
         //
+        
+        loadDrug();
     }//GEN-LAST:event_btn_dispenseActionPerformed
 
     private void btn_browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browseActionPerformed
@@ -6098,6 +6100,8 @@ public class Pharmacy extends javax.swing.JFrame{
         int r = tbl_drugOrder.getSelectedRow();
         int c = tbl_drugOrder.getSelectedColumn();
         
+        System.out.println("print total: "+grand_total);
+        
         try {
             if (!tbl_drugOrder.getValueAt(r, c).equals("")) {
                 //transfer
@@ -6474,58 +6478,58 @@ public void setSelectedAppointment(String selectedAppointment, String selectedTi
         //3. Display at screen/all tab
 
     }
-public void resetTable(){
+    public void resetTable(){
 
-    //reset tbl order
-    tbl_drugOList.setModel(new javax.swing.table.DefaultTableModel(
-    new Object [][] {
+        //reset tbl order
+        tbl_drugOList.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
 
-    },
-    new String [] {
-        "Drug Code", "Drug Item Desc", "Frequency", "Route", "Drug Form", "Strength", "Dosage", "Order OUM", "Duration (Day)", "Qty Order", "Qty Supply", "Qty Dispense", "Status"
-    }
-) {
-    boolean[] canEdit = new boolean [] {
-        false, true, false, false, false, false, false, false, false, false, false, false, false
-    };
+            },
+            new String [] {
+                "Drug Code", "Drug Item Desc", "Frequency", "Route", "Drug Form", "Strength", "Dosage", "Order OUM", "Duration (Day)", "Qty Order", "Qty Supply", "Qty Dispense", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false, false, false, false, false, false, false, false, false
+            };
 
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return canEdit [columnIndex];
-    }
-});
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
 
-tbl_drugOList.getTableHeader().setReorderingAllowed(false);
+        tbl_drugOList.getTableHeader().setReorderingAllowed(false);
 
-//clear form
-txt_patientName.setText("");
-txt_pmiNo.setText("");
-txt_icNo.setText("");
-txt_sex.setText("");
-txt_birthDate.setText("");
-txt_race.setText("");
-txt_bloodType.setText("");
-cbAllergy.setSelectedItem("");
-order_no2.setText("");
-order_date2.setText("");
-loc_code.setText("");
-arrival_date.setText("");
-txt_doctor.setText("");
+        //clear form
+        txt_patientName.setText("");
+        txt_pmiNo.setText("");
+        txt_icNo.setText("");
+        txt_sex.setText("");
+        txt_birthDate.setText("");
+        txt_race.setText("");
+        txt_bloodType.setText("");
+        cbAllergy.setSelectedItem("");
+        order_no2.setText("");
+        order_date2.setText("");
+        loc_code.setText("");
+        arrival_date.setText("");
+        txt_doctor.setText("");
 
-jScrollPane17.setViewportView(tbl_drugOList);
-    
-    for(int i = 0; i < 100; i++) {
-        for(int j = 0; j < 10; j++) {
-            tbl_drugOrder.getModel().setValueAt("", i, j);
-            tbl_drugList.getModel().setValueAt("", i, j);
+        jScrollPane17.setViewportView(tbl_drugOList);
+
+        for(int i = 0; i < 100; i++) {
+            for(int j = 0; j < 10; j++) {
+                tbl_drugOrder.getModel().setValueAt("", i, j);
+                tbl_drugList.getModel().setValueAt("", i, j);
+            }
         }
-    }
-    
-    row1 = 0;
-    row2 = 0;
-   
-    
-    
-}// private void ShowAllergy(){
+
+        row1 = 0;
+        row2 = 0;
+
+        grand_total = 0.00;
+
+    }// private void ShowAllergy(){
 //       try{
 //            
 //        String sql ="SELECT * FROM PIS_SUPPLIER";//pls bg nama alergy history
@@ -8871,7 +8875,7 @@ jScrollPane17.setViewportView(tbl_drugOList);
                     arrPS[23]=(dpriceppack);
                     arrPS[24]=(minimum_stock_level);                    
                     
-                    Boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
+                    boolean bool = DBConnection.getImpl().setQuery(sql, arrPS);
                     
                     loadDrug();
                 } catch (Exception e) {
