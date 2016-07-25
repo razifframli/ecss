@@ -53,8 +53,8 @@ public class NewJFrame extends javax.swing.JFrame {
     String faculty = null; //public var
     
     static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-    static String par = fi.getParent()+"/";
-//    static String par = "";
+//    static String par = fi.getParent()+"/";
+    static String par = "";
     String logoUTeM = par+"logoUTeM/logoUTeMPNG.png";
     
     /**

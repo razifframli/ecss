@@ -23,8 +23,8 @@ import javax.swing.JTextPane;
 public class PrintTest2 {
     
     static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-//    static String par = fi.getParent()+"/";
-    static String par = "";
+    static String par = fi.getParent()+"/";
+//    static String par = "";
     
     public static void main(String[] args) {
         //print3();
@@ -49,6 +49,7 @@ public class PrintTest2 {
             System.out.println("Done");
 
         } catch (Exception ex) {
+            J.o("Error", "Error generating file!", 0);
             ex.printStackTrace();
         }
     }

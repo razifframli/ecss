@@ -32,12 +32,14 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
 import java.io.*;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.sql.Timestamp;
 import java.util.*;
 import library.Func;
 import library.LongRunProcess;
+import models.PMS_Queue_Name_Bean;
 import oms.rmi.server.Message;
 
 public class Registration extends javax.swing.JFrame {
@@ -182,6 +184,35 @@ public class Registration extends javax.swing.JFrame {
         rbNewRegister.setSelected(true);
 
         setDefault();
+        
+        listQueue();
+    }
+    
+    public void listQueue() {
+        try {
+            String sql = "SELECT queue_type, queue_name, queue_description, user_id, quota "
+                    + "FROM pms_queue_name ";
+            ArrayList<ArrayList<String>> data = DBConnection.getImpl().getQuerySQL(sql);
+            cboxQueue.removeAllItems();
+            for (int i = 0; i < data.size(); i++) {
+                PMS_Queue_Name_Bean qnb = new PMS_Queue_Name_Bean();
+                qnb.setQueue_type(data.get(i).get(0));
+                qnb.setQueue_name(data.get(i).get(1));
+                qnb.setQueue_description(data.get(i).get(2));
+                qnb.setUser_id(data.get(i).get(3));
+                int quota = 0;
+                try {
+                    quota = Integer.parseInt(data.get(i).get(4));
+                } catch (Exception e) {
+                    quota = 0;
+                }
+                qnb.setQuota(quota);
+                
+                cboxQueue.addItem(qnb);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void generateAutogeneratePMI() {
@@ -814,7 +845,7 @@ public class Registration extends javax.swing.JFrame {
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOnlineSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -999,6 +1030,7 @@ public class Registration extends javax.swing.JFrame {
 
         rbConsultationRoom.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         rbConsultationRoom.setText("Consultation Room");
+        rbConsultationRoom.setEnabled(false);
         rbConsultationRoom.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EnableConsulationRoom(evt);
@@ -1016,6 +1048,7 @@ public class Registration extends javax.swing.JFrame {
 
         rbDoctor.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         rbDoctor.setText("Doctor");
+        rbDoctor.setEnabled(false);
         rbDoctor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EnableDoctor(evt);
@@ -1043,12 +1076,14 @@ public class Registration extends javax.swing.JFrame {
 
         cboxConsultationRoom.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cboxConsultationRoom.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Consultation Room", "Consultation Room 1", "Consultation Room 2", "Consultation Room 3", "Consultation Room 4", "Consultation Room 5" }));
+        cboxConsultationRoom.setEnabled(false);
 
         cboxQueue.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cboxQueue.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Queue", "Common Queue", " " }));
 
         cboxDoctor.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cboxDoctor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Doctor", "Dr.Jeff", "Dr.Angeline", "Dr.Ranjit", "Dr.Chung", "Dr.Lee" }));
+        cboxDoctor.setEnabled(false);
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -1279,7 +1314,6 @@ public class Registration extends javax.swing.JFrame {
 
         btnAppointmentList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnAppointmentList.setText("Appointment List");
-        btnAppointmentList.setEnabled(false);
         btnAppointmentList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAppointmentListActionPerformed(evt);
@@ -1906,7 +1940,7 @@ public class Registration extends javax.swing.JFrame {
                                     .addComponent(tfieldHandphoneNoPatient)
                                     .addComponent(cboxStatePatient, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(tfieldHomephonePatient)
-                                    .addComponent(cboxPostalTown, 0, 176, Short.MAX_VALUE)
+                                    .addComponent(cboxPostalTown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cboxTownCode, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(tfieldPostalAddressPatient))))
                 .addContainerGap(81, Short.MAX_VALUE))
@@ -1980,7 +2014,7 @@ public class Registration extends javax.swing.JFrame {
                     .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27)
                 .addComponent(pnl_IC_PersonMasterIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         tabPMILayout.setVerticalGroup(
             tabPMILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2296,7 +2330,7 @@ public class Registration extends javax.swing.JFrame {
                 .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73)
                 .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2305,7 +2339,7 @@ public class Registration extends javax.swing.JFrame {
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
@@ -2942,7 +2976,7 @@ public class Registration extends javax.swing.JFrame {
             .addGroup(jPanel35Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel36.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "FAMILY INFORMATION", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N

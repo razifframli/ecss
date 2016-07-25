@@ -47,6 +47,8 @@ public class Consultation_subcode {
             Date date1 = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String date = sdf.format(date1) + " " + Consultation.EpisodeTime;
+            
+            // remark
 
             String PMI = cons.txt_pPmiNo.getText();
             String name = cons.txt_pName.getText();

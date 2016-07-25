@@ -143,6 +143,7 @@ public class AppointmentList extends javax.swing.JFrame {
 
         btnReadMyKadReferral.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnReadMyKadReferral.setText("Read MyKAD Info");
+        btnReadMyKadReferral.setEnabled(false);
         btnReadMyKadReferral.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReadMyKadReferralActionPerformed(evt);
@@ -227,7 +228,7 @@ public class AppointmentList extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnReadMyKadReferral))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,8 +314,8 @@ public class AppointmentList extends javax.swing.JFrame {
             .addComponent(Appointment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-1143)/2, (screenSize.height-664)/2, 1143, 664);
+        setSize(new java.awt.Dimension(1143, 664));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
     //close appointment list form
@@ -345,6 +346,35 @@ public class AppointmentList extends javax.swing.JFrame {
     private void btnSearchReferralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchReferralActionPerformed
         // TODO add your handling code here:
 
+        //Vector AppointmentInfo= new Vector();
+        Appointment patientAppointmentx = new Appointment();
+
+        try {
+                //AppointmentInfo = patientAppointment.getAppointmentUsingPMI(tfieldPMISearchAppointment.getText());
+
+                //if (AppointmentInfo == null) {
+            // JOptionPane.showMessageDialog(null, "Patient Information is not existed in the database. Please proceed to Patient Master Index Form to fill in information !!!", "Error",JOptionPane.INFORMATION_MESSAGE);
+            //}
+            // else{
+            data = patientAppointmentx.getAppointment();
+            header = new Vector<String>();
+            header.add("PMI_NO");
+            header.add("PATIENT_NAME");
+            header.add("APPOINTMENT_DATE");
+            header.add("APPOINTMENT_TIME");
+            header.add("APPOINTMENT_TYPE");
+
+            tblAppointment.setModel(new javax.swing.table.DefaultTableModel(data, header) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            });
+            // }
+        } catch (Exception ex) {
+            Logger.getLogger(ReferralDetail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         if (tfieldPMISearchAppointment.getText() != null && (tfieldPMISearchAppointment.getText().length() != 0)) {
 
             //Vector AppointmentInfo= new Vector();

@@ -1,2 +1,0 @@
-/*C3*/SET SCHEMA PUBLIC
-create table CIS_RESPONSETIME\u000a(\u000acrt_process VARCHAR(200),\u000acrt_timetaken VARCHAR(200),\u000acrt_date DATE\u000a)

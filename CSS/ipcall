@@ -1,7 +1,7 @@
-ip:10.73.33.216
+ip:10.120.7.200
 callsys:on
 port:1098
-ipserver:biocore-stag.utem.edu.my
+ipserver:ecss.utem.edu.my
 ------------------
 calling 10.73.34.117
 

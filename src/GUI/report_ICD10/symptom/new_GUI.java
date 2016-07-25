@@ -53,8 +53,8 @@ public class new_GUI extends javax.swing.JFrame {
  * @version 1.0 29 DEC 2015
  */   
     static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-    static String par = fi.getParent()+"/";
-//    static String par = "";
+//    static String par = fi.getParent()+"/";
+    static String par = "";
     String fileNameSymptom = par+"Report_Symptom.pdf";
     String dateFormatAll = "yyyy/MM/dd";
     String logoUTeM = par+"logoUTeM/logo.png";

@@ -11976,8 +11976,8 @@ public class Consultation extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtn_per_search_dgsMouseClicked
 
     static File fi = new File(Login.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-    static String par = fi.getParent()+"/";
-//    static String par = "";
+//    static String par = fi.getParent()+"/";
+    static String par = "";
     public static final String fileNameDGS = par+"DGS";
     
     private void btn_plus_dgsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_plus_dgsActionPerformed

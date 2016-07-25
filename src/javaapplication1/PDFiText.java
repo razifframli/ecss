@@ -258,6 +258,9 @@ public class PDFiText {
             table.addCell(getCell(table, "Matric/Staff No.", 1, 1, 2));
             table.addCell(getCell(table, "Kos Perubatan", 1, 1, 2));
             
+            DecimalFormat df = new DecimalFormat("#,###.00");
+            double super_total_price = 0.00;
+            
             for (int i = 0; i < num_row; i++) {
                 table.addCell(getCell(table, (i+1)+".", 1, 1, 2));
                 table.addCell(getCell(table, data.get(i).get(2), 1, 1, 2));
@@ -266,15 +269,23 @@ public class PDFiText {
                 table.addCell(getCell(table, data.get(i).get(12), 1, 1, 2));
                 
                 double total_price = 0.00;
-                DecimalFormat df = new DecimalFormat("#,###.00");
                 try {
                     total_price = Double.parseDouble(data.get(i).get(11));
                 } catch (Exception e) {
                     total_price = 0.00;
                 }
                 
+                super_total_price += total_price;
+                
                 table.addCell(getCell(table, df.format(total_price), 1, 1, 2));
             }
+            
+            table.addCell(getCell(table, "TOTAL", 1, 1, 2));
+            table.addCell(getCell(table, "...", 1, 1, 2));
+            table.addCell(getCell(table, "...", 1, 1, 2));
+            table.addCell(getCell(table, "...", 1, 1, 2));
+            table.addCell(getCell(table, "...", 1, 1, 2));
+            table.addCell(getCell(table, df.format(super_total_price), 1, 1, 2));
             
             preface.add(table);
             
@@ -1522,6 +1533,7 @@ public class PDFiText {
         Session.setUser_name("Umar Mukhtar");
 //        PDFiText.createReportICD10("TimeSlip_.pdf", "2014-04-24 16:33:15");
 //        PDFiText.createTimeSlip("timeslip_.pdf", data_temp, masa);
-        PDFiText.createMC("mcSlip_.pdf", data_temp, masa);
+//        PDFiText.createMC("mcSlip_.pdf", data_temp, masa);
+        PDFiText.createPrescription("test_slip.pdf", data_temp);
     }
 }

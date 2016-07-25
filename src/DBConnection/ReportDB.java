@@ -161,7 +161,7 @@ public class ReportDB {
             }
             query += "GROUP BY pdm.order_date "
                     + "ORDER BY ppb.patient_name ASC ";
-//            System.out.println("query:"+query);
+            System.out.println("query:"+query);
             data = DBConnection.getImpl().getQuerySQL(query);
         } catch (Exception e) {
             e.printStackTrace();
