@@ -341,7 +341,7 @@ public class Registration extends javax.swing.JFrame {
             Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        tfieldReceiptNo.setText("REC" + autogenerateRecNo[0]);
+//        tfieldReceiptNo.setText("REC" + autogenerateRecNo[0]);
     }
     
     public void generateAllAutogenerateNo(String ic) {
@@ -442,17 +442,6 @@ public class Registration extends javax.swing.JFrame {
         jPanel23 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         cboxPriorityGroupRegistration = new javax.swing.JComboBox();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        tfieldChargeRate = new javax.swing.JTextField();
-        tfieldPaymentAmount = new javax.swing.JTextField();
-        jLabel81 = new javax.swing.JLabel();
-        tfieldReceiptNo = new javax.swing.JTextField();
-        jLabel82 = new javax.swing.JLabel();
-        cboxPaymentMode = new javax.swing.JComboBox();
         btnRegister = new javax.swing.JButton();
         btnReferralDetails = new javax.swing.JButton();
         btnAppointmentList = new javax.swing.JButton();
@@ -1214,87 +1203,6 @@ public class Registration extends javax.swing.JFrame {
                 .addContainerGap(74, Short.MAX_VALUE))
         );
 
-        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "FEE COLLECTION", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-
-        jLabel30.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel30.setText("Charge Rate");
-
-        jLabel32.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel32.setText("Payment Amount");
-
-        jLabel33.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel33.setText("RM");
-
-        jLabel31.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel31.setText("RM");
-
-        tfieldChargeRate.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-
-        jLabel81.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel81.setText("Receipt No");
-
-        tfieldReceiptNo.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        tfieldReceiptNo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                UnchangeableReceiptNo(evt);
-            }
-        });
-
-        jLabel82.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel82.setText("Payment Mode");
-
-        cboxPaymentMode.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cboxPaymentMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Payment Mode", "Cash", "Credit" }));
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel30)
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel31)
-                        .addGap(12, 12, 12)
-                        .addComponent(tfieldChargeRate, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel32)
-                        .addGap(77, 77, 77)
-                        .addComponent(jLabel33)
-                        .addGap(12, 12, 12)
-                        .addComponent(tfieldPaymentAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(78, 78, 78)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel81)
-                    .addComponent(jLabel82, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cboxPaymentMode, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfieldReceiptNo, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel30)
-                    .addComponent(jLabel31)
-                    .addComponent(tfieldChargeRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel82)
-                    .addComponent(cboxPaymentMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel32)
-                    .addComponent(jLabel33)
-                    .addComponent(tfieldPaymentAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel81)
-                    .addComponent(tfieldReceiptNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         btnRegister.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -1357,29 +1265,29 @@ public class Registration extends javax.swing.JFrame {
         jPanel26Layout.setHorizontalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(98, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRegister)
-                .addGap(13, 13, 13)
-                .addComponent(btnReferralDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addComponent(btnAppointmentList, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
-                .addComponent(btnPrintReceipt)
-                .addGap(17, 17, 17)
-                .addComponent(btnClearRegistration)
-                .addGap(21, 21, 21)
-                .addComponent(jButton1)
-                .addGap(212, 212, 212))
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addComponent(btnRegister)
+                        .addGap(13, 13, 13)
+                        .addComponent(btnReferralDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(btnAppointmentList, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(btnPrintReceipt)
+                        .addGap(17, 17, 17)
+                        .addComponent(btnClearRegistration)
+                        .addGap(21, 21, 21)
+                        .addComponent(jButton1)))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1393,8 +1301,6 @@ public class Registration extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegister)
                     .addComponent(btnReferralDetails)
@@ -1402,7 +1308,7 @@ public class Registration extends javax.swing.JFrame {
                     .addComponent(btnPrintReceipt)
                     .addComponent(btnClearRegistration)
                     .addComponent(jButton1))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         jPanel9.add(jPanel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 1200, -1));
@@ -4883,10 +4789,10 @@ public class Registration extends javax.swing.JFrame {
         cboxQueue.setSelectedIndex(0);
         cboxDoctor.setSelectedIndex(0);
         cboxPriorityGroupRegistration.setSelectedIndex(0);
-        tfieldChargeRate.setText("");
-        tfieldPaymentAmount.setText("");
+//        tfieldChargeRate.setText("");
+//        tfieldPaymentAmount.setText("");
         //tfieldReceiptNo.setText("");
-        cboxPaymentMode.setSelectedIndex(0);
+//        cboxPaymentMode.setSelectedIndex(0);
         rbConsultationRoom.setSelected(true);
         cboxConsultationRoom.setEnabled(true);
         cboxDoctor.setEnabled(false);
@@ -4933,17 +4839,17 @@ public class Registration extends javax.swing.JFrame {
                 String name = tfieldNameRegistration.getText();
                 fw.append("\r\nPatient Name   : " + name + "\n");
 
-                String chargeRate = tfieldChargeRate.getText();
-                fw.append("\r\nCharge Rate    : RM " + chargeRate + "\n");
-
-                String paymentAmount = tfieldPaymentAmount.getText();
-                fw.append("\r\nPayment Amount : RM " + paymentAmount + "\n");
-
-                String paymentMode = cboxPaymentMode.getSelectedItem().toString();
-                fw.append("\r\nPayment Mode   : " + paymentMode + "\n");
-
-                String receiptNo = tfieldReceiptNo.getText();
-                fw.append("\r\nReceipt No     : " + receiptNo + "\n");
+//                String chargeRate = tfieldChargeRate.getText();
+//                fw.append("\r\nCharge Rate    : RM " + chargeRate + "\n");
+//
+//                String paymentAmount = tfieldPaymentAmount.getText();
+//                fw.append("\r\nPayment Amount : RM " + paymentAmount + "\n");
+//
+//                String paymentMode = cboxPaymentMode.getSelectedItem().toString();
+//                fw.append("\r\nPayment Mode   : " + paymentMode + "\n");
+//
+//                String receiptNo = tfieldReceiptNo.getText();
+//                fw.append("\r\nReceipt No     : " + receiptNo + "\n");
 
                 Calendar today = Calendar.getInstance();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -4982,7 +4888,7 @@ public class Registration extends javax.swing.JFrame {
 
             //save receipt no into database
             String[] saveReceiptNo = {""};
-            saveReceiptNo[0] = tfieldReceiptNo.getText();
+//            saveReceiptNo[0] = tfieldReceiptNo.getText();
             try {
                 new Patient(this).addReceiptNo(saveReceiptNo);
             } catch (ClassNotFoundException ex) {
@@ -5003,7 +4909,7 @@ public class Registration extends javax.swing.JFrame {
                 Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            tfieldReceiptNo.setText("REC" + autogenerateRecNo[0]);
+//            tfieldReceiptNo.setText("REC" + autogenerateRecNo[0]);
 
         }
 
@@ -5066,11 +4972,23 @@ public class Registration extends javax.swing.JFrame {
         registerPatient[12] = cboxEligibilityTypeRegistration.getSelectedItem().toString();
         registerPatient[13] = cboxDisciplineRegistration.getSelectedItem().toString();
 
+        String sqlx = "SELECT last_queue_no FROM pms_last_queue_no FOR UPDATE; UPDATE pms_last_queue_no SET last_queue_no = last_queue_no + 1;";
+        try {
+            boolean statusx = DBConnection.getImpl().setQuerySQL(sqlx);
+            System.out.println("statux: "+statusx);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (true) {
+            return;
+        }
 
         if (rbConsultationRoom.isSelected()) {
             registerPatient[15] = cboxConsultationRoom.getSelectedItem().toString();
         } else if (rbQueue.isSelected()) {
-            registerPatient[16] = cboxQueue.getSelectedItem().toString();
+            PMS_Queue_Name_Bean pqnb = (PMS_Queue_Name_Bean) cboxQueue.getSelectedItem();
+            String queue_name = pqnb.getQueue_name();
+            registerPatient[16] = queue_name;
         } else if (rbDoctor.isSelected()) {
             registerPatient[17] = cboxDoctor.getSelectedItem().toString();
         }
@@ -5238,12 +5156,6 @@ public class Registration extends javax.swing.JFrame {
         }
         setDefault();
     }//GEN-LAST:event_btnRegisterActionPerformed
-
-    //to make payment amount unchageable
-    private void UnchangeableReceiptNo(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UnchangeableReceiptNo
-        // TODO add your handling code here:
-        tfieldReceiptNo.setEditable(false);
-    }//GEN-LAST:event_UnchangeableReceiptNo
 
     //to enable doctor combobox only
     private void EnableDoctor(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EnableDoctor
@@ -5717,8 +5629,8 @@ public class Registration extends javax.swing.JFrame {
                     cboxEligibilityTypeRegistration.getModel().setSelectedItem(RegisterInfo[9]);
                     //cboxVisitTypeRegistration.setSelectedItem("Walk-in");
                     cboxVisitTypeRegistration.getModel().setSelectedItem("Walk-in");
-                    tfieldChargeRate.setText("1.00");
-                    tfieldPaymentAmount.setText("1.00");
+//                    tfieldChargeRate.setText("1.00");
+//                    tfieldPaymentAmount.setText("1.00");
                     //if(tfieldIdNoRegistration.getText().length() != 0)
                     //{
                     // tfieldChargeRate.setText("5.00");
@@ -6009,8 +5921,8 @@ public class Registration extends javax.swing.JFrame {
                     cboxEligibilityCategoryRegistration.getModel().setSelectedItem(RegisterInfo1[6]);
                     cboxEligibilityTypeRegistration.getModel().setSelectedItem(RegisterInfo1[7]);
                     cboxVisitTypeRegistration.getModel().setSelectedItem("Walk-in");
-                    tfieldChargeRate.setText("1.00");
-                    tfieldPaymentAmount.setText("1.00");
+//                    tfieldChargeRate.setText("1.00");
+//                    tfieldPaymentAmount.setText("1.00");
 
 
 
@@ -6311,8 +6223,8 @@ public class Registration extends javax.swing.JFrame {
                     cboxEligibilityTypeRegistration.getModel().setSelectedItem(RegisterInfo2[7]);
                     //cboxVisitTypeRegistration.setSelectedItem("Walk-in");
                     cboxVisitTypeRegistration.getModel().setSelectedItem("Walk-in");
-                    tfieldChargeRate.setText("1.00");
-                    tfieldPaymentAmount.setText("1.00");
+//                    tfieldChargeRate.setText("1.00");
+//                    tfieldPaymentAmount.setText("1.00");
 
                     //show patient biodata on patient master index screen
                     tfieldPMINoPMI.setText(BiodataInfo2[0]);
@@ -6588,8 +6500,8 @@ public class Registration extends javax.swing.JFrame {
                     cboxEligibilityTypeRegistration.getModel().setSelectedItem(RegisterInfo3[7]);
                     //cboxVisitTypeRegistration.setSelectedItem("Walk-in");
                     cboxVisitTypeRegistration.getModel().setSelectedItem("Walk-in");
-                    tfieldChargeRate.setText("5.00");
-                    tfieldPaymentAmount.setText("5.00");
+//                    tfieldChargeRate.setText("5.00");
+//                    tfieldPaymentAmount.setText("5.00");
 
                     try {
                         //show patient biodata on patient master index screen
@@ -6897,10 +6809,10 @@ public class Registration extends javax.swing.JFrame {
         cboxQueue.setSelectedIndex(0);
         cboxDoctor.setSelectedIndex(0);
         cboxPriorityGroupRegistration.setSelectedIndex(0);
-        tfieldChargeRate.setText("");
-        tfieldPaymentAmount.setText("");
+//        tfieldChargeRate.setText("");
+//        tfieldPaymentAmount.setText("");
         //tfieldReceiptNo.setText("");
-        cboxPaymentMode.setSelectedIndex(0);
+//        cboxPaymentMode.setSelectedIndex(0);
         rbConsultationRoom.setSelected(true);
         cboxConsultationRoom.setEnabled(true);
         cboxDoctor.setEnabled(false);
@@ -7151,18 +7063,18 @@ public class Registration extends javax.swing.JFrame {
         cboxEligibilityCategoryRegistration.setSelectedItem(AppointmentInfo[8]);
         cboxEligibilityTypeRegistration.setSelectedItem(AppointmentInfo[9]);
         cboxVisitTypeRegistration.setSelectedItem("Appointment");
-        if (tfieldNewICNoRegistration.getText() != null && (tfieldNewICNoRegistration.getText().length() != 1)) {
-            tfieldChargeRate.setText("1.00");
-            tfieldPaymentAmount.setText("1.00");
-        }
-        if (tfieldOldICNoRegistration.getText() != null && (tfieldOldICNoRegistration.getText().length() != 1)) {
-            tfieldChargeRate.setText("1.00");
-            tfieldPaymentAmount.setText("1.00");
-        }
-        if (tfieldIdNoRegistration.getText() != null && (tfieldIdNoRegistration.getText().length() != 1)) {
-            tfieldChargeRate.setText("1.00");
-            tfieldPaymentAmount.setText("1.00");
-        }
+//        if (tfieldNewICNoRegistration.getText() != null && (tfieldNewICNoRegistration.getText().length() != 1)) {
+//            tfieldChargeRate.setText("1.00");
+//            tfieldPaymentAmount.setText("1.00");
+//        }
+//        if (tfieldOldICNoRegistration.getText() != null && (tfieldOldICNoRegistration.getText().length() != 1)) {
+//            tfieldChargeRate.setText("1.00");
+//            tfieldPaymentAmount.setText("1.00");
+//        }
+//        if (tfieldIdNoRegistration.getText() != null && (tfieldIdNoRegistration.getText().length() != 1)) {
+//            tfieldChargeRate.setText("1.00");
+//            tfieldPaymentAmount.setText("1.00");
+//        }
 
         try {
             BiodataInfo = appointment.getBiodata(tfieldPMINoRegistration.getText());
@@ -7337,18 +7249,18 @@ public class Registration extends javax.swing.JFrame {
         cboxEligibilityCategoryRegistration.setSelectedItem(ReferralInfo[8]);
         cboxEligibilityTypeRegistration.setSelectedItem(ReferralInfo[9]);
         cboxVisitTypeRegistration.setSelectedItem("Referral");
-        if (tfieldNewICNoRegistration.getText() != null && (tfieldNewICNoRegistration.getText().length() != 1)) {
-            tfieldChargeRate.setText("1.00");
-            tfieldPaymentAmount.setText("1.00");
-        }
-        if (tfieldOldICNoRegistration.getText() != null && (tfieldOldICNoRegistration.getText().length() != 1)) {
-            tfieldChargeRate.setText("1.00");
-            tfieldPaymentAmount.setText("1.00");
-        }
-        if (tfieldIdNoRegistration.getText() != null && (tfieldIdNoRegistration.getText().length() != 1)) {
-            tfieldChargeRate.setText("5.00");
-            tfieldPaymentAmount.setText("5.00");
-        }
+//        if (tfieldNewICNoRegistration.getText() != null && (tfieldNewICNoRegistration.getText().length() != 1)) {
+//            tfieldChargeRate.setText("1.00");
+//            tfieldPaymentAmount.setText("1.00");
+//        }
+//        if (tfieldOldICNoRegistration.getText() != null && (tfieldOldICNoRegistration.getText().length() != 1)) {
+//            tfieldChargeRate.setText("1.00");
+//            tfieldPaymentAmount.setText("1.00");
+//        }
+//        if (tfieldIdNoRegistration.getText() != null && (tfieldIdNoRegistration.getText().length() != 1)) {
+//            tfieldChargeRate.setText("5.00");
+//            tfieldPaymentAmount.setText("5.00");
+//        }
 
 
         try {
@@ -7667,8 +7579,8 @@ public class Registration extends javax.swing.JFrame {
             cboxPriorityGroupRegistration.setModel(UniCBmodel);
             Func.cmbSelectInput(cboxPriorityGroupRegistration, "Normal");
 
-            UniCBmodel = CBoxloader.getLookupReferences("0018", "Payment Mode", true);
-            cboxPaymentMode.setModel(UniCBmodel);
+//            UniCBmodel = CBoxloader.getLookupReferences("0018", "Payment Mode", true);
+//            cboxPaymentMode.setModel(UniCBmodel);
 
             rbConsultationRoom.setSelected(false);
             rbQueue.setSelected(true);
@@ -7962,8 +7874,8 @@ public class Registration extends javax.swing.JFrame {
         cboxEligibilityTypeRegistration.getModel().setSelectedItem(RegisterInfo[9]);
         //cboxVisitTypeRegistration.setSelectedItem("Walk-in");
         cboxVisitTypeRegistration.getModel().setSelectedItem("Walk-in");
-        tfieldChargeRate.setText("1.00");
-        tfieldPaymentAmount.setText("1.00");
+//        tfieldChargeRate.setText("1.00");
+//        tfieldPaymentAmount.setText("1.00");
         //if(tfieldIdNoRegistration.getText().length() != 0)
         //{
         // tfieldChargeRate.setText("5.00");
@@ -8231,7 +8143,6 @@ public class Registration extends javax.swing.JFrame {
     private javax.swing.JComboBox cboxNationalityPatient;
     private javax.swing.JComboBox cboxOrganDonorPatient;
     private javax.swing.JComboBox cboxPatientCategoryRegistration;
-    private javax.swing.JComboBox cboxPaymentMode;
     private javax.swing.JComboBox cboxPostalCountryPatient;
     private javax.swing.JComboBox cboxPostalDistrict;
     private javax.swing.JComboBox cboxPostalPostcode;
@@ -8272,10 +8183,6 @@ public class Registration extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
@@ -8323,13 +8230,10 @@ public class Registration extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel80;
-    private javax.swing.JLabel jLabel81;
-    private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
@@ -8420,7 +8324,6 @@ public class Registration extends javax.swing.JFrame {
     private javax.swing.JTable tbl_family;
     private javax.swing.JTable tbl_insurance;
     private javax.swing.JTable tbl_nok;
-    private javax.swing.JTextField tfieldChargeRate;
     private com.toedter.calendar.JDateChooser tfieldCreatedDate;
     private com.toedter.calendar.JDateChooser tfieldDOB;
     private com.toedter.calendar.JDateChooser tfieldDOBPatient;
@@ -8457,14 +8360,12 @@ public class Registration extends javax.swing.JFrame {
     private javax.swing.JTextField tfieldPMINoRegistration;
     private javax.swing.JTextField tfieldPMISearchRegister;
     private javax.swing.JTextField tfieldPatientName;
-    private javax.swing.JTextField tfieldPaymentAmount;
     private javax.swing.JTextField tfieldPmiEmployment;
     private javax.swing.JTextField tfieldPmiFamily;
     private javax.swing.JTextField tfieldPmiInsurance;
     private javax.swing.JTextField tfieldPmiNextOfKin;
     private javax.swing.JTextField tfieldPolicyNo;
     private javax.swing.JTextField tfieldPostalAddressPatient;
-    private javax.swing.JTextField tfieldReceiptNo;
     private javax.swing.JTextField tfieldRegistrationNo;
     private javax.swing.JTextField tfieldTempPMINo;
     private javax.swing.JTextField tfieldmedicalseqno;
