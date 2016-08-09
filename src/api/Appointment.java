@@ -42,28 +42,25 @@ public class Appointment {
                 + "lds.Description AS subdipline_name, "
                 + "lookSub.appointment_type, "
                 + "lookSub.ID_NO, "
-                + "lookSub.status "
-                + "FROM lookup_detail lds, (SELECT lookDis.appointment_date, "
-                + "lookDis.start_time, lookDis.pmi_no, "
-                + "lookDis.PATIENT_NAME AS patient_name, "
-                + "lookDis.USER_NAME AS staff_name, "
-                + "ld.Description AS discipline_name, lookDis.subdiscipline, "
-                + "lookDis.appointment_type, lookDis.ID_NO, lookDis.status "
+                + "lookSub.status, "
+                + "lookSub.canceled_reason "
+                + "FROM lookup_detail lds, "
+                + "(SELECT lookDis.appointment_date, lookDis.start_time, lookDis.pmi_no, lookDis.PATIENT_NAME AS patient_name, "
+                + "lookDis.USER_NAME AS staff_name ,ld.Description AS discipline_name, lookDis.subdiscipline, lookDis.appointment_type, lookDis.ID_NO, lookDis.status, lookDis.canceled_reason "
                 + "FROM lookup_detail ld, "
-                + "(SELECT DATE(pa.appointment_date) AS appointment_date, "
-                + "TIME(pa.start_time) AS start_time, pa.pmi_no, "
-                + "LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
-                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, "
-                + "pa.subdiscipline, pa.appointment_type, pb.ID_NO, "
-                + "pa.status FROM pms_appointment pa, pms_patient_biodata pb, "
-                + "adm_user au WHERE pa.pmi_no = pb.PMI_NO AND "
-                + "pa.userid = au.USER_ID ORDER BY pa.appointment_date ASC) "
-                + "lookDis WHERE lookDis.discipline=ld.Detail_Ref_code AND "
-                + "ld.Master_Ref_code = '0072') lookSub WHERE "
-                + "lds.Master_Ref_code = '0071' "
-                + "AND lookSub.subdiscipline=lds.Detail_Ref_code";
+                + "(SELECT DATE(pa.appointment_date) AS appointment_date, TIME(pa.start_time) AS start_time, pa.pmi_no, LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
+                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, pa.subdiscipline, pa.appointment_type, pb.ID_NO, pa.status, pa.canceled_reason "
+                + "FROM pms_appointment pa, pms_patient_biodata pb, adm_user au "
+                + "WHERE pa.pmi_no = pb.PMI_NO AND pa.userid = au.USER_ID AND DATE(pa.appointment_date) = DATE(NOW()) "
+                + "ORDER BY DATE(pa.appointment_date) ASC) lookDis "
+                + "WHERE lookDis.discipline=ld.Detail_Ref_code "
+                + "AND ld.Master_Ref_code = '0072') lookSub "
+                + "WHERE lds.Master_Ref_code = '0071' "
+                + "AND lookSub.subdiscipline=lds.Detail_Ref_code "
+                + "AND DATE(lookSub.appointment_date) = DATE(NOW()) ";
+        System.out.println("sql app:"+sql);
         PreparedStatement ps = Session.getCon_x(100).prepareStatement(sql);
-        ps.setString(1, PMI);
+//        ps.setString(1, PMI);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
@@ -92,6 +89,36 @@ public class Appointment {
 
         Connection conn = DbConnection.doConnection();
 //        String sql = "SELECT * FROM PMS_APPOINTMENT_LIST WHERE PMI_NO= (SELECT PMI_NO FROM PMS_PATIENT_BIODATA WHERE NEW_IC_NO=?)";
+//        String sql = "SELECT "
+//                + "lookSub.appointment_date, "
+//                + "lookSub.start_time, "
+//                + "lookSub.pmi_no, "
+//                + "lookSub.patient_name, "
+//                + "lookSub.staff_name, "
+//                + "lookSub.discipline_name, "
+//                + "lds.Description AS subdipline_name, "
+//                + "lookSub.appointment_type, "
+//                + "lookSub.ID_NO, "
+//                + "lookSub.status "
+//                + "FROM lookup_detail lds, (SELECT lookDis.appointment_date, "
+//                + "lookDis.start_time, lookDis.pmi_no, "
+//                + "lookDis.PATIENT_NAME AS patient_name, "
+//                + "lookDis.USER_NAME AS staff_name, "
+//                + "ld.Description AS discipline_name, lookDis.subdiscipline, "
+//                + "lookDis.appointment_type, lookDis.ID_NO, lookDis.status "
+//                + "FROM lookup_detail ld, "
+//                + "(SELECT DATE(pa.appointment_date) AS appointment_date, "
+//                + "TIME(pa.start_time) AS start_time, pa.pmi_no, "
+//                + "LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
+//                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, "
+//                + "pa.subdiscipline, pa.appointment_type, pb.ID_NO, "
+//                + "pa.status FROM pms_appointment pa, pms_patient_biodata pb, "
+//                + "adm_user au WHERE pa.pmi_no = pb.PMI_NO AND "
+//                + "pa.userid = au.USER_ID ORDER BY pa.appointment_date ASC) "
+//                + "lookDis WHERE lookDis.discipline=ld.Detail_Ref_code AND "
+//                + "ld.Master_Ref_code = '0072') lookSub WHERE "
+//                + "lds.Master_Ref_code = '0071' "
+//                + "AND lookSub.subdiscipline=lds.Detail_Ref_code";
         String sql = "SELECT "
                 + "lookSub.appointment_date, "
                 + "lookSub.start_time, "
@@ -102,28 +129,25 @@ public class Appointment {
                 + "lds.Description AS subdipline_name, "
                 + "lookSub.appointment_type, "
                 + "lookSub.ID_NO, "
-                + "lookSub.status "
-                + "FROM lookup_detail lds, (SELECT lookDis.appointment_date, "
-                + "lookDis.start_time, lookDis.pmi_no, "
-                + "lookDis.PATIENT_NAME AS patient_name, "
-                + "lookDis.USER_NAME AS staff_name, "
-                + "ld.Description AS discipline_name, lookDis.subdiscipline, "
-                + "lookDis.appointment_type, lookDis.ID_NO, lookDis.status "
+                + "lookSub.status, "
+                + "lookSub.canceled_reason "
+                + "FROM lookup_detail lds, "
+                + "(SELECT lookDis.appointment_date, lookDis.start_time, lookDis.pmi_no, lookDis.PATIENT_NAME AS patient_name, "
+                + "lookDis.USER_NAME AS staff_name ,ld.Description AS discipline_name, lookDis.subdiscipline, lookDis.appointment_type, lookDis.ID_NO, lookDis.status, lookDis.canceled_reason "
                 + "FROM lookup_detail ld, "
-                + "(SELECT DATE(pa.appointment_date) AS appointment_date, "
-                + "TIME(pa.start_time) AS start_time, pa.pmi_no, "
-                + "LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
-                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, "
-                + "pa.subdiscipline, pa.appointment_type, pb.ID_NO, "
-                + "pa.status FROM pms_appointment pa, pms_patient_biodata pb, "
-                + "adm_user au WHERE pa.pmi_no = pb.PMI_NO AND "
-                + "pa.userid = au.USER_ID ORDER BY pa.appointment_date ASC) "
-                + "lookDis WHERE lookDis.discipline=ld.Detail_Ref_code AND "
-                + "ld.Master_Ref_code = '0072') lookSub WHERE "
-                + "lds.Master_Ref_code = '0071' "
-                + "AND lookSub.subdiscipline=lds.Detail_Ref_code";
+                + "(SELECT DATE(pa.appointment_date) AS appointment_date, TIME(pa.start_time) AS start_time, pa.pmi_no, LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
+                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, pa.subdiscipline, pa.appointment_type, pb.ID_NO, pa.status, pa.canceled_reason "
+                + "FROM pms_appointment pa, pms_patient_biodata pb, adm_user au "
+                + "WHERE pa.pmi_no = pb.PMI_NO AND pa.userid = au.USER_ID AND DATE(pa.appointment_date) = DATE(NOW()) "
+                + "ORDER BY DATE(pa.appointment_date) ASC) lookDis "
+                + "WHERE lookDis.discipline=ld.Detail_Ref_code "
+                + "AND ld.Master_Ref_code = '0072') lookSub "
+                + "WHERE lds.Master_Ref_code = '0071' "
+                + "AND lookSub.subdiscipline=lds.Detail_Ref_code "
+                + "AND DATE(lookSub.appointment_date) = DATE(NOW()) ";
+        System.out.println("sql app:"+sql);
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, NewIC);
+//        ps.setString(1, NewIC);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
@@ -158,28 +182,25 @@ public class Appointment {
                 + "lds.Description AS subdipline_name, "
                 + "lookSub.appointment_type, "
                 + "lookSub.ID_NO, "
-                + "lookSub.status "
-                + "FROM lookup_detail lds, (SELECT lookDis.appointment_date, "
-                + "lookDis.start_time, lookDis.pmi_no, "
-                + "lookDis.PATIENT_NAME AS patient_name, "
-                + "lookDis.USER_NAME AS staff_name, "
-                + "ld.Description AS discipline_name, lookDis.subdiscipline, "
-                + "lookDis.appointment_type, lookDis.ID_NO, lookDis.status "
+                + "lookSub.status, "
+                + "lookSub.canceled_reason "
+                + "FROM lookup_detail lds, "
+                + "(SELECT lookDis.appointment_date, lookDis.start_time, lookDis.pmi_no, lookDis.PATIENT_NAME AS patient_name, "
+                + "lookDis.USER_NAME AS staff_name ,ld.Description AS discipline_name, lookDis.subdiscipline, lookDis.appointment_type, lookDis.ID_NO, lookDis.status, lookDis.canceled_reason "
                 + "FROM lookup_detail ld, "
-                + "(SELECT DATE(pa.appointment_date) AS appointment_date, "
-                + "TIME(pa.start_time) AS start_time, pa.pmi_no, "
-                + "LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
-                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, "
-                + "pa.subdiscipline, pa.appointment_type, pb.ID_NO, "
-                + "pa.status FROM pms_appointment pa, pms_patient_biodata pb, "
-                + "adm_user au WHERE pa.pmi_no = pb.PMI_NO AND "
-                + "pa.userid = au.USER_ID ORDER BY pa.appointment_date ASC) "
-                + "lookDis WHERE lookDis.discipline=ld.Detail_Ref_code AND "
-                + "ld.Master_Ref_code = '0072') lookSub WHERE "
-                + "lds.Master_Ref_code = '0071' "
-                + "AND lookSub.subdiscipline=lds.Detail_Ref_code";
+                + "(SELECT DATE(pa.appointment_date) AS appointment_date, TIME(pa.start_time) AS start_time, pa.pmi_no, LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
+                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, pa.subdiscipline, pa.appointment_type, pb.ID_NO, pa.status, pa.canceled_reason "
+                + "FROM pms_appointment pa, pms_patient_biodata pb, adm_user au "
+                + "WHERE pa.pmi_no = pb.PMI_NO AND pa.userid = au.USER_ID AND DATE(pa.appointment_date) = DATE(NOW()) "
+                + "ORDER BY DATE(pa.appointment_date) ASC) lookDis "
+                + "WHERE lookDis.discipline=ld.Detail_Ref_code "
+                + "AND ld.Master_Ref_code = '0072') lookSub "
+                + "WHERE lds.Master_Ref_code = '0071' "
+                + "AND lookSub.subdiscipline=lds.Detail_Ref_code "
+                + "AND DATE(lookSub.appointment_date) = DATE(NOW()) ";
+        System.out.println("sql app:"+sql);
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, OldIC);
+//        ps.setString(1, OldIC);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
@@ -214,31 +235,28 @@ public class Appointment {
                 + "lds.Description AS subdipline_name, "
                 + "lookSub.appointment_type, "
                 + "lookSub.ID_NO, "
-                + "lookSub.status "
-                + "FROM lookup_detail lds, (SELECT lookDis.appointment_date, "
-                + "lookDis.start_time, lookDis.pmi_no, "
-                + "lookDis.PATIENT_NAME AS patient_name, "
-                + "lookDis.USER_NAME AS staff_name, "
-                + "ld.Description AS discipline_name, lookDis.subdiscipline, "
-                + "lookDis.appointment_type, lookDis.ID_NO, lookDis.status "
+                + "lookSub.status, "
+                + "lookSub.canceled_reason "
+                + "FROM lookup_detail lds, "
+                + "(SELECT lookDis.appointment_date, lookDis.start_time, lookDis.pmi_no, lookDis.PATIENT_NAME AS patient_name, "
+                + "lookDis.USER_NAME AS staff_name ,ld.Description AS discipline_name, lookDis.subdiscipline, lookDis.appointment_type, lookDis.ID_NO, lookDis.status, lookDis.canceled_reason "
                 + "FROM lookup_detail ld, "
-                + "(SELECT DATE(pa.appointment_date) AS appointment_date, "
-                + "TIME(pa.start_time) AS start_time, pa.pmi_no, "
-                + "LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
-                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, "
-                + "pa.subdiscipline, pa.appointment_type, pb.ID_NO, "
-                + "pa.status FROM pms_appointment pa, pms_patient_biodata pb, "
-                + "adm_user au WHERE pa.pmi_no = pb.PMI_NO AND "
-                + "pa.userid = au.USER_ID ORDER BY pa.appointment_date ASC) "
-                + "lookDis WHERE lookDis.discipline=ld.Detail_Ref_code AND "
-                + "ld.Master_Ref_code = '0072') lookSub WHERE "
-                + "lds.Master_Ref_code = '0071' "
-                + "AND lookSub.subdiscipline=lds.Detail_Ref_code";
+                + "(SELECT DATE(pa.appointment_date) AS appointment_date, TIME(pa.start_time) AS start_time, pa.pmi_no, LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
+                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, pa.subdiscipline, pa.appointment_type, pb.ID_NO, pa.status, pa.canceled_reason "
+                + "FROM pms_appointment pa, pms_patient_biodata pb, adm_user au "
+                + "WHERE pa.pmi_no = pb.PMI_NO AND pa.userid = au.USER_ID AND DATE(pa.appointment_date) = DATE(NOW()) "
+                + "ORDER BY DATE(pa.appointment_date) ASC) lookDis "
+                + "WHERE lookDis.discipline=ld.Detail_Ref_code "
+                + "AND ld.Master_Ref_code = '0072') lookSub "
+                + "WHERE lds.Master_Ref_code = '0071' "
+                + "AND lookSub.subdiscipline=lds.Detail_Ref_code "
+                + "AND DATE(lookSub.appointment_date) = DATE(NOW()) ";
+        System.out.println("sql app:"+sql);
 //PreparedStatement ps = conn.prepareStatement("SELECT PMI_NO,NAME,DATE,TIME,APPOINTMENT_TYPE FROM PMS_APPOINTMENT_LIST WHERE DISCIPLINE=? AND SUBDISCIPLINE=? AND DATE=?");
         //ps.setString(1, appointmentInformation);
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, idno);
-        ps.setString(2, idtype);
+//        ps.setString(1, idno);
+//        ps.setString(2, idtype);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
@@ -270,28 +288,25 @@ public class Appointment {
                 + "lds.Description AS subdipline_name, "
                 + "lookSub.appointment_type, "
                 + "lookSub.ID_NO, "
-                + "lookSub.status "
-                + "FROM lookup_detail lds, (SELECT lookDis.appointment_date, "
-                + "lookDis.start_time, lookDis.pmi_no, "
-                + "lookDis.PATIENT_NAME AS patient_name, "
-                + "lookDis.USER_NAME AS staff_name, "
-                + "ld.Description AS discipline_name, lookDis.subdiscipline, "
-                + "lookDis.appointment_type, lookDis.ID_NO, lookDis.status "
+                + "lookSub.status, "
+                + "lookSub.canceled_reason "
+                + "FROM lookup_detail lds, "
+                + "(SELECT lookDis.appointment_date, lookDis.start_time, lookDis.pmi_no, lookDis.PATIENT_NAME AS patient_name, "
+                + "lookDis.USER_NAME AS staff_name ,ld.Description AS discipline_name, lookDis.subdiscipline, lookDis.appointment_type, lookDis.ID_NO, lookDis.status, lookDis.canceled_reason "
                 + "FROM lookup_detail ld, "
-                + "(SELECT DATE(pa.appointment_date) AS appointment_date, "
-                + "TIME(pa.start_time) AS start_time, pa.pmi_no, "
-                + "LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
-                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, "
-                + "pa.subdiscipline, pa.appointment_type, pb.ID_NO, "
-                + "pa.status FROM pms_appointment pa, pms_patient_biodata pb, "
-                + "adm_user au WHERE pa.pmi_no = pb.PMI_NO AND "
-                + "pa.userid = au.USER_ID ORDER BY pa.appointment_date ASC) "
-                + "lookDis WHERE lookDis.discipline=ld.Detail_Ref_code AND "
-                + "ld.Master_Ref_code = '0072') lookSub WHERE "
-                + "lds.Master_Ref_code = '0071' "
-                + "AND lookSub.subdiscipline=lds.Detail_Ref_code";
+                + "(SELECT DATE(pa.appointment_date) AS appointment_date, TIME(pa.start_time) AS start_time, pa.pmi_no, LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
+                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, pa.subdiscipline, pa.appointment_type, pb.ID_NO, pa.status, pa.canceled_reason "
+                + "FROM pms_appointment pa, pms_patient_biodata pb, adm_user au "
+                + "WHERE pa.pmi_no = pb.PMI_NO AND pa.userid = au.USER_ID AND DATE(pa.appointment_date) = DATE(NOW()) "
+                + "ORDER BY DATE(pa.appointment_date) ASC) lookDis "
+                + "WHERE lookDis.discipline=ld.Detail_Ref_code "
+                + "AND ld.Master_Ref_code = '0072') lookSub "
+                + "WHERE lds.Master_Ref_code = '0071' "
+                + "AND lookSub.subdiscipline=lds.Detail_Ref_code "
+                + "AND DATE(lookSub.appointment_date) = DATE(NOW()) ";
+        System.out.println("sql app:"+sql);
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, MyKad);
+//        ps.setString(1, MyKad);
         ResultSet rs = ps.executeQuery();
 
         Vector<Vector<String>> list = new Vector<Vector<String>>();
@@ -336,26 +351,23 @@ public class Appointment {
                 + "lds.Description AS subdipline_name, "
                 + "lookSub.appointment_type, "
                 + "lookSub.ID_NO, "
-                + "lookSub.status "
-                + "FROM lookup_detail lds, (SELECT lookDis.appointment_date, "
-                + "lookDis.start_time, lookDis.pmi_no, "
-                + "lookDis.PATIENT_NAME AS patient_name, "
-                + "lookDis.USER_NAME AS staff_name, "
-                + "ld.Description AS discipline_name, lookDis.subdiscipline, "
-                + "lookDis.appointment_type, lookDis.ID_NO, lookDis.status "
+                + "lookSub.status, "
+                + "lookSub.canceled_reason "
+                + "FROM lookup_detail lds, "
+                + "(SELECT lookDis.appointment_date, lookDis.start_time, lookDis.pmi_no, lookDis.PATIENT_NAME AS patient_name, "
+                + "lookDis.USER_NAME AS staff_name ,ld.Description AS discipline_name, lookDis.subdiscipline, lookDis.appointment_type, lookDis.ID_NO, lookDis.status, lookDis.canceled_reason "
                 + "FROM lookup_detail ld, "
-                + "(SELECT DATE(pa.appointment_date) AS appointment_date, "
-                + "TIME(pa.start_time) AS start_time, pa.pmi_no, "
-                + "LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
-                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, "
-                + "pa.subdiscipline, pa.appointment_type, pb.ID_NO, "
-                + "pa.status FROM pms_appointment pa, pms_patient_biodata pb, "
-                + "adm_user au WHERE pa.pmi_no = pb.PMI_NO AND "
-                + "pa.userid = au.USER_ID ORDER BY pa.appointment_date ASC) "
-                + "lookDis WHERE lookDis.discipline=ld.Detail_Ref_code AND "
-                + "ld.Master_Ref_code = '0072') lookSub WHERE "
-                + "lds.Master_Ref_code = '0071' "
-                + "AND lookSub.subdiscipline=lds.Detail_Ref_code";
+                + "(SELECT DATE(pa.appointment_date) AS appointment_date, TIME(pa.start_time) AS start_time, pa.pmi_no, LCASE(pb.PATIENT_NAME) AS PATIENT_NAME, "
+                + "LCASE(au.USER_NAME) AS USER_NAME, pa.discipline, pa.subdiscipline, pa.appointment_type, pb.ID_NO, pa.status, pa.canceled_reason "
+                + "FROM pms_appointment pa, pms_patient_biodata pb, adm_user au "
+                + "WHERE pa.pmi_no = pb.PMI_NO AND pa.userid = au.USER_ID AND DATE(pa.appointment_date) = DATE(NOW()) "
+                + "ORDER BY DATE(pa.appointment_date) ASC) lookDis "
+                + "WHERE lookDis.discipline=ld.Detail_Ref_code "
+                + "AND ld.Master_Ref_code = '0072') lookSub "
+                + "WHERE lds.Master_Ref_code = '0071' "
+                + "AND lookSub.subdiscipline=lds.Detail_Ref_code "
+                + "AND DATE(lookSub.appointment_date) = DATE(NOW()) ";
+        System.out.println("sql app:"+sql);
         //PreparedStatement ps = conn.prepareStatement("SELECT PMI_NO,NAME,DATE,TIME,APPOINTMENT_TYPE FROM PMS_APPOINTMENT_LIST WHERE DISCIPLINE=? AND SUBDISCIPLINE=? AND DATE=?");
         //ps.setString(1, appointmentInformation);
 //        PreparedStatement ps = conn.prepareStatement(sql);

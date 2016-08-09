@@ -4972,16 +4972,16 @@ public class Registration extends javax.swing.JFrame {
         registerPatient[12] = cboxEligibilityTypeRegistration.getSelectedItem().toString();
         registerPatient[13] = cboxDisciplineRegistration.getSelectedItem().toString();
 
-        String sqlx = "SELECT last_queue_no FROM pms_last_queue_no FOR UPDATE; UPDATE pms_last_queue_no SET last_queue_no = last_queue_no + 1;";
-        try {
-            boolean statusx = DBConnection.getImpl().setQuerySQL(sqlx);
-            System.out.println("statux: "+statusx);
-        } catch (RemoteException ex) {
-            Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (true) {
-            return;
-        }
+//        String sqlx = "SELECT last_queue_no FROM pms_last_queue_no FOR UPDATE; UPDATE pms_last_queue_no SET last_queue_no = last_queue_no + 1;";
+//        try {
+//            boolean statusx = DBConnection.getImpl().setQuerySQL(sqlx);
+//            System.out.println("statux: "+statusx);
+//        } catch (RemoteException ex) {
+//            Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        if (true) {
+//            return;
+//        }
 
         if (rbConsultationRoom.isSelected()) {
             registerPatient[15] = cboxConsultationRoom.getSelectedItem().toString();
@@ -5564,7 +5564,7 @@ public class Registration extends javax.swing.JFrame {
     public static boolean isRecognizedPatient = false;
     public static String numCheckDigit = "";
     
-    private void searchRegister() {
+    public void searchRegister() {
         setDefault();
 
         // search by PMI No.
@@ -8358,7 +8358,7 @@ public class Registration extends javax.swing.JFrame {
     private javax.swing.JTextField tfieldOldICNoRegistration;
     private javax.swing.JTextField tfieldPMINoPMI;
     private javax.swing.JTextField tfieldPMINoRegistration;
-    private javax.swing.JTextField tfieldPMISearchRegister;
+    public static javax.swing.JTextField tfieldPMISearchRegister;
     private javax.swing.JTextField tfieldPatientName;
     private javax.swing.JTextField tfieldPmiEmployment;
     private javax.swing.JTextField tfieldPmiFamily;

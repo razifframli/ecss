@@ -15,7 +15,6 @@ import AdtFrm.MainFrm;
 import AppointmentGUI.ApptCalender;
 import DBConnection.DBConnection;
 import Helper.Session;
-import eklinik_bill.Billing;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -33,6 +32,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import library.Func;
+import view.Billing;
 /**
  *
  * @author phoebe

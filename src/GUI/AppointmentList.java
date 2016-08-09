@@ -330,13 +330,17 @@ public class AppointmentList extends javax.swing.JFrame {
     if (evt.getClickCount() == 2) {
         int rowIndex = tblAppointment.getSelectedRow();
         selectedAppointment =(String) tblAppointment.getValueAt(rowIndex,0);
+        
+        registrationPage.tfieldPMISearchRegister.setText(selectedAppointment);
+        registrationPage.searchRegister();
+        
         //selectedAppointmentType =(String) tblAppointment.getValueAt(rowIndex,4);
 
 
 //        Registration register = new Registration();
 //        register.setVisible(true);
-       registrationPage.setSelectedAppointment(selectedAppointment,tabName);
-       registrationPage.show();
+//       registrationPage.setSelectedAppointment(selectedAppointment,tabName);
+//       registrationPage.show();
        dispose();
         //Appointment.deleteAppointment(selectedAppointment);
         //register.setSelectedAppointmentType(selectedAppointmentType,tabName);
