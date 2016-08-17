@@ -63,7 +63,8 @@ public final class QueueList extends javax.swing.JFrame {
                 header.add("PMI_NO");
                 header.add("NAME");
                 header.add("EPISODE_TIME");
-                header.add("CONSULTATION_ROOM");
+                header.add("QUEUE NAME");
+                header.add("QUEUE NO.");
                 header.add("DOCTOR");
                 header.add("STATUS");
 
@@ -374,10 +375,12 @@ public final class QueueList extends javax.swing.JFrame {
         int rowIndex = tblQueue.getSelectedRow();
         selectedAppointment =(String) tblQueue.getValueAt(rowIndex,0);
         String selectedTime =(String) tblQueue.getValueAt(rowIndex,2);
+        String queueName =(String) tblQueue.getValueAt(rowIndex,3);
+        String queueNo =(String) tblQueue.getValueAt(rowIndex,4);
         
         //J.o("Test QueueList.java:430", "selectedAppointment: "+selectedAppointment+" | selectedTime: "+selectedTime, 1);
 
-        cons.setSelectedAppointment(selectedAppointment, selectedTime);
+        cons.setSelectedAppointment(selectedAppointment, selectedTime, queueName, queueNo);
         cons.setVisible(true);
         dispose();
 }//GEN-LAST:event_btn_pHistoryOk1ActionPerformed

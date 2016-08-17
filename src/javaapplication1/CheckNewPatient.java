@@ -82,7 +82,7 @@ public class CheckNewPatient implements Runnable {
             Vector<Vector<String>> vec = que.getQueueNameList("", 1);
             ArrayList<String> data = new ArrayList<String>();
             for (int i = 0; i < vec.size(); i++) {
-                if (vec.get(i).get(5).toUpperCase().contains("Waiting".toUpperCase())) {
+                if (vec.get(i).get(6).toUpperCase().contains("Waiting".toUpperCase())) {
                     data.add(vec.get(i).get(5));
                 }
             }

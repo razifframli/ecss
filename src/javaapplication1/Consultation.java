@@ -9846,10 +9846,10 @@ public class Consultation extends javax.swing.JFrame {
                 Q.s(2, time);
                 Q.gPs().execute();
 
-                this.setSelectedAppointment(idpms, time);
+//                this.setSelectedAppointment(idpms, time);
             } else {
                 J.o("Queue", ".. No more queue ..", 1);
-                this.setSelectedAppointment("-", "-");
+//                this.setSelectedAppointment("-", "-");
                 this.IDPMS = "-";
                 this.EpisodeTime = "-";
             }
@@ -9945,7 +9945,7 @@ public class Consultation extends javax.swing.JFrame {
             if (data.size() > 0) {
                 for (int i = 0; i < data.size(); i++) {
                     if (data.get(i).size() > 0) {
-                        status = data.get(i).get(5);
+                        status = data.get(i).get(6);
                         System.out.println("vector:-\n|" + data.get(i));
                         if (status.equals("Waiting")) {
                             idpms = data.get(i).get(0);
@@ -9958,8 +9958,10 @@ public class Consultation extends javax.swing.JFrame {
                     }
                 }
                 System.out.println("Status Found: |"+found+"|");
+                String queueName = data.get(i).get(3);
+                String queueNo = data.get(i).get(4);
                 if (found) {
-                    this.setSelectedAppointment(idpms, time);
+                    this.setSelectedAppointment(idpms, time, queueName, queueNo);
                     this.setVisible(true);
                 } else {
                     J.o("No Patient", "No Patient Waiting ..", 1);
@@ -14377,7 +14379,7 @@ public class Consultation extends javax.swing.JFrame {
         btn_viewHistory.setEnabled(false);
     }
     
-    public void setSelectedAppointment(String selectedAppointment, String selectedTime) {
+    public void setSelectedAppointment(String selectedAppointment, String selectedTime, String queueName, String queueNo) {
         
 //        time1 = Func.getTimeNow();
         String timeStart = selectedTime;
@@ -14427,7 +14429,8 @@ public class Consultation extends javax.swing.JFrame {
         System.out.println("wat to print 2: : " + AppointmentInfo[2]);
 
         String str_pdi = AppointmentInfo[0] + "|" + AppointmentInfo[2] + "|" 
-                + Session.getUser_name() + "|" +Session.getData_user().get(17);
+                + Session.getUser_name() + "|" +Session.getData_user().get(17) + "|"
+                + queueName + "|" + queueNo;
         
         try {
             Queue updatequeue = new Queue();

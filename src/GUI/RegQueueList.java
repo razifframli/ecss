@@ -50,7 +50,8 @@ public class RegQueueList extends javax.swing.JFrame {
                 header.add("PMI_NO");
                 header.add("NAME");
                 header.add("EPISODE_TIME");
-                header.add("CONSULTATION_ROOM");
+                header.add("QUEUE NAME");
+                header.add("QUEUE NO.");
                 header.add("DOCTOR");
                 header.add("STATUS");
                 header.add("ACTION");
@@ -141,7 +142,7 @@ public class RegQueueList extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         int index = tblQueueREG.getSelectedColumn();
-        if (index == 6) {
+        if (index == 7) {
             
             int rowIndex = tblQueueREG.getSelectedRow();
             String pmiNo = tblQueueREG.getValueAt(rowIndex, 0).toString();

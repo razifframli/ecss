@@ -4,7 +4,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ecss/src/GUI/MainPage.java</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ecss/src/oms/rmi/server/Message.java</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ecss/src/api/Patient.java</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ecss/src/GUI/Registration.java</file>
         </group>
     </open-files>
 </project-private>

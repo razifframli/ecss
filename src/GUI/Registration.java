@@ -4956,7 +4956,8 @@ public class Registration extends javax.swing.JFrame {
 
         registerPatient[0] = tfieldPMINoRegistration.getText();
         Calendar today = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String now = dateFormat.format(today.getTime());
         registerPatient[1] = now;
         registerPatient[2] = tfieldNameRegistration.getText();
