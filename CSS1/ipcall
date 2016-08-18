@@ -1,0 +1,16 @@
+ip:10.73.33.216
+callsys:on
+port:1098
+ipserver:10.73.32.200
+------------------
+calling 10.73.34.117
+
+10.73.33.72
+210.48.157.104 <-- public ip server staging
+10.73.32.200 <-- server development
+10.73.38.205 <-- umar local lab
+ecss.utem.edu.my <-- domain name server VM
+calling <—- 10.120.7.200
+biocore-stag.utem.edu.my <-- domain stagging
+calling <—- 10.73.33.216
+------------------

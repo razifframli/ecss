@@ -686,7 +686,7 @@ public class DBConnection {
     }
    
     
-    public static boolean insertDispenseMaster(String [] data1, java.sql.Timestamp data2, boolean data3) {
+    public static boolean insertDispenseMaster(String [] data1, String data2, boolean data3) {
         boolean stat = false;
         try {
             String in1 = "INSERT INTO PIS_DISPENSE_MASTER "
@@ -699,7 +699,7 @@ public class DBConnection {
             ins1.setString(2, data1[1]);
             ins1.setString(3, data1[2]);//loc code
             ins1.setString(4, data1[3]);
-            ins1.setTimestamp(5, data2);
+            ins1.setString(5, data2);
             ins1.setString(6, data1[4]);
             ins1.setString(7, data1[5]);
             ins1.setString(8, data1[6]);

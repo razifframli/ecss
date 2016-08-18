@@ -4618,7 +4618,10 @@ public class Pharmacy extends javax.swing.JFrame{
                     //if not exist
                     if (dm1.size() <= 0) {
                         //insert dispense master
-                        java.sql.Timestamp dispenseDate = new java.sql.Timestamp(new java.util.Date().getTime());
+//                        java.sql.Timestamp dispenseDate = new java.sql.Timestamp(new java.util.Date().getTime());
+                        java.util.Date dispenseDate1 = new java.util.Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String dispenseDate = sdf.format(dispenseDate1);
                         String dmData1[] = {oNo, oD, lc, ad, id, id, id, id};
                         DBConnection.getImpl().insertDispenseMaster(dmData1, dispenseDate, false);
                     }
@@ -4670,11 +4673,17 @@ public class Pharmacy extends javax.swing.JFrame{
 
                     System.out.println(".....Dispense Sent....");
                 } catch (Exception e) {
-//                    e.printStackTrace();
+                    
+                    System.out.println("Error Da: "+e.getMessage());
+                    e.printStackTrace();
+                    
                     //offline
                     //select dispense master based on order no
                     oNo = order_no2.getText();
                     oD = order_date2.getText();
+                    
+                    System.out.println("oD: |"+oD+"|");
+                    
                     lc = loc_code.getText();
                     ad = arrival_date.getText();
                     dB = txt_userIDOList.getText();//dispensed by
@@ -4685,7 +4694,9 @@ public class Pharmacy extends javax.swing.JFrame{
                     //if not exist then insert
                     if (dm1.size() <= 0) {
                         //insert dispense master
-                        java.sql.Timestamp dispenseDate = new java.sql.Timestamp(new java.util.Date().getTime());
+                        java.util.Date dispenseDate1 = new java.util.Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String dispenseDate = sdf.format(dispenseDate1);
                         String dmData1[] = {oNo, oD, lc, ad, dB, id, id, id};
                         DBConnection.insertDispenseMaster(dmData1, dispenseDate, false);
 
@@ -4694,30 +4705,35 @@ public class Pharmacy extends javax.swing.JFrame{
                     }
                     //insert dispense detail AND update order detail
                     for (int i = 0; i < row2; i++) {
-                        String drugCode = tbl_drugList.getValueAt(i, 0).toString();
-                        String inst = tbl_drugList.getValueAt(i, 2).toString();
-
-                        ArrayList<String> pod = DBConnection.getOrderDetail(oNo, drugCode);
-                        String ddData1[] = {oNo, drugCode, inst, pod.get(4)};
-                        
-                        String qty_temp = tbl_drugList.getValueAt(i, 7).toString(); // change from 5 to 7 - hadi
-                        String qty_split[] = qty_temp.split("<HTML><U>");
-                        String qty_split2[] = qty_split[1].split("</U></HTML>");
-                        String qty2 = qty_split2[0];
-                        
-                        String dispensed_status = tbl_drugList.getValueAt(i, 10).toString();
-
-                        int d_qty = 0;
-
                         try {
+                            String drugCode = tbl_drugList.getValueAt(i, 0).toString();
+                            String inst = tbl_drugList.getValueAt(i, 2).toString();
 
-                            d_qty = Integer.parseInt(qty2); //change from 5 to 7 - hadi
-                            instruction = String.valueOf(tbl_drugList.getValueAt(i, 2).toString());
-                        } catch (Exception eex) {
-                            d_qty = 0;
+                            ArrayList<String> pod = DBConnection.getOrderDetail(oNo, drugCode);
+                            String ddData1[] = {oNo, drugCode, inst, pod.get(4)};
+
+                            String qty_temp = tbl_drugList.getValueAt(i, 7).toString(); // change from 5 to 7 - hadi
+                            String qty_split[] = qty_temp.split("<HTML><U>");
+                            String qty_split2[] = qty_split[1].split("</U></HTML>");
+                            String qty2 = qty_split2[0];
+
+                            String dispensed_status = tbl_drugList.getValueAt(i, 10).toString();
+
+                            int d_qty = 0;
+
+                            try {
+
+                                d_qty = Integer.parseInt(qty2); //change from 5 to 7 - hadi
+                                instruction = String.valueOf(tbl_drugList.getValueAt(i, 2).toString());
+                            } catch (Exception eex) {
+                                d_qty = 0;
+                            }
+                            DBConnection.insertDispenseDetail(ddData1, d_qty, true);
+                            DBConnection.updateOrderDetail(d_qty, oNo, drugCode, dispensed_status);
+                        } catch (Exception ee) {
+                            System.out.println("Error Drug Dispense: " + ee.getMessage());
+                            ee.printStackTrace();
                         }
-                        DBConnection.insertDispenseDetail(ddData1, d_qty, true);
-                        DBConnection.updateOrderDetail(d_qty, oNo, drugCode, dispensed_status);
 
                     }
                     //check status all order detail
