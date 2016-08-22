@@ -3,6 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ecss/src/library/Func.java</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ecss/src/GUI/Login.java</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ecss/src/GUI/FacilityPage.java</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ecss/src/GUI/MainPage.java</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ecss/src/DBConnection/DBConnection.java</file>
+        </group>
     </open-files>
 </project-private>

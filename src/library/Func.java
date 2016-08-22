@@ -31,6 +31,9 @@ public class Func {
     public final static String PEM_SEPARATOR_TO_DB = ",";
     public final static String PEM_SEPARATOR_FROM_DB = "^";
     public final static String SPECIAL_CHARACTER = "'\"#&";
+    public final static int NUMBER_SESSION_ARRAY_SIZE1 = 19;
+    public final static int NUMBER_SESSION_ARRAY_SIZE2 = 5;
+    public final static int NUMBER_SESSION_ARRAY_SIZE = NUMBER_SESSION_ARRAY_SIZE1 + NUMBER_SESSION_ARRAY_SIZE2;
     
     public static int getAge(String birthdate) {
         int age = 0;

@@ -1,0 +1,26 @@
+-----------------------------------------------------------------------------------
+                               Prescription Slip                                     
+------------------------------------------------------------------------------------
+
+
+
+Patient Name : SHATILAH  
+Gender : FEMALE  
+DOB : 09/04/1987  
+Address : 312 MELACCA TOWN - MELAKA MALAYSIA 
+
+Prescription Date : 2012-11-21 12:39:38.429 
+
+
+Drug prescribe : 
+
+
+Drug Name : SALAP PANAU LISON  Dosage : 1.0  Dosage Form : OINTMENT  
+Route : null  Frequency : In the morning  Instruction : As directed  
+Quantity : 1.0  Duration : 7  
+Total Quantity : 7.0
+
+
+
+
+Prescribed by : SASIKUMAR A/L SUNDRAM

@@ -32,6 +32,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import library.Func;
+import main.RMIConnector;
 import view.Billing;
 /**
  *
@@ -503,6 +504,10 @@ public class MainPage extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         new Billing(Session.getRmi_hostname(), Session.getRmi_port()).setVisible(true);
+//        RMIConnector rmic = new RMIConnector();
+//        String sql = "SELECT DATE(NOW())";
+//        ArrayList<ArrayList<String>> d = rmic.getQuerySQL(Session.getRmi_hostname(), Session.getRmi_port(), sql);
+//        System.out.println(d);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

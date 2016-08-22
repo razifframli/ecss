@@ -1673,7 +1673,7 @@ public class DBConnection {
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                for (int i = 0; i < 23; i++) {
+                for (int i = 0; i < Func.NUMBER_SESSION_ARRAY_SIZE; i++) {
                     data.add(rs.getString(i + 1));
                 }
             }
@@ -1685,8 +1685,8 @@ public class DBConnection {
     
     public static boolean copyDataStaff(String user_id, ArrayList<String> data) {
         boolean stat = false;
-        int num_cols1 = 18;
-        int num_cols2 = 5;
+        int num_cols1 = Func.NUMBER_SESSION_ARRAY_SIZE1;
+        int num_cols2 = Func.NUMBER_SESSION_ARRAY_SIZE2;
         try {
             String sql1 = "DELETE FROM ADM_USER "
                     + "WHERE USER_ID = ? ";
@@ -1707,7 +1707,14 @@ public class DBConnection {
             sql3 += ")";
             PreparedStatement ps3 = Session.getCon_x(1000).prepareStatement(sql3);
             for (int i = 0; i < num_cols1; i++) {
-                ps3.setString(i+1, data.get(i));
+                String temp3 = data.get(i);
+                try {
+                    temp3 = (temp3 == null || temp3 == "") ? ("-") : (temp3);
+                } catch (Exception e) {
+                    temp3 = "-";
+                }
+                ps3.setString(i+1, temp3);
+//                System.out.println(i+"="+temp3);
             }
             ps3.execute();
             String sql4 = "INSERT INTO ADM_USER_ACCESS VALUES(?";
@@ -1717,7 +1724,14 @@ public class DBConnection {
             sql4 += ")";
             PreparedStatement ps4 = Session.getCon_x(1000).prepareStatement(sql4);
             for (int i = num_cols1, j = 0; i < (num_cols2 + num_cols1); i++, j++) {
-                ps4.setString(j+1, data.get(i));
+                String temp4 = data.get(i);
+                try {
+                    temp4 = (temp4 == null || temp4 == "") ? ("-") : (temp4);
+                } catch (Exception e) {
+                    temp4 = "-";
+                }
+                ps4.setString(j+1, temp4);
+//                System.out.println(i+"="+temp4);
             }
             ps4.execute();
             

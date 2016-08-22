@@ -53,13 +53,13 @@ public class FacilityPage extends javax.swing.JFrame {
     
     private void setJob() {
         
-        System.out.println("17: " + Session.getData_user().get(18));
-        System.out.println("21: " + Session.getData_user().get(21));
-        System.out.println("22: " + Session.getData_user().get(22));
+//        System.out.println("17: " + Session.getData_user().get(18));
+//        System.out.println("21: " + Session.getData_user().get(21));
+//        System.out.println("22: " + Session.getData_user().get(22));
         
-        Func.cmbSelectInput(cbx_hfc, Session.getData_user().get(18));
-        Func.cmbSelectInput(cbx_dis, Session.getData_user().get(21));
-        Func.cmbSelectInput(cbx_sub, Session.getData_user().get(22));
+        Func.cmbSelectInput(cbx_hfc, Session.getData_user().get(19));
+        Func.cmbSelectInput(cbx_dis, Session.getData_user().get(22));
+        Func.cmbSelectInput(cbx_sub, Session.getData_user().get(23));
     }
     
      public FacilityPage(String id) {
