@@ -1684,6 +1684,7 @@ public class DBConnection {
     }
     
     public static boolean copyDataStaff(String user_id, ArrayList<String> data) {
+        System.out.println("data online: "+data);
         boolean stat = false;
         int num_cols1 = Func.NUMBER_SESSION_ARRAY_SIZE1;
         int num_cols2 = Func.NUMBER_SESSION_ARRAY_SIZE2;
@@ -1714,7 +1715,7 @@ public class DBConnection {
                     temp3 = "-";
                 }
                 ps3.setString(i+1, temp3);
-//                System.out.println(i+"="+temp3);
+                System.out.println(i+"="+temp3);
             }
             ps3.execute();
             String sql4 = "INSERT INTO ADM_USER_ACCESS VALUES(?";
@@ -1731,7 +1732,7 @@ public class DBConnection {
                     temp4 = "-";
                 }
                 ps4.setString(j+1, temp4);
-//                System.out.println(i+"="+temp4);
+                System.out.println(i+"="+temp4);
             }
             ps4.execute();
             

@@ -301,6 +301,9 @@ public class Login extends javax.swing.JFrame {
                         //3.1.2. check offline data again
                         data = DBConnection.getStaffLogin(id, password);
                     }
+                } else {
+                    JOptionPane.showMessageDialog(btn_submit, "Invalid UserID or Password!");
+                    return;
                 }
 
             } catch (Exception e) {

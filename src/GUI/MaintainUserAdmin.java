@@ -856,7 +856,8 @@ public class MaintainUserAdmin extends javax.swing.JFrame {
             Func.trim("Fixed"),
             Func.trim(Func.datetosql(str_dob_start_date)),
             Func.trim(Func.datetosql(str_dob_end_date)),
-            Func.trim(cbx_room_no.getSelectedItem().toString())
+            Func.trim(cbx_room_no.getSelectedItem().toString()),
+            Func.trim(cbx_hfc.getSelectedItem().toString())
         };
         String data2[] = {
             Func.trim(cbx_hfc.getSelectedItem().toString()),
